@@ -171,11 +171,34 @@ export async function submitContact(
     });
 
     if (error) {
+      // Log the full object for ops visibility (lands in Vercel runtime logs).
       console.error("[contact] Resend error:", error);
+
+      // Surface a more specific user-facing message where we safely can.
+      // Resend error shapes vary by failure mode; we keep this conservative.
+      const name = (error as { name?: string }).name ?? "";
+      const message =
+        (error as { message?: string }).message ??
+        "Unknown email delivery error.";
+
+      // Only "safe" Resend errors get echoed to the visitor (no API keys,
+      // no internal infrastructure names). Everything else falls through
+      // to a generic message.
+      const isSafeToShow =
+        name === "validation_error" ||
+        name === "domain_not_found" ||
+        name === "missing_required_field" ||
+        name === "invalid_from_address" ||
+        name === "invalid_to_address" ||
+        message.toLowerCase().includes("domain") ||
+        message.toLowerCase().includes("from address") ||
+        message.toLowerCase().includes("not verified");
+
       return {
         ok: false,
-        error:
-          "Something went wrong sending your message. Please email hello@webgro.co.uk directly.",
+        error: isSafeToShow
+          ? `Email provider rejected the send (${message}). Please email hello@webgro.co.uk directly.`
+          : "Something went wrong sending your message. Please email hello@webgro.co.uk directly.",
       };
     }
 
