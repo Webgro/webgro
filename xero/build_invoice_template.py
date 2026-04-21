@@ -352,25 +352,10 @@ def main() -> None:
     add_run(vat, "VAT No. ", font=MONO_FONT, size=7, color=SLATE)
     add_merge(vat, "OrganisationTaxNumber", font=MONO_FONT, size=7, color=SLATE)
 
-    spacer = fcell.add_paragraph()
-    spacer.paragraph_format.left_indent = Cm(0.35)
-    spacer.paragraph_format.space_after = Pt(1)
-    add_run(spacer, "", font=BODY_FONT, size=4, color=INK)
-
-    # Contact
-    for text, font, size, bold, color in [
-        ("hello@webgro.co.uk", BODY_FONT, 9, False, INK),
-        ("+44 (0) 1344 231 119", BODY_FONT, 9, False, INK),
-    ]:
-        para = fcell.add_paragraph()
-        para.paragraph_format.left_indent = Cm(0.35)
-        para.paragraph_format.space_before = Pt(0)
-        para.paragraph_format.space_after = Pt(1)
-        add_run(para, text, font=font, size=size, bold=bold, color=color)
-
-    # small bottom padding
-    para = fcell.add_paragraph()
-    para.paragraph_format.space_after = Pt(8)
+    # small bottom padding — email + phone moved to the Thanks block
+    # at the bottom of the invoice so the header stays tight.
+    pad = fcell.add_paragraph()
+    pad.paragraph_format.space_after = Pt(8)
 
     # BILL TO
     tcell = ft.rows[0].cells[1]
@@ -603,46 +588,10 @@ def main() -> None:
     sp_line.paragraph_format.space_after = Pt(1)
     add_run(sp_line, "", font=BODY_FONT, size=3, color=INK)
 
-    # Divider paragraph inside the cell
-    dp = pl.add_paragraph()
-    dp.paragraph_format.left_indent = Cm(0.35)
-    dp.paragraph_format.right_indent = Cm(0.35)
-    dp.paragraph_format.space_before = Pt(6)
-    dp.paragraph_format.space_after = Pt(4)
-    pPr = dp._p.get_or_add_pPr()
-    pBdr = OxmlElement("w:pBdr")
-    bottom = OxmlElement("w:bottom")
-    bottom.set(qn("w:val"), "single")
-    bottom.set(qn("w:sz"), "4")
-    bottom.set(qn("w:space"), "1")
-    bottom.set(qn("w:color"), "E6EAF2")
-    pBdr.append(bottom)
-    pPr.append(pBdr)
-
-    # Thanks + short note
-    pt = pl.add_paragraph()
-    pt.paragraph_format.left_indent = Cm(0.35)
-    pt.paragraph_format.space_before = Pt(2)
-    pt.paragraph_format.space_after = Pt(2)
-    add_run(pt, "Thanks.", font=DISPLAY_FONT, size=22, bold=True,
-            italic=True, color=INK)
-
-    pn = pl.add_paragraph()
-    pn.paragraph_format.left_indent = Cm(0.35)
-    pn.paragraph_format.right_indent = Cm(0.35)
-    pn.paragraph_format.space_before = Pt(2)
-    pn.paragraph_format.space_after = Pt(2)
-    add_run(pn,
-            "Questions or changes? Email hello@webgro.co.uk and we'll sort it.",
-            font=BODY_FONT, size=8, color=INK_SOFT)
-
-    pm = pl.add_paragraph()
-    pm.paragraph_format.left_indent = Cm(0.35)
-    pm.paragraph_format.right_indent = Cm(0.35)
-    pm.paragraph_format.space_before = Pt(6)
-    pm.paragraph_format.space_after = Pt(8)
-    add_run(pm, "WEBGRO LTD  ·  REG 10889889  ·  PART OF BROADBRIDGE GROUP",
-            font=MONO_FONT, size=7, color=SLATE, tracking_pts=1.2)
+    # Bottom padding inside the HOW TO PAY cell. Thanks copy now lives
+    # as its own full-width block after this payment/totals row.
+    padp = pl.add_paragraph()
+    padp.paragraph_format.space_after = Pt(8)
 
     # ---------- RIGHT: totals ----------
     tr = footer.rows[0].cells[1]
@@ -652,27 +601,52 @@ def main() -> None:
     # Xero's real field names for invoice totals. `AmountPaid` isn't
     # exposed as a template field, so we omit a Paid row; InvoiceAmountDue
     # is the outstanding balance after any part-payments.
+    #
+    # Important: TaxTotal is a *repeater* field in Xero (an invoice can
+    # carry multiple tax rates, each with its own line). It MUST live
+    # inside a row wrapped by TableStart:TaxSubTotal / TableEnd:TaxSubTotal
+    # markers — the same pattern as line items. Without the markers,
+    # TaxTotal won't merge and renders as «TaxTotal». We build that
+    # wrapper by nesting a single-row table inside the totals cell.
     MONEY_FMT = r'\# "#,##0.00;(#,##0.00)"'
-    totals_rows = [
-        ("Subtotal", "InvoiceSubTotal"),
-        ("VAT", "TaxTotal"),
-    ]
 
-    first = True
-    for label, field in totals_rows:
-        p = tr.paragraphs[0] if first else tr.add_paragraph()
-        is_first = first
-        first = False
-        p.paragraph_format.left_indent = Cm(0.35)
-        p.paragraph_format.right_indent = Cm(0.35)
-        p.paragraph_format.space_before = Pt(8 if is_first else 0)
-        p.paragraph_format.space_after = Pt(3)
-        tab_stops = p.paragraph_format.tab_stops
-        tab_stops.add_tab_stop(Cm(6.7), WD_ALIGN_PARAGRAPH.RIGHT)
-        add_run(p, label, font=BODY_FONT, size=9, color=INK_SOFT)
-        add_run(p, "\t", font=BODY_FONT, size=9)
-        add_merge(p, field, font=MONO_FONT, size=10, color=INK,
-                  format_switch=MONEY_FMT)
+    # Subtotal line (static — not a repeater)
+    sub_p = tr.paragraphs[0]
+    sub_p.paragraph_format.left_indent = Cm(0.35)
+    sub_p.paragraph_format.right_indent = Cm(0.35)
+    sub_p.paragraph_format.space_before = Pt(8)
+    sub_p.paragraph_format.space_after = Pt(3)
+    tab_stops = sub_p.paragraph_format.tab_stops
+    tab_stops.add_tab_stop(Cm(6.7), WD_ALIGN_PARAGRAPH.RIGHT)
+    add_run(sub_p, "Subtotal", font=BODY_FONT, size=9, color=INK_SOFT)
+    add_run(sub_p, "\t", font=BODY_FONT, size=9)
+    add_merge(sub_p, "InvoiceSubTotal", font=MONO_FONT, size=10, color=INK,
+              format_switch=MONEY_FMT)
+
+    # VAT line — nested one-row table so we can put both TaxSubTotal
+    # markers in the same row as TaxTotal (mirroring how LineItem works).
+    vat_tbl = tr.add_table(rows=1, cols=1)
+    vat_tbl.autofit = False
+    remove_all_table_borders(vat_tbl)
+    vat_cell = vat_tbl.rows[0].cells[0]
+    vat_cell.width = Cm(7.5)
+    set_cell_shading(vat_cell, WHITE)
+    vat_p = vat_cell.paragraphs[0]
+    vat_p.paragraph_format.left_indent = Cm(0.35)
+    vat_p.paragraph_format.right_indent = Cm(0.35)
+    vat_p.paragraph_format.space_before = Pt(0)
+    vat_p.paragraph_format.space_after = Pt(3)
+    vat_tabs = vat_p.paragraph_format.tab_stops
+    vat_tabs.add_tab_stop(Cm(6.7), WD_ALIGN_PARAGRAPH.RIGHT)
+    # Start marker (invisible), visible label, tab, TaxTotal, end marker
+    add_merge(vat_p, "TableStart:TaxSubTotal", font=MONO_FONT, size=1,
+              color=WHITE_RGB)
+    add_run(vat_p, "VAT", font=BODY_FONT, size=9, color=INK_SOFT)
+    add_run(vat_p, "\t", font=BODY_FONT, size=9)
+    add_merge(vat_p, "TaxTotal", font=MONO_FONT, size=10, color=INK,
+              format_switch=MONEY_FMT)
+    add_merge(vat_p, "TableEnd:TaxSubTotal", font=MONO_FONT, size=1,
+              color=WHITE_RGB)
 
     # Divider
     dv = tr.add_paragraph()
@@ -707,6 +681,44 @@ def main() -> None:
     pda.paragraph_format.space_after = Pt(8)
     add_merge(pda, "InvoiceAmountDue", font=DISPLAY_FONT, size=20,
               bold=True, color=INK, format_switch=MONEY_FMT)
+
+    # ------ FULL-WIDTH THANKS BLOCK -----------------------------------
+    # Sits outside the payment/totals cards on the cream page itself —
+    # no white card, full width, bigger breathing room. Holds the
+    # large italic "Thanks.", the contact lines that used to live in
+    # the FROM cell, and the Webgro reg footer line.
+    thanks_spacer = doc.add_paragraph()
+    thanks_spacer.paragraph_format.space_before = Pt(0)
+    thanks_spacer.paragraph_format.space_after = Pt(12)
+
+    # Big italic headline
+    th = doc.add_paragraph()
+    th.paragraph_format.space_before = Pt(0)
+    th.paragraph_format.space_after = Pt(6)
+    add_run(th, "Thanks.", font=DISPLAY_FONT, size=28, bold=True,
+            italic=True, color=INK)
+
+    # Contact line: email + phone, previously in the FROM cell
+    contact = doc.add_paragraph()
+    contact.paragraph_format.space_before = Pt(0)
+    contact.paragraph_format.space_after = Pt(4)
+    add_run(contact, "Questions or changes? Email ",
+            font=BODY_FONT, size=10, color=INK_SOFT)
+    add_run(contact, "hello@webgro.co.uk",
+            font=BODY_FONT, size=10, color=INK, bold=True)
+    add_run(contact, " or call ",
+            font=BODY_FONT, size=10, color=INK_SOFT)
+    add_run(contact, "+44 (0) 1344 231 119",
+            font=BODY_FONT, size=10, color=INK, bold=True)
+    add_run(contact, ". We'll sort it.",
+            font=BODY_FONT, size=10, color=INK_SOFT)
+
+    # Webgro reg line in small mono, bottom-aligned
+    reg = doc.add_paragraph()
+    reg.paragraph_format.space_before = Pt(10)
+    reg.paragraph_format.space_after = Pt(0)
+    add_run(reg, "WEBGRO LTD  ·  REG 10889889  ·  PART OF BROADBRIDGE GROUP",
+            font=MONO_FONT, size=7, color=SLATE, tracking_pts=1.2)
 
     # Save
     OUT.parent.mkdir(parents=True, exist_ok=True)
