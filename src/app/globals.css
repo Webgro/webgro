@@ -1,0 +1,107 @@
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap');
+@import "tailwindcss";
+
+:root {
+  --wg-blue: #2D8DFF;
+  --wg-blue-dark: #1F6FD4;
+  --wg-violet: #7C3AED;
+  --wg-ink: #07080C;
+  --wg-ink-raised: #0D1117;
+  --wg-slate: #6B7A99;
+  --wg-mist: #F4F6FB;
+  --wg-teal: #00C9A7;
+
+  --background: var(--wg-ink);
+  --foreground: #EDEFF4;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-wg-blue: var(--wg-blue);
+  --color-wg-blue-dark: var(--wg-blue-dark);
+  --color-wg-violet: var(--wg-violet);
+  --color-wg-ink: var(--wg-ink);
+  --color-wg-ink-raised: var(--wg-ink-raised);
+  --color-wg-slate: var(--wg-slate);
+  --color-wg-mist: var(--wg-mist);
+  --color-wg-teal: var(--wg-teal);
+
+  --font-display: 'Satoshi', var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html, body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (pointer: fine) {
+  html, body, a, button, [data-cursor] {
+    cursor: none;
+  }
+}
+
+@keyframes wgDrift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-8px, -6px, 0); }
+}
+
+@keyframes wgMarquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+.animate-marquee {
+  animation: wgMarquee 28s linear infinite;
+  animation-play-state: running;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Hide animated elements on initial load so the browser never paints them
+   in their visible state before GSAP takes over. Without this, SSR HTML
+   renders visible, then GSAP yanks elements hidden just before animating,
+   the "load, glitch, animate after the user's already seen it" bug.
+   GSAP writes higher-specificity inline styles that override these as it
+   animates. If JS fails, content stays hidden, acceptable for this
+   JS-dependent site (Lenis smooth scroll, custom cursor, mockups). */
+[data-hero-char],
+[data-case-title-word],
+[data-article-title-line],
+[data-work-h2-word],
+[data-services-h2-word],
+[data-gro-h2-word],
+[data-faq-h2-word],
+[data-contact-h2-word],
+[data-service-title],
+[data-service-meta],
+[data-service-lead],
+[data-service-reveal],
+[data-capability],
+[data-why-card],
+[data-approach-step],
+[data-more-card],
+[data-platform-row],
+[data-triple-tablet],
+[data-triple-desktop],
+[data-triple-phone],
+[data-about-title],
+[data-about-meta],
+[data-about-lead],
+[data-about-reveal],
+[data-about-person],
+[data-about-principle],
+[data-about-award],
+[data-contactpg-title],
+[data-contactpg-meta],
+[data-contactpg-lead],
+[data-contactpg-reveal],
+[data-contactpg-method],
+[data-contactpg-step] {
+  opacity: 0;
+}

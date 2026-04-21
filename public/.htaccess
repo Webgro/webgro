@@ -1,0 +1,185 @@
+# ============================================================================
+# Webgro.co.uk — 301 redirect map for the 2026 redesign.
+#
+# Maps every URL the old WordPress site had (pulled from
+# https://webgro.co.uk/sitemap_index.xml) to its closest equivalent on the
+# new Next.js site. Used when the new site is deployed to Apache-backed
+# hosting (20i, cPanel, shared LAMP). On Vercel / Netlify / Next.js-native
+# hosts this file is ignored — the same map lives in next.config.ts.
+#
+# Philosophy:
+#   - Old case-study slugs that still exist on the new site get their own
+#     mapping, so ranking + social-share equity transfers exactly.
+#   - Old case-study slugs that don't exist on the new site (legacy work we
+#     chose not to carry forward) redirect to /work so nothing 404s.
+#   - Old service-location landing pages (web-design-development/{city},
+#     shopify-web-design/{city}, wordpress-web-design/{city}) collapse to
+#     /services/websites — there are hundreds of them, so wildcards.
+#   - Blog posts haven't been individually carried across — the new /the-gro
+#     only has three articles — so every post redirects there for now.
+#     Individual mappings can be added here later as articles are ported.
+#   - Category archives collapse to /work (portfolio cats) or /the-gro
+#     (editorial cats).
+#
+# All redirects are 301 (permanent) so Google consolidates ranking signal
+# onto the new URL.
+# ============================================================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # --------------------------------------------------------------------------
+  # 1. Legacy service-location pages (hundreds of variants, wildcards only).
+  # Must come FIRST so the city-suffix rules don't get overtaken by the
+  # plain /services/ rule below.
+  # --------------------------------------------------------------------------
+  RewriteRule ^services/web-design-development(/.*)?/?$   /services/websites [R=301,L]
+  RewriteRule ^services/shopify-web-design(/.*)?/?$        /services/websites [R=301,L]
+  RewriteRule ^services/wordpress-web-design(/.*)?/?$      /services/websites [R=301,L]
+
+  # --------------------------------------------------------------------------
+  # 2. Specific service routes
+  # --------------------------------------------------------------------------
+  RewriteRule ^services/seo-packages/?$          /services/seo         [R=301,L]
+  RewriteRule ^services/seo/?$                    /services/seo         [R=301,L]
+  RewriteRule ^services/ecommerce/?$              /services/consultancy [R=301,L]
+  RewriteRule ^services/maintenance/?$            /services/websites    [R=301,L]
+  RewriteRule ^services/?$                        /services             [R=301,L]
+
+  # --------------------------------------------------------------------------
+  # 3. Top-level pages
+  # --------------------------------------------------------------------------
+  RewriteRule ^about/?$                           /about     [R=301,L]
+  RewriteRule ^contact/?$                         /contact   [R=301,L]
+  RewriteRule ^request-a-proposal/?$              /contact   [R=301,L]
+  RewriteRule ^our-work/?$                        /work      [R=301,L]
+  RewriteRule ^our-awards/?$                      /about     [R=301,L]
+  RewriteRule ^blog/?$                            /the-gro   [R=301,L]
+
+  # --------------------------------------------------------------------------
+  # 4. Category archives
+  # --------------------------------------------------------------------------
+  RewriteRule ^category/portfolio(/.*)?/?$        /work      [R=301,L]
+  RewriteRule ^category/tips-tricks/?$            /the-gro   [R=301,L]
+  RewriteRule ^category/news/?$                   /the-gro   [R=301,L]
+  RewriteRule ^category/uncategorised/?$          /the-gro   [R=301,L]
+
+  # --------------------------------------------------------------------------
+  # 5. Portfolio — case studies with a direct equivalent on the new site
+  # --------------------------------------------------------------------------
+  RewriteRule ^fun-cases/?$                       /work/fun-cases        [R=301,L]
+  RewriteRule ^twisted-tailor/?$                  /work/twisted-tailor   [R=301,L]
+  RewriteRule ^gieves-and-hawkes/?$               /work/gieves-and-hawkes[R=301,L]
+  RewriteRule ^sublishop/?$                       /work/sublishop        [R=301,L]
+
+  # --------------------------------------------------------------------------
+  # 6. Portfolio — legacy slugs (old case studies we didn't port) → /work
+  # --------------------------------------------------------------------------
+  RewriteRule ^admiral-cunningham/?$              /work [R=301,L]
+  RewriteRule ^middleton-associates/?$            /work [R=301,L]
+  RewriteRule ^bms-driveways/?$                   /work [R=301,L]
+  RewriteRule ^patrick-grant-studio/?$            /work [R=301,L]
+  RewriteRule ^kibble-watches/?$                  /work [R=301,L]
+  RewriteRule ^georgina-bywater/?$                /work [R=301,L]
+  RewriteRule ^vagamundo/?$                       /work [R=301,L]
+  RewriteRule ^anyprint/?$                        /work [R=301,L]
+  RewriteRule ^kim-duffy/?$                       /work [R=301,L]
+  RewriteRule ^tc4re/?$                           /work [R=301,L]
+  RewriteRule ^lawnify/?$                         /work [R=301,L]
+  RewriteRule ^architectural-fx/?$                /work [R=301,L]
+  RewriteRule ^samso-solar/?$                     /work [R=301,L]
+
+  # --------------------------------------------------------------------------
+  # 7. Auto-sector landing pages (old PPC landers) → /services/websites
+  # --------------------------------------------------------------------------
+  RewriteRule ^elite-autocentre/?$                /services/websites [R=301,L]
+  RewriteRule ^longshot-lane-mot/?$               /services/websites [R=301,L]
+  RewriteRule ^asj-auto-services/?$               /services/websites [R=301,L]
+  RewriteRule ^baileys-garage/?$                  /services/websites [R=301,L]
+  RewriteRule ^helyer-autos/?$                    /services/websites [R=301,L]
+  RewriteRule ^ackroyd-ackroyd-autos/?$           /services/websites [R=301,L]
+
+  # --------------------------------------------------------------------------
+  # 8. One-off proposal URLs → homepage
+  # --------------------------------------------------------------------------
+  RewriteRule ^proposal-altos-lighting-ai-demo/?$ / [R=301,L]
+  RewriteRule ^proposal-altos-lighting/?$         / [R=301,L]
+
+  # --------------------------------------------------------------------------
+  # 9. News-style posts with a more specific destination than /the-gro
+  # --------------------------------------------------------------------------
+  RewriteRule ^broadbridge-design-is-now-webgro/?$                                                                 /about                  [R=301,L]
+  RewriteRule ^webgro-nominated-for-best-gardening-website-design-award-by-designrush/?$                          /about                  [R=301,L]
+  RewriteRule ^webgro-embarks-on-a-digital-odyssey-with-the-launch-of-gieves-and-hawkes-impeccable-online-presence/?$ /work/gieves-and-hawkes [R=301,L]
+  RewriteRule ^we-have-moved/?$                                                                                    /about                  [R=301,L]
+  RewriteRule ^how-to-use-your-webgro-email-address/?$                                                             /                       [R=301,L]
+
+  # --------------------------------------------------------------------------
+  # 10. Editorial blog posts — everything we didn't port individually.
+  # Each listed explicitly so Google sees a clean 301 per URL rather than
+  # a soft 404. Add a specific destination later as articles get ported.
+  # --------------------------------------------------------------------------
+  RewriteRule ^top-tips-for-starting-an-e-commerce-business/?$                                     /the-gro [R=301,L]
+  RewriteRule ^the-benefits-of-hiring-a-professional-web-design-agency/?$                          /the-gro [R=301,L]
+  RewriteRule ^what-makes-a-great-landing-page/?$                                                  /the-gro [R=301,L]
+  RewriteRule ^how-much-should-i-expect-to-pay-for-a-website-design/?$                             /the-gro [R=301,L]
+  RewriteRule ^how-does-infinite-scrolling-affect-seo/?$                                            /the-gro [R=301,L]
+  RewriteRule ^5-ways-a-blog-can-benefit-your-business/?$                                          /the-gro [R=301,L]
+  RewriteRule ^4-reasons-you-need-to-use-a-business-email-address/?$                                /the-gro [R=301,L]
+  RewriteRule ^7-tricks-to-increase-your-conversion-rate/?$                                         /the-gro [R=301,L]
+  RewriteRule ^web-accessibility-designing-for-inclusivity/?$                                      /the-gro [R=301,L]
+  RewriteRule ^e-commerce-trends-in-2024-the-future-of-online-shopping/?$                          /the-gro [R=301,L]
+  RewriteRule ^the-importance-of-mobile-first-web-design/?$                                        /the-gro [R=301,L]
+  RewriteRule ^the-dos-and-donts-of-website-navigation/?$                                          /the-gro [R=301,L]
+  RewriteRule ^how-to-make-your-website-look-more-christmassy-a-guide-to-festive-web-design/?$      /the-gro [R=301,L]
+  RewriteRule ^the-unseen-benefits-of-a-dedicated-server-in-website-design/?$                      /the-gro [R=301,L]
+  RewriteRule ^a-b-testing-your-email-campaigns-a-step-by-step-guide/?$                             /the-gro [R=301,L]
+  RewriteRule ^email-marketing-101-building-and-growing-your-subscriber-list/?$                     /the-gro [R=301,L]
+  RewriteRule ^top-seo-tools-every-website-needs-in-2024/?$                                         /the-gro [R=301,L]
+  RewriteRule ^leveraging-shopify-apps-to-enhance-your-online-store/?$                              /the-gro [R=301,L]
+  RewriteRule ^crafting-compelling-email-campaigns-best-practices-for-marketers/?$                  /the-gro [R=301,L]
+  RewriteRule ^on-page-vs-off-page-seo-whats-the-difference-and-why-it-matters/?$                   /the-gro [R=301,L]
+  RewriteRule ^responsive-design-why-its-crucial-for-your-wordpress-website/?$                     /the-gro [R=301,L]
+  RewriteRule ^squarespace-vs-professional-web-design-which-is-the-better-option/?$                 /the-gro [R=301,L]
+  RewriteRule ^wix-vs-professional-web-design-which-is-the-better-option/?$                        /the-gro [R=301,L]
+  RewriteRule ^how-to-appear-on-google-maps-a-comprehensive-guide/?$                                /the-gro [R=301,L]
+  RewriteRule ^how-to-add-a-user-to-your-google-my-business-listing/?$                              /the-gro [R=301,L]
+  RewriteRule ^the-benefits-of-ecommerce-consultancy-for-small-businesses/?$                        /the-gro [R=301,L]
+  RewriteRule ^essential-shopify-plugins-to-supercharge-your-online-store/?$                        /the-gro [R=301,L]
+  RewriteRule ^wordpress-vs-shopify-which-platform-is-right-for-your-business/?$                    /the-gro [R=301,L]
+  RewriteRule ^how-to-optimise-your-shopify-store-for-mobile-users/?$                               /the-gro [R=301,L]
+  RewriteRule ^boost-your-local-seo-tips-for-small-businesses/?$                                    /the-gro [R=301,L]
+  RewriteRule ^seo-best-practices-for-wordpress-a-beginners-guide/?$                                /the-gro [R=301,L]
+  RewriteRule ^why-seo-is-important-for-local-businesses/?$                                         /the-gro [R=301,L]
+  RewriteRule ^how-a-website-redesign-can-boost-your-conversion-rates/?$                            /the-gro [R=301,L]
+  RewriteRule ^5-common-web-design-mistakes-that-could-be-hurting-your-business/?$                  /the-gro [R=301,L]
+  RewriteRule ^is-shopify-plus-worth-it/?$                                                          /the-gro [R=301,L]
+  RewriteRule ^the-ultimate-guide-to-optimising-your-shopify-store-for-seo/?$                       /the-gro [R=301,L]
+  RewriteRule ^why-content-is-king-the-role-of-blogging-in-boosting-seo/?$                          /the-gro [R=301,L]
+  RewriteRule ^how-to-choose-the-best-e-commerce-platform-for-your-business/?$                      /the-gro [R=301,L]
+  RewriteRule ^the-10-most-common-reasons-for-abandoned-carts-and-how-to-fix-them/?$                 /the-gro [R=301,L]
+  RewriteRule ^how-to-improve-your-e-commerce-sites-product-pages-for-maximum-conversions/?$        /the-gro [R=301,L]
+  RewriteRule ^is-dropshipping-still-profitable-in-2025/?$                                          /the-gro [R=301,L]
+  RewriteRule ^what-to-do-when-your-online-store-isnt-generating-sales/?$                           /the-gro [R=301,L]
+  RewriteRule ^the-role-of-customer-reviews-in-e-commerce-success/?$                                /the-gro [R=301,L]
+  RewriteRule ^how-to-use-email-marketing-to-drive-repeat-sales-for-your-online-store/?$            /the-gro [R=301,L]
+  RewriteRule ^how-to-offer-free-shipping-without-hurting-your-profit-margins/?$                    /the-gro [R=301,L]
+  RewriteRule ^how-to-write-product-descriptions-that-actually-sell/?$                              /the-gro [R=301,L]
+  RewriteRule ^essential-website-features-every-e-commerce-store-needs/?$                           /the-gro [R=301,L]
+  RewriteRule ^how-to-optimise-your-product-pages-for-seo/?$                                        /the-gro [R=301,L]
+  RewriteRule ^the-best-free-and-paid-seo-tools-for-e-commerce/?$                                   /the-gro [R=301,L]
+  RewriteRule ^how-blogging-can-boost-your-online-stores-seo-and-sales/?$                           /the-gro [R=301,L]
+  RewriteRule ^why-internal-linking-is-crucial-for-e-commerce-seo/?$                                /the-gro [R=301,L]
+  RewriteRule ^what-is-retargeting-and-how-can-it-help-your-e-commerce-business/?$                  /the-gro [R=301,L]
+  RewriteRule ^how-to-use-user-generated-content-to-increase-sales/?$                               /the-gro [R=301,L]
+  RewriteRule ^how-to-reduce-bounce-rate-and-keep-visitors-on-your-site-longer/?$                   /the-gro [R=301,L]
+  RewriteRule ^how-to-handle-negative-reviews-and-turn-them-into-opportunities/?$                   /the-gro [R=301,L]
+
+  # --------------------------------------------------------------------------
+  # 11. Sitemap — WordPress's sitemap_index.xml → site's own sitemap.xml
+  # so any backlinks to the old sitemap address still land somewhere useful.
+  # --------------------------------------------------------------------------
+  RewriteRule ^sitemap_index\.xml$                /sitemap.xml [R=301,L]
+  RewriteRule ^(post|page|category|author|e-landing-page)-sitemap\.xml$ /sitemap.xml [R=301,L]
+</IfModule>
