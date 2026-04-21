@@ -14,7 +14,7 @@ const footerNav = {
     "Marketing",
     "Design",
   ],
-  agency: ["Work", "Services", "About", "FAQ", "Contact"],
+  agency: ["Work", "Services", "About", "Contact"],
   legal: ["Privacy Policy", "Cookie Policy", "Accessibility"],
 };
 
@@ -139,7 +139,7 @@ export function Footer() {
               {footerNav.agency.map((item) => (
                 <li key={item}>
                   <a
-                    href={item === "Contact" ? "/contact" : item === "Work" ? "/work" : item === "Services" ? "/#services" : item === "FAQ" ? "/#faq" : item === "About" ? "/about" : "#"}
+                    href={item === "Contact" ? "/contact" : item === "Work" ? "/work" : item === "Services" ? "/services" : item === "About" ? "/about" : "#"}
                     data-cursor="hover"
                     className="inline-block transition hover:text-white"
                   >
