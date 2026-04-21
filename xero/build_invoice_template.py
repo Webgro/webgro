@@ -34,16 +34,28 @@ from pathlib import Path
 INK = RGBColor(0x07, 0x08, 0x0C)
 INK_SOFT = RGBColor(0x52, 0x5B, 0x6E)
 SLATE = RGBColor(0x8B, 0x94, 0xA8)
-MIST = "F4F6FB"           # hex without # for xml
+MIST = "F4F6FB"           # hex without # for xml shading
 WHITE = "FFFFFF"
 LINE = "E6EAF2"           # hairline grey
+# RGBColor white for run text colour — used for making the hidden
+# TableStart/TableEnd marker merge fields invisible.
+WHITE_RGB = RGBColor(0xFF, 0xFF, 0xFF)
 BLUE = RGBColor(0x2D, 0x8D, 0xFF)
 VIOLET = RGBColor(0x7C, 0x3A, 0xED)
 TEAL = RGBColor(0x00, 0xC9, 0xA7)
 
-DISPLAY_FONT = "Space Grotesk"
-BODY_FONT = "Inter"
-MONO_FONT = "JetBrains Mono"
+# Fonts chosen to render cleanly inside Xero's PDF engine, which doesn't
+# have Space Grotesk / Inter / JetBrains Mono available. We pick fonts
+# that ship with the Xero renderer (and Windows / macOS Word) so the
+# preview and the rendered PDF look the same, rather than falling back
+# silently to Times New Roman (which is what happened on the first try).
+#
+# Trebuchet MS is the closest "humanist modern sans" equivalent to Space
+# Grotesk in a Word-safe font. Calibri is the closest clean body sans to
+# Inter. Consolas is a solid mono fallback.
+DISPLAY_FONT = "Trebuchet MS"
+BODY_FONT = "Calibri"
+MONO_FONT = "Consolas"
 
 OUT = Path(
     "/Users/michaelbroadbridge/Desktop/Claude/webgro-site/xero/"
@@ -373,38 +385,39 @@ def main() -> None:
     add_run(p, "BILL TO", font=MONO_FONT, size=8, color=VIOLET,
             tracking_pts=1.6)
 
-    # Each bill-to line becomes a real MERGEFIELD so Xero fills it in.
-    # The raw field name (no guillemets) is passed — add_merge wraps it.
-    bill_lines = [
-        ("ContactName", DISPLAY_FONT, 12, True, INK),
-        ("ContactPhysicalAddressLine1", BODY_FONT, 9, False, INK_SOFT),
-        ("ContactPhysicalAddressLine2", BODY_FONT, 9, False, INK_SOFT),
-        ("ContactPhysicalAddressLine3", BODY_FONT, 9, False, INK_SOFT),
-        ("ContactPhysicalAddressLine4", BODY_FONT, 9, False, INK_SOFT),
-        ("ContactPhysicalPostalCode", BODY_FONT, 9, False, INK_SOFT),
-        ("ContactPhysicalCountry", BODY_FONT, 9, False, INK_SOFT),
-    ]
-    for field, font, size, bold, color in bill_lines:
-        para = tcell.add_paragraph()
-        para.paragraph_format.left_indent = Cm(0.35)
-        para.paragraph_format.space_before = Pt(0)
-        para.paragraph_format.space_after = Pt(1)
-        add_merge(para, field, font=font, size=size, bold=bold, color=color)
-    # Blank spacer paragraph, then email
+    # Contact name (the client's display name on the invoice)
+    name_p = tcell.add_paragraph()
+    name_p.paragraph_format.left_indent = Cm(0.35)
+    name_p.paragraph_format.space_before = Pt(0)
+    name_p.paragraph_format.space_after = Pt(1)
+    add_merge(name_p, "ContactName", font=DISPLAY_FONT, size=12, bold=True,
+              color=INK)
+
+    # Full postal address — Xero populates this as a multi-line string,
+    # so one merge field on its own paragraph renders the whole address
+    # block with line breaks preserved.
+    addr_p = tcell.add_paragraph()
+    addr_p.paragraph_format.left_indent = Cm(0.35)
+    addr_p.paragraph_format.space_before = Pt(0)
+    addr_p.paragraph_format.space_after = Pt(1)
+    add_merge(addr_p, "ContactPostalAddress", font=BODY_FONT, size=9,
+              color=INK_SOFT)
+
+    # Spacer then email
     sep = tcell.add_paragraph()
     sep.paragraph_format.left_indent = Cm(0.35)
-    sep.paragraph_format.space_before = Pt(0)
     sep.paragraph_format.space_after = Pt(1)
     add_run(sep, "", font=BODY_FONT, size=4, color=INK)
 
-    para = tcell.add_paragraph()
-    para.paragraph_format.left_indent = Cm(0.35)
-    para.paragraph_format.space_before = Pt(0)
-    para.paragraph_format.space_after = Pt(1)
-    add_merge(para, "ContactEmailAddress", font=BODY_FONT, size=9, color=INK)
+    email_p = tcell.add_paragraph()
+    email_p.paragraph_format.left_indent = Cm(0.35)
+    email_p.paragraph_format.space_before = Pt(0)
+    email_p.paragraph_format.space_after = Pt(1)
+    add_merge(email_p, "ContactEmailAddress", font=BODY_FONT, size=9,
+              color=INK)
 
-    para = tcell.add_paragraph()
-    para.paragraph_format.space_after = Pt(8)
+    pad = tcell.add_paragraph()
+    pad.paragraph_format.space_after = Pt(8)
 
     # tighter spacer
     sp = doc.add_paragraph()
@@ -416,8 +429,8 @@ def main() -> None:
     remove_all_table_borders(meta)
     meta_colors = [BLUE, VIOLET, TEAL]
     meta_labels = ["ISSUED", "DUE", "REFERENCE"]
-    # Xero merge field names
-    meta_fields = ["Date", "DueDate", "Reference"]
+    # Xero merge field names (invoice-scoped dates, not a plain `Date`)
+    meta_fields = ["InvoiceDate", "InvoiceDueDate", "Reference"]
     for col in range(3):
         hdr = meta.rows[0].cells[col]
         val = meta.rows[1].cells[col]
@@ -465,7 +478,7 @@ def main() -> None:
         WD_ALIGN_PARAGRAPH.RIGHT,
         WD_ALIGN_PARAGRAPH.RIGHT,
     ]
-    for cell, title, align in zip(h.cells, h_titles, h_aligns):
+    for idx, (cell, title, align) in enumerate(zip(h.cells, h_titles, h_aligns)):
         set_cell_shading(cell, WHITE)
         set_cell_border(cell, "bottom", "07080C", size=10)
         set_cell_vertical_align(cell, "center")
@@ -475,6 +488,14 @@ def main() -> None:
         p.paragraph_format.space_after = Pt(5)
         p.paragraph_format.left_indent = Cm(0.25) if align == WD_ALIGN_PARAGRAPH.LEFT else Cm(0)
         p.paragraph_format.right_indent = Cm(0.25) if align == WD_ALIGN_PARAGRAPH.RIGHT else Cm(0)
+        # TableStart marker MUST appear before the first line-item row.
+        # We tuck it into the first header cell so it's in document order
+        # before the body row but doesn't need its own row.
+        if idx == 0:
+            # White on white + 1pt: the marker is present in the XML so
+            # Xero's parser finds it, but it takes no visible space.
+            add_merge(p, "TableStart:LineItem", font=MONO_FONT, size=1,
+                      color=WHITE_RGB)
         add_run(p, title, font=MONO_FONT, size=8, color=INK, bold=True,
                 tracking_pts=1.4)
 
@@ -486,7 +507,9 @@ def main() -> None:
         ("UnitAmount", WD_ALIGN_PARAGRAPH.RIGHT, MONO_FONT, 10, False, INK_SOFT),
         ("LineAmount", WD_ALIGN_PARAGRAPH.RIGHT, DISPLAY_FONT, 11, True, INK),
     ]
-    for cell, (field, align, font, size, bold, color) in zip(b.cells, body_fields):
+    for idx, (cell, (field, align, font, size, bold, color)) in enumerate(
+        zip(b.cells, body_fields)
+    ):
         set_cell_shading(cell, WHITE)
         set_cell_border(cell, "bottom", "E6EAF2", size=4)
         set_cell_vertical_align(cell, "center")
@@ -497,6 +520,11 @@ def main() -> None:
         p.paragraph_format.left_indent = Cm(0.25) if align == WD_ALIGN_PARAGRAPH.LEFT else Cm(0)
         p.paragraph_format.right_indent = Cm(0.25) if align == WD_ALIGN_PARAGRAPH.RIGHT else Cm(0)
         add_merge(p, field, font=font, size=size, bold=bold, color=color)
+        # TableEnd marker goes in the last body cell, after the visible
+        # line-item field. Same hiding trick as the start marker.
+        if idx == len(body_fields) - 1:
+            add_merge(p, "TableEnd:LineItem", font=MONO_FONT, size=1,
+                      color=WHITE_RGB)
 
     # small spacer
     sp = doc.add_paragraph()
@@ -549,21 +577,14 @@ def main() -> None:
     add_run(pref, "Reference · ", font=BODY_FONT, size=9, color=INK_SOFT)
     add_merge(pref, "InvoiceNumber", font=BODY_FONT, size=9, color=INK_SOFT)
 
-    # Blank spacer
+    # Blank spacer line (keeps the visual rhythm between "Reference" and
+    # the divider before Thanks). Payment terms already appear in the
+    # "DUE" date of the metadata strip above, so we don't repeat them
+    # here.
     sp_line = pl.add_paragraph()
     sp_line.paragraph_format.left_indent = Cm(0.35)
     sp_line.paragraph_format.space_after = Pt(1)
     add_run(sp_line, "", font=BODY_FONT, size=3, color=INK)
-
-    # Payment-terms line (payment terms is a merge field on the Xero invoice)
-    pterm = pl.add_paragraph()
-    pterm.paragraph_format.left_indent = Cm(0.35)
-    pterm.paragraph_format.space_before = Pt(0)
-    pterm.paragraph_format.space_after = Pt(1)
-    add_run(pterm, "Payment terms · ", font=BODY_FONT, size=8, color=SLATE)
-    add_merge(pterm, "PaymentTerms", font=BODY_FONT, size=8, color=SLATE)
-    add_run(pterm, " days from invoice date.", font=BODY_FONT, size=8,
-            color=SLATE)
 
     # Divider paragraph inside the cell
     dp = pl.add_paragraph()
@@ -611,10 +632,12 @@ def main() -> None:
     set_cell_shading(tr, WHITE)
     set_cell_vertical_align(tr, "top")
 
+    # Xero's real field names for invoice totals. `AmountPaid` isn't
+    # exposed as a template field — Xero just shows the outstanding
+    # balance in InvoiceAmountDue — so we omit a Paid row.
     totals_rows = [
-        ("Subtotal", "SubTotal"),
-        ("VAT", "TotalTax"),
-        ("Paid", "AmountPaid"),
+        ("Subtotal", "InvoiceSubTotal"),
+        ("VAT", "TaxTotal"),
     ]
 
     first = True
@@ -663,8 +686,8 @@ def main() -> None:
     pda.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     pda.paragraph_format.space_before = Pt(0)
     pda.paragraph_format.space_after = Pt(8)
-    add_merge(pda, "AmountDue", font=DISPLAY_FONT, size=20, bold=True,
-              color=INK)
+    add_merge(pda, "InvoiceAmountDue", font=DISPLAY_FONT, size=20,
+              bold=True, color=INK)
 
     # Save
     OUT.parent.mkdir(parents=True, exist_ok=True)
