@@ -155,6 +155,40 @@ def add_run(paragraph, text, *, font=BODY_FONT, size=10, bold=False,
     return run
 
 
+def add_merge(paragraph, field_name: str, *, font=BODY_FONT, size=10,
+              bold=False, italic=False, color: RGBColor = INK,
+              tracking_pts: float | None = None):
+    """Add a proper Word MERGEFIELD that Xero's parser recognises.
+
+    Visually identical to `add_run(«FieldName»)` in Word (preview text is
+    the same guillemet wrap), but the underlying XML carries the
+    instruction `MERGEFIELD <name>` which Xero substitutes on PDF render.
+    Previously we shipped plain text with guillemets and Xero had
+    nothing to substitute, so the placeholders leaked through verbatim.
+    """
+    display = f"«{field_name}»"
+    # Build the inner run first so we reuse all the run-styling logic.
+    run = add_run(paragraph, display, font=font, size=size, bold=bold,
+                  italic=italic, color=color, tracking_pts=tracking_pts)
+    r_elem = run._r
+
+    # Swap the run out for a <w:fldSimple> wrapper. The run element is
+    # moved inside so the formatted display text is still rendered as-is
+    # when Word opens the file (or when Xero reads it before merge).
+    parent = r_elem.getparent()
+    idx = list(parent).index(r_elem)
+    parent.remove(r_elem)
+
+    fldSimple = OxmlElement("w:fldSimple")
+    fldSimple.set(
+        qn("w:instr"),
+        f' MERGEFIELD  {field_name}  \\* MERGEFORMAT ',
+    )
+    fldSimple.append(r_elem)
+    parent.insert(idx, fldSimple)
+    return run
+
+
 def set_paragraph_spacing(p, *, before=0, after=4, line_rule_auto=True):
     pf = p.paragraph_format
     pf.space_before = Pt(before)
@@ -237,9 +271,8 @@ def main() -> None:
     p2.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     p2.paragraph_format.space_before = Pt(2)
     p2.paragraph_format.space_after = Pt(0)
-    # Smaller than before so a long invoice number doesn't wrap in preview.
-    add_run(p2, "«InvoiceNumber»", font=DISPLAY_FONT, size=24, bold=True,
-            color=INK)
+    add_merge(p2, "InvoiceNumber", font=DISPLAY_FONT, size=24, bold=True,
+              color=INK)
 
     # ------ GRADIENT ACCENT BAR -------------------------------------------
     # Tri-column table, each cell a thin colored strip.
@@ -281,24 +314,50 @@ def main() -> None:
     p.paragraph_format.left_indent = Cm(0.35)
     add_run(p, "FROM", font=MONO_FONT, size=8, color=BLUE, tracking_pts=1.6)
 
+    # Webgro's own details are static (our own org info doesn't change per
+    # invoice), EXCEPT the VAT number which is pulled from Xero's
+    # organisation settings via the OrganisationTaxNumber merge field —
+    # change it in one place in Xero instead of having to rebuild the
+    # template when we register for VAT / change the number.
     lines = [
-        ("Webgro Ltd", DISPLAY_FONT, 12, True, INK),
-        ("12 Longshot Lane", BODY_FONT, 9, False, INK_SOFT),
-        ("Bracknell, Berkshire, RG12 1RL", BODY_FONT, 9, False, INK_SOFT),
-        ("United Kingdom", BODY_FONT, 9, False, INK_SOFT),
-        ("", BODY_FONT, 4, False, INK),
-        ("Company No. 10889889", MONO_FONT, 7, False, SLATE),
-        ("VAT No. [YOUR VAT NUMBER]", MONO_FONT, 7, False, SLATE),
-        ("", BODY_FONT, 4, False, INK),
-        ("hello@webgro.co.uk", BODY_FONT, 9, False, INK),
-        ("+44 (0) 1344 231 119", BODY_FONT, 9, False, INK),
+        ("Webgro Ltd", DISPLAY_FONT, 12, True, INK, False),
+        ("12 Longshot Lane", BODY_FONT, 9, False, INK_SOFT, False),
+        ("Bracknell, Berkshire, RG12 1RL", BODY_FONT, 9, False, INK_SOFT, False),
+        ("United Kingdom", BODY_FONT, 9, False, INK_SOFT, False),
+        ("", BODY_FONT, 4, False, INK, False),
+        ("Company No. 10889889", MONO_FONT, 7, False, SLATE, False),
     ]
-    for text, font, size, bold, color in lines:
+    for text, font, size, bold, color, _ in lines:
         para = fcell.add_paragraph()
         para.paragraph_format.left_indent = Cm(0.35)
         para.paragraph_format.space_before = Pt(0)
         para.paragraph_format.space_after = Pt(1)
         add_run(para, text, font=font, size=size, bold=bold, color=color)
+
+    # VAT line with merge field for the number
+    vat = fcell.add_paragraph()
+    vat.paragraph_format.left_indent = Cm(0.35)
+    vat.paragraph_format.space_before = Pt(0)
+    vat.paragraph_format.space_after = Pt(1)
+    add_run(vat, "VAT No. ", font=MONO_FONT, size=7, color=SLATE)
+    add_merge(vat, "OrganisationTaxNumber", font=MONO_FONT, size=7, color=SLATE)
+
+    spacer = fcell.add_paragraph()
+    spacer.paragraph_format.left_indent = Cm(0.35)
+    spacer.paragraph_format.space_after = Pt(1)
+    add_run(spacer, "", font=BODY_FONT, size=4, color=INK)
+
+    # Contact
+    for text, font, size, bold, color in [
+        ("hello@webgro.co.uk", BODY_FONT, 9, False, INK),
+        ("+44 (0) 1344 231 119", BODY_FONT, 9, False, INK),
+    ]:
+        para = fcell.add_paragraph()
+        para.paragraph_format.left_indent = Cm(0.35)
+        para.paragraph_format.space_before = Pt(0)
+        para.paragraph_format.space_after = Pt(1)
+        add_run(para, text, font=font, size=size, bold=bold, color=color)
+
     # small bottom padding
     para = fcell.add_paragraph()
     para.paragraph_format.space_after = Pt(8)
@@ -314,23 +373,36 @@ def main() -> None:
     add_run(p, "BILL TO", font=MONO_FONT, size=8, color=VIOLET,
             tracking_pts=1.6)
 
+    # Each bill-to line becomes a real MERGEFIELD so Xero fills it in.
+    # The raw field name (no guillemets) is passed — add_merge wraps it.
     bill_lines = [
-        ("«ContactName»", DISPLAY_FONT, 12, True, INK),
-        ("«ContactPhysicalAddressLine1»", BODY_FONT, 9, False, INK_SOFT),
-        ("«ContactPhysicalAddressLine2»", BODY_FONT, 9, False, INK_SOFT),
-        ("«ContactPhysicalAddressLine3»", BODY_FONT, 9, False, INK_SOFT),
-        ("«ContactPhysicalAddressLine4»", BODY_FONT, 9, False, INK_SOFT),
-        ("«ContactPhysicalPostalCode»", BODY_FONT, 9, False, INK_SOFT),
-        ("«ContactPhysicalCountry»", BODY_FONT, 9, False, INK_SOFT),
-        ("", BODY_FONT, 4, False, INK),
-        ("«ContactEmailAddress»", BODY_FONT, 9, False, INK),
+        ("ContactName", DISPLAY_FONT, 12, True, INK),
+        ("ContactPhysicalAddressLine1", BODY_FONT, 9, False, INK_SOFT),
+        ("ContactPhysicalAddressLine2", BODY_FONT, 9, False, INK_SOFT),
+        ("ContactPhysicalAddressLine3", BODY_FONT, 9, False, INK_SOFT),
+        ("ContactPhysicalAddressLine4", BODY_FONT, 9, False, INK_SOFT),
+        ("ContactPhysicalPostalCode", BODY_FONT, 9, False, INK_SOFT),
+        ("ContactPhysicalCountry", BODY_FONT, 9, False, INK_SOFT),
     ]
-    for text, font, size, bold, color in bill_lines:
+    for field, font, size, bold, color in bill_lines:
         para = tcell.add_paragraph()
         para.paragraph_format.left_indent = Cm(0.35)
         para.paragraph_format.space_before = Pt(0)
         para.paragraph_format.space_after = Pt(1)
-        add_run(para, text, font=font, size=size, bold=bold, color=color)
+        add_merge(para, field, font=font, size=size, bold=bold, color=color)
+    # Blank spacer paragraph, then email
+    sep = tcell.add_paragraph()
+    sep.paragraph_format.left_indent = Cm(0.35)
+    sep.paragraph_format.space_before = Pt(0)
+    sep.paragraph_format.space_after = Pt(1)
+    add_run(sep, "", font=BODY_FONT, size=4, color=INK)
+
+    para = tcell.add_paragraph()
+    para.paragraph_format.left_indent = Cm(0.35)
+    para.paragraph_format.space_before = Pt(0)
+    para.paragraph_format.space_after = Pt(1)
+    add_merge(para, "ContactEmailAddress", font=BODY_FONT, size=9, color=INK)
+
     para = tcell.add_paragraph()
     para.paragraph_format.space_after = Pt(8)
 
@@ -344,7 +416,8 @@ def main() -> None:
     remove_all_table_borders(meta)
     meta_colors = [BLUE, VIOLET, TEAL]
     meta_labels = ["ISSUED", "DUE", "REFERENCE"]
-    meta_values = ["«Date»", "«DueDate»", "«Reference»"]
+    # Xero merge field names
+    meta_fields = ["Date", "DueDate", "Reference"]
     for col in range(3):
         hdr = meta.rows[0].cells[col]
         val = meta.rows[1].cells[col]
@@ -364,8 +437,8 @@ def main() -> None:
         p2.paragraph_format.left_indent = Cm(0.35)
         p2.paragraph_format.space_before = Pt(0)
         p2.paragraph_format.space_after = Pt(6)
-        add_run(p2, meta_values[col], font=DISPLAY_FONT, size=12, bold=True,
-                color=INK)
+        add_merge(p2, meta_fields[col], font=DISPLAY_FONT, size=12,
+                  bold=True, color=INK)
 
     # tighter spacer before line items
     sp = doc.add_paragraph()
@@ -405,15 +478,15 @@ def main() -> None:
         add_run(p, title, font=MONO_FONT, size=8, color=INK, bold=True,
                 tracking_pts=1.4)
 
-    # --- body row (repeats per line item) ---
+    # --- body row (Xero replicates this row per line item) ---
     b = items.rows[1]
     body_fields = [
-        ("«Description»", WD_ALIGN_PARAGRAPH.LEFT, BODY_FONT, 10, False, INK),
-        ("«Quantity»", WD_ALIGN_PARAGRAPH.RIGHT, MONO_FONT, 10, False, INK_SOFT),
-        ("«UnitAmount»", WD_ALIGN_PARAGRAPH.RIGHT, MONO_FONT, 10, False, INK_SOFT),
-        ("«LineAmount»", WD_ALIGN_PARAGRAPH.RIGHT, DISPLAY_FONT, 11, True, INK),
+        ("Description", WD_ALIGN_PARAGRAPH.LEFT, BODY_FONT, 10, False, INK),
+        ("Quantity", WD_ALIGN_PARAGRAPH.RIGHT, MONO_FONT, 10, False, INK_SOFT),
+        ("UnitAmount", WD_ALIGN_PARAGRAPH.RIGHT, MONO_FONT, 10, False, INK_SOFT),
+        ("LineAmount", WD_ALIGN_PARAGRAPH.RIGHT, DISPLAY_FONT, 11, True, INK),
     ]
-    for cell, (value, align, font, size, bold, color) in zip(b.cells, body_fields):
+    for cell, (field, align, font, size, bold, color) in zip(b.cells, body_fields):
         set_cell_shading(cell, WHITE)
         set_cell_border(cell, "bottom", "E6EAF2", size=4)
         set_cell_vertical_align(cell, "center")
@@ -423,7 +496,7 @@ def main() -> None:
         p.paragraph_format.space_after = Pt(6)
         p.paragraph_format.left_indent = Cm(0.25) if align == WD_ALIGN_PARAGRAPH.LEFT else Cm(0)
         p.paragraph_format.right_indent = Cm(0.25) if align == WD_ALIGN_PARAGRAPH.RIGHT else Cm(0)
-        add_run(p, value, font=font, size=size, bold=bold, color=color)
+        add_merge(p, field, font=font, size=size, bold=bold, color=color)
 
     # small spacer
     sp = doc.add_paragraph()
@@ -453,22 +526,44 @@ def main() -> None:
     add_run(p, "HOW TO PAY", font=MONO_FONT, size=8, color=TEAL,
             tracking_pts=1.6)
 
-    pay_lines = [
-        ("Bank transfer", DISPLAY_FONT, 11, True, INK),
+    # Static payment detail lines (hardcoded, no merge fields)
+    static_pay = [
+        ("Bank transfer · Monzo", DISPLAY_FONT, 11, True, INK),
         ("Webgro Ltd", BODY_FONT, 9, False, INK),
-        ("Sort code · [YOUR SORT CODE]", BODY_FONT, 9, False, INK_SOFT),
-        ("Account · [YOUR ACCOUNT NUMBER]", BODY_FONT, 9, False, INK_SOFT),
-        ("Reference · «InvoiceNumber»", BODY_FONT, 9, False, INK_SOFT),
-        ("", BODY_FONT, 3, False, INK),
-        ("Payment terms · «PaymentTerms» days from invoice date.",
-         BODY_FONT, 8, False, SLATE),
+        ("Sort code · 04-00-04", BODY_FONT, 9, False, INK_SOFT),
+        ("Account · 65693471", BODY_FONT, 9, False, INK_SOFT),
     ]
-    for text, font, size, bold, color in pay_lines:
+    for text, font, size, bold, color in static_pay:
         para = pl.add_paragraph()
         para.paragraph_format.left_indent = Cm(0.35)
         para.paragraph_format.space_before = Pt(0)
         para.paragraph_format.space_after = Pt(1)
         add_run(para, text, font=font, size=size, bold=bold, color=color)
+
+    # Reference line — label is static, the invoice number is a real
+    # merge field so it populates on send.
+    pref = pl.add_paragraph()
+    pref.paragraph_format.left_indent = Cm(0.35)
+    pref.paragraph_format.space_before = Pt(0)
+    pref.paragraph_format.space_after = Pt(1)
+    add_run(pref, "Reference · ", font=BODY_FONT, size=9, color=INK_SOFT)
+    add_merge(pref, "InvoiceNumber", font=BODY_FONT, size=9, color=INK_SOFT)
+
+    # Blank spacer
+    sp_line = pl.add_paragraph()
+    sp_line.paragraph_format.left_indent = Cm(0.35)
+    sp_line.paragraph_format.space_after = Pt(1)
+    add_run(sp_line, "", font=BODY_FONT, size=3, color=INK)
+
+    # Payment-terms line (payment terms is a merge field on the Xero invoice)
+    pterm = pl.add_paragraph()
+    pterm.paragraph_format.left_indent = Cm(0.35)
+    pterm.paragraph_format.space_before = Pt(0)
+    pterm.paragraph_format.space_after = Pt(1)
+    add_run(pterm, "Payment terms · ", font=BODY_FONT, size=8, color=SLATE)
+    add_merge(pterm, "PaymentTerms", font=BODY_FONT, size=8, color=SLATE)
+    add_run(pterm, " days from invoice date.", font=BODY_FONT, size=8,
+            color=SLATE)
 
     # Divider paragraph inside the cell
     dp = pl.add_paragraph()
@@ -517,24 +612,25 @@ def main() -> None:
     set_cell_vertical_align(tr, "top")
 
     totals_rows = [
-        ("Subtotal", "«SubTotal»"),
-        ("VAT", "«TotalTax»"),
-        ("Paid", "«AmountPaid»"),
+        ("Subtotal", "SubTotal"),
+        ("VAT", "TotalTax"),
+        ("Paid", "AmountPaid"),
     ]
 
     first = True
-    for label, value in totals_rows:
+    for label, field in totals_rows:
         p = tr.paragraphs[0] if first else tr.add_paragraph()
+        is_first = first
         first = False
         p.paragraph_format.left_indent = Cm(0.35)
         p.paragraph_format.right_indent = Cm(0.35)
-        p.paragraph_format.space_before = Pt(0 if not first else 8)
+        p.paragraph_format.space_before = Pt(8 if is_first else 0)
         p.paragraph_format.space_after = Pt(3)
         tab_stops = p.paragraph_format.tab_stops
         tab_stops.add_tab_stop(Cm(6.7), WD_ALIGN_PARAGRAPH.RIGHT)
         add_run(p, label, font=BODY_FONT, size=9, color=INK_SOFT)
         add_run(p, "\t", font=BODY_FONT, size=9)
-        add_run(p, value, font=MONO_FONT, size=10, color=INK)
+        add_merge(p, field, font=MONO_FONT, size=10, color=INK)
 
     # Divider
     dv = tr.add_paragraph()
@@ -567,8 +663,8 @@ def main() -> None:
     pda.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     pda.paragraph_format.space_before = Pt(0)
     pda.paragraph_format.space_after = Pt(8)
-    add_run(pda, "«AmountDue»", font=DISPLAY_FONT, size=20, bold=True,
-            color=INK)
+    add_merge(pda, "AmountDue", font=DISPLAY_FONT, size=20, bold=True,
+              color=INK)
 
     # Save
     OUT.parent.mkdir(parents=True, exist_ok=True)
