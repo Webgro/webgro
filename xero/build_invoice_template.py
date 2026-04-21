@@ -169,33 +169,31 @@ def add_run(paragraph, text, *, font=BODY_FONT, size=10, bold=False,
 
 def add_merge(paragraph, field_name: str, *, font=BODY_FONT, size=10,
               bold=False, italic=False, color: RGBColor = INK,
-              tracking_pts: float | None = None):
+              tracking_pts: float | None = None,
+              format_switch: str | None = None):
     """Add a proper Word MERGEFIELD that Xero's parser recognises.
 
-    Visually identical to `add_run(«FieldName»)` in Word (preview text is
-    the same guillemet wrap), but the underlying XML carries the
-    instruction `MERGEFIELD <name>` which Xero substitutes on PDF render.
-    Previously we shipped plain text with guillemets and Xero had
-    nothing to substitute, so the placeholders leaked through verbatim.
+    `format_switch` is an optional Word merge-field format string, e.g.
+    `\\# "£#,##0.00"` for currency, `\\@ "dd MMM yyyy"` for dates.
+    Xero honours these at render time — necessary if you want amounts
+    prefixed with currency symbols or dates in a human format rather
+    than the raw ISO date Xero stores internally.
     """
     display = f"«{field_name}»"
-    # Build the inner run first so we reuse all the run-styling logic.
     run = add_run(paragraph, display, font=font, size=size, bold=bold,
                   italic=italic, color=color, tracking_pts=tracking_pts)
     r_elem = run._r
 
-    # Swap the run out for a <w:fldSimple> wrapper. The run element is
-    # moved inside so the formatted display text is still rendered as-is
-    # when Word opens the file (or when Xero reads it before merge).
     parent = r_elem.getparent()
     idx = list(parent).index(r_elem)
     parent.remove(r_elem)
 
     fldSimple = OxmlElement("w:fldSimple")
-    fldSimple.set(
-        qn("w:instr"),
-        f' MERGEFIELD  {field_name}  \\* MERGEFORMAT ',
-    )
+    instr = f' MERGEFIELD  {field_name}  '
+    if format_switch:
+        instr += f'{format_switch}  '
+    instr += '\\* MERGEFORMAT '
+    fldSimple.set(qn("w:instr"), instr)
     fldSimple.append(r_elem)
     parent.insert(idx, fldSimple)
     return run
@@ -429,8 +427,14 @@ def main() -> None:
     remove_all_table_borders(meta)
     meta_colors = [BLUE, VIOLET, TEAL]
     meta_labels = ["ISSUED", "DUE", "REFERENCE"]
-    # Xero merge field names (invoice-scoped dates, not a plain `Date`)
-    meta_fields = ["InvoiceDate", "InvoiceDueDate", "Reference"]
+    # (field_name, format_switch) — dates use the \@ date-format switch
+    # so they render as "21 Apr 2026" rather than ISO 2026-04-21.
+    DATE_FMT = r'\@ "dd MMM yyyy"'
+    meta_specs = [
+        ("InvoiceDate", DATE_FMT),
+        ("InvoiceDueDate", DATE_FMT),
+        ("Reference", None),
+    ]
     for col in range(3):
         hdr = meta.rows[0].cells[col]
         val = meta.rows[1].cells[col]
@@ -450,8 +454,9 @@ def main() -> None:
         p2.paragraph_format.left_indent = Cm(0.35)
         p2.paragraph_format.space_before = Pt(0)
         p2.paragraph_format.space_after = Pt(6)
-        add_merge(p2, meta_fields[col], font=DISPLAY_FONT, size=12,
-                  bold=True, color=INK)
+        field_name, fmt = meta_specs[col]
+        add_merge(p2, field_name, font=DISPLAY_FONT, size=12,
+                  bold=True, color=INK, format_switch=fmt)
 
     # tighter spacer before line items
     sp = doc.add_paragraph()
@@ -488,26 +493,29 @@ def main() -> None:
         p.paragraph_format.space_after = Pt(5)
         p.paragraph_format.left_indent = Cm(0.25) if align == WD_ALIGN_PARAGRAPH.LEFT else Cm(0)
         p.paragraph_format.right_indent = Cm(0.25) if align == WD_ALIGN_PARAGRAPH.RIGHT else Cm(0)
-        # TableStart marker MUST appear before the first line-item row.
-        # We tuck it into the first header cell so it's in document order
-        # before the body row but doesn't need its own row.
-        if idx == 0:
-            # White on white + 1pt: the marker is present in the XML so
-            # Xero's parser finds it, but it takes no visible space.
-            add_merge(p, "TableStart:LineItem", font=MONO_FONT, size=1,
-                      color=WHITE_RGB)
         add_run(p, title, font=MONO_FONT, size=8, color=INK, bold=True,
                 tracking_pts=1.4)
 
     # --- body row (Xero replicates this row per line item) ---
+    #
+    # CRITICAL: both TableStart:LineItem AND TableEnd:LineItem MUST live
+    # in THIS same row. If TableStart ends up in the header row above,
+    # Xero can't pair them and PDF generation fails. (That's the bug the
+    # previous version hit.) We stash them in cell 1 and cell N at 1pt
+    # white-on-white so they're present in the XML but invisible.
     b = items.rows[1]
+
+    # (field_name, alignment, font, size, bold, color, format_switch)
     body_fields = [
-        ("Description", WD_ALIGN_PARAGRAPH.LEFT, BODY_FONT, 10, False, INK),
-        ("Quantity", WD_ALIGN_PARAGRAPH.RIGHT, MONO_FONT, 10, False, INK_SOFT),
-        ("UnitAmount", WD_ALIGN_PARAGRAPH.RIGHT, MONO_FONT, 10, False, INK_SOFT),
-        ("LineAmount", WD_ALIGN_PARAGRAPH.RIGHT, DISPLAY_FONT, 11, True, INK),
+        ("Description", WD_ALIGN_PARAGRAPH.LEFT, BODY_FONT, 10, False, INK, None),
+        ("Quantity", WD_ALIGN_PARAGRAPH.RIGHT, MONO_FONT, 10, False, INK_SOFT,
+         r'\# #,##0.##'),
+        ("UnitAmount", WD_ALIGN_PARAGRAPH.RIGHT, MONO_FONT, 10, False, INK_SOFT,
+         r'\# "#,##0.00;(#,##0.00)"'),
+        ("LineAmount", WD_ALIGN_PARAGRAPH.RIGHT, DISPLAY_FONT, 11, True, INK,
+         r'\# "#,##0.00;(#,##0.00)"'),
     ]
-    for idx, (cell, (field, align, font, size, bold, color)) in enumerate(
+    for idx, (cell, (field, align, font, size, bold, color, fmt)) in enumerate(
         zip(b.cells, body_fields)
     ):
         set_cell_shading(cell, WHITE)
@@ -519,10 +527,19 @@ def main() -> None:
         p.paragraph_format.space_after = Pt(6)
         p.paragraph_format.left_indent = Cm(0.25) if align == WD_ALIGN_PARAGRAPH.LEFT else Cm(0)
         p.paragraph_format.right_indent = Cm(0.25) if align == WD_ALIGN_PARAGRAPH.RIGHT else Cm(0)
-        add_merge(p, field, font=font, size=size, bold=bold, color=color)
-        # TableEnd marker goes in the last body cell, after the visible
-        # line-item field. Same hiding trick as the start marker.
+
+        if idx == 0:
+            # TableStart goes INSIDE the body row before the first
+            # visible line-item field.
+            add_merge(p, "TableStart:LineItem", font=MONO_FONT, size=1,
+                      color=WHITE_RGB)
+
+        add_merge(p, field, font=font, size=size, bold=bold, color=color,
+                  format_switch=fmt)
+
         if idx == len(body_fields) - 1:
+            # TableEnd comes after the last visible line-item field in
+            # the same row.
             add_merge(p, "TableEnd:LineItem", font=MONO_FONT, size=1,
                       color=WHITE_RGB)
 
@@ -633,8 +650,9 @@ def main() -> None:
     set_cell_vertical_align(tr, "top")
 
     # Xero's real field names for invoice totals. `AmountPaid` isn't
-    # exposed as a template field — Xero just shows the outstanding
-    # balance in InvoiceAmountDue — so we omit a Paid row.
+    # exposed as a template field, so we omit a Paid row; InvoiceAmountDue
+    # is the outstanding balance after any part-payments.
+    MONEY_FMT = r'\# "#,##0.00;(#,##0.00)"'
     totals_rows = [
         ("Subtotal", "InvoiceSubTotal"),
         ("VAT", "TaxTotal"),
@@ -653,7 +671,8 @@ def main() -> None:
         tab_stops.add_tab_stop(Cm(6.7), WD_ALIGN_PARAGRAPH.RIGHT)
         add_run(p, label, font=BODY_FONT, size=9, color=INK_SOFT)
         add_run(p, "\t", font=BODY_FONT, size=9)
-        add_merge(p, field, font=MONO_FONT, size=10, color=INK)
+        add_merge(p, field, font=MONO_FONT, size=10, color=INK,
+                  format_switch=MONEY_FMT)
 
     # Divider
     dv = tr.add_paragraph()
@@ -687,7 +706,7 @@ def main() -> None:
     pda.paragraph_format.space_before = Pt(0)
     pda.paragraph_format.space_after = Pt(8)
     add_merge(pda, "InvoiceAmountDue", font=DISPLAY_FONT, size=20,
-              bold=True, color=INK)
+              bold=True, color=INK, format_switch=MONEY_FMT)
 
     # Save
     OUT.parent.mkdir(parents=True, exist_ok=True)
