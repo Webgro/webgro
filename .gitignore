@@ -40,3 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Xero preview renders (regenerated from build_invoice_template.py)
+/xero/preview-*.jpg
+/xero/webgro-invoice-template.pdf
