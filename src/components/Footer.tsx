@@ -110,23 +110,34 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Services */}
+          {/* Services — each label maps to its dedicated /services/[slug] */}
           <div data-footer-col className="md:col-span-3">
             <p className="mb-6 font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.22em] text-white/40">
               Services
             </p>
             <ul className="space-y-3 text-sm text-white/70">
-              {footerNav.services.map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
-                    data-cursor="hover"
-                    className="inline-block transition hover:text-white"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
+              {footerNav.services.map((item) => {
+                const slug: Record<string, string> = {
+                  Websites: "websites",
+                  Consultancy: "consultancy",
+                  "Automation & AI": "automation-ai",
+                  SEO: "seo",
+                  Marketing: "marketing",
+                  Design: "design",
+                };
+                const href = slug[item] ? `/services/${slug[item]}` : "/services";
+                return (
+                  <li key={item}>
+                    <a
+                      href={href}
+                      data-cursor="hover"
+                      className="inline-block transition hover:text-white"
+                    >
+                      {item}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
