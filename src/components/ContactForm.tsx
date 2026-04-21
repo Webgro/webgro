@@ -36,8 +36,9 @@ const accentDot: Record<ServiceOption["accent"], string> = {
 };
 
 type Props = {
-  /** When true, a service pre-selects on mount (e.g. deep-link from a
-   *  service page CTA). */
+  /** Optional pre-selected service when the form is reached via a deep
+   *  link from a service page CTA. Added as the first item in the
+   *  multi-select services array. */
   initialService?: string;
 };
 
@@ -47,9 +48,10 @@ type Props = {
  * action (src/app/actions/contact.ts) which handles Turnstile verify,
  * honeypot, and Resend delivery.
  *
- * Honeypot: the `website` field is rendered but hidden from users; bots
- * fill it and the server action short-circuits. See the action for why
- * this silently "succeeds" rather than erroring.
+ * Services are multi-select — an array of strings toggled by pill. On
+ * submit they're joined into a single comma-separated string so the
+ * server-side payload shape stays backward-compatible with the Resend
+ * email template.
  */
 export function ContactForm({ initialService = "" }: Props) {
   const [sent, setSent] = useState(false);
@@ -61,12 +63,20 @@ export function ContactForm({ initialService = "" }: Props) {
     lastName: "",
     email: "",
     phone: "",
-    service: initialService,
+    services: initialService ? [initialService] : ([] as string[]),
     budget: "",
     message: "",
     website: "", // honeypot
     agreed: false,
   });
+
+  const toggleService = (name: string) =>
+    setForm((prev) => ({
+      ...prev,
+      services: prev.services.includes(name)
+        ? prev.services.filter((s) => s !== name)
+        : [...prev.services, name],
+    }));
 
   const onToken = useCallback((token: string) => setTurnstileToken(token), []);
   const onExpire = useCallback(() => setTurnstileToken(null), []);
@@ -82,7 +92,9 @@ export function ContactForm({ initialService = "" }: Props) {
         lastName: form.lastName,
         email: form.email,
         phone: form.phone || undefined,
-        service: form.service || undefined,
+        // Server-side payload takes a single string; join the array so
+        // the email renders naturally ("Websites, SEO, Marketing").
+        service: form.services.length ? form.services.join(", ") : undefined,
         budget: form.budget || undefined,
         message: form.message || undefined,
         website: form.website,
@@ -151,7 +163,7 @@ export function ContactForm({ initialService = "" }: Props) {
             value={form.firstName}
             onChange={(e) => setForm({ ...form, firstName: e.target.value })}
             className="w-full border-b border-white/20 bg-transparent pb-3 text-base text-white placeholder-white/50 transition-colors focus:border-wg-blue focus:outline-none"
-            placeholder="Michael"
+            placeholder="Alex"
           />
         </div>
         <div>
@@ -164,7 +176,7 @@ export function ContactForm({ initialService = "" }: Props) {
             value={form.lastName}
             onChange={(e) => setForm({ ...form, lastName: e.target.value })}
             className="w-full border-b border-white/20 bg-transparent pb-3 text-base text-white placeholder-white/50 transition-colors focus:border-wg-blue focus:outline-none"
-            placeholder="Broadbridge"
+            placeholder="Morgan"
           />
         </div>
       </div>
@@ -198,19 +210,25 @@ export function ContactForm({ initialService = "" }: Props) {
         />
       </div>
 
-      {/* Service pills */}
+      {/* Service pills — multi-select */}
       <div className="mt-10">
-        <label className="mb-4 block font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.22em] text-white/70">
-          Which service interests you?
-        </label>
+        <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+          <label className="block font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.22em] text-white/70">
+            Which services interest you?
+          </label>
+          <span className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-white/40">
+            Select all that apply
+          </span>
+        </div>
         <div className="flex flex-wrap gap-3">
           {services.map((s) => {
-            const selected = form.service === s.name;
+            const selected = form.services.includes(s.name);
             return (
               <button
                 key={s.name}
                 type="button"
-                onClick={() => setForm({ ...form, service: s.name })}
+                onClick={() => toggleService(s.name)}
+                aria-pressed={selected}
                 data-cursor="hover"
                 className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition ${
                   selected
@@ -220,6 +238,24 @@ export function ContactForm({ initialService = "" }: Props) {
               >
                 <span className={`h-1.5 w-1.5 rounded-full ${accentDot[s.accent]}`} />
                 {s.name}
+                {selected && (
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    aria-hidden="true"
+                    className="ml-0.5"
+                  >
+                    <path
+                      d="M2 6l3 3 5-6"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                )}
               </button>
             );
           })}
