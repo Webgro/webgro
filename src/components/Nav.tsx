@@ -240,6 +240,44 @@ export function Nav() {
 
             {/* Right side */}
             <div className="flex items-center gap-2 md:gap-3">
+              {/* Phone pill (desktop only). Intentionally quiet — small
+                  mono number + a subtle teal pulse so it reads as "we're
+                  reachable" rather than as a loud CTA. Clicks dial on
+                  mobile-capable devices, copies/selects on desktop. */}
+              <a
+                href="tel:+441344231119"
+                data-cursor="hover"
+                onMouseEnter={closeLater}
+                aria-label="Call Webgro on +44 (0) 1344 231 119"
+                className="group hidden items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-3.5 py-2 font-[family-name:var(--font-mono)] text-xs text-white/70 backdrop-blur-md transition hover:border-white/30 hover:bg-white/[0.08] hover:text-white lg:inline-flex"
+              >
+                {/* Tiny pulse dot */}
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-wg-teal opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-wg-teal" />
+                </span>
+                {/* Phone glyph */}
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  className="transition-transform group-hover:-rotate-12"
+                >
+                  <path
+                    d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinejoin="round"
+                    fill="none"
+                  />
+                </svg>
+                <span className="tabular-nums tracking-[0.02em]">
+                  +44 (0) 1344 231 119
+                </span>
+              </a>
+
               {/* Desktop CTA */}
               <a
                 href="/contact"
