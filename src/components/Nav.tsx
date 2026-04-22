@@ -410,11 +410,36 @@ export function Nav() {
             </div>
           </nav>
 
+          {/* Mobile phone pill — sits above the primary CTA so users
+              who want to phone rather than submit a form see it first.
+              Tapping dials the number on phones, opens Skype/FaceTime
+              dialog on tablets/laptops. */}
           <a
-            href="#contact"
+            href="tel:+441344231119"
             onClick={() => setMobileOpen(false)}
             data-cursor="hover"
-            className="group mt-8 inline-flex items-center justify-center gap-3 rounded-full bg-wg-blue px-7 py-4 text-base font-medium text-white"
+            aria-label="Call Webgro on +44 (0) 1344 231 119"
+            className="mt-8 flex items-center justify-between rounded-2xl border border-white/15 bg-white/[0.04] px-5 py-4 backdrop-blur-md"
+          >
+            <div className="flex items-center gap-3">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-wg-teal opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-wg-teal" />
+              </span>
+              <span className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-white/50">
+                Call us
+              </span>
+            </div>
+            <span className="font-[family-name:var(--font-mono)] text-sm tabular-nums tracking-[0.02em] text-white">
+              +44 (0) 1344 231 119
+            </span>
+          </a>
+
+          <a
+            href="/contact"
+            onClick={() => setMobileOpen(false)}
+            data-cursor="hover"
+            className="group mt-3 inline-flex items-center justify-center gap-3 rounded-full bg-wg-blue px-7 py-4 text-base font-medium text-white"
           >
             Start a project
             <span className="inline-block transition-transform group-hover:translate-x-1">

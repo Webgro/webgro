@@ -28,13 +28,13 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://webgro.co.uk"),
-  title: "Webgro · Your AI partner for digital growth",
+  title: "Webgro · eCommerce, WordPress, and production AI tools",
   description:
-    "Websites, eCommerce consultancy, automation and AI. From a studio that does both. Today's site. Tomorrow's system.",
+    "Shopify and WordPress built for conversion and speed. Production AI tools layered in where the numbers say yes. One senior studio, Bracknell-based.",
   openGraph: {
-    title: "Webgro · AI-first eCommerce & WordPress agency",
+    title: "Webgro · Shopify, WordPress, and AI tools. One studio.",
     description:
-      "Shopify and WordPress builds, consultancy, and production AI tools. Based in Bracknell, part of Broadbridge Group.",
+      "A senior studio building eCommerce sites, WordPress builds, and production AI tools. Based in Bracknell, part of Broadbridge Group.",
     url: "https://webgro.co.uk",
     siteName: "Webgro",
     locale: "en_GB",
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Webgro · AI-first eCommerce & WordPress agency",
+    title: "Webgro · Shopify, WordPress, and AI tools. One studio.",
     description:
-      "Shopify and WordPress builds, consultancy, and production AI tools. Based in Bracknell, part of Broadbridge Group.",
+      "A senior studio building eCommerce sites, WordPress builds, and production AI tools. Based in Bracknell, part of Broadbridge Group.",
   },
 };
 

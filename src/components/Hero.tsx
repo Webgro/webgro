@@ -82,15 +82,17 @@ export function Hero() {
           </div>
 
           <h1 className="font-[family-name:var(--font-display)] text-6xl font-bold leading-[0.92] tracking-tight text-white sm:text-7xl md:text-8xl lg:text-[9.5rem]">
-            <span className="block pb-2">{splitWords("We build")}</span>
+            <span className="block pb-2">{splitWords("We build websites.")}</span>
             <span className="block pb-2">
-              {splitWords("websites that")}{" "}
+              {splitWords("And the")}{" "}
               <span
                 data-hero-char
                 className="inline-block bg-gradient-to-r from-wg-blue via-wg-violet to-wg-teal bg-clip-text pr-[0.35em] italic text-transparent will-change-transform"
               >
-                think.
+                systems
               </span>
+              {" "}
+              {splitWords("behind them.")}
             </span>
           </h1>
 
@@ -98,7 +100,7 @@ export function Hero() {
             className="mt-10 max-w-2xl text-lg leading-relaxed text-white/70 md:text-xl"
             data-hero-meta
           >
-            Websites that pay back from week one. Built to plug in the AI and automation that grows with you. Today&rsquo;s site. Tomorrow&rsquo;s system.
+            Shopify and WordPress built for conversion and speed. Production AI tools layered in where the numbers say yes. Today&rsquo;s site. Tomorrow&rsquo;s system.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4" data-hero-meta>

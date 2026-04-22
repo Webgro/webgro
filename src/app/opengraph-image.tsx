@@ -9,7 +9,7 @@ import { ImageResponse } from "next/og";
  * Routes that need their own image (individual case studies, articles)
  * add an `opengraph-image.tsx` inside their route folder.
  */
-export const alt = "Webgro · AI-first eCommerce & WordPress agency";
+export const alt = "Webgro · Shopify, WordPress, and AI tools. One studio.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -97,7 +97,7 @@ export default async function OgImage() {
               gap: 16,
             }}
           >
-            <span>AI-first&nbsp;eCommerce,</span>
+            <span>We&nbsp;build&nbsp;websites.</span>
             <span
               style={{
                 background:
@@ -108,7 +108,7 @@ export default async function OgImage() {
                 paddingRight: 20,
               }}
             >
-              shipped.
+              And the systems behind them.
             </span>
           </div>
           <div
@@ -119,8 +119,8 @@ export default async function OgImage() {
               maxWidth: 900,
             }}
           >
-            Shopify &amp; WordPress builds, consultancy, AI, SEO, marketing.
-            One studio in Bracknell.
+            Shopify, WordPress, and production AI tools. One studio in
+            Bracknell.
           </div>
         </div>
 
