@@ -81,7 +81,7 @@ export function Hero() {
             Websites built for what&rsquo;s next
           </div>
 
-          <h1 className="font-[family-name:var(--font-display)] text-6xl font-bold leading-[0.92] tracking-tight text-white sm:text-7xl md:text-8xl lg:text-[9.5rem]">
+          <h1 className="font-[family-name:var(--font-display)] text-5xl font-bold leading-[0.95] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[7rem]">
             <span className="block pb-2">{splitWords("We build websites.")}</span>
             <span className="block pb-2">
               {splitWords("And the")}{" "}
