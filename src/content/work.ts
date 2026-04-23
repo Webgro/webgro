@@ -670,7 +670,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     stack: ["Shopify", "Smart Glazier API"],
     timeline: "3 months",
-    url: "https://originarchitectural.com",
+    url: "https://originarchitectural.co.uk",
     featured: true,
     categories: ["ecommerce", "ai"],
     body: [
@@ -706,7 +706,7 @@ export const caseStudies: CaseStudy[] = [
         type: "browser",
         src: "/work/origin-architectural/storefront.jpg",
         alt: "Origin Architectural storefront",
-        url: "originarchitectural.com",
+        url: "originarchitectural.co.uk",
       },
       {
         type: "statGroup",
@@ -792,7 +792,7 @@ export const caseStudies: CaseStudy[] = [
     services: ["WordPress", "Design"],
     stack: ["WordPress", "Block theme"],
     timeline: "6 weeks",
-    url: "https://threadology.com",
+    url: "https://threadology.co.uk",
     featured: true,
     categories: ["wordpress"],
     body: [
@@ -823,7 +823,7 @@ export const caseStudies: CaseStudy[] = [
         type: "browser",
         src: "/work/threadology/storefront.jpg",
         alt: "Threadology storefront",
-        url: "threadology.com",
+        url: "threadology.co.uk",
         phone: {
           src: "/work/threadology/mobile.jpg",
           alt: "Threadology on mobile",
