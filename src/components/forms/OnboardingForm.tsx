@@ -22,7 +22,7 @@ import {
  * need to kick off work: company info, primary contact, billing and
  * accounts contact, registered address, platform access, etc.
  *
- * Every field is optional — sections with nothing entered simply
+ * Every field is optional. Sections with nothing entered simply
  * won't appear in the email that lands at hello@webgro.co.uk. That
  * lets us re-use this single form for everyone from a sole trader
  * to a PLC with eight stakeholders.
@@ -287,7 +287,7 @@ export function OnboardingForm() {
           label="Best times to reach you"
           value={s("primaryTimes")}
           onChange={(v) => update("primaryTimes", v)}
-          placeholder="e.g. Weekdays 9\u201312, or avoid Fri afternoons"
+          placeholder="e.g. Weekdays 9–12, or avoid Fri afternoons"
         />
       </FormSection>
 
@@ -333,7 +333,7 @@ export function OnboardingForm() {
             label="Standing PO number (if any)"
             value={s("poDefault")}
             onChange={(v) => update("poDefault", v)}
-            help="Optional — only if you use the same PO across every invoice."
+            help="Optional. Only if you use the same PO across every invoice."
           />
         </TwoCol>
         <TwoCol>
@@ -380,7 +380,7 @@ export function OnboardingForm() {
       <FormSection
         num="05"
         title="Other contacts"
-        intro="Anyone else we might correspond with during the project — a project manager, a brand lead, an external agency, an IT contact."
+        intro="Anyone else we might correspond with during the project: a project manager, a brand lead, an external agency, an IT contact."
       >
         <TextArea
           label="Anyone else we should CC or know about?"
@@ -402,7 +402,7 @@ export function OnboardingForm() {
       <FormSection
         num="06"
         title="Platform access & credentials"
-        intro="We don't need passwords up front — just a picture of where everything lives so we can request access cleanly at the right time."
+        intro="We don't need passwords up front. Just a picture of where everything lives so we can request access cleanly at the right time."
       >
         <TwoCol>
           <TextInput

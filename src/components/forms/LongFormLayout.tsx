@@ -25,7 +25,7 @@ export type LongFormState = Record<string, LongFormValue>;
 export type FieldMapEntry = {
   section: string;
   label: string;
-  /** Always provided — used for ordering within a section. */
+  /** Always provided, used for ordering within a section. */
   order?: number;
 };
 
@@ -43,7 +43,7 @@ function flatten(
   const bySection = new Map<string, LongFormField[]>();
   for (const [key, raw] of Object.entries(state)) {
     const meta = fieldMap[key];
-    if (!meta) continue; // unknown key — skip
+    if (!meta) continue; // unknown key, skip
     const v = Array.isArray(raw) ? raw.join(", ") : String(raw ?? "");
     const arr = bySection.get(meta.section) ?? [];
     arr.push({ section: meta.section, label: meta.label, value: v });
@@ -59,7 +59,7 @@ function flatten(
 }
 
 // ---------------------------------------------------------------------------
-// useLongFormState — field-aware state hook with localStorage draft-save.
+// useLongFormState: field-aware state hook with localStorage draft-save.
 // ---------------------------------------------------------------------------
 
 export function useLongFormState(
@@ -78,7 +78,7 @@ export function useLongFormState(
         setState((prev) => ({ ...prev, ...parsed }));
       }
     } catch {
-      // ignore parse / storage errors — fall through with defaults
+      // ignore parse / storage errors, fall through with defaults
     }
     loaded.current = true;
   }, [storageKey]);
@@ -125,7 +125,7 @@ export function useLongFormState(
 }
 
 // ---------------------------------------------------------------------------
-// LongFormLayout — hero header, optional-fields notice, submit wiring.
+// LongFormLayout: hero header, optional-fields notice, submit wiring.
 // ---------------------------------------------------------------------------
 
 type Props = {
@@ -360,7 +360,7 @@ export function LongFormLayout({
                 data-cursor="hover"
                 className="group mt-8 inline-flex items-center gap-3 rounded-full bg-wg-blue px-7 py-4 text-base font-medium text-white transition hover:bg-white hover:text-wg-ink disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-wg-blue disabled:hover:text-white"
               >
-                {submitting ? "Sending\u2026" : "Send the brief"}
+                {submitting ? "Sending…" : "Send the brief"}
                 <span
                   className={`inline-block transition-transform ${
                     submitting ? "" : "group-hover:translate-x-1"

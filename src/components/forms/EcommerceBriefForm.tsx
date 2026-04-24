@@ -18,7 +18,7 @@ import {
 /**
  * eCommerce website brief.
  *
- * Longer-form than the onboarding doc — the questions here shape the
+ * Longer-form than the onboarding doc. The questions here shape the
  * build estimate, not the paperwork. Designed to be filled in one
  * sitting or saved mid-way (localStorage keeps the draft alive). All
  * fields optional.
@@ -34,7 +34,7 @@ const FIELD_MAP: Record<string, FieldMapEntry> = {
   currentUrl: { section: "The business", label: "Current website URL" },
   businessDescription: {
     section: "The business",
-    label: "What the business does (2\u20133 lines)",
+    label: "What the business does",
   },
   tradingSince: { section: "The business", label: "How long trading" },
   revenueRange: { section: "The business", label: "Annual revenue range" },
@@ -48,7 +48,7 @@ const FIELD_MAP: Record<string, FieldMapEntry> = {
     section: "Project scope",
     label: "What does success look like?",
   },
-  // buildBudget removed post-rewrite — redundant once the quote is
+  // buildBudget removed post-rewrite: redundant once the quote is
   // agreed; the agreed figure lives in Xero and the proposal PDF.
   retainerBudget: {
     section: "Project scope",
@@ -60,7 +60,7 @@ const FIELD_MAP: Record<string, FieldMapEntry> = {
   currentPlatform: { section: "Platform", label: "Current platform (if any)" },
   platformReasoning: {
     section: "Platform",
-    label: "Why that platform — or why you're unsure",
+    label: "Why that platform, or why you're unsure",
   },
 
   // §4 Products
@@ -242,10 +242,6 @@ const FIELD_MAP: Record<string, FieldMapEntry> = {
     section: "Team & decision-making",
     label: "Team members contributing assets / content",
   },
-  availability: {
-    section: "Team & decision-making",
-    label: "Weekly hours you can commit",
-  },
 
   // §14 Anything else
   keptYouUp: {
@@ -320,7 +316,7 @@ export function EcommerceBriefForm() {
       formType="ecommerce-brief"
       eyebrow="[ Webgro ] eCommerce kickoff"
       title="Let's get the store built."
-      lead="Now that we're on, this is the brief that kicks the build off — the creative direction, integrations, content status, and the operational detail we'll design around. Fill what's relevant, skip what isn't."
+      lead="Now that we're on, this is the brief that kicks the build off: the creative direction, integrations, content status, and the operational detail we'll design around. Fill what's relevant, skip what isn't."
       state={state}
       fieldMap={FIELD_MAP}
       sectionOrder={SECTION_ORDER as unknown as readonly string[]}
@@ -343,7 +339,7 @@ export function EcommerceBriefForm() {
           <TextInput label="Current website URL" type="url" value={s("currentUrl")} onChange={(v) => update("currentUrl", v)} placeholder="https://" />
         </TwoCol>
         <TextArea
-          label="What the business does (2\u20133 lines)"
+          label="What the business does"
           value={s("businessDescription")}
           onChange={(v) => update("businessDescription", v)}
           rows={3}
@@ -354,13 +350,13 @@ export function EcommerceBriefForm() {
             label="How long trading"
             value={s("tradingSince")}
             onChange={(v) => update("tradingSince", v)}
-            options={["Pre-launch", "< 1 year", "1\u20133 years", "3\u20135 years", "5\u201310 years", "10+ years"]}
+            options={["Pre-launch", "< 1 year", "1–3 years", "3–5 years", "5–10 years", "10+ years"]}
           />
           <PillRadio
             label="Annual revenue range"
             value={s("revenueRange")}
             onChange={(v) => update("revenueRange", v)}
-            options={["Pre-launch", "< \u00a3100k", "\u00a3100k\u2013500k", "\u00a3500k\u20131M", "\u00a31M\u20135M", "\u00a35M\u201310M", "\u00a310M+"]}
+            options={["Pre-launch", "< £100k", "£100k–500k", "£500k–1M", "£1M–5M", "£5M–10M", "£10M+"]}
           />
         </TwoCol>
         <TextInput label="Team size" value={s("teamSize")} onChange={(v) => update("teamSize", v)} placeholder="e.g. 3 full-time, 2 freelance" />
@@ -402,14 +398,14 @@ export function EcommerceBriefForm() {
           label="Ongoing retainer appetite (post-launch)"
           value={s("retainerBudget")}
           onChange={(v) => update("retainerBudget", v)}
-          help="Optional — helps us shape what we propose for ongoing care after go-live."
+          help="Optional. Helps us shape what we propose for ongoing care after go-live."
           options={[
             "Not decided yet",
-            "< \u00a3500 / month",
-            "\u00a3500\u20131k / month",
-            "\u00a31\u20132.5k / month",
-            "\u00a32.5\u20135k / month",
-            "\u00a35k+ / month",
+            "< £500 / month",
+            "£500–1k / month",
+            "£1–2.5k / month",
+            "£2.5–5k / month",
+            "£5k+ / month",
           ]}
         />
       </FormSection>
@@ -427,7 +423,7 @@ export function EcommerceBriefForm() {
             "Magento",
             "BigCommerce",
             "Other",
-            "Not sure \u2014 recommend one",
+            "Not sure, recommend one",
           ]}
         />
         <TextInput
@@ -436,7 +432,7 @@ export function EcommerceBriefForm() {
           onChange={(v) => update("currentPlatform", v)}
         />
         <TextArea
-          label="Why that platform \u2014 or why you're unsure"
+          label="Why that platform, or why you're unsure"
           value={s("platformReasoning")}
           onChange={(v) => update("platformReasoning", v)}
           rows={3}
@@ -449,7 +445,7 @@ export function EcommerceBriefForm() {
           label="Product count"
           value={s("productCount")}
           onChange={(v) => update("productCount", v)}
-          options={["1\u201310", "11\u201350", "51\u2013200", "201\u20131000", "1000+", "Growing fast"]}
+          options={["1–10", "11–50", "51–200", "201–1000", "1000+", "Growing fast"]}
         />
         <PillMulti
           label="Product types"
@@ -511,7 +507,7 @@ export function EcommerceBriefForm() {
             onChange={(v) => update("orders12m", v)}
           />
         </TwoCol>
-        <TextInput label="Average order value" value={s("aov")} onChange={(v) => update("aov", v)} placeholder="e.g. \u00a345" />
+        <TextInput label="Average order value" value={s("aov")} onChange={(v) => update("aov", v)} placeholder="e.g. £45" />
         <PillRadio
           label="Fulfilment"
           value={s("fulfilment")}
@@ -531,7 +527,7 @@ export function EcommerceBriefForm() {
           onChange={(v) => update("shippingCalc", v)}
           options={[
             "Free shipping",
-            "Free over \u00a3X",
+            "Free over £X",
             "Flat rate",
             "By weight",
             "By zone",
@@ -636,7 +632,7 @@ export function EcommerceBriefForm() {
           label="Monthly paid marketing spend"
           value={s("paidSpend")}
           onChange={(v) => update("paidSpend", v)}
-          placeholder="e.g. \u00a310k / month blended"
+          placeholder="e.g. £10k / month blended"
         />
         <TwoCol>
           <PillRadio
@@ -723,7 +719,7 @@ export function EcommerceBriefForm() {
           value={s("sitesYouLove")}
           onChange={(v) => update("sitesYouLove", v)}
           rows={5}
-          help="3\u20135 URLs, and one line each on what you love about them."
+          help="3–5 URLs, and one line each on what you love about them."
         />
         <TextArea
           label="Competitors you respect"
@@ -847,7 +843,6 @@ export function EcommerceBriefForm() {
         <TextInput label="Primary decision-maker" value={s("decisionMaker")} onChange={(v) => update("decisionMaker", v)} />
         <TextArea label="Others who need to approve designs" value={s("approvers")} onChange={(v) => update("approvers", v)} rows={2} />
         <TextArea label="Team members contributing assets / content" value={s("contributors")} onChange={(v) => update("contributors", v)} rows={2} />
-        <TextInput label="Hours per week you can commit to reviews" value={s("availability")} onChange={(v) => update("availability", v)} placeholder="e.g. 2\u20133 hours / week" />
       </FormSection>
 
       {/* §14 Anything else */}

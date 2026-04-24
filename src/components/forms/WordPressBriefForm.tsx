@@ -18,7 +18,7 @@ import {
 /**
  * WordPress website brief.
  *
- * Shorter than the eCommerce brief — the commercial / fulfilment
+ * Shorter than the eCommerce brief. The commercial / fulfilment
  * sections come out, and we swap in questions about content types,
  * page templates, functionality (membership, booking, forms,
  * newsletter), and hosting.
@@ -34,7 +34,7 @@ const FIELD_MAP: Record<string, FieldMapEntry> = {
   currentUrl: { section: "The business", label: "Current website URL" },
   businessDescription: {
     section: "The business",
-    label: "What the business / project does (2\u20133 lines)",
+    label: "What the business / project does",
   },
   tradingSince: { section: "The business", label: "How long you've been going" },
   teamSize: { section: "The business", label: "Team size" },
@@ -47,7 +47,7 @@ const FIELD_MAP: Record<string, FieldMapEntry> = {
     section: "Project scope",
     label: "What does success look like?",
   },
-  // buildBudget removed post-rewrite — redundant once the quote is
+  // buildBudget removed post-rewrite: redundant once the quote is
   // agreed; the agreed figure lives in Xero and the proposal PDF.
   retainerBudget: {
     section: "Project scope",
@@ -185,10 +185,6 @@ const FIELD_MAP: Record<string, FieldMapEntry> = {
     section: "Team & decision-making",
     label: "Team members contributing content",
   },
-  availability: {
-    section: "Team & decision-making",
-    label: "Hours per week you can commit to reviews",
-  },
 
   // §11 Anything else
   keptYouUp: {
@@ -253,7 +249,7 @@ export function WordPressBriefForm() {
       formType="wordpress-brief"
       eyebrow="[ Webgro ] WordPress kickoff"
       title="Let's get the site built."
-      lead="Now that we're on, this is the brief that kicks the build off \u2014 audience, content shape, functionality, creative direction. Fill what's relevant, skip what isn't."
+      lead="Now that we're on, this is the brief that kicks the build off, audience, content shape, functionality, creative direction. Fill what's relevant, skip what isn't."
       state={state}
       fieldMap={FIELD_MAP}
       sectionOrder={SECTION_ORDER as unknown as readonly string[]}
@@ -276,7 +272,7 @@ export function WordPressBriefForm() {
           <TextInput label="Current website URL" type="url" value={s("currentUrl")} onChange={(v) => update("currentUrl", v)} placeholder="https://" />
         </TwoCol>
         <TextArea
-          label="What the business / project does (2\u20133 lines)"
+          label="What the business / project does"
           value={s("businessDescription")}
           onChange={(v) => update("businessDescription", v)}
           rows={3}
@@ -286,7 +282,7 @@ export function WordPressBriefForm() {
             label="How long you've been going"
             value={s("tradingSince")}
             onChange={(v) => update("tradingSince", v)}
-            options={["Pre-launch", "< 1 year", "1\u20133 years", "3\u20135 years", "5\u201310 years", "10+ years"]}
+            options={["Pre-launch", "< 1 year", "1–3 years", "3–5 years", "5–10 years", "10+ years"]}
           />
           <TextInput label="Team size" value={s("teamSize")} onChange={(v) => update("teamSize", v)} placeholder="e.g. 3 full-time, 2 freelance" />
         </TwoCol>
@@ -323,13 +319,13 @@ export function WordPressBriefForm() {
           label="Ongoing maintenance appetite (post-launch)"
           value={s("retainerBudget")}
           onChange={(v) => update("retainerBudget", v)}
-          help="Optional — helps us shape what we propose for ongoing care after go-live."
+          help="Optional. Helps us shape what we propose for ongoing care after go-live."
           options={[
             "Not decided yet",
-            "\u00a3120 / month maintenance only",
-            "\u00a3250\u2013500 / month",
-            "\u00a3500\u20131k / month",
-            "\u00a31k+ / month",
+            "£120 / month maintenance only",
+            "£250–500 / month",
+            "£500–1k / month",
+            "£1k+ / month",
           ]}
         />
       </FormSection>
@@ -344,7 +340,7 @@ export function WordPressBriefForm() {
             "Standard WordPress (self-hosted)",
             "WordPress.com business",
             "Open to alternatives",
-            "Not sure \u2014 recommend",
+            "Not sure, recommend",
           ]}
         />
         <TextInput label="Current platform (if any)" value={s("currentPlatform")} onChange={(v) => update("currentPlatform", v)} />
@@ -355,7 +351,7 @@ export function WordPressBriefForm() {
           options={[
             "We have hosting, keep it",
             "We have hosting, open to moving",
-            "No hosting yet \u2014 recommend",
+            "No hosting yet, recommend",
             "Not sure",
           ]}
         />
@@ -422,7 +418,7 @@ export function WordPressBriefForm() {
           label="Multilingual / multi-region?"
           value={s("multilingual")}
           onChange={(v) => update("multilingual", v)}
-          options={["No", "Yes \u2014 2 languages", "Yes \u2014 3+ languages", "Regional variants (e.g. UK/US)"]}
+          options={["No", "Yes, 2 languages", "Yes, 3+ languages", "Regional variants (e.g. UK/US)"]}
         />
       </FormSection>
 
@@ -476,8 +472,8 @@ export function WordPressBriefForm() {
           value={s("seoPriority")}
           onChange={(v) => update("seoPriority", v)}
           options={[
-            "Core \u2014 it's how we win customers",
-            "Important \u2014 one of several channels",
+            "Core, it's how we win customers",
+            "Important, one of several channels",
             "Nice to have",
             "Not a priority",
           ]}
@@ -534,7 +530,7 @@ export function WordPressBriefForm() {
           value={s("sitesYouLove")}
           onChange={(v) => update("sitesYouLove", v)}
           rows={5}
-          help="3\u20135 URLs, and one line each on what you love about them."
+          help="3–5 URLs, and one line each on what you love about them."
         />
         <TextArea label="Competitors / peers you respect" value={s("respectedCompetitors")} onChange={(v) => update("respectedCompetitors", v)} rows={3} />
         <PillMulti
@@ -567,7 +563,6 @@ export function WordPressBriefForm() {
         <TextInput label="Primary decision-maker" value={s("decisionMaker")} onChange={(v) => update("decisionMaker", v)} />
         <TextArea label="Others who need to approve designs" value={s("approvers")} onChange={(v) => update("approvers", v)} rows={2} />
         <TextArea label="Team members contributing content" value={s("contributors")} onChange={(v) => update("contributors", v)} rows={2} />
-        <TextInput label="Hours per week you can commit to reviews" value={s("availability")} onChange={(v) => update("availability", v)} />
       </FormSection>
 
       {/* §11 Anything else */}

@@ -123,7 +123,7 @@ export function TextArea({
 }
 
 // ---------------------------------------------------------------------------
-// Pill group — single-select (radio semantics)
+// Pill group: single-select (radio semantics)
 // ---------------------------------------------------------------------------
 
 export function PillRadio({
@@ -170,7 +170,7 @@ export function PillRadio({
 }
 
 // ---------------------------------------------------------------------------
-// Pill group — multi-select (checkbox semantics)
+// Pill group: multi-select (checkbox semantics)
 // ---------------------------------------------------------------------------
 
 export function PillMulti({
@@ -292,7 +292,7 @@ export function YesNo({
 }
 
 // ---------------------------------------------------------------------------
-// Section wrapper — numbered heading + child fields
+// Section wrapper: numbered heading + child fields
 // ---------------------------------------------------------------------------
 
 export function FormSection({
