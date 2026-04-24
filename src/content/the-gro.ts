@@ -32,6 +32,122 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "seo-after-ai-overviews-2026",
+    category: "SEO",
+    title: "SEO after AI Overviews: the three levers that still move the needle.",
+    excerpt:
+      "AI Overviews killed half of organic CTR for informational queries. SEO didn't die, it just got harder to fake. Here's what's still working for our clients in 2026.",
+    date: "Apr 2026",
+    readTime: "6 min read",
+    accent: "violet",
+    author: "Webgro Studio",
+    heroImage: "/articles/seo-ai-overviews.png",
+    relatedService: "seo",
+    body: [
+      {
+        type: "p",
+        text: "Google's AI Overviews changed organic search. We have twelve months of client data to say how much, and the short version is this: traffic didn't evaporate, but the queries that still send clicks are very different from the ones SEO teams were optimising for three years ago.",
+      },
+      {
+        type: "p",
+        text: "The teams that adjusted quickly kept growing. The ones that held onto the old playbook lost somewhere between 18 and 42% of organic traffic over the last year, depending on how informational their niche was.",
+      },
+      { type: "h2", text: "The shape of the loss" },
+      {
+        type: "p",
+        text: "Across ten of our clients, CTR on top-of-funnel informational queries ('what is X', 'how does Y work', 'is Z worth it') dropped 40 to 60% year on year. Google answers those inside the AI Overview now. The click to your page is optional, and most users don't bother.",
+      },
+      {
+        type: "p",
+        text: "The clients who'd built their entire content strategy on informational capture saw the steepest falls. The ones with a mix of intents were bruised but intact.",
+      },
+      { type: "h2", text: "What didn't change" },
+      {
+        type: "ul",
+        items: [
+          "Transactional queries ('buy Y', 'Z near me', 'X pricing'). AI Overviews are cautious here. Commercial intent still drives clicks to your site.",
+          "Branded queries. Overviews almost never block a click through to your own brand.",
+          "High-consideration research. Two-sided comparison articles that genuinely earn trust still pull clicks when the buyer wants more than a summary.",
+          "Local and in-person intent. Maps, directories, and brand presence matter more than ever.",
+        ],
+      },
+      {
+        type: "callout",
+        text: "Overviews killed the top of funnel, not the whole funnel. The revenue end is still intact.",
+        accent: "violet",
+      },
+      { type: "h2", text: "Lever 1. Become a source AI cites" },
+      {
+        type: "p",
+        text: "AI Overviews cite their sources. Being cited is the new rank one, and citation is worth something even when the click doesn't happen. Users read the citation, remember the brand, and come back for the transactional query later.",
+      },
+      {
+        type: "p",
+        text: "We've had three clients enter citation lists on queries they'd never ranked in the organic top 10 for. The mechanism isn't mysterious:",
+      },
+      {
+        type: "ul",
+        items: [
+          "Clean, well-structured content with clear answer paragraphs that models can lift cleanly.",
+          "Genuine subject-matter authority: named authors, expertise signals, reviews from trusted peers.",
+          "Schema markup. FAQ, Article, and Product are still free rank insurance.",
+          "Fresh-enough content. Models cite recent sources disproportionately.",
+        ],
+      },
+      { type: "h2", text: "Lever 2. Double down on the commercial floor" },
+      {
+        type: "p",
+        text: "If transactional queries still convert, and they do, the smart move is to stop chasing flat informational traffic and redirect that effort into pages that match buying intent.",
+      },
+      {
+        type: "p",
+        text: "For a retail client, we paused 40% of the blog calendar and redirected the budget to twenty net-new category pages, product comparison tables, and a 'find the right X' quiz. Organic revenue went up 31% in six months while total sessions dropped 8%.",
+      },
+      {
+        type: "p",
+        text: "Traffic is a vanity metric now. Revenue per query is the real number.",
+      },
+      { type: "h2", text: "Lever 3. Measure what SEO actually delivers" },
+      {
+        type: "p",
+        text: "The old SEO dashboard (rankings, sessions, impressions) tells you less every quarter. The useful metrics now are:",
+      },
+      {
+        type: "ul",
+        items: [
+          "Branded search volume. A real leading indicator of mind-share. If Overviews are citing you, this number climbs.",
+          "Share of voice on transactional SERPs. Rank tracking on your revenue-earning queries only, not a vanity set of 500 keywords.",
+          "Assisted conversions via organic. Most organic value is now assist, not last-click.",
+          "Citation rate in AI Overviews. Tooling is still poor but improving. Manual spot-checks on your top fifty commercial queries work well enough.",
+        ],
+      },
+      { type: "h2", text: "Our default SEO stack in 2026" },
+      {
+        type: "ol",
+        items: [
+          "Schema audit on first engagement. A single afternoon's work can move CTR 3 to 7% on existing content.",
+          "Commercial floor first, informational second. Ship the category, comparison, and product pages before the blog.",
+          "One citable pillar per quarter. Deep, genuine expertise, not 500-word fluff. The goal is to be the piece AI lifts from.",
+          "Kill decay monthly, not yearly. The rank decay cycle is faster now because Google retrains Overviews more often.",
+          "Measure branded search every month. It's the cleanest signal that your SEO is actually paying off.",
+        ],
+      },
+      { type: "h2", text: "Don't panic, plan" },
+      {
+        type: "p",
+        text: "SEO isn't dead. The part of SEO that was always a bit lazy (generic informational content farming) is dead, and good riddance. What replaces it is harder and slower, but the payoff is real when it compounds.",
+      },
+      {
+        type: "p",
+        text: "If your organic revenue is down year on year, the question isn't 'how do we claw back the traffic'. It's 'which of the three levers are we not pulling?'. Nine times out of ten, it's the commercial floor.",
+      },
+      {
+        type: "p",
+        text: "Traffic you can't monetise isn't worth chasing. Traffic that converts is worth more than ever.",
+      },
+    ],
+  },
+  {
     slug: "shopify-vs-headless-framework-2026",
     category: "Strategy",
     title: "Shopify vs headless: a framework for choosing in 2026.",
