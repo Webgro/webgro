@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { articles, type Accent } from "@/content/the-gro";
@@ -32,6 +32,37 @@ const accentHoverBorder: Record<Accent, string> = {
 
 export function TheGroSection() {
   const root = useRef<HTMLElement>(null);
+  const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const [canLeft, setCanLeft] = useState(false);
+  const [canRight, setCanRight] = useState(false);
+
+  const updateArrows = useCallback(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    setCanLeft(el.scrollLeft > 8);
+    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 8);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    updateArrows();
+    el.addEventListener("scroll", updateArrows, { passive: true });
+    window.addEventListener("resize", updateArrows);
+    return () => {
+      el.removeEventListener("scroll", updateArrows);
+      window.removeEventListener("resize", updateArrows);
+    };
+  }, [updateArrows]);
+
+  const scrollByCard = useCallback((dir: 1 | -1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const firstCard = el.querySelector<HTMLElement>("[data-gro-card]");
+    if (!firstCard) return;
+    const step = firstCard.offsetWidth + 24; // gap-6
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -166,18 +197,63 @@ export function TheGroSection() {
           </div>
         </div>
 
-        {/* Articles grid */}
-        <div
-          data-gro-grid
-          className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-6"
-        >
+        {/* Articles carousel */}
+        <div className="relative">
+          {/* Prev / next buttons, md+ only (mobile uses native swipe) */}
+          <div className="pointer-events-none absolute inset-y-0 -left-2 z-20 hidden items-center md:flex lg:-left-4">
+            <button
+              type="button"
+              aria-label="Previous articles"
+              onClick={() => scrollByCard(-1)}
+              disabled={!canLeft}
+              data-cursor="hover"
+              className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-wg-ink/70 text-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:border-white/40 hover:bg-white hover:text-wg-ink disabled:pointer-events-none disabled:opacity-20"
+            >
+              <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M7.5 10L3.5 6L7.5 2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </div>
+          <div className="pointer-events-none absolute inset-y-0 -right-2 z-20 hidden items-center md:flex lg:-right-4">
+            <button
+              type="button"
+              aria-label="Next articles"
+              onClick={() => scrollByCard(1)}
+              disabled={!canRight}
+              data-cursor="hover"
+              className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-wg-ink/70 text-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:border-white/40 hover:bg-white hover:text-wg-ink disabled:pointer-events-none disabled:opacity-20"
+            >
+              <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M4.5 2L8.5 6L4.5 10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Right-edge fade: visual affordance that there's more to scroll.
+              Fades to the section background (wg-ink-raised). */}
+          <div
+            aria-hidden="true"
+            className={`pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-wg-ink-raised to-transparent transition-opacity duration-300 ${
+              canRight ? "opacity-100" : "opacity-0"
+            }`}
+          />
+
+          {/* Scroller */}
+          <div
+            ref={scrollerRef}
+            data-gro-grid
+            className="-mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-6 pb-6 md:-mx-12 md:px-12 lg:-mx-16 lg:px-16 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
           {articles.map((a) => (
             <Link
               key={a.slug}
               href={`/the-gro/${a.slug}`}
               data-cursor="hover"
               data-gro-card
-              className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-wg-ink transition-all duration-500 hover:-translate-y-1 ${accentHoverBorder[a.accent]}`}
+              // Inline flex: 0 0 auto guarantees cards never shrink
+              // regardless of Tailwind compilation.
+              style={{ flex: "0 0 auto" }}
+              className={`group relative flex h-full w-72 snap-start flex-col overflow-hidden rounded-3xl border border-white/10 bg-wg-ink transition-all duration-500 hover:-translate-y-1 sm:w-80 md:w-80 lg:w-96 ${accentHoverBorder[a.accent]}`}
             >
               {/* Hero image */}
               <div className="relative aspect-[16/11] overflow-hidden">
@@ -240,6 +316,7 @@ export function TheGroSection() {
               </div>
             </Link>
           ))}
+          </div>
         </div>
 
         {/* View all CTA */}
