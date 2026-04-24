@@ -103,9 +103,18 @@
         </div>
 
         <!-- Small footnote: reg + group. Typographically quiet, adds
-             legitimacy without taking up space. -->
+             legitimacy without taking up space. The "Broadbridge Group"
+             link points at broadbridge.co.uk — we force the colour on
+             both the <a> and a nested <span> because Gmail's user
+             stylesheet re-colours bare <a> tags to blue; doubling the
+             colour declaration inside a span is the reliable way to
+             keep the link the same slate tone as the surrounding text
+             while preserving the underline. -->
         <div style="font-family:Consolas,'Courier New',monospace;font-size:9px;letter-spacing:0.8px;text-transform:uppercase;line-height:1.4;color:#9AA6BC;margin:8px 0 0;">
-          Webgro Ltd &middot; Reg 10889889 &middot; Part of Broadbridge Group
+          Webgro Ltd &middot; Reg 10889889 &middot; Part of
+          <a href="https://broadbridge.co.uk" style="color:#9AA6BC;text-decoration:underline;">
+            <span style="color:#9AA6BC;text-decoration:underline;">Broadbridge Group</span>
+          </a>
         </div>
       </td>
     </tr>
