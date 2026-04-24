@@ -244,15 +244,16 @@ export function LongFormLayout({
             {lead}
           </p>
 
-          {/* All fields optional notice */}
+          {/* Optional-fields + kickoff-context notice */}
           <div className="mt-10 flex items-start gap-3 rounded-2xl border border-wg-teal/25 bg-wg-teal/[0.04] p-4 md:p-5">
             <span className="mt-[5px] inline-flex h-2 w-2 shrink-0 rounded-full bg-wg-teal" />
             <p className="text-sm leading-relaxed text-white/80 md:text-base">
               <span className="font-semibold text-white">
                 Every question here is optional.
               </span>{" "}
-              Skip anything that isn&rsquo;t relevant to you. Your draft
-              auto-saves as you type, so you can step away and come back later.
+              This is our kickoff pack now that we&rsquo;ve agreed to work
+              together, not a pitch document, so skip anything that
+              isn&rsquo;t relevant. Your answers auto-save as you type.
             </p>
           </div>
         </div>
@@ -275,12 +276,12 @@ export function LongFormLayout({
                 </svg>
               </div>
               <h2 className="mt-8 font-[family-name:var(--font-display)] text-3xl font-bold leading-tight tracking-tight text-white md:text-5xl">
-                Got it. Cheers for that.
+                Got it. Cheers.
               </h2>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
-                We&rsquo;ve got your brief. One of us will be in touch within a
-                working day to book the next step. If anything changes in the
-                meantime, email{" "}
+                That&rsquo;s everything we need to kick off. One of us will be
+                in touch within a working day to confirm next steps and book
+                you in. If anything changes in the meantime, email{" "}
                 <a
                   href="mailto:hello@webgro.co.uk"
                   className="text-white underline underline-offset-4 hover:text-wg-blue"

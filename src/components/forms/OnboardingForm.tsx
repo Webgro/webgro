@@ -175,8 +175,8 @@ export function OnboardingForm() {
     <LongFormLayout
       formType="onboarding"
       eyebrow="[ Webgro ] New client onboarding"
-      title="Let's get set up."
-      lead="A few details so we can file you properly, hit the ground running, and make sure invoices land with the right person. Fill what's relevant, skip what isn't."
+      title="Welcome aboard. Let's get set up."
+      lead="Now the quote's signed off, a few details so we can file you properly, kick the project off cleanly, and make sure invoices land with the right person. Fill what's relevant, skip what isn't."
       state={state}
       fieldMap={FIELD_MAP}
       sectionOrder={SECTION_ORDER as unknown as readonly string[]}

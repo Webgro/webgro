@@ -41,17 +41,18 @@ const FIELD_MAP: Record<string, FieldMapEntry> = {
   teamSize: { section: "The business", label: "Team size" },
 
   // §2 Scope
-  projectType: { section: "Project scope", label: "What are you building?" },
+  projectType: { section: "Project scope", label: "Confirm what we're building" },
   whyNow: { section: "Project scope", label: "Why now? What's driving this?" },
-  launchDate: { section: "Project scope", label: "Desired launch date" },
+  launchDate: { section: "Project scope", label: "Launch deadline" },
   successMetrics: {
     section: "Project scope",
     label: "What does success look like?",
   },
-  buildBudget: { section: "Project scope", label: "Build budget" },
+  // buildBudget removed post-rewrite — redundant once the quote is
+  // agreed; the agreed figure lives in Xero and the proposal PDF.
   retainerBudget: {
     section: "Project scope",
-    label: "Ongoing retainer budget",
+    label: "Ongoing retainer appetite",
   },
 
   // §3 Platform
@@ -317,9 +318,9 @@ export function EcommerceBriefForm() {
   return (
     <LongFormLayout
       formType="ecommerce-brief"
-      eyebrow="[ Webgro ] eCommerce brief"
-      title="Tell us about the store."
-      lead="A working brief for a Shopify, Shopify Plus, or WooCommerce build. The more you fill in, the sharper our estimate and design direction — but skip anything that isn't relevant or you don't know yet."
+      eyebrow="[ Webgro ] eCommerce kickoff"
+      title="Let's get the store built."
+      lead="Now that we're on, this is the brief that kicks the build off — the creative direction, integrations, content status, and the operational detail we'll design around. Fill what's relevant, skip what isn't."
       state={state}
       fieldMap={FIELD_MAP}
       sectionOrder={SECTION_ORDER as unknown as readonly string[]}
@@ -366,9 +367,9 @@ export function EcommerceBriefForm() {
       </FormSection>
 
       {/* §2 Scope */}
-      <FormSection num="02" title="Project scope" intro="What's on the table, and what does winning look like.">
+      <FormSection num="02" title="Project scope" intro="Confirming what we agreed, and what success looks like six months after go-live.">
         <PillRadio
-          label="What are you building?"
+          label="Confirm what we're building"
           value={s("projectType")}
           onChange={(v) => update("projectType", v)}
           options={[
@@ -376,37 +377,20 @@ export function EcommerceBriefForm() {
             "Replatform",
             "Redesign on same platform",
             "Extending a current store",
-            "Not sure yet",
           ]}
         />
         <TextArea
-          label="Why now? What's driving this?"
+          label="Why now? What's driving this project?"
           value={s("whyNow")}
           onChange={(v) => update("whyNow", v)}
           rows={3}
         />
-        <TwoCol>
-          <TextInput
-            label="Desired launch date"
-            value={s("launchDate")}
-            onChange={(v) => update("launchDate", v)}
-            placeholder="e.g. Q3 2026, or by Black Friday"
-          />
-          <PillRadio
-            label="Build budget"
-            value={s("buildBudget")}
-            onChange={(v) => update("buildBudget", v)}
-            options={[
-              "< \u00a35k",
-              "\u00a35\u201310k",
-              "\u00a310\u201325k",
-              "\u00a325\u201350k",
-              "\u00a350\u2013100k",
-              "\u00a3100k+",
-              "Not sure",
-            ]}
-          />
-        </TwoCol>
+        <TextInput
+          label="Launch deadline (if any)"
+          value={s("launchDate")}
+          onChange={(v) => update("launchDate", v)}
+          placeholder="e.g. by Black Friday, Q3 2026, flexible"
+        />
         <TextArea
           label="What does success look like?"
           value={s("successMetrics")}
@@ -415,11 +399,12 @@ export function EcommerceBriefForm() {
           help="Three specific outcomes you'd celebrate six months after launch."
         />
         <PillRadio
-          label="Ongoing retainer budget"
+          label="Ongoing retainer appetite (post-launch)"
           value={s("retainerBudget")}
           onChange={(v) => update("retainerBudget", v)}
+          help="Optional — helps us shape what we propose for ongoing care after go-live."
           options={[
-            "None yet",
+            "Not decided yet",
             "< \u00a3500 / month",
             "\u00a3500\u20131k / month",
             "\u00a31\u20132.5k / month",
