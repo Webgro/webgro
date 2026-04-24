@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Michael Broadbridge · Email signature</title>
+</head>
+<!--
+  Michael's email signature for Gmail.
+
+  How to use (30 seconds):
+    1. Open this file in a browser.
+    2. Click anywhere on the signature block below, then press Cmd+A
+       (select all), Cmd+C (copy).
+    3. Go to Gmail → Settings (gear icon) → See all settings → General
+       → Signature → Create new.
+    4. Click in the signature editor and press Cmd+V (paste). Name it
+       something like "Michael — Webgro".
+    5. Set it as the default for new mails and replies/forwards.
+    6. Save changes.
+
+  Spam-safe by design:
+    · One small image (the 80x80 photo) — image-heavy signatures get
+      flagged, we keep to just one.
+    · All contact info as plain text, so filters can read it and you
+      can search your own sent mail for it.
+    · No tracking pixels, no 1x1 hidden images, no background images,
+      no colour blocks.
+    · No "Sent from my iPhone"-style marketing lines.
+
+  Photo hosting:
+    The src= URL below points at webgro.co.uk/team/michael.jpg. Once
+    you save the signature Gmail re-hosts the image on Google's CDN,
+    so even if the webgro.co.uk domain later goes down the signature
+    keeps working. If webgro.co.uk isn't live when you save, swap in
+    your current *.vercel.app URL temporarily, then re-save once the
+    custom domain is active.
+-->
+<body style="margin:0;padding:32px;background:#f6f7f9;font-family:Arial,Helvetica,sans-serif;">
+  <p style="font-size:12px;color:#6b7280;max-width:520px;margin:0 0 16px;">
+    Preview below — select from "Michael Broadbridge" down through the
+    last line, copy, and paste into Gmail's signature editor.
+  </p>
+
+  <!-- ============ SIGNATURE STARTS HERE ============ -->
+  <table cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,Helvetica,sans-serif;color:#07080C;border-collapse:collapse;">
+    <tr>
+      <!-- Photo cell. 80x80, rounded via border-radius. Gmail keeps
+           border-radius on images in recent versions; older clients
+           will show a square, which still looks tidy. -->
+      <td valign="top" style="padding-right:18px;vertical-align:top;">
+        <img
+          src="https://webgro.co.uk/team/michael.jpg"
+          width="80"
+          height="80"
+          alt="Michael Broadbridge"
+          style="display:block;width:80px;height:80px;border-radius:80px;border:0;"
+        />
+      </td>
+
+      <!-- Info cell. Thin left border rule gives the signature a
+           visual anchor without needing a background colour. -->
+      <td valign="top" style="vertical-align:top;padding-left:18px;border-left:1px solid #e6eaf2;">
+        <!-- Name -->
+        <div style="font-family:'Trebuchet MS',Arial,Helvetica,sans-serif;font-size:17px;font-weight:700;line-height:1.1;color:#07080C;margin:0 0 3px;">
+          Michael Broadbridge
+        </div>
+
+        <!-- Role · Company. Slightly muted, tracked uppercase gives the
+             site's mono-eyebrow vibe using a plain sans font, no
+             custom font required. -->
+        <div style="font-family:Consolas,'Courier New',monospace;font-size:10px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;line-height:1.4;color:#6B7A99;margin:0 0 10px;">
+          Co-Founder, Webgro
+        </div>
+
+        <!-- Tiny three-dot brand accent (blue / violet / teal) sitting
+             in for the site's gradient bar. Dots are safer than a
+             gradient in Gmail — linear-gradient is stripped by many
+             clients, three flat-colour spans render identically
+             everywhere. -->
+        <div style="font-size:0;line-height:0;margin:0 0 10px;">
+          <span style="display:inline-block;width:8px;height:8px;background:#2D8DFF;border-radius:8px;margin-right:4px;"></span>
+          <span style="display:inline-block;width:8px;height:8px;background:#7C3AED;border-radius:8px;margin-right:4px;"></span>
+          <span style="display:inline-block;width:8px;height:8px;background:#00C9A7;border-radius:8px;"></span>
+        </div>
+
+        <!-- Contact lines. Plain text with subtle coloured label
+             letters so it's searchable and spam-safe. -->
+        <div style="font-size:13px;line-height:1.6;color:#525B6E;">
+          <a href="mailto:michael@webgro.co.uk" style="color:#07080C;text-decoration:none;">
+            michael@webgro.co.uk
+          </a>
+          &nbsp;&middot;&nbsp;
+          <a href="tel:+441344231119" style="color:#07080C;text-decoration:none;">
+            +44 (0) 1344 231 119
+          </a>
+        </div>
+        <div style="font-size:13px;line-height:1.6;color:#525B6E;">
+          <a href="https://webgro.co.uk" style="color:#2D8DFF;text-decoration:none;font-weight:600;">
+            webgro.co.uk
+          </a>
+          &nbsp;&middot;&nbsp;
+          12 Longshot Lane, Bracknell, RG12 1RL
+        </div>
+
+        <!-- Small footnote: reg + group. Typographically quiet, adds
+             legitimacy without taking up space. -->
+        <div style="font-family:Consolas,'Courier New',monospace;font-size:9px;letter-spacing:0.8px;text-transform:uppercase;line-height:1.4;color:#9AA6BC;margin:8px 0 0;">
+          Webgro Ltd &middot; Reg 10889889 &middot; Part of Broadbridge Group
+        </div>
+      </td>
+    </tr>
+  </table>
+  <!-- ============ SIGNATURE ENDS HERE ============ -->
+
+</body>
+</html>
