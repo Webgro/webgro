@@ -110,6 +110,14 @@ export function TheGroCarousel({ articles }: { articles: Article[] }) {
         </button>
       </div>
 
+      {/* Right-edge fade: visual affordance that there's more to scroll */}
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-wg-ink to-transparent transition-opacity duration-300 ${
+          canRight ? "opacity-100" : "opacity-0"
+        }`}
+      />
+
       {/* Scroller */}
       <div
         ref={scrollerRef}
@@ -121,7 +129,10 @@ export function TheGroCarousel({ articles }: { articles: Article[] }) {
             href={`/the-gro/${a.slug}`}
             data-cursor="hover"
             data-card
-            className={`group relative flex w-[85%] flex-shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-white/10 bg-wg-ink-raised transition-all duration-500 hover:-translate-y-1 sm:w-[60%] md:w-[48%] lg:w-[31.5%] ${accentHoverBorder[a.accent]}`}
+            // Inline style guarantees the width + non-shrink behaviour even
+            // if Tailwind's class scanner trips on an arbitrary value.
+            style={{ flex: "0 0 auto" }}
+            className={`group relative flex w-72 snap-start flex-col overflow-hidden rounded-3xl border border-white/10 bg-wg-ink-raised transition-all duration-500 hover:-translate-y-1 sm:w-80 md:w-80 lg:w-96 ${accentHoverBorder[a.accent]}`}
           >
             {/* Hero image */}
             <div className="relative aspect-[16/11] overflow-hidden">
