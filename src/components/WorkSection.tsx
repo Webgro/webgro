@@ -199,7 +199,7 @@ export function WorkSection() {
           <span className="block pb-3">
             <span
               data-work-h2-word
-              className="inline-block bg-gradient-to-r from-wg-blue via-wg-violet to-wg-teal bg-clip-text pr-[0.35em] italic text-transparent will-change-transform"
+              className="inline-block bg-gradient-to-r from-wg-blue via-wg-violet to-wg-teal bg-clip-text pr-[0.35em] text-transparent will-change-transform"
             >
               earns its keep.
             </span>

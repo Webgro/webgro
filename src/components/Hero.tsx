@@ -87,7 +87,7 @@ export function Hero() {
               {splitWords("And the")}{" "}
               <span
                 data-hero-char
-                className="inline-block bg-gradient-to-r from-wg-blue via-wg-violet to-wg-teal bg-clip-text pr-[0.35em] italic text-transparent will-change-transform"
+                className="inline-block bg-gradient-to-r from-wg-blue via-wg-violet to-wg-teal bg-clip-text pr-[0.35em] text-transparent will-change-transform"
               >
                 systems
               </span>

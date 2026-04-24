@@ -104,7 +104,6 @@ export default async function OgImage() {
                   "linear-gradient(90deg, #2D8DFF 0%, #7C3AED 50%, #00C9A7 100%)",
                 backgroundClip: "text",
                 color: "transparent",
-                fontStyle: "italic",
                 paddingRight: 20,
               }}
             >

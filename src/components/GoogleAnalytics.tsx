@@ -11,10 +11,11 @@ import { readConsent, subscribeConsent } from "@/lib/consent";
  * in via the CookieBanner. Rejection (or no decision yet) means the
  * script never loads and nothing is tracked.
  *
- * On a change of decision we trigger a soft reload so any analytics
- * state is reset cleanly. That's cruder than a full Consent-Mode v2
- * integration but entirely correct under UK PECR, and well inside the
- * traffic ceiling where marginal-session accuracy matters.
+ * On accept, flipping `enabled` mounts the <Script> tag and GA loads
+ * cleanly, no reload needed. On reject, GA was never loaded in the
+ * first place, so there is also nothing to unload: the Script tag
+ * simply never mounts. This keeps the accept flow seamless (no jarring
+ * page refresh the instant a visitor clicks Accept).
  *
  * The GA4 measurement ID is hard-coded here because it is a public
  * identifier (it ends up in client-side script tags); gating it behind
@@ -30,16 +31,7 @@ export function GoogleAnalytics() {
     setEnabled(Boolean(existing?.analytics));
 
     const unsubscribe = subscribeConsent((state) => {
-      const next = Boolean(state.analytics);
-      // If consent just toggled, reload to cleanly load or unload GA.
-      // Only fires when the state actually changes, so no loop.
-      setEnabled((prev) => {
-        if (prev !== next) {
-          // tiny timeout so the banner's fade-out can finish first
-          window.setTimeout(() => window.location.reload(), 150);
-        }
-        return next;
-      });
+      setEnabled(Boolean(state.analytics));
     });
 
     return unsubscribe;

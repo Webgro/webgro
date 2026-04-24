@@ -121,7 +121,7 @@ export function ContactSection() {
               <span className="block pb-6 md:pb-8 lg:pb-10">
                 <span
                   data-contact-h2-word
-                  className="inline-block bg-gradient-to-r from-wg-blue via-wg-violet to-wg-teal bg-clip-text pr-[0.35em] italic text-transparent will-change-transform"
+                  className="inline-block bg-gradient-to-r from-wg-blue via-wg-violet to-wg-teal bg-clip-text pr-[0.35em] text-transparent will-change-transform"
                 >
                   gro.
                 </span>

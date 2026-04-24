@@ -180,7 +180,7 @@ export function TheGroSection() {
               <span className="block pb-4 md:pb-6 lg:pb-10">
                 <span
                   data-gro-h2-word
-                  className="inline-block bg-gradient-to-r from-wg-blue via-wg-violet to-wg-teal bg-clip-text pr-[0.35em] italic text-transparent will-change-transform"
+                  className="inline-block bg-gradient-to-r from-wg-blue via-wg-violet to-wg-teal bg-clip-text pr-[0.35em] text-transparent will-change-transform"
                 >
                   loud.
                 </span>

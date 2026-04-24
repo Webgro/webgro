@@ -663,7 +663,7 @@ export function ServiceView({
             {service.hero.headingAccent && (
               <>
                 {" "}
-                <span className="bg-gradient-to-r from-wg-blue via-wg-violet to-wg-teal bg-clip-text pr-[0.35em] italic text-transparent">
+                <span className="bg-gradient-to-r from-wg-blue via-wg-violet to-wg-teal bg-clip-text pr-[0.35em] text-transparent">
                   {service.hero.headingAccent}
                 </span>
               </>
@@ -779,7 +779,7 @@ export function ServiceView({
               {service.triplePreview.headingAccent && (
                 <>
                   {" "}
-                  <span className="bg-gradient-to-r from-wg-blue via-wg-violet to-wg-teal bg-clip-text pr-[0.35em] italic text-transparent">
+                  <span className="bg-gradient-to-r from-wg-blue via-wg-violet to-wg-teal bg-clip-text pr-[0.35em] text-transparent">
                     {service.triplePreview.headingAccent}
                   </span>
                 </>
@@ -1158,7 +1158,7 @@ export function ServiceView({
           </div>
           <h2 className="mt-6 max-w-3xl font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-7xl">
             {service.cta.heading}{" "}
-            <span className="bg-gradient-to-r from-wg-blue via-wg-violet to-wg-teal bg-clip-text pr-[0.35em] italic text-transparent">
+            <span className="bg-gradient-to-r from-wg-blue via-wg-violet to-wg-teal bg-clip-text pr-[0.35em] text-transparent">
               {service.cta.headingAccent}
             </span>
           </h2>
