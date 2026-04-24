@@ -229,15 +229,6 @@ export function TheGroSection() {
             </button>
           </div>
 
-          {/* Right-edge fade: visual affordance that there's more to scroll.
-              Fades to the section background (wg-ink-raised). */}
-          <div
-            aria-hidden="true"
-            className={`pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-wg-ink-raised to-transparent transition-opacity duration-300 ${
-              canRight ? "opacity-100" : "opacity-0"
-            }`}
-          />
-
           {/* Scroller */}
           <div
             ref={scrollerRef}
