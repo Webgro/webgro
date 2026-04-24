@@ -207,7 +207,7 @@ export function TheGroSection() {
               onClick={() => scrollByCard(-1)}
               disabled={!canLeft}
               data-cursor="hover"
-              className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-wg-ink/70 text-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:border-white/40 hover:bg-white hover:text-wg-ink disabled:pointer-events-none disabled:opacity-20"
+              className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-wg-ink-raised text-white/80 transition-all duration-300 hover:border-white/40 hover:bg-white hover:text-wg-ink disabled:pointer-events-none disabled:opacity-20"
             >
               <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                 <path d="M7.5 10L3.5 6L7.5 2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -221,7 +221,7 @@ export function TheGroSection() {
               onClick={() => scrollByCard(1)}
               disabled={!canRight}
               data-cursor="hover"
-              className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-wg-ink/70 text-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:border-white/40 hover:bg-white hover:text-wg-ink disabled:pointer-events-none disabled:opacity-20"
+              className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-wg-ink-raised text-white/80 transition-all duration-300 hover:border-white/40 hover:bg-white hover:text-wg-ink disabled:pointer-events-none disabled:opacity-20"
             >
               <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                 <path d="M4.5 2L8.5 6L4.5 10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />

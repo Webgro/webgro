@@ -1,12 +1,30 @@
+import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
-import { TheGroCarousel } from "@/components/TheGroCarousel";
-import { articles } from "@/content/the-gro";
+import { articles, type Accent } from "@/content/the-gro";
 
 export const metadata = {
   title: "The Gro · Webgro Studio",
   description:
     "Essays, experiments, and field notes on building better websites and shipping AI that earns its keep.",
+};
+
+const accentDot: Record<Accent, string> = {
+  blue: "bg-wg-blue",
+  violet: "bg-wg-violet",
+  teal: "bg-wg-teal",
+};
+
+const accentText: Record<Accent, string> = {
+  blue: "text-wg-blue",
+  violet: "text-wg-violet",
+  teal: "text-wg-teal",
+};
+
+const accentHoverBorder: Record<Accent, string> = {
+  blue: "hover:border-wg-blue/60",
+  violet: "hover:border-wg-violet/60",
+  teal: "hover:border-wg-teal/60",
 };
 
 export default function TheGroIndex() {
@@ -38,7 +56,65 @@ export default function TheGroIndex() {
 
         <section className="border-t border-white/10 bg-wg-ink py-20 md:py-24">
           <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-16">
-            <TheGroCarousel articles={articles} />
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-6">
+              {articles.map((a) => (
+                <Link
+                  key={a.slug}
+                  href={`/the-gro/${a.slug}`}
+                  data-cursor="hover"
+                  className={`group relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-wg-ink-raised transition-all duration-500 hover:-translate-y-1 ${accentHoverBorder[a.accent]}`}
+                >
+                  {/* Hero image */}
+                  <div className="relative aspect-[16/11] overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={a.heroImage}
+                      alt={a.title}
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-wg-ink-raised via-wg-ink-raised/10 to-transparent" />
+
+                    <div className="absolute inset-x-5 top-5 flex items-center justify-between">
+                      <div
+                        className={`inline-flex items-center gap-2 rounded-full border border-white/20 bg-wg-ink/70 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] ${accentText[a.accent]} backdrop-blur-md`}
+                      >
+                        <span className={`h-1.5 w-1.5 rounded-full ${accentDot[a.accent]}`} />
+                        {a.category}
+                      </div>
+                      <div className="inline-flex items-center rounded-full border border-white/20 bg-wg-ink/70 px-3 py-1 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-white/80 backdrop-blur-md">
+                        {a.readTime}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Text block */}
+                  <div className="flex flex-1 flex-col p-8">
+                    <h3 className="font-[family-name:var(--font-display)] text-2xl font-bold leading-tight tracking-tight text-white md:text-3xl">
+                      {a.title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-relaxed text-white/60">
+                      {a.excerpt}
+                    </p>
+                    <div className="mt-auto flex items-center justify-between pt-10">
+                      <span className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-white/40">
+                        {a.date}
+                      </span>
+                      <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/60 transition-all duration-500 group-hover:border-white/40 group-hover:bg-white group-hover:text-wg-ink">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                          <path
+                            d="M3 9L9 3M9 3H4M9 3V8"
+                            stroke="currentColor"
+                            strokeWidth="1.4"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
       </main>
