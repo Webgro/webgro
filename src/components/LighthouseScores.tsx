@@ -13,13 +13,19 @@ type Props = {
 };
 
 /**
- * Lighthouse-style score wheels for case studies. Each metric shows two
- * circular score gauges side by side: a muted "before" gauge and a
- * vibrant "after" gauge with an arrow between them.
+ * Lighthouse-style score wheels for case studies. Each metric gets its
+ * own card with a heading, a "Before" wheel and an "After" wheel, and
+ * an arrow between them.
  *
- * On viewport entry the rings sweep from 0 to their final value while
- * the centred number counts up. Colour follows Lighthouse conventions:
- * red 0–49, yellow 50–89, green 90–100.
+ * Animation:
+ *  - Ring fill: pure CSS transition on stroke-dashoffset, triggered by
+ *    a class flip when the section enters the viewport. Reliable across
+ *    every device and resilient to scroll speed (the previous RAF-only
+ *    version could land mid-animation on fast scroll, leaving some
+ *    rings appearing to snap).
+ *  - Centre number: rAF count-up, with a setTimeout for the per-pair
+ *    delay so it can never land in the past.
+ *  - Colours follow Lighthouse buckets: red 0-49, amber 50-89, green 90+.
  */
 export function LighthouseScores({ scores }: Props) {
   const ref = useRef<HTMLDivElement>(null);
@@ -38,25 +44,23 @@ export function LighthouseScores({ scores }: Props) {
           }
         }
       },
-      { threshold: 0.2, rootMargin: "0px 0px -40px 0px" },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <div ref={ref} className="my-16 md:my-24">
-      <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-y-16 lg:grid-cols-4 lg:gap-y-0 lg:gap-x-6">
-        {scores.map((s, i) => (
-          <ScorePair key={s.label} score={s} delayMs={i * 120} active={active} />
-        ))}
-      </div>
+    <div ref={ref} className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+      {scores.map((s, i) => (
+        <ScoreCard key={s.label} score={s} delayMs={i * 140} active={active} />
+      ))}
     </div>
   );
 }
 
-/** A pair of circles for one metric: before -> after with an arrow. */
-function ScorePair({
+/** A single metric card: label at top, before -> after wheels below. */
+function ScoreCard({
   score,
   delayMs,
   active,
@@ -66,15 +70,19 @@ function ScorePair({
   active: boolean;
 }) {
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex items-center gap-3 sm:gap-4">
-        <ScoreCircle value={score.before} muted active={active} delayMs={delayMs} />
-        <Arrow />
-        <ScoreCircle value={score.after} active={active} delayMs={delayMs + 200} />
-      </div>
-      <p className="mt-5 text-center font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.22em] text-white/55">
+    <div className="rounded-2xl border border-white/10 bg-wg-ink/40 p-6 text-center backdrop-blur-sm transition-colors duration-500 hover:border-white/20">
+      <p className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.25em] text-white/55">
         {score.label}
       </p>
+      <div className="mt-5 flex items-center justify-center gap-3 sm:gap-4">
+        <ScoreWheel value={score.before} muted active={active} delayMs={delayMs} />
+        <Arrow />
+        <ScoreWheel value={score.after} active={active} delayMs={delayMs + 220} />
+      </div>
+      <div className="mt-4 flex items-center justify-center gap-8 font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.22em] text-white/40">
+        <span>Before</span>
+        <span>After</span>
+      </div>
     </div>
   );
 }
@@ -82,8 +90,8 @@ function ScorePair({
 function Arrow() {
   return (
     <svg
-      width="22"
-      height="14"
+      width="18"
+      height="12"
       viewBox="0 0 22 14"
       fill="none"
       aria-hidden="true"
@@ -108,13 +116,21 @@ function bucket(value: number): "red" | "amber" | "green" {
 }
 
 const tone = {
-  green: { stroke: "#00C9A7", text: "text-wg-teal", glow: "rgba(0,201,167,0.30)" },
-  amber: { stroke: "#F0B429", text: "text-[#F0B429]", glow: "rgba(240,180,41,0.25)" },
-  red: { stroke: "#E5484D", text: "text-[#E5484D]", glow: "rgba(229,72,77,0.25)" },
+  green: { stroke: "#00C9A7", text: "text-wg-teal", glow: "rgba(0,201,167,0.25)" },
+  amber: { stroke: "#F0B429", text: "text-[#F0B429]", glow: "rgba(240,180,41,0.20)" },
+  red: { stroke: "#E5484D", text: "text-[#E5484D]", glow: "rgba(229,72,77,0.20)" },
 };
 
-/** A single animated Lighthouse-style score circle. */
-function ScoreCircle({
+const RADIUS = 38;
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+const DURATION_MS = 1100;
+
+/** A single animated Lighthouse-style score wheel.
+ *
+ *  Ring uses a pure CSS transition (no RAF), so it's bulletproof.
+ *  Number uses rAF for a count-up effect; if rAF skips, the value
+ *  will simply land at its final state which still reads correctly. */
+function ScoreWheel({
   value,
   muted = false,
   active,
@@ -127,43 +143,46 @@ function ScoreCircle({
 }) {
   const [shown, setShown] = useState(0);
   const colour = tone[bucket(value)];
-  const radius = 38;
-  const circumference = 2 * Math.PI * radius;
-  // pct of ring filled, 0..1
-  const pct = shown / 100;
-  const dashOffset = circumference * (1 - pct);
+
+  // Ring is driven by `active`. While inactive the ring is empty
+  // (offset = full circumference). When active flips true, CSS
+  // transitions the offset to the target over DURATION_MS.
+  const targetOffset = CIRCUMFERENCE * (1 - value / 100);
+  const dashOffset = active ? targetOffset : CIRCUMFERENCE;
 
   useEffect(() => {
     if (!active) return;
-    const start = performance.now() + delayMs;
+
     let raf = 0;
-    const duration = 1100;
-    const tick = (now: number) => {
-      const elapsed = now - start;
-      if (elapsed < 0) {
-        raf = requestAnimationFrame(tick);
-        return;
-      }
-      const t = Math.min(elapsed / duration, 1);
-      // ease-out cubic for the count-up
-      const eased = 1 - Math.pow(1 - t, 3);
-      setShown(Math.round(value * eased));
-      if (t < 1) raf = requestAnimationFrame(tick);
+    let cancelled = false;
+
+    const startTimer = window.setTimeout(() => {
+      if (cancelled) return;
+      const startedAt = performance.now();
+      const tick = (now: number) => {
+        if (cancelled) return;
+        const elapsed = now - startedAt;
+        const t = Math.min(Math.max(elapsed / DURATION_MS, 0), 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        setShown(Math.round(value * eased));
+        if (t < 1) raf = requestAnimationFrame(tick);
+      };
+      raf = requestAnimationFrame(tick);
+    }, delayMs);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(startTimer);
+      if (raf) cancelAnimationFrame(raf);
     };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
   }, [active, value, delayMs]);
 
-  // Muted "before" gauge: desaturated, lower opacity ring & text
-  const opacity = muted ? 0.45 : 1;
+  const opacity = muted ? 0.5 : 1;
 
   return (
     <div
-      className="relative flex h-24 w-24 shrink-0 items-center justify-center sm:h-28 sm:w-28"
-      style={{
-        // Soft halo behind the "after" circle to make it pop
-        filter: muted ? undefined : `drop-shadow(0 0 18px ${colour.glow})`,
-      }}
+      className="relative flex h-20 w-20 shrink-0 items-center justify-center sm:h-24 sm:w-24"
+      style={{ filter: muted ? undefined : `drop-shadow(0 0 14px ${colour.glow})` }}
     >
       <svg
         viewBox="0 0 100 100"
@@ -176,28 +195,32 @@ function ScoreCircle({
         <circle
           cx="50"
           cy="50"
-          r={radius}
+          r={RADIUS}
           fill="none"
           stroke="rgba(255,255,255,0.08)"
           strokeWidth="6"
         />
-        {/* Score ring */}
+        {/* Score ring (CSS transition drives the sweep) */}
         <circle
           cx="50"
           cy="50"
-          r={radius}
+          r={RADIUS}
           fill="none"
           stroke={colour.stroke}
           strokeWidth="6"
           strokeLinecap="round"
-          strokeDasharray={circumference}
+          strokeDasharray={CIRCUMFERENCE}
           strokeDashoffset={dashOffset}
           opacity={opacity}
-          style={{ transition: "stroke-dashoffset 60ms linear" }}
+          style={{
+            transition: `stroke-dashoffset ${DURATION_MS}ms cubic-bezier(0.22, 1, 0.36, 1) ${delayMs}ms`,
+          }}
         />
       </svg>
       <div
-        className={`pointer-events-none absolute inset-0 flex items-center justify-center font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight ${muted ? "text-white/55" : colour.text}`}
+        className={`pointer-events-none absolute inset-0 flex items-center justify-center font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight sm:text-3xl ${
+          muted ? "text-white/55" : colour.text
+        }`}
       >
         {shown}
       </div>

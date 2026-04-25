@@ -37,6 +37,15 @@ export type CaseBlock =
       aspect?: string;
       caption?: string;
     }
+  | {
+      /** Side-by-side comparison for tall (portrait) page screenshots.
+       *  No drag slider; both images stay on screen with prominent
+       *  BEFORE / AFTER badges so the comparison is unambiguous. */
+      type: "beforeAfterStacked";
+      before: { src: string; alt: string };
+      after: { src: string; alt: string };
+      caption?: string;
+    }
   | { type: "gallery"; images: Array<{ src: string; alt: string; aspect?: string }> }
   | { type: "quote"; text: string; attribution?: string }
   | {
@@ -423,18 +432,16 @@ export const caseStudies: CaseStudy[] = [
         body: "ANYPRINT print products fast. Their site didn't. The old build had layered up over years of small tweaks: heavy theme, plugin sprawl, render-blocking everything. The brief was a rebuild that kept what worked and fixed everything that didn't.",
       },
       {
-        type: "beforeAfter",
+        type: "beforeAfterStacked",
         before: {
           src: "/work/anyprint/before.jpg",
-          alt: "ANYPRINT site before the rebuild",
-          label: "Before",
+          alt: "ANYPRINT site before the rebuild, full page screenshot",
         },
         after: {
           src: "/work/anyprint/after.jpg",
-          alt: "ANYPRINT site after the rebuild",
-          label: "After",
+          alt: "ANYPRINT site after the rebuild, full page screenshot",
         },
-        caption: "Drag the slider to compare. Same business, very different site.",
+        caption: "Full page, top to bottom. Same business, very different site.",
       },
       {
         type: "section",

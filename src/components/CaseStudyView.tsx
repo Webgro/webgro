@@ -385,6 +385,67 @@ function Block({ block, accent, client }: { block: CaseBlock; accent: Accent; cl
         </div>
       );
 
+    case "beforeAfterStacked": {
+      // Tall portrait full-page screenshots, side by side.
+      // Each gets a clear BEFORE / AFTER badge that floats over the
+      // top so the comparison is unmistakable. Mobile stacks them.
+      const Pane = ({
+        src,
+        alt,
+        kind,
+      }: {
+        src: string;
+        alt: string;
+        kind: "before" | "after";
+      }) => (
+        <div className="relative">
+          <div
+            className={`absolute left-4 top-4 z-10 inline-flex items-center gap-2 rounded-full border px-3 py-1 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.28em] backdrop-blur-md md:left-5 md:top-5 ${
+              kind === "before"
+                ? "border-white/20 bg-wg-ink/80 text-white/65"
+                : "border-wg-teal/40 bg-wg-ink/80 text-wg-teal"
+            }`}
+          >
+            <span
+              className={`h-1.5 w-1.5 rounded-full ${
+                kind === "before" ? "bg-white/45" : "bg-wg-teal"
+              }`}
+            />
+            {kind === "before" ? "Before" : "After"}
+          </div>
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-wg-ink-raised">
+            {src ? (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={src}
+                alt={alt}
+                loading="lazy"
+                className="block h-auto w-full"
+              />
+            ) : (
+              <div className="aspect-[3/8]">
+                <Placeholder client={client} accent={accent} />
+              </div>
+            )}
+          </div>
+        </div>
+      );
+
+      return (
+        <div data-case-reveal className="mx-auto mt-20 max-w-6xl md:mt-28">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+            <Pane src={block.before.src} alt={block.before.alt} kind="before" />
+            <Pane src={block.after.src} alt={block.after.alt} kind="after" />
+          </div>
+          {block.caption && (
+            <p className="mt-6 text-center text-sm leading-relaxed text-white/55">
+              {block.caption}
+            </p>
+          )}
+        </div>
+      );
+    }
+
     case "split":
       return (
         <div data-case-reveal className="mx-auto mt-20 grid max-w-6xl grid-cols-1 gap-4 md:mt-28 md:grid-cols-2 md:gap-6">
@@ -456,15 +517,10 @@ function Block({ block, accent, client }: { block: CaseBlock; accent: Accent; cl
 
     case "lighthouseScores":
       return (
-        <div data-case-reveal className="mx-auto mt-24 max-w-5xl md:mt-32">
-          <div className="mb-10 flex items-center justify-center gap-12 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.28em] text-white/45">
-            <span>Before</span>
-            <span className="h-px w-10 bg-white/15" />
-            <span>After</span>
-          </div>
+        <div data-case-reveal className="mx-auto mt-24 max-w-6xl md:mt-32">
           <LighthouseScores scores={block.scores} />
           {block.caption && (
-            <p className="mt-6 text-center text-sm leading-relaxed text-white/55">
+            <p className="mt-8 text-center text-sm leading-relaxed text-white/55">
               {block.caption}
             </p>
           )}
