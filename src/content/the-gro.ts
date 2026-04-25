@@ -41,7 +41,7 @@ export const articles: Article[] = [
     readTime: "6 min read",
     accent: "violet",
     author: "Webgro Studio",
-    heroImage: "/articles/seo-ai-overviews.png",
+    heroImage: "/articles/seo-ai-overviews.jpg",
     relatedService: "seo",
     body: [
       {
@@ -157,7 +157,7 @@ export const articles: Article[] = [
     readTime: "6 min read",
     accent: "blue",
     author: "Webgro Studio",
-    heroImage: "/articles/shopify-vs-headless.png",
+    heroImage: "/articles/shopify-vs-headless.jpg",
     relatedService: "websites",
     body: [
       {
@@ -248,7 +248,7 @@ export const articles: Article[] = [
     readTime: "4 min read",
     accent: "teal",
     author: "Webgro Studio",
-    heroImage: "/articles/five-ai-integrations.png",
+    heroImage: "/articles/five-ai-integrations.jpg",
     relatedService: "automation-ai",
     body: [
       {
@@ -334,7 +334,7 @@ export const articles: Article[] = [
     readTime: "7 min read",
     accent: "violet",
     author: "Webgro Studio",
-    heroImage: "/articles/cms-complexity.png",
+    heroImage: "/articles/cms-complexity.jpg",
     relatedService: "websites",
     body: [
       {

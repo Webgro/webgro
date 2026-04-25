@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import useIsomorphicLayoutEffect from "@/lib/useIsomorphicLayoutEffect";
 import type { Accent, Article, ArticleBlock } from "@/content/the-gro";
 import { services } from "@/content/services";
 
@@ -215,49 +213,9 @@ export function ArticleView({
     };
   }, []);
 
-  useIsomorphicLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        "[data-article-meta]",
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.7,
-          ease: "power2.out",
-          delay: 0.1,
-          immediateRender: false,
-          overwrite: "auto",
-        }
-      );
-      gsap.set("[data-article-title-line]", {
-        y: 40,
-        opacity: 0,
-      });
-      gsap.to("[data-article-title-line]", {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        stagger: 0.08,
-        ease: "power4.out",
-        delay: 0.2,
-      });
-      gsap.fromTo(
-        "[data-article-excerpt]",
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.9,
-          ease: "power3.out",
-          delay: 0.7,
-          immediateRender: false,
-          overwrite: "auto",
-        }
-      );
-    }, root);
-    return () => ctx.revert();
-  }, []);
+  // Hero entrance (data-article-title-line / -meta / -excerpt) is now
+  // CSS-only via globals.css. LCP fires on first paint without waiting
+  // for hydration, and there's no flash from JS hiding then animating.
 
   return (
     <article ref={root} className="relative bg-wg-ink">

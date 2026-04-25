@@ -472,30 +472,8 @@ export function CaseStudyView({
     const ctx = gsap.context(() => {
       const opts = { immediateRender: false, overwrite: "auto" as const };
 
-      gsap.fromTo(
-        "[data-case-meta]",
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, stagger: 0.08, ease: "power2.out", delay: 0.1 }
-      );
-
-      gsap.fromTo(
-        "[data-case-title-word]",
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.1,
-          stagger: 0.08,
-          ease: "power4.out",
-          delay: 0.2,
-        }
-      );
-
-      gsap.fromTo(
-        "[data-case-excerpt]",
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: 0.9 }
-      );
+      // Hero entrance (data-case-title-word, data-case-meta, data-case-excerpt)
+      // is CSS-only via globals.css. LCP fires on first paint.
 
       gsap.fromTo(
         "[data-case-reveal]",

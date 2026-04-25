@@ -80,6 +80,8 @@ export function Footer() {
               <img
                 src="/brand/logo-white.png"
                 alt="Webgro"
+                width={450}
+                height={146}
                 className="h-8 w-auto md:h-10"
               />
             </a>

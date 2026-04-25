@@ -71,7 +71,7 @@ const featuredWork: FeaturedWork[] = [
   {
     name: "Fun Cases",
     tag: "eCommerce",
-    image: "/work/fun-cases.png",
+    image: "/work/fun-cases.jpg",
     href: "/work/fun-cases",
   },
   {
@@ -192,6 +192,8 @@ export function Nav() {
               <img
                 src="/brand/logo-white.png"
                 alt="Webgro"
+                width={450}
+                height={146}
                 className="h-7 w-auto md:h-8"
               />
             </a>

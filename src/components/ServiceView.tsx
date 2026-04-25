@@ -452,37 +452,8 @@ export function ServiceView({
     const ctx = gsap.context(() => {
       const opts = { immediateRender: false, overwrite: "auto" as const };
 
-      gsap.fromTo(
-        "[data-service-meta]",
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.08,
-          ease: "power2.out",
-          delay: 0.1,
-        }
-      );
-
-      gsap.fromTo(
-        "[data-service-title]",
-        { y: 40, opacity: 0, filter: "blur(12px)" },
-        {
-          y: 0,
-          opacity: 1,
-          filter: "blur(0px)",
-          duration: 1.1,
-          ease: "power4.out",
-          delay: 0.2,
-        }
-      );
-
-      gsap.fromTo(
-        "[data-service-lead]",
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: 0.7 }
-      );
+      // Hero entrance (title/meta/lead) is CSS-only via globals.css.
+      // LCP fires on first paint without waiting for hydration.
 
       // Section-level reveals, batched so each enters the viewport on its
       // own, not all at once when the article top hits the fold.

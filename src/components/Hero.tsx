@@ -1,67 +1,20 @@
 "use client";
 
-import { Fragment, useRef } from "react";
-import gsap from "gsap";
-import useIsomorphicLayoutEffect from "@/lib/useIsomorphicLayoutEffect";
 import { HeroBackground } from "./HeroBackground";
 import { MagneticLink } from "./MagneticLink";
 
-function splitWords(text: string, charClassName = "") {
-  const words = text.split(" ");
-  return words.map((word, wi) => (
-    <Fragment key={wi}>
-      <span className="inline-block whitespace-nowrap">
-        {[...word].map((c, ci) => (
-          <span
-            key={ci}
-            data-hero-char
-            className={`inline-block will-change-transform ${charClassName}`}
-          >
-            {c}
-          </span>
-        ))}
-      </span>
-      {wi < words.length - 1 && " "}
-    </Fragment>
-  ));
-}
+/**
+ * Hero entrance is CSS-only (see [data-hero-line] / [data-hero-meta]
+ * keyframes in globals.css). That keeps LCP firing on first paint
+ * instead of waiting for hydration + GSAP, and removes the visible
+ * "render, hide, animate" flicker the JS-driven version caused.
+ *
+ * The "Scroll to explore" floating cue is also pure CSS (wgFloat).
+ */
 
 export function Hero() {
-  const root = useRef<HTMLElement>(null);
-
-  useIsomorphicLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.set("[data-hero-char]", { y: 40, opacity: 0, filter: "blur(14px)" });
-      gsap.set("[data-hero-meta]", { y: 20, opacity: 0 });
-
-      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-      tl.to("[data-hero-char]", {
-        y: 0,
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 1.1,
-        stagger: 0.018,
-        delay: 0.15,
-      }).to(
-        "[data-hero-meta]",
-        { y: 0, opacity: 1, duration: 0.8, ease: "power2.out", stagger: 0.08 },
-        "-=0.6"
-      );
-
-      gsap.to("[data-float]", {
-        y: -6,
-        duration: 2.2,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-      });
-    }, root);
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section
-      ref={root}
       className="relative min-h-screen w-full overflow-hidden bg-wg-ink"
     >
       <HeroBackground />
@@ -74,6 +27,7 @@ export function Hero() {
           <div
             className="mb-10 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-white/80 backdrop-blur-md"
             data-hero-meta
+            style={{ animationDelay: "0.05s" }}
           >
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-wg-teal opacity-75"></span>
@@ -83,28 +37,39 @@ export function Hero() {
           </div>
 
           <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[5rem] xl:text-[5.75rem]">
-            <span className="block pb-2">{splitWords("We build websites.")}</span>
-            <span className="block pb-2">
-              {splitWords("And the")}{" "}
-              <span
-                data-hero-char
-                className="inline-block bg-gradient-to-r from-wg-blue via-wg-violet to-wg-teal bg-clip-text pr-[0.35em] text-transparent will-change-transform"
-              >
+            <span
+              data-hero-line
+              className="block pb-2 will-change-transform"
+              style={{ animationDelay: "0.1s" }}
+            >
+              We build websites.
+            </span>
+            <span
+              data-hero-line
+              className="block pb-2 will-change-transform"
+              style={{ animationDelay: "0.25s" }}
+            >
+              And the{" "}
+              <span className="inline-block bg-gradient-to-r from-wg-blue via-wg-violet to-wg-teal bg-clip-text pr-[0.35em] text-transparent">
                 systems
               </span>
-              {" "}
-              {splitWords("behind them.")}
+              {" "}behind them.
             </span>
           </h1>
 
           <p
             className="mt-10 max-w-2xl text-lg leading-relaxed text-white/70 md:text-xl"
             data-hero-meta
+            style={{ animationDelay: "0.55s" }}
           >
             Shopify and WordPress built for conversion and speed. Production AI tools layered in where the numbers say yes. Today&rsquo;s site. Tomorrow&rsquo;s system.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center gap-4" data-hero-meta>
+          <div
+            className="mt-10 flex flex-wrap items-center gap-4"
+            data-hero-meta
+            style={{ animationDelay: "0.7s" }}
+          >
             <MagneticLink
               href="#contact"
               className="group inline-flex items-center gap-3 rounded-full bg-wg-blue px-7 py-4 text-base font-medium text-white transition-colors hover:bg-white hover:text-wg-ink"
@@ -125,8 +90,9 @@ export function Hero() {
         <div
           className="flex flex-wrap items-end justify-between gap-6 text-xs uppercase tracking-[0.2em] text-white/50"
           data-hero-meta
+          style={{ animationDelay: "0.85s" }}
         >
-          <div className="flex items-center gap-3" data-float>
+          <div className="flex items-center gap-3">
             <span className="font-[family-name:var(--font-mono)] text-[11px]">[ 01 ]</span>
             <span>Scroll to explore</span>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="translate-y-[1px]" aria-hidden="true">

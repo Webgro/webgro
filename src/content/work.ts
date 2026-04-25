@@ -78,7 +78,7 @@ export const caseStudies: CaseStudy[] = [
     tag: "eCommerce · AI",
     year: "Since 2012",
     accent: "blue",
-    heroImage: "/work/fun-cases.png",
+    heroImage: "/work/fun-cases.jpg",
     heroImageAlt: "Fun Cases storefront",
     excerpt:
       "A Shopify storefront, a custom inventory system, and three production-grade AI tools. Built for a team that ships designs faster than most brands ship campaigns.",
@@ -600,7 +600,7 @@ export const caseStudies: CaseStudy[] = [
     tag: "eCommerce",
     year: "2025",
     accent: "teal",
-    heroImage: "/work/its-pouch.png",
+    heroImage: "/work/its-pouch.jpg",
     heroImageAlt: "it's Pouch brand world",
     excerpt:
       "Shopify development and a considered email notification system for a lifestyle brand shipping a new line.",

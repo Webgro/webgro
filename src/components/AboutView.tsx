@@ -113,36 +113,9 @@ export function AboutView() {
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero meta + lead (fire on mount, not scroll)
-      gsap.fromTo(
-        "[data-about-meta]",
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.08,
-          ease: "power2.out",
-          delay: 0.1,
-        }
-      );
-      gsap.fromTo(
-        "[data-about-title]",
-        { y: 40, opacity: 0, filter: "blur(12px)" },
-        {
-          y: 0,
-          opacity: 1,
-          filter: "blur(0px)",
-          duration: 1.1,
-          ease: "power4.out",
-          delay: 0.2,
-        }
-      );
-      gsap.fromTo(
-        "[data-about-lead]",
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: 0.7 }
-      );
+      // Hero entrance (data-about-title / -meta / -lead) is now CSS-only.
+      // See globals.css. That keeps LCP firing on first paint instead of
+      // waiting for hydration, and removes the SSR-flash-then-hide bug.
 
       // Section reveals — generic stagger for eyebrow/heading/body triples
       ScrollTrigger.batch("[data-about-reveal]", {

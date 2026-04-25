@@ -89,36 +89,8 @@ export function ContactView() {
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero mount reveal
-      gsap.fromTo(
-        "[data-contactpg-meta]",
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.08,
-          ease: "power2.out",
-          delay: 0.1,
-        }
-      );
-      gsap.fromTo(
-        "[data-contactpg-title]",
-        { y: 40, opacity: 0, filter: "blur(12px)" },
-        {
-          y: 0,
-          opacity: 1,
-          filter: "blur(0px)",
-          duration: 1.1,
-          ease: "power4.out",
-          delay: 0.2,
-        }
-      );
-      gsap.fromTo(
-        "[data-contactpg-lead]",
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: 0.7 }
-      );
+      // Hero entrance (title/meta/lead) is CSS-only via globals.css.
+      // Keeps LCP firing on first paint without hydration dependency.
 
       // Scroll-triggered stagger reveals
       ScrollTrigger.batch("[data-contactpg-reveal]", {
