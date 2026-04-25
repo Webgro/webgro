@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import useIsomorphicLayoutEffect from "@/lib/useIsomorphicLayoutEffect";
 import type { Service, ServiceMedia } from "@/content/services";
 import type { Accent, CaseStudy } from "@/content/work";
 import { BrowserFrame } from "@/components/BrowserFrame";
@@ -447,7 +448,7 @@ export function ServiceView({
 }) {
   const root = useRef<HTMLElement>(null);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const opts = { immediateRender: false, overwrite: "auto" as const };
 

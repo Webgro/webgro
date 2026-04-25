@@ -1,7 +1,8 @@
 "use client";
 
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment, useRef } from "react";
 import gsap from "gsap";
+import useIsomorphicLayoutEffect from "@/lib/useIsomorphicLayoutEffect";
 import { HeroBackground } from "./HeroBackground";
 import { MagneticLink } from "./MagneticLink";
 
@@ -28,7 +29,7 @@ function splitWords(text: string, charClassName = "") {
 export function Hero() {
   const root = useRef<HTMLElement>(null);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.set("[data-hero-char]", { y: 40, opacity: 0, filter: "blur(14px)" });
       gsap.set("[data-hero-meta]", { y: 20, opacity: 0 });

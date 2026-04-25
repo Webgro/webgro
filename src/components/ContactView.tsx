@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import useIsomorphicLayoutEffect from "@/lib/useIsomorphicLayoutEffect";
 import type { Accent } from "@/content/work";
 import { contact } from "@/content/contact";
 import { ContactForm } from "@/components/ContactForm";
@@ -86,7 +87,7 @@ function methodIcon(kind: "email" | "phone" | "visit") {
 export function ContactView() {
   const root = useRef<HTMLElement>(null);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       // Hero mount reveal
       gsap.fromTo(

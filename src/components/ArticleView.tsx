@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import useIsomorphicLayoutEffect from "@/lib/useIsomorphicLayoutEffect";
 import type { Accent, Article, ArticleBlock } from "@/content/the-gro";
 import { services } from "@/content/services";
 
@@ -214,7 +215,7 @@ export function ArticleView({
     };
   }, []);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         "[data-article-meta]",

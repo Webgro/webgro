@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import useIsomorphicLayoutEffect from "@/lib/useIsomorphicLayoutEffect";
 import type { Accent, CaseBlock, CaseStudy } from "@/content/work";
 import { BrandImage } from "@/components/BrandImage";
 import { BrowserFrame } from "@/components/BrowserFrame";
@@ -467,7 +468,7 @@ export function CaseStudyView({
     .filter((b): b is Extract<CaseBlock, { type: "chapter" }> => b.type === "chapter")
     .map((c) => ({ id: c.id, num: c.num, label: c.label }));
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const opts = { immediateRender: false, overwrite: "auto" as const };
 
