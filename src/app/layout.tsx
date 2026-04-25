@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Geist_Mono, Poppins } from "next/font/google";
+import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { LenisProvider } from "@/components/LenisProvider";
 import { CustomCursor } from "@/components/CustomCursor";
@@ -19,12 +19,9 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
+// Poppins was loaded for mockup UI (Fun Cases case study screens) but
+// is below the fold and the system fallback is acceptable. Removed from
+// the global font load to save a font request on every page.
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://webgro.co.uk"),
@@ -56,8 +53,21 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${geistMono.variable} ${poppins.variable} h-full antialiased`}
+      className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Preconnect to Fontshare so the Satoshi font download chain starts
+            as soon as DNS resolves. */}
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="" />
+        {/* Direct <link> for Satoshi (was inside globals.css as @import,
+            which forced a serial chain). Discoverable by the browser
+            preload scanner the moment HTML lands. */}
+        <link
+          rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap"
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <JsonLd id="ld-org" data={organisationLd()} />
         <JsonLd id="ld-website" data={websiteLd()} />

@@ -1,4 +1,7 @@
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap');
+/* Satoshi loads via a <link> in app/layout.tsx so the browser preload
+   scanner can discover it immediately. The previous @import here forced
+   a chain (parse globals.css -> request Satoshi CSS -> request woff2)
+   that delayed first paint. */
 @import "tailwindcss";
 
 :root {

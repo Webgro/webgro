@@ -1,7 +1,15 @@
 "use client";
 
-import { HeroBackground } from "./HeroBackground";
+import dynamic from "next/dynamic";
 import { MagneticLink } from "./MagneticLink";
+
+// HeroBackground is a WebGL2 shader. Defer it so the GLSL compile
+// + RAF loop don't block hydration or the LCP candidate. The hero
+// looks fine without it during the brief moment before it loads.
+const HeroBackground = dynamic(
+  () => import("./HeroBackground").then((m) => m.HeroBackground),
+  { ssr: false }
+);
 
 /**
  * Hero entrance is CSS-only (see [data-hero-line] / [data-hero-meta]
