@@ -83,7 +83,7 @@ const featuredWork: FeaturedWork[] = [
   {
     name: "ANYPRINT",
     tag: "WordPress · Performance",
-    image: "/work/anyprint.jpg",
+    image: "/work/anyprint.webp",
     href: "/work/anyprint",
   },
 ];

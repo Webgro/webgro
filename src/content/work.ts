@@ -387,7 +387,7 @@ export const caseStudies: CaseStudy[] = [
     tag: "WordPress · Performance",
     year: "2026",
     accent: "violet",
-    heroImage: "/work/anyprint.jpg",
+    heroImage: "/work/anyprint.webp",
     heroImageAlt: "ANYPRINT homepage",
     excerpt:
       "A WordPress redesign and rebuild with page speed as the design constraint, not an afterthought. Lighthouse Performance from 54 to 99. Accessibility, Best Practices, and SEO all to 100.",

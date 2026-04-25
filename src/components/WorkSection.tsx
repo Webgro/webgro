@@ -53,7 +53,7 @@ const cases: CaseStudy[] = [
     client: "ANYPRINT",
     tag: "WordPress · Performance",
     services: "WordPress · Performance · SEO",
-    image: "/work/anyprint.jpg",
+    image: "/work/anyprint.webp",
     accent: "violet",
     size: "hero",
   },
