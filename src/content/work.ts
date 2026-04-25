@@ -408,6 +408,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     stack: ["WordPress", "Custom theme"],
     timeline: "Rebuild + ongoing",
+    url: "https://any-print.co.uk",
     featured: true,
     categories: ["wordpress"],
     body: [
@@ -463,7 +464,7 @@ export const caseStudies: CaseStudy[] = [
         type: "browser",
         src: "/work/anyprint/storefront.jpg",
         alt: "ANYPRINT homepage after the rebuild",
-        url: "anyprint.co.uk",
+        url: "any-print.co.uk",
         phone: {
           src: "/work/anyprint/mobile.jpg",
           alt: "ANYPRINT on mobile",
