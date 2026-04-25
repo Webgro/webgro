@@ -10,6 +10,7 @@ import { BrandImage } from "@/components/BrandImage";
 import { BrowserFrame } from "@/components/BrowserFrame";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { BeforeAfter } from "@/components/BeforeAfter";
+import { LighthouseScores } from "@/components/LighthouseScores";
 import { CaseStudyNav } from "@/components/CaseStudyNav";
 import { Mockup, type MockupName } from "@/components/mockups";
 
@@ -450,6 +451,23 @@ function Block({ block, accent, client }: { block: CaseBlock; accent: Accent; cl
               </span>
             ))}
           </div>
+        </div>
+      );
+
+    case "lighthouseScores":
+      return (
+        <div data-case-reveal className="mx-auto mt-24 max-w-5xl md:mt-32">
+          <div className="mb-10 flex items-center justify-center gap-12 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.28em] text-white/45">
+            <span>Before</span>
+            <span className="h-px w-10 bg-white/15" />
+            <span>After</span>
+          </div>
+          <LighthouseScores scores={block.scores} />
+          {block.caption && (
+            <p className="mt-6 text-center text-sm leading-relaxed text-white/55">
+              {block.caption}
+            </p>
+          )}
         </div>
       );
   }

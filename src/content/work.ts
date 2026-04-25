@@ -39,6 +39,11 @@ export type CaseBlock =
     }
   | { type: "gallery"; images: Array<{ src: string; alt: string; aspect?: string }> }
   | { type: "quote"; text: string; attribution?: string }
+  | {
+      type: "lighthouseScores";
+      caption?: string;
+      scores: Array<{ label: string; before: number; after: number }>;
+    }
   | { type: "deliverables"; heading?: string; items: string[] };
 
 export type Category = "ecommerce" | "wordpress" | "ai";
@@ -416,17 +421,20 @@ export const caseStudies: CaseStudy[] = [
         eyebrow: "The starting point",
         heading: "Good business, slow site",
         body: "ANYPRINT print products fast. Their site didn't. The old build had layered up over years of small tweaks: heavy theme, plugin sprawl, render-blocking everything. The brief was a rebuild that kept what worked and fixed everything that didn't.",
-        phone: {
-          src: "/work/anyprint/mobile.jpg",
-          alt: "ANYPRINT on mobile",
-          caption: "Mobile · the new build",
-        },
       },
       {
-        type: "browser",
-        src: "/work/anyprint/storefront.jpg",
-        alt: "ANYPRINT homepage after the rebuild",
-        url: "anyprint.co.uk",
+        type: "beforeAfter",
+        before: {
+          src: "/work/anyprint/before.jpg",
+          alt: "ANYPRINT site before the rebuild",
+          label: "Before",
+        },
+        after: {
+          src: "/work/anyprint/after.jpg",
+          alt: "ANYPRINT site after the rebuild",
+          label: "After",
+        },
+        caption: "Drag the slider to compare. Same business, very different site.",
       },
       {
         type: "section",
@@ -435,13 +443,24 @@ export const caseStudies: CaseStudy[] = [
         body: "Every decision on this build was filtered through one question: will this hurt page speed? Custom theme rather than a page builder, strict image discipline, modern WordPress as a clean publishing tool, no plugin bloat, no third-party scripts unless they earned their place. The result is a site that loads fast on mobile and posts a near-perfect Lighthouse profile.",
       },
       {
-        type: "statGroup",
-        items: [
-          { eyebrow: "From 54", value: "99", label: "Performance" },
-          { eyebrow: "From 91", value: "100", label: "Accessibility" },
-          { eyebrow: "From 90", value: "100", label: "Best Practices" },
-          { eyebrow: "From 75", value: "100", label: "SEO" },
+        type: "lighthouseScores",
+        caption: "Lighthouse scores, mobile, simulated 4G. Old site on the left, new site on the right.",
+        scores: [
+          { label: "Performance",   before: 54, after: 99 },
+          { label: "Accessibility", before: 91, after: 100 },
+          { label: "Best Practices", before: 90, after: 100 },
+          { label: "SEO",            before: 75, after: 100 },
         ],
+      },
+      {
+        type: "browser",
+        src: "/work/anyprint/storefront.jpg",
+        alt: "ANYPRINT homepage after the rebuild",
+        url: "anyprint.co.uk",
+        phone: {
+          src: "/work/anyprint/mobile.jpg",
+          alt: "ANYPRINT on mobile",
+        },
       },
 
       // ── Chapter 02 ─────────────────────────────────────────────
