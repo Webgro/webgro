@@ -81,10 +81,10 @@ const featuredWork: FeaturedWork[] = [
     href: "/work/gieves-and-hawkes",
   },
   {
-    name: "Sublishop",
-    tag: "B2B eCommerce · AI",
-    image: "/work/sublishop.jpg",
-    href: "/work/sublishop",
+    name: "ANYPRINT",
+    tag: "WordPress · Performance",
+    image: "/work/anyprint.jpg",
+    href: "/work/anyprint",
   },
 ];
 

@@ -377,6 +377,103 @@ export const caseStudies: CaseStudy[] = [
   },
 
   {
+    slug: "anyprint",
+    client: "ANYPRINT",
+    tag: "WordPress · Performance",
+    year: "2026",
+    accent: "violet",
+    heroImage: "/work/anyprint.jpg",
+    heroImageAlt: "ANYPRINT homepage",
+    excerpt:
+      "A WordPress redesign and rebuild with page speed as the design constraint, not an afterthought. Lighthouse Performance from 54 to 99. Accessibility, Best Practices, and SEO all to 100.",
+    services: [
+      "WordPress",
+      "Performance",
+      "Accessibility",
+      "SEO programme",
+    ],
+    stack: ["WordPress", "Custom theme"],
+    timeline: "Rebuild + ongoing",
+    featured: true,
+    categories: ["wordpress"],
+    body: [
+      {
+        type: "intro",
+        text: "ANYPRINT had a WordPress site that was holding the brand back. Slow theme, plugin sprawl, an admin panel nobody enjoyed using. We rebuilt it with page speed as the brief, not a feature. The numbers tell the rest.",
+      },
+
+      // ── Chapter 01 ─────────────────────────────────────────────
+      {
+        type: "chapter",
+        id: "rebuild",
+        num: "01",
+        label: "Rebuild",
+        description:
+          "A clean WordPress build with page speed treated as a design constraint. Lighthouse went from a yellow 54 to a green 99.",
+      },
+      {
+        type: "section",
+        eyebrow: "The starting point",
+        heading: "Good business, slow site",
+        body: "ANYPRINT print products fast. Their site didn't. The old build had layered up over years of small tweaks: heavy theme, plugin sprawl, render-blocking everything. The brief was a rebuild that kept what worked and fixed everything that didn't.",
+        phone: {
+          src: "/work/anyprint/mobile.jpg",
+          alt: "ANYPRINT on mobile",
+          caption: "Mobile · the new build",
+        },
+      },
+      {
+        type: "browser",
+        src: "/work/anyprint/storefront.jpg",
+        alt: "ANYPRINT homepage after the rebuild",
+        url: "anyprint.co.uk",
+      },
+      {
+        type: "section",
+        eyebrow: "Page-speed first",
+        heading: "Performance as a design constraint",
+        body: "Every decision on this build was filtered through one question: will this hurt page speed? Custom theme rather than a page builder, strict image discipline, modern WordPress as a clean publishing tool, no plugin bloat, no third-party scripts unless they earned their place. The result is a site that loads fast on mobile and posts a near-perfect Lighthouse profile.",
+      },
+      {
+        type: "statGroup",
+        items: [
+          { eyebrow: "From 54", value: "99", label: "Performance" },
+          { eyebrow: "From 91", value: "100", label: "Accessibility" },
+          { eyebrow: "From 90", value: "100", label: "Best Practices" },
+          { eyebrow: "From 75", value: "100", label: "SEO" },
+        ],
+      },
+
+      // ── Chapter 02 ─────────────────────────────────────────────
+      {
+        type: "chapter",
+        id: "next",
+        num: "02",
+        label: "What's next",
+        description:
+          "A fast site is rank insurance. The SEO programme is how it actually starts winning queries.",
+      },
+      {
+        type: "section",
+        eyebrow: "Ongoing",
+        heading: "An SEO programme to match the speed",
+        body: "Speed is necessary for SEO, not sufficient. Pairing the rebuild with a content and technical SEO retainer is how the site converts the page-speed gains into real ranking and traffic. We've started this month, focused on the categories ANYPRINT compete in. This case study will be updated in three to six months once the data tells the truth.",
+      },
+      {
+        type: "deliverables",
+        heading: "Deliverables",
+        items: [
+          "WordPress redesign",
+          "Custom theme build",
+          "Performance optimisation, mobile and desktop",
+          "Accessibility audit and fixes",
+          "SEO programme (ongoing)",
+        ],
+      },
+    ],
+  },
+
+  {
     slug: "sublishop",
     client: "Sublishop",
     tag: "B2B eCommerce · AI",
@@ -396,7 +493,6 @@ export const caseStudies: CaseStudy[] = [
     stack: ["Shopify", "Custom AI apps", "Claude API"],
     timeline: "Ongoing",
     url: "https://sublishop.co.uk",
-    featured: true,
     categories: ["ecommerce", "ai"],
     body: [
       {
