@@ -1,9 +1,38 @@
-/* Satoshi (display face) is loaded via next/font/local in app/layout.tsx
-   and exposes itself as --font-satoshi. Referenced in --font-display
-   below. The previous @import url('//api.fontshare.com/...') was being
-   stripped from the compiled bundle by Tailwind v4 / Turbopack, so
-   the headings were silently falling back to Inter. */
 @import "tailwindcss";
+
+/* Satoshi (display face) declared inline here so nothing in the
+   build pipeline can strip or rewrite it. Earlier attempts that
+   used @import url(fontshare), <link rel=stylesheet> in <head>,
+   and next/font/local all silently failed for various Tailwind v4
+   / Turbopack / @theme-inline reasons. Plain old @font-face works. */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi-900.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   --wg-blue: #2D8DFF;
@@ -18,13 +47,12 @@
   --background: var(--wg-ink);
   --foreground: #EDEFF4;
 
-  /* Font stacks declared as plain CSS variables (NOT inside @theme inline)
-     so they're emitted to :root at runtime. Tailwind v4's @theme inline
-     bakes values into utility classes instead of exposing them as CSS
-     vars, which silently broke font-[family-name:var(--font-display)]
-     across the site. The next/font Inter / Geist Mono / Satoshi vars
-     are populated by Next via the html className. */
-  --font-display: var(--font-satoshi), 'Satoshi', var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* Font stacks declared as plain CSS variables (NOT inside @theme inline,
+     which bakes values into utility classes instead of exposing them as
+     CSS vars, breaking font-[family-name:var(--font-display)]). Satoshi
+     is referenced literally so the @font-face declarations above pick
+     it up; no indirection. */
+  --font-display: 'Satoshi', var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
