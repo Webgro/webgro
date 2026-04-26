@@ -18,7 +18,7 @@
      emitting them as runtime CSS vars, which broke the
      font-[family-name:var(--font-display)] utility used by every
      heading. Display face is Onest (next/font/google), self-hosted. */
-  --font-display: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
