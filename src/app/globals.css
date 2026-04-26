@@ -1,5 +1,39 @@
 @import "tailwindcss";
 
+/* Optional: real Satoshi if you've dropped the woff2 files into
+   /public/fonts. Files are 404 by default so the browser harmlessly
+   falls through to Plus Jakarta Sans below. To activate Satoshi,
+   download the official Satoshi ZIP from www.fontshare.com/fonts/satoshi,
+   unzip, and copy the four woff2s to /public/fonts/satoshi-{400,500,700,900}.woff2. */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi-900.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --wg-blue: #2D8DFF;
   --wg-blue-dark: #1F6FD4;
@@ -18,7 +52,13 @@
      emitting them as runtime CSS vars, which broke the
      font-[family-name:var(--font-display)] utility used by every
      heading. Display face is Onest (next/font/google), self-hosted. */
-  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  /* Plus Jakarta Sans is the closest free, self-hostable equivalent
+     to Satoshi. If you want real Satoshi: download the official ZIP
+     from https://www.fontshare.com/fonts/satoshi (the API CDN serves
+     placeholders to non-browsers, but the website ZIP is real),
+     drop satoshi-{400,500,700,900}.woff2 into /public/fonts, and
+     uncomment the @font-face block below. */
+  --font-display: 'Satoshi', var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }

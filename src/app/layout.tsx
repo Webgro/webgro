@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Geist_Mono, Manrope } from "next/font/google";
+import { Inter, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { LenisProvider } from "@/components/LenisProvider";
 import { CustomCursor } from "@/components/CustomCursor";
@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-// Display face. Manrope is a free Google-Fonts geometric sans with a
+// Display face. Plus_Jakarta_Sans is a free Google-Fonts geometric sans with a
 // distinctive humanist character that reads visibly different from
 // Inter (which the rest of the site uses for body copy). Picked as
 // a permanent replacement for Satoshi after every attempt to self-
@@ -27,10 +27,10 @@ const geistMono = Geist_Mono({
 // to non-browser clients (literally a 25KB binary with all name
 // fields set to "false") to discourage hotlinking, AND Tailwind v4 /
 // Turbopack strips @import url(fontshare) from the compiled bundle.
-// Manrope via next/font/google self-hosts via Vercel's same-origin
+// Plus_Jakarta_Sans via next/font/google self-hosts via Vercel's same-origin
 // CDN, no external dependency, no risk of regression.
-const manrope = Manrope({
-  variable: "--font-manrope",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
@@ -70,7 +70,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${geistMono.variable} ${manrope.variable} h-full antialiased`}
+      className={`${inter.variable} ${geistMono.variable} ${jakarta.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <JsonLd id="ld-org" data={organisationLd()} />
