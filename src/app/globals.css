@@ -78,6 +78,16 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Belt-and-braces: every heading element AND every element with the
+   font-display utility class gets Satoshi explicitly. Bypasses any
+   var() indirection or Tailwind layer ambiguity. The literal 'Satoshi'
+   string here matches the @font-face declarations at the top of this
+   file, so the browser will fetch the local woff2 and apply it. */
+h1, h2, h3, h4, h5, h6,
+.font-\[family-name\:var\(--font-display\)\] {
+  font-family: 'Satoshi', system-ui, sans-serif;
+}
+
 @media (pointer: fine) {
   html, body, a, button, [data-cursor] {
     cursor: none;
