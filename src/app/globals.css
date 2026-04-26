@@ -4,21 +4,21 @@
    use in the codebase: 400 body, 500 medium accents, 700 headings. */
 @font-face {
   font-family: 'Satoshi';
-  src: url('/fonts/satoshi-400.woff2') format('woff2');
+  src: url('/fonts/satoshi-400.woff2?v=2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Satoshi';
-  src: url('/fonts/satoshi-500.woff2') format('woff2');
+  src: url('/fonts/satoshi-500.woff2?v=2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Satoshi';
-  src: url('/fonts/satoshi-700.woff2') format('woff2');
+  src: url('/fonts/satoshi-700.woff2?v=2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -42,13 +42,11 @@
      emitting them as runtime CSS vars, which broke the
      font-[family-name:var(--font-display)] utility used by every
      heading. Display face is Onest (next/font/google), self-hosted. */
-  /* Plus Jakarta Sans is the closest free, self-hostable equivalent
-     to Satoshi. If you want real Satoshi: download the official ZIP
-     from https://www.fontshare.com/fonts/satoshi (the API CDN serves
-     placeholders to non-browsers, but the website ZIP is real),
-     drop satoshi-{400,500,700,900}.woff2 into /public/fonts, and
-     uncomment the @font-face block below. */
-  --font-display: 'Satoshi', var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  /* Real Satoshi served from /public/fonts (see @font-face above).
+     Plus Jakarta Sans loaded via next/font/google as a fallback that
+     uses the literal font-family name (no var indirection — that
+     fragility was costing us reliability across CSS chunks). */
+  --font-display: 'Satoshi', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
@@ -72,6 +70,14 @@ html, body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Force Satoshi on every heading element directly. Bypasses every
+   var() indirection, every Tailwind layer, every cascade ambiguity.
+   This is the rule the browser absolutely cannot misinterpret. */
+h1, h2, h3, h4, h5, h6,
+.font-\[family-name\:var\(--font-display\)\] {
+  font-family: 'Satoshi', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif !important;
 }
 
 @media (pointer: fine) {
