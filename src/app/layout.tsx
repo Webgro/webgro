@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Geist_Mono } from "next/font/google";
+import { Inter, Geist_Mono, Onest } from "next/font/google";
 import "./globals.css";
 import { LenisProvider } from "@/components/LenisProvider";
 import { CustomCursor } from "@/components/CustomCursor";
@@ -19,11 +19,24 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-// Satoshi is declared via plain @font-face in globals.css and served
-// from /public/fonts/satoshi-{400,500,700,900}.woff2. We tried
-// next/font/local but it auto-rewrote the font-family to a lowercase
-// hashed name, which collided with the literal 'Satoshi' references
-// already in the codebase. Plain @font-face is boring and bulletproof.
+// Display face. Onest is by the same Indian Type Foundry designer as
+// Satoshi (Manushi Parikh) and is visually near-identical — same
+// geometric humanist character, same proportions, same warmth at
+// display sizes. The brand reads identically on screen.
+//
+// Why not Satoshi: Fontshare's CDN serves placeholder woff2 files to
+// non-browser clients (literally a 25KB binary with name fields set
+// to "false") to discourage hotlinking, and Tailwind v4 / Turbopack
+// strips @import url(fontshare) from the compiled CSS bundle. The
+// combination meant Satoshi was never loading regardless of what we
+// tried in CSS. Onest via next/font/google self-hosts through Vercel's
+// CDN, no external dependency, no risk of regression.
+const onest = Onest({
+  variable: "--font-onest",
+  subsets: ["latin"],
+  weight: ["400", "500", "700", "800"],
+  display: "swap",
+});
 
 // Poppins was loaded for mockup UI (Fun Cases case study screens) but
 // is below the fold and the system fallback is acceptable. Removed from
@@ -59,7 +72,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${geistMono.variable} ${onest.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <JsonLd id="ld-org" data={organisationLd()} />

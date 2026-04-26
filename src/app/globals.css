@@ -1,39 +1,5 @@
 @import "tailwindcss";
 
-/* Satoshi (display face) declared inline here so nothing in the
-   build pipeline can strip or rewrite it. Earlier attempts that
-   used @import url(fontshare), <link rel=stylesheet> in <head>,
-   and next/font/local all silently failed for various Tailwind v4
-   / Turbopack / @theme-inline reasons. Plain old @font-face works. */
-@font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/satoshi-400.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/satoshi-500.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/satoshi-700.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/satoshi-900.woff2') format('woff2');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   --wg-blue: #2D8DFF;
   --wg-blue-dark: #1F6FD4;
@@ -47,12 +13,12 @@
   --background: var(--wg-ink);
   --foreground: #EDEFF4;
 
-  /* Font stacks declared as plain CSS variables (NOT inside @theme inline,
-     which bakes values into utility classes instead of exposing them as
-     CSS vars, breaking font-[family-name:var(--font-display)]). Satoshi
-     is referenced literally so the @font-face declarations above pick
-     it up; no indirection. */
-  --font-display: 'Satoshi', var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* Font stacks live in :root (NOT @theme inline). Tailwind v4's
+     @theme inline bakes values into utility classes instead of
+     emitting them as runtime CSS vars, which broke the
+     font-[family-name:var(--font-display)] utility used by every
+     heading. Display face is Onest (next/font/google), self-hosted. */
+  --font-display: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
@@ -76,16 +42,6 @@ html, body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* Belt-and-braces: every heading element AND every element with the
-   font-display utility class gets Satoshi explicitly. Bypasses any
-   var() indirection or Tailwind layer ambiguity. The literal 'Satoshi'
-   string here matches the @font-face declarations at the top of this
-   file, so the browser will fetch the local woff2 and apply it. */
-h1, h2, h3, h4, h5, h6,
-.font-\[family-name\:var\(--font-display\)\] {
-  font-family: 'Satoshi', system-ui, sans-serif;
 }
 
 @media (pointer: fine) {
