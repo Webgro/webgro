@@ -1,10 +1,7 @@
 @import "tailwindcss";
 
-/* Optional: real Satoshi if you've dropped the woff2 files into
-   /public/fonts. Files are 404 by default so the browser harmlessly
-   falls through to Plus Jakarta Sans below. To activate Satoshi,
-   download the official Satoshi ZIP from www.fontshare.com/fonts/satoshi,
-   unzip, and copy the four woff2s to /public/fonts/satoshi-{400,500,700,900}.woff2. */
+/* Real Satoshi served from /public/fonts. Three weights cover every
+   use in the codebase: 400 body, 500 medium accents, 700 headings. */
 @font-face {
   font-family: 'Satoshi';
   src: url('/fonts/satoshi-400.woff2') format('woff2');
@@ -23,13 +20,6 @@
   font-family: 'Satoshi';
   src: url('/fonts/satoshi-700.woff2') format('woff2');
   font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/satoshi-900.woff2') format('woff2');
-  font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
