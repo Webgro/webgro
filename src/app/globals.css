@@ -1,4 +1,8 @@
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap');
+/* Satoshi (display face) is loaded via next/font/local in app/layout.tsx
+   and exposes itself as --font-satoshi. Referenced in --font-display
+   below. The previous @import url('//api.fontshare.com/...') was being
+   stripped from the compiled bundle by Tailwind v4 / Turbopack, so
+   the headings were silently falling back to Inter. */
 @import "tailwindcss";
 
 :root {
@@ -27,7 +31,7 @@
   --color-wg-mist: var(--wg-mist);
   --color-wg-teal: var(--wg-teal);
 
-  --font-display: 'Satoshi', var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-satoshi), 'Satoshi', var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
