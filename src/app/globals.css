@@ -72,10 +72,14 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Force Satoshi on every heading element directly. Bypasses every
-   var() indirection, every Tailwind layer, every cascade ambiguity.
-   This is the rule the browser absolutely cannot misinterpret. */
-h1, h2, h3, h4, h5, h6,
+/* Force Satoshi on every heading. SPLIT into two rules deliberately:
+   if a browser fails to parse the escaped arbitrary-value class
+   selector below, the simple element-selector rule still applies. A
+   single comma-list rule would have dropped the WHOLE thing on a
+   parser failure. */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Satoshi', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif !important;
+}
 .font-\[family-name\:var\(--font-display\)\] {
   font-family: 'Satoshi', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif !important;
 }
