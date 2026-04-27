@@ -173,10 +173,19 @@ async function handleEndOfCall(message: VapiMessage) {
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    console.error("[vapi-webhook] RESEND_API_KEY not set; skipping email.");
+    console.error(
+      "[vapi-webhook] RESEND_API_KEY env var is not set on Vercel. " +
+      "End-of-call summary email was not sent. Add the key under " +
+      "Vercel project > Settings > Environment Variables and redeploy.",
+    );
     return NextResponse.json({ received: true, emailed: false, reason: "missing-resend-key" });
   }
 
+  console.log("[vapi-webhook] attempting end-of-call email", {
+    to: NOTIFY_TO,
+    from: NOTIFY_FROM,
+    subject,
+  });
   const resend = new Resend(apiKey);
   const { data, error } = await resend.emails.send({
     from: NOTIFY_FROM,
@@ -186,9 +195,14 @@ async function handleEndOfCall(message: VapiMessage) {
     text,
   });
   if (error) {
-    console.error("[vapi-webhook] Resend send failed:", error);
+    console.error("[vapi-webhook] Resend rejected the send:", {
+      name: error.name,
+      message: error.message,
+      full: JSON.stringify(error),
+    });
     return NextResponse.json({ received: true, emailed: false, error: error.message ?? String(error) });
   }
+  console.log("[vapi-webhook] end-of-call email sent OK", { id: data?.id });
   return NextResponse.json({ received: true, emailed: true, id: data?.id ?? null });
 }
 

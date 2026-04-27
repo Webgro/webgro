@@ -96,7 +96,12 @@ async function scheduleCallback(args: Record<string, unknown>): Promise<string> 
     .filter(Boolean)
     .join("\n");
 
-  await sendMail({ to: NOTIFY_TO, from: NOTIFY_FROM, subject, html, text });
+  const ok = await sendMail({ to: NOTIFY_TO, from: NOTIFY_FROM, subject, html, text });
+  if (!ok) {
+    // Don't lie to the caller. They asked for a callback and we failed
+    // to deliver the notification, so own it on the call.
+    return "I've taken those details down, but our notification system is having a moment. I'll make sure Michael sees this and calls you back directly.";
+  }
 
   const confirmWhen = when ? ` for ${when}` : "";
   return `All booked. Michael will call you back${confirmWhen} on ${phone}. He's been notified.`;
@@ -248,19 +253,37 @@ async function sendMail(opts: {
 }): Promise<boolean> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    console.error("[vapi tool] RESEND_API_KEY not set; not sending email.");
+    console.error(
+      "[vapi-mail] RESEND_API_KEY env var is not set on Vercel. " +
+      "The tool ran but no email was sent. Add it under " +
+      "Vercel project > Settings > Environment Variables and redeploy.",
+    );
     return false;
   }
+  // Log enough to debug from Vercel's runtime logs without leaking
+  // anything secret. Subject + to/from are useful to confirm a send
+  // was attempted at all.
+  console.log("[vapi-mail] attempting send", {
+    to: opts.to,
+    from: opts.from,
+    subject: opts.subject,
+  });
   try {
     const resend = new Resend(apiKey);
-    const { error } = await resend.emails.send(opts);
+    const { data, error } = await resend.emails.send(opts);
     if (error) {
-      console.error("[vapi tool] Resend send failed:", error);
+      console.error("[vapi-mail] Resend rejected the send:", {
+        name: error.name,
+        message: error.message,
+        // Resend includes the full error blob here when validation fails.
+        full: JSON.stringify(error),
+      });
       return false;
     }
+    console.log("[vapi-mail] sent OK", { id: data?.id });
     return true;
   } catch (e) {
-    console.error("[vapi tool] sendMail threw:", e);
+    console.error("[vapi-mail] sendMail threw exception:", e);
     return false;
   }
 }
