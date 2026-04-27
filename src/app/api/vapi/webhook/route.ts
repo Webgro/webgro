@@ -49,7 +49,7 @@ type ToolCall = {
 };
 
 const NOTIFY_TO   = process.env.VAPI_NOTIFY_EMAIL ?? "michael@webgro.co.uk";
-const NOTIFY_FROM = process.env.VAPI_FROM_EMAIL   ?? "Webgro Receptionist <receptionist@send.webgro.co.uk>";
+const NOTIFY_FROM = process.env.VAPI_FROM_EMAIL   ?? "Webgro Receptionist <receptionist@webgro.co.uk>";
 const VAPI_SECRET = process.env.VAPI_SECRET ?? "";
 
 // GET: a tiny health check so it's obvious the route is live.

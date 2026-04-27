@@ -10,7 +10,7 @@
 import { Resend } from "resend";
 
 const NOTIFY_TO   = process.env.VAPI_NOTIFY_EMAIL ?? "michael@webgro.co.uk";
-const NOTIFY_FROM = process.env.VAPI_FROM_EMAIL   ?? "Webgro Receptionist <receptionist@send.webgro.co.uk>";
+const NOTIFY_FROM = process.env.VAPI_FROM_EMAIL   ?? "Webgro Receptionist <receptionist@webgro.co.uk>";
 const BUSINESS_PHONE = process.env.VAPI_BUSINESS_PHONE ?? "+44 1344 231119";
 
 type ToolFn = (args: Record<string, unknown>) => Promise<string>;
