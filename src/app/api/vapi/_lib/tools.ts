@@ -18,8 +18,6 @@ type ToolFn = (args: Record<string, unknown>) => Promise<string>;
 const tools: Record<string, ToolFn> = {
   scheduleCallback,
   sendInfoEmail,
-  checkBusinessHours,
-  transferToHuman,
 };
 
 export async function runTool(name: string, args: Record<string, unknown>): Promise<string> {
@@ -237,76 +235,6 @@ async function sendInfoEmail(args: Record<string, unknown>): Promise<string> {
     return "I tried to send that, but the email didn't go through. I'll make sure Michael follows up directly.";
   }
   return "Sent. It should be in your inbox in the next minute or two. Anything else?";
-}
-
-// =====================================================================
-// checkBusinessHours
-//
-// Vapi schema:
-//   {
-//     "name": "checkBusinessHours",
-//     "description": "Check whether Webgro is currently inside business hours and return the next opening time if not.",
-//     "parameters": { "type": "object", "properties": {} }
-//   }
-// =====================================================================
-async function checkBusinessHours(_args: Record<string, unknown>): Promise<string> {
-  const ukNow = new Date(
-    new Date().toLocaleString("en-GB", { timeZone: "Europe/London" }),
-  );
-  const dayOfWeek = ukNow.getDay() === 0 ? 7 : ukNow.getDay(); // 1..7
-  const hour = ukNow.getHours();
-  const minute = ukNow.getMinutes();
-  const isWeekday = dayOfWeek >= 1 && dayOfWeek <= 5;
-  const isOpen = isWeekday && hour >= 9 && hour < 18;
-
-  if (isOpen) {
-    const minsLeft = (18 - hour) * 60 - minute;
-    if (minsLeft <= 30) {
-      return `We're open, but only for another ${minsLeft} minutes. After that we open again tomorrow at 9 a.m. UK time.`;
-    }
-    return `Yes, we're open right now until 6 p.m. UK time. You can also reach us on ${BUSINESS_PHONE}.`;
-  }
-
-  // Not open, find next opening
-  let when = "tomorrow";
-  if (dayOfWeek === 5 && hour >= 18) when = "Monday morning";
-  else if (dayOfWeek === 6) when = "Monday morning";
-  else if (dayOfWeek === 7) when = "tomorrow morning";
-
-  return `We're closed right now. Office hours are Monday to Friday, 9 a.m. to 6 p.m. UK time. We open again ${when} at 9. Want me to take a callback request?`;
-}
-
-// =====================================================================
-// transferToHuman
-//
-// Vapi schema:
-//   {
-//     "name": "transferToHuman",
-//     "description": "Transfer the call to Michael. Use when the caller asks for a person, sounds frustrated, has a complaint, or when the conversation is going in circles.",
-//     "parameters": {
-//       "type": "object",
-//       "properties": {
-//         "reason": { "type": "string", "description": "Brief reason for the transfer." }
-//       },
-//       "required": ["reason"]
-//     }
-//   }
-// =====================================================================
-async function transferToHuman(args: Record<string, unknown>): Promise<string> {
-  const reason = String(args.reason ?? "Caller asked to speak to a human.").trim();
-
-  // Best-effort heads-up email; failure does not block the speech response.
-  await sendMail({
-    to: NOTIFY_TO,
-    from: NOTIFY_FROM,
-    subject: "[ Transfer ] Receptionist is bridging a call",
-    html:
-      `<p style="font-family:system-ui,sans-serif;font-size:15px;color:#0D1117;">The receptionist is transferring a live call to you now. Reason given:</p>` +
-      `<blockquote style="border-left:3px solid #2D8DFF;margin:12px 0;padding:6px 14px;color:#0D1117;font-size:15px;">${escapeHtml(reason)}</blockquote>`,
-    text: `Receptionist is transferring a call now. Reason: ${reason}`,
-  });
-
-  return "I'll put you through to Michael now. One moment.";
 }
 
 // ---------- shared helpers ----------
