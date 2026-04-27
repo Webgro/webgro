@@ -61,16 +61,21 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  // 1. Auth: Vapi forwards the secret in x-vapi-secret. Reject anything else.
-  const presented = req.headers.get("x-vapi-secret") ?? "";
-  if (!VAPI_SECRET) {
-    return NextResponse.json(
-      { error: "VAPI_SECRET env var not set on server." },
-      { status: 500 },
+  // 1. Auth: optional. If VAPI_SECRET is set, we require x-vapi-secret
+  //    to match it. If it's not set, we accept any caller and just log
+  //    a warning. Convenient for first-run setup; lock it down later
+  //    by adding the env var + the same value in Vapi's dashboard.
+  if (VAPI_SECRET) {
+    const presented = req.headers.get("x-vapi-secret") ?? "";
+    if (!constantTimeEqual(presented, VAPI_SECRET)) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+  } else {
+    console.warn(
+      "[vapi-webhook] VAPI_SECRET not set; webhook is unauthenticated. " +
+      "Add VAPI_SECRET to Vercel env vars and paste the same value into " +
+      "Vapi's Server URL Secret field to lock down.",
     );
-  }
-  if (!constantTimeEqual(presented, VAPI_SECRET)) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   // 2. Body
