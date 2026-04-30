@@ -32,6 +32,138 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "ai-2026-boring-wins",
+    category: "AI",
+    title: "AI in 2026: the boring wins.",
+    excerpt:
+      "Every AI hot take is about agents, autonomous workflows, or whatever's on the front page of Hacker News this morning. The wins we've actually shipped this year are far more boring. They're also the ones that compound.",
+    date: "Apr 2026",
+    readTime: "5 min read",
+    accent: "teal",
+    author: "Webgro Studio",
+    heroImage: "/articles/ai-2026-boring-wins.jpg",
+    relatedService: "automation-ai",
+    body: [
+      {
+        type: "p",
+        text: "Every AI hot take is about agents, autonomous workflows, or whatever's on the front page of Hacker News this morning. The wins we've actually shipped for clients in 2026 are far more boring. They're also the ones that compound.",
+      },
+      {
+        type: "p",
+        text: "Six months ago we wrote about five AI integrations that paid back in their first month. This is the same thesis, twelve months on. The pattern got clearer.",
+      },
+
+      { type: "h2", text: "Three boring wins from this quarter" },
+      {
+        type: "p",
+        text: "None of the things below are demoable. None of them would impress an investor. All of them are saving someone real money or buying someone real time, every working day.",
+      },
+
+      { type: "h3", text: "01. Auto-tagging product copy on import" },
+      {
+        type: "p",
+        text: "A Shopify client uploads 80 to 200 SKUs a week. Before, the merchandising team manually picked tags from a 400-tag taxonomy for each product. It was hours of work, and tags were inconsistent because three people each had their own mental model.",
+      },
+      {
+        type: "p",
+        text: "We built a small tool that reads the product description and suggests the top five tags. A human approves or edits before publish. Tagging time dropped 87%. Search relevance on the storefront went up because tags are now applied consistently rather than vaguely.",
+      },
+
+      { type: "h3", text: "02. First-draft email and meta from a one-line brief" },
+      {
+        type: "p",
+        text: "An in-house marketing team writes 30+ campaign emails a quarter. We built a tool that takes their one-line brief plus a product, returns a subject line, three preview-text variants, a hero paragraph, and three CTA options. They edit, approve, ship.",
+      },
+      {
+        type: "p",
+        text: "The team now ships three times more concepts a week. The first draft is never the final draft. The second draft, once a human has put hands on it, is much better than the old first draft.",
+      },
+
+      { type: "h3", text: "03. Monthly stale-content audit" },
+      {
+        type: "p",
+        text: "A B2B SaaS client has 2,000 blog posts dating back eight years. Maintaining them manually was impossible. We built a small AI agent that reads GSC data and the post body, flags pages losing rank or contradicting newer content, and writes a short recommendation: refresh, redirect, delete.",
+      },
+      {
+        type: "p",
+        text: "The editor takes ten minutes a month and clears a queue that used to never get touched. Organic traffic stopped declining. The win is the maintenance discipline the tool finally made possible, not the AI itself.",
+      },
+
+      {
+        type: "callout",
+        text: "None of these are smart. They're useful. That's the bar.",
+        accent: "teal",
+      },
+
+      { type: "h2", text: "What every win shares" },
+      {
+        type: "p",
+        text: "Three different problems, the same shape underneath:",
+      },
+      {
+        type: "ul",
+        items: [
+          "Bulk drudgery. Each one replaces a task humans were already doing on a repeating schedule. The work was real, just unloved.",
+          "Clean inputs. The model is fed structured data (product fields, GSC export, briefing template) rather than free-form natural language. Less hallucination surface, less variance in output.",
+          "Human approval gate. The AI does the bulk work. A human adds the taste. Output is reviewed before anyone outside the company sees it. AI assist, not AI auto.",
+          "Cheap to build, cheap to run. None of these are agentic. None required a team for six months. Two weeks of build, twenty pounds a month in API spend, paid back inside the first month.",
+        ],
+      },
+
+      { type: "h2", text: "Three things we keep declining to build" },
+      {
+        type: "p",
+        text: "Mirror image of the above. Tempting on paper, rarely earns out, sometimes net-negative.",
+      },
+
+      { type: "h3", text: "Customer-facing chatbots that answer product questions" },
+      {
+        type: "p",
+        text: "The hallucination rate on real product specs runs around 6 to 9% even with strong retrieval. For a £500 conversion that's not acceptable. We've yet to see a chatbot deployment beat a well-written FAQ plus a good search box on conversion rate. The few that do win are scoped to non-commercial questions (returns policy, shipping windows, account help) where the cost of a wrong answer is low.",
+      },
+
+      { type: "h3", text: "Fully autonomous social posting" },
+      {
+        type: "p",
+        text: "Engagement on AI-only social posts collapses to about 20% of human-written for any sustained run. Followers know within three weeks. The 'time saved' figure looks great on a dashboard. The brand cost shows up six months later in declining reach you can't undo.",
+      },
+
+      { type: "h3", text: "End-to-end customer-service replies" },
+      {
+        type: "p",
+        text: "Auto-replies that bypass human review on anything trickier than 'where's my order' produce edge cases that ruin brand voice and occasionally get the company in trouble. The version that does work, AI drafts, human edits, human sends, is exactly the support-triage win we shipped last year. Same tech, different gate.",
+      },
+
+      { type: "h2", text: "The question we ask before building" },
+      {
+        type: "p",
+        text: "One filter we run every AI proposal through:",
+      },
+      {
+        type: "quote",
+        text: "Will this still be valuable if the model gets cheaper, dumber, or temporarily unavailable?",
+      },
+      {
+        type: "p",
+        text: "If the answer is yes, build it. The wins above all pass. When GPT-5 ships, our auto-tagger gets better but doesn't depend on it. When OpenAI has an outage, the marketing team writes emails the old way for a day. When API costs halve, our margin improves but the calculus doesn't change.",
+      },
+      {
+        type: "p",
+        text: "If the answer is no, the integration is a vanity build dressed up as a productivity tool. Walk away.",
+      },
+
+      { type: "h2", text: "Optimise for compounding, not for demos" },
+      {
+        type: "p",
+        text: "AI work in 2026 is mostly resisting the urge to build the demoable thing. The boring integrations don't pitch as well, but they earn out, and they keep earning out. Six months in is the time to compare your AI tooling spend against your AI tooling savings. If the line crosses, you've built the right things.",
+      },
+      {
+        type: "p",
+        text: "If it doesn't, you've built the press release.",
+      },
+    ],
+  },
+  {
     slug: "seo-after-ai-overviews-2026",
     category: "SEO",
     title: "SEO after AI Overviews: the three levers that still move the needle.",
