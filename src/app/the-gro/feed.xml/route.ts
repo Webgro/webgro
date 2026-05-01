@@ -27,10 +27,16 @@ export async function GET() {
     .map((article) => {
       const url = `${SITE_URL}/the-gro/${article.slug}`;
       const pubDate = new Date(parseDate(article.date)).toUTCString();
-      const fullHtml = renderBodyToHtml(article.body);
-      const heroImage = article.heroImage
-        ? `<enclosure url="${SITE_URL}${article.heroImage}" type="image/jpeg" />`
-        : "";
+
+      // Feed image = the photographic hero with the title burnt in
+      // across a brand-tinted gradient. Pre-baked offline by
+      // scripts/generate-feed-image.py and committed under
+      // /public/articles/feed/<slug>.jpg. The website cards still use
+      // the un-overlaid hero at /public/articles/<slug>.jpg.
+      const feedImageUrl = `${SITE_URL}/articles/feed/${article.slug}.jpg`;
+
+      const inlineImage = `<p><img src="${feedImageUrl}" alt="${escapeXml(article.title)}" style="display:block;width:100%;height:auto;border-radius:14px;margin-bottom:18px;" /></p>`;
+      const fullHtml = inlineImage + renderBodyToHtml(article.body);
 
       return `
     <item>
@@ -42,7 +48,7 @@ export async function GET() {
       <dc:creator>${escapeXml(article.author)}</dc:creator>
       <description>${escapeXml(article.excerpt)}</description>
       <content:encoded><![CDATA[${fullHtml}]]></content:encoded>
-      ${heroImage}
+      <enclosure url="${feedImageUrl}" type="image/jpeg" />
     </item>`;
     })
     .join("");

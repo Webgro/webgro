@@ -27,15 +27,6 @@ const accentHoverBorder: Record<Accent, string> = {
   teal: "hover:border-wg-teal/60",
 };
 
-// Brand-tinted gradient strip behind the title overlay. Keeps the
-// readability dark zone in the article's accent colour rather than
-// generic black.
-const accentTitleGradient: Record<Accent, string> = {
-  blue:   "from-wg-ink via-wg-ink/85 to-wg-blue/10",
-  violet: "from-wg-ink via-wg-ink/85 to-wg-violet/10",
-  teal:   "from-wg-ink via-wg-ink/85 to-wg-teal/10",
-};
-
 export default function TheGroIndex() {
   return (
     <>
@@ -73,7 +64,7 @@ export default function TheGroIndex() {
                   data-cursor="hover"
                   className={`group relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-wg-ink-raised transition-all duration-500 hover:-translate-y-1 ${accentHoverBorder[a.accent]}`}
                 >
-                  {/* Hero image with title overlay */}
+                  {/* Hero image */}
                   <div className="relative aspect-[16/11] overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -81,16 +72,8 @@ export default function TheGroIndex() {
                       alt={a.title}
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
                     />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-wg-ink-raised via-wg-ink-raised/10 to-transparent" />
 
-                    {/* Brand-tinted readability gradient: deep ink at the
-                        bottom fading to a hint of the article's accent
-                        colour at the top, then transparent. Slight, not
-                        overpowering. */}
-                    <div
-                      className={`pointer-events-none absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t ${accentTitleGradient[a.accent]}`}
-                    />
-
-                    {/* Top: category + read-time pills */}
                     <div className="absolute inset-x-5 top-5 flex items-center justify-between">
                       <div
                         className={`inline-flex items-center gap-2 rounded-full border border-white/20 bg-wg-ink/70 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] ${accentText[a.accent]} backdrop-blur-md`}
@@ -102,19 +85,17 @@ export default function TheGroIndex() {
                         {a.readTime}
                       </div>
                     </div>
-
-                    {/* Bottom: title overlaid on the gradient */}
-                    <h3 className="absolute inset-x-0 bottom-0 px-6 pb-6 font-[family-name:var(--font-display)] text-xl font-bold leading-tight tracking-tight text-white md:px-8 md:pb-7 md:text-2xl">
-                      {a.title}
-                    </h3>
                   </div>
 
-                  {/* Text block: excerpt + date + read-more chevron */}
+                  {/* Text block */}
                   <div className="flex flex-1 flex-col p-8">
-                    <p className="text-sm leading-relaxed text-white/60">
+                    <h3 className="font-[family-name:var(--font-display)] text-2xl font-bold leading-tight tracking-tight text-white md:text-3xl">
+                      {a.title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-relaxed text-white/60">
                       {a.excerpt}
                     </p>
-                    <div className="mt-auto flex items-center justify-between pt-8">
+                    <div className="mt-auto flex items-center justify-between pt-10">
                       <span className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-white/40">
                         {a.date}
                       </span>
