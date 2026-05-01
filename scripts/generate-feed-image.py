@@ -74,28 +74,22 @@ def make_gradient_overlay(width: int, height: int, accent: tuple) -> Image.Image
     """
     overlay = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     px = overlay.load()
-    # Gradient covers the bottom 60% of the image:
-    #   - top 40% of image: fully transparent (preserve photo detail)
-    #   - 40-70%: gentle fade in, ink tone, low alpha
-    #   - 70-100%: full ink, high alpha (target for the title text)
-    fade_start = int(height * 0.40)
-    solid_start = int(height * 0.85)
+    # Gradient covers the bottom 65% of the image. Above that, fully
+    # transparent so the photographic detail is preserved. Single
+    # continuous eased fade with no solid band at the bottom; keeps
+    # the gradient feeling smooth rather than letterboxed.
+    fade_start = int(height * 0.35)
+    fade_height = height - fade_start
     for y in range(fade_start, height):
-        if y < solid_start:
-            # Eased fade from transparent to ~85% ink
-            t = (y - fade_start) / max(1, solid_start - fade_start - 1)
-            eased = t ** 1.4
-            a = int(220 * eased)
-            r = int(INK[0] * (1 - eased * 0.10) + accent[0] * (eased * 0.10))
-            g = int(INK[1] * (1 - eased * 0.10) + accent[1] * (eased * 0.10))
-            b = int(INK[2] * (1 - eased * 0.10) + accent[2] * (eased * 0.10))
-        else:
-            # Title band: fully opaque ink, accent hint at the very base
-            t = (y - solid_start) / max(1, height - solid_start - 1)
-            r = int(INK[0] * (1 - t * 0.18) + accent[0] * (t * 0.18))
-            g = int(INK[1] * (1 - t * 0.18) + accent[1] * (t * 0.18))
-            b = int(INK[2] * (1 - t * 0.18) + accent[2] * (t * 0.18))
-            a = 245
+        t = (y - fade_start) / max(1, fade_height - 1)
+        # Eased curve so the bottom quarter is properly dark.
+        eased = t ** 1.6
+        # Mix colour: starts at INK, ends at a slight accent tint.
+        r = int(INK[0] * (1 - eased * 0.15) + accent[0] * (eased * 0.15))
+        g = int(INK[1] * (1 - eased * 0.15) + accent[1] * (eased * 0.15))
+        b = int(INK[2] * (1 - eased * 0.15) + accent[2] * (eased * 0.15))
+        # Alpha ramps from 0 at top to ~235 at bottom.
+        a = int(235 * eased)
         for x in range(width):
             px[x, y] = (r, g, b, a)
     return overlay
