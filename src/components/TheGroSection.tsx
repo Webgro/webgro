@@ -30,6 +30,13 @@ const accentHoverBorder: Record<Accent, string> = {
   teal: "group-hover:border-wg-teal/60",
 };
 
+// Brand-tinted readability gradient for the title overlay on cards.
+const accentTitleGradient: Record<Accent, string> = {
+  blue:   "from-wg-ink via-wg-ink/85 to-wg-blue/10",
+  violet: "from-wg-ink via-wg-ink/85 to-wg-violet/10",
+  teal:   "from-wg-ink via-wg-ink/85 to-wg-teal/10",
+};
+
 export function TheGroSection() {
   const root = useRef<HTMLElement>(null);
   const scrollerRef = useRef<HTMLDivElement | null>(null);
@@ -246,7 +253,7 @@ export function TheGroSection() {
               style={{ flex: "0 0 auto" }}
               className={`group relative flex h-full w-72 snap-start flex-col overflow-hidden rounded-3xl border border-white/10 bg-wg-ink transition-all duration-500 hover:-translate-y-1 sm:w-80 md:w-80 lg:w-96 ${accentHoverBorder[a.accent]}`}
             >
-              {/* Hero image */}
+              {/* Hero image with title overlay */}
               <div className="relative aspect-[16/11] overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -254,9 +261,13 @@ export function TheGroSection() {
                   alt={a.title}
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-wg-ink via-wg-ink/10 to-transparent" />
 
-                {/* Overlay pills */}
+                {/* Brand-tinted readability gradient for the title */}
+                <div
+                  className={`pointer-events-none absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t ${accentTitleGradient[a.accent]}`}
+                />
+
+                {/* Top: category + read-time pills */}
                 <div className="absolute inset-x-5 top-5 flex items-center justify-between">
                   <div
                     className={`inline-flex items-center gap-2 rounded-full border border-white/20 bg-wg-ink/70 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] ${accentText[a.accent]} backdrop-blur-md`}
@@ -272,20 +283,20 @@ export function TheGroSection() {
                     {a.readTime}
                   </div>
                 </div>
+
+                {/* Bottom: title overlaid on the gradient */}
+                <h3 className="absolute inset-x-0 bottom-0 px-6 pb-6 font-[family-name:var(--font-display)] text-xl font-bold leading-[1.2] tracking-tight text-white md:px-7 md:pb-7 md:text-2xl">
+                  {a.title}
+                </h3>
               </div>
 
-              {/* Text block */}
+              {/* Text block: date + read-more chevron */}
               <div className="relative flex flex-1 flex-col p-7 md:p-8">
-                {/* Accent glow */}
+                {/* Accent glow on hover */}
                 <div
                   className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${accentGlow[a.accent]} via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
                 />
-
-                <h3 className="relative font-[family-name:var(--font-display)] text-xl font-bold leading-[1.2] tracking-tight text-white transition-colors duration-500 md:text-2xl">
-                  {a.title}
-                </h3>
-
-                <div className="relative mt-auto flex items-end justify-between pt-8">
+                <div className="relative mt-auto flex items-end justify-between">
                   <span className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-white/40">
                     {a.date}
                   </span>

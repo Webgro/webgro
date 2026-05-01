@@ -177,6 +177,14 @@ const legacyRedirects = async () => {
     r("/e-landing-page-sitemap.xml", "/sitemap.xml"),
   ];
 
+  // --- Conventional feed paths → the canonical RSS at /the-gro/feed.xml ----
+  const feeds: R[] = [
+    r("/feed.xml", "/the-gro/feed.xml"),
+    r("/rss.xml", "/the-gro/feed.xml"),
+    r("/feed", "/the-gro/feed.xml"),
+    r("/rss", "/the-gro/feed.xml"),
+  ];
+
   return [
     ...serviceLocation,
     ...services,
@@ -189,6 +197,7 @@ const legacyRedirects = async () => {
     ...specificPosts,
     ...blogPosts,
     ...sitemaps,
+    ...feeds,
   ];
 };
 

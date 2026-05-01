@@ -60,6 +60,13 @@ export const metadata: Metadata = {
     description:
       "A senior studio building eCommerce sites, WordPress builds, and production AI tools. Based in Bracknell, part of Broadbridge Group.",
   },
+  alternates: {
+    // RSS autodiscovery for The Gro. Site-wide so any reader extension
+    // can find the feed from any page.
+    types: {
+      "application/rss+xml": "/the-gro/feed.xml",
+    },
+  },
 };
 
 export default function RootLayout({
