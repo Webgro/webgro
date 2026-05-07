@@ -36,7 +36,13 @@ from urllib.request import Request, urlopen
 REPO_ROOT      = Path(__file__).resolve().parent.parent
 CONTENT_FILE   = REPO_ROOT / "src" / "content" / "the-gro.ts"
 ARTICLES_DIR   = REPO_ROOT / "public" / "articles"
-TEXT_MODEL     = os.environ.get("GEMINI_TEXT_MODEL", "gemini-3-pro")
+
+# Writer = Claude (Anthropic API). Image = Gemini (Google AI).
+# If ANTHROPIC_API_KEY is missing we fall back to Gemini for the
+# text too so the workflow can still ship.
+ANTHROPIC_MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5")
+ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages"
+GEMINI_TEXT_MODEL = os.environ.get("GEMINI_TEXT_MODEL", "gemini-3-pro")
 GEMINI_API_BASE = "https://generativelanguage.googleapis.com/v1beta/models"
 
 
@@ -79,8 +85,56 @@ def parse_existing_articles() -> list[dict]:
     return out
 
 
+def call_anthropic_json(prompt: str, api_key: str) -> dict:
+    """Call Anthropic Messages API and parse a strict JSON response."""
+    payload = {
+        "model": ANTHROPIC_MODEL,
+        "max_tokens": 8192,
+        "temperature": 0.85,
+        "system": (
+            "You are an editorial agent writing for The Gro, the journal "
+            "section of webgro.co.uk. Reply with ONLY a JSON object that "
+            "matches the schema in the user message. No markdown, no "
+            "preamble, no surrounding text."
+        ),
+        "messages": [{"role": "user", "content": prompt}],
+    }
+    req = Request(
+        ANTHROPIC_API_URL,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "x-api-key": api_key,
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+        },
+        method="POST",
+    )
+    try:
+        with urlopen(req, timeout=180) as resp:
+            data = json.loads(resp.read())
+    except HTTPError as e:
+        raise RuntimeError(f"Anthropic HTTP {e.code}: {e.read().decode('utf-8','replace')[:600]}")
+    except URLError as e:
+        raise RuntimeError(f"Anthropic network error: {e.reason}")
+
+    blocks = data.get("content", [])
+    raw = "".join(b.get("text", "") for b in blocks if b.get("type") == "text").strip()
+    # Trim accidental fenced markdown if the model adds it.
+    if raw.startswith("```"):
+        raw = raw.strip("`")
+        if raw.lower().startswith("json"):
+            raw = raw[4:]
+        raw = raw.strip()
+    if not raw:
+        raise RuntimeError(f"Empty text response from Claude: {json.dumps(data)[:400]}")
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        raise RuntimeError(f"Claude returned non-JSON. First 400 chars: {raw[:400]}")
+
+
 def call_gemini_json(prompt: str, api_key: str) -> dict:
-    url = f"{GEMINI_API_BASE}/{TEXT_MODEL}:generateContent?key={api_key}"
+    url = f"{GEMINI_API_BASE}/{GEMINI_TEXT_MODEL}:generateContent?key={api_key}"
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
@@ -276,9 +330,10 @@ def build_ts_entry(article: dict, service: dict, date: str) -> str:
 
 
 def main() -> int:
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        print("error: GEMINI_API_KEY env var is not set.", file=sys.stderr)
+    gemini_key = os.environ.get("GEMINI_API_KEY")
+    anthropic_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not gemini_key:
+        print("error: GEMINI_API_KEY env var is not set (needed for the hero image).", file=sys.stderr)
         return 1
 
     # 1. Service rotation
@@ -289,9 +344,15 @@ def main() -> int:
     existing = parse_existing_articles()
     print(f"[auto-publish] existing articles: {len(existing)}", file=sys.stderr)
 
-    # 3. Draft via Gemini text
+    # 3. Draft. Prefer Claude when ANTHROPIC_API_KEY is available;
+    #    fall back to Gemini text if not.
     prompt = build_article_prompt(service, existing)
-    article = call_gemini_json(prompt, api_key)
+    if anthropic_key:
+        print(f"[auto-publish] writer: Anthropic ({ANTHROPIC_MODEL})", file=sys.stderr)
+        article = call_anthropic_json(prompt, anthropic_key)
+    else:
+        print(f"[auto-publish] writer: Gemini ({GEMINI_TEXT_MODEL}) (ANTHROPIC_API_KEY not set)", file=sys.stderr)
+        article = call_gemini_json(prompt, gemini_key)
 
     # Validate the shape we expect
     for required in ("slug", "title", "excerpt", "readTime", "body", "imagePrompt"):

@@ -43,6 +43,9 @@ jobs:
       - name: Run auto-publish
         id: publish
         env:
+          # Writer: Claude if available, falls back to Gemini text.
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Image generator: Gemini Nano Banana 2 (no fallback).
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           set -e
