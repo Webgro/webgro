@@ -2,10 +2,9 @@ name: The Gro . weekly auto-publish
 
 on:
   schedule:
-    # Mondays at 09:00 UK time. GitHub cron is UTC, so this fires at
+    # Mondays at ~09:00 UK time. GitHub cron is UTC, so this fires at
     # 08:00 UTC year-round (will look like 09:00 GMT in winter and
-    # 10:00 BST in summer; close enough). Edit if you'd rather lock
-    # to civil 09:00 across DST changes.
+    # 09:00 BST during summer is actually 08:00 UTC — same trigger).
     - cron: "0 8 * * 1"
   # Manual run-now button in the Actions tab. Useful for testing.
   workflow_dispatch:
@@ -14,9 +13,35 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      # Required so the workflow can git push the new article.
       contents: write
     steps:
+      - name: Sanity-check that the required secrets exist
+        # Only checks presence; never echoes values. If a secret is
+        # missing, fail this step BEFORE wasting an API call so the
+        # error message tells you exactly what's wrong.
+        env:
+          HAS_ANTHROPIC: ${{ secrets.ANTHROPIC_API_KEY != '' }}
+          HAS_GEMINI:    ${{ secrets.GEMINI_API_KEY    != '' }}
+          HAS_RESEND:    ${{ secrets.RESEND_API_KEY    != '' }}
+        run: |
+          set -e
+          echo "Secrets present in this GitHub repository:"
+          echo "  ANTHROPIC_API_KEY : $HAS_ANTHROPIC"
+          echo "  GEMINI_API_KEY    : $HAS_GEMINI"
+          echo "  RESEND_API_KEY    : $HAS_RESEND"
+          missing=()
+          [ "$HAS_GEMINI" = "true" ] || missing+=("GEMINI_API_KEY")
+          [ "$HAS_RESEND" = "true" ] || missing+=("RESEND_API_KEY")
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "::error::Missing required GitHub repo secrets: ${missing[*]}"
+            echo "Add them at:  Repo Settings > Secrets and variables > Actions > New repository secret"
+            echo "Vercel env vars are NOT shared with GitHub Actions; they are separate stores."
+            exit 1
+          fi
+          if [ "$HAS_ANTHROPIC" != "true" ]; then
+            echo "::warning::ANTHROPIC_API_KEY is not set; will fall back to Gemini for article text."
+          fi
+
       - name: Checkout main
         uses: actions/checkout@v4
         with:
@@ -43,36 +68,48 @@ jobs:
       - name: Run auto-publish
         id: publish
         env:
-          # Writer: Claude if available, falls back to Gemini text.
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          # Image generator: Gemini Nano Banana 2 (no fallback).
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY:    ${{ secrets.GEMINI_API_KEY }}
         run: |
-          set -e
-          # auto-publish.py prints a JSON summary on its last line.
-          # Capture into outputs so later steps can use them.
-          python3 scripts/auto-publish.py | tee /tmp/publish-summary.json
-          tail -n1 /tmp/publish-summary.json > /tmp/last.json
-          echo "slug=$(python3 -c 'import json,sys;print(json.load(open("/tmp/last.json"))["slug"])')"     >> $GITHUB_OUTPUT
-          echo "title=$(python3 -c 'import json,sys;print(json.load(open("/tmp/last.json"))["title"])')"   >> $GITHUB_OUTPUT
-          echo "excerpt=$(python3 -c 'import json,sys;print(json.load(open("/tmp/last.json"))["excerpt"])')" >> $GITHUB_OUTPUT
-          echo "category=$(python3 -c 'import json,sys;print(json.load(open("/tmp/last.json"))["category"])')" >> $GITHUB_OUTPUT
+          set -e -o pipefail
+          # Write stdout straight to file so non-zero exits don't get
+          # swallowed by a tee pipe (the previous approach hid script
+          # failures and produced empty downstream outputs).
+          python3 scripts/auto-publish.py > /tmp/publish-summary.json
+          echo "--- raw publish summary ---"
+          cat /tmp/publish-summary.json
+          echo "---"
+          # Pull each field out individually with explicit failure
+          # messages so a malformed JSON shows up here, not three
+          # steps later as "pathspec did not match".
+          for field in slug title excerpt category; do
+            value=$(python3 -c "import json;d=json.load(open('/tmp/publish-summary.json'));print(d.get('$field',''))")
+            if [ -z "$value" ]; then
+              echo "::error::auto-publish summary is missing field '$field'"
+              cat /tmp/publish-summary.json
+              exit 1
+            fi
+            echo "$field=$value" >> $GITHUB_OUTPUT
+          done
 
       - name: Type check
         run: npx tsc --noEmit
 
       - name: Commit + push the new article
         run: |
+          set -e
           git config user.name  "Gro Auto-publish"
           git config user.email "auto-publish@webgro.co.uk"
-          git add src/content/the-gro.ts public/articles/${{ steps.publish.outputs.slug }}.jpg public/articles/feed/${{ steps.publish.outputs.slug }}.jpg
+          git add src/content/the-gro.ts \
+                  public/articles/${{ steps.publish.outputs.slug }}.jpg \
+                  public/articles/feed/${{ steps.publish.outputs.slug }}.jpg
           git commit -m "The Gro: ${{ steps.publish.outputs.title }}"
           git push
 
-      - name: Wait for Vercel deploy (60s buffer)
+      - name: Wait for Vercel deploy
         run: sleep 60
 
-      - name: Email Michael
+      - name: Email Michael that the article is live
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
         run: |
@@ -82,13 +119,22 @@ jobs:
             --excerpt   "${{ steps.publish.outputs.excerpt }}" \
             --category  "${{ steps.publish.outputs.category }}"
 
-      - name: On failure, email Michael with the bad news
+      - name: Notify Michael on failure (best-effort)
         if: failure()
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          python3 - <<'PY'
-          import json, os, urllib.request
+          # Only attempt the email if the key actually exists, otherwise
+          # don't add a second confusing 403 on top of whatever the real
+          # failure was.
+          if [ -z "$RESEND_API_KEY" ]; then
+            echo "::warning::RESEND_API_KEY not set; skipping failure email."
+            exit 0
+          fi
+          python3 - <<PY
+          import json, os, urllib.request, urllib.error
+          run_url = os.environ["RUN_URL"]
           payload = {
             "from": "Webgro Auto-publish <receptionist@webgro.co.uk>",
             "to": ["michael@webgro.co.uk"],
@@ -96,12 +142,12 @@ jobs:
             "html": (
               "<p style='font-family:system-ui,sans-serif;font-size:15px;color:#0D1117;'>"
               "This week's Gro auto-publish job didn't complete. "
-              f"See the run logs:</p>"
-              f"<p><a href='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'>"
-              "Open run on GitHub Actions &rarr;</a></p>"
-              "<p style='font-size:12px;color:#6B7A99;'>Nothing was committed. Re-run manually from the Actions tab once the cause is fixed.</p>"
+              "See the run logs:</p>"
+              f"<p><a href='{run_url}'>Open run on GitHub Actions &rarr;</a></p>"
+              "<p style='font-size:12px;color:#6B7A99;'>Nothing was committed. "
+              "Re-run manually from the Actions tab once the cause is fixed.</p>"
             ),
-            "text": "The Gro auto-publish job failed. See: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            "text": f"The Gro auto-publish job failed. See: {run_url}",
           }
           req = urllib.request.Request(
             "https://api.resend.com/emails",
@@ -112,5 +158,9 @@ jobs:
             },
             method="POST",
           )
-          urllib.request.urlopen(req, timeout=15).read()
+          try:
+              urllib.request.urlopen(req, timeout=15).read()
+              print("Failure email sent.")
+          except urllib.error.HTTPError as e:
+              print(f"::warning::Failure email rejected by Resend: HTTP {e.code} {e.read().decode('utf-8','replace')[:300]}")
           PY
