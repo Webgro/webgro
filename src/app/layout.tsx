@@ -44,11 +44,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://webgro.co.uk"),
   title: "Webgro · eCommerce, WordPress, and production AI tools",
   description:
-    "Shopify and WordPress built for conversion and speed. Production AI tools layered in where the numbers say yes. One senior studio, Bracknell-based.",
+    "Shopify and WordPress, hand-built for conversion and speed. AI handles the maintenance, marketing, automation, and reporting around the build. One senior studio, Bracknell-based.",
   openGraph: {
-    title: "Webgro · Shopify, WordPress, and AI tools. One studio.",
+    title: "Webgro · Shopify, WordPress, and AI around the build. One studio.",
     description:
-      "A senior studio building eCommerce sites, WordPress builds, and production AI tools. Based in Bracknell, part of Broadbridge Group.",
+      "A senior studio. We hand-build eCommerce and WordPress sites, then use AI for the maintenance, marketing, automation, and reporting that keeps them paying back. Based in Bracknell, part of Broadbridge Group.",
     url: "https://webgro.co.uk",
     siteName: "Webgro",
     locale: "en_GB",
@@ -56,9 +56,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Webgro · Shopify, WordPress, and AI tools. One studio.",
+    title: "Webgro · Shopify, WordPress, and AI around the build. One studio.",
     description:
-      "A senior studio building eCommerce sites, WordPress builds, and production AI tools. Based in Bracknell, part of Broadbridge Group.",
+      "A senior studio. We hand-build eCommerce and WordPress sites, then use AI for the maintenance, marketing, automation, and reporting that keeps them paying back. Based in Bracknell, part of Broadbridge Group.",
   },
   alternates: {
     // RSS autodiscovery for The Gro. Site-wide so any reader extension

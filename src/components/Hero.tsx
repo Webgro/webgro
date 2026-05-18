@@ -70,7 +70,7 @@ export function Hero() {
             data-hero-meta
             style={{ animationDelay: "0.55s" }}
           >
-            Shopify and WordPress built for conversion and speed. Production AI tools layered in where the numbers say yes. Today&rsquo;s site. Tomorrow&rsquo;s system.
+            Shopify and WordPress, hand-built for conversion and speed. AI handles the maintenance, marketing, automation, and reporting around the build. Today&rsquo;s site. Tomorrow&rsquo;s system.
           </p>
 
           <div

@@ -50,7 +50,7 @@ export const articles: Article[] = [
       },
       {
         type: "p",
-        text: "We use these tools every day. But there's a precise difference between AI-assisted engineering (a senior dev steering the model) and vibe coding (the model steering itself). The first compounds your output. The second compounds your technical debt. This piece is about where the line sits.",
+        text: "At Webgro, we don't write client code this way. The builds we ship are written by engineers, line by line. We use AI heavily, but in a different place: the maintenance, marketing, automation, and reporting that surrounds a website. This piece is about why that line sits where it does.",
       },
 
       { type: "h2", text: "What it actually is" },
@@ -80,7 +80,7 @@ export const articles: Article[] = [
       { type: "h2", text: "What it gets right" },
       {
         type: "p",
-        text: "We're not anti-this. We use AI heavily. Here is where vibe coding, even the unsupervised flavour, is genuinely good news:",
+        text: "We're not anti this. AI tooling has a real place. Here is where vibe coding, even the unsupervised flavour, is genuinely good news:",
       },
       {
         type: "ul",
@@ -153,24 +153,27 @@ export const articles: Article[] = [
         text: "The most expensive single mistake we see: a vibe-coded app that's been charging customers for nine months but the founder still thinks of it as an MVP. The framing is doing the damage. Once a customer paid you, it's not an MVP. The bar shifted. The codebase didn't.",
       },
 
-      { type: "h2", text: "How we use AI for client work" },
+      { type: "h2", text: "Where we use AI on a Webgro project" },
       {
         type: "p",
-        text: "We don't write less code with AI. We write more. The difference is who's driving.",
+        text: "We don't put AI on the keyboard for client code. The build that ships is written by engineers, the same way it was in 2018. That's the part of the project where vibe coding bites, so we don't bring it in.",
+      },
+      {
+        type: "p",
+        text: "AI does a different job for us. It's around the build, not inside it:",
       },
       {
         type: "ul",
         items: [
-          "We use Claude, Cursor, and GitHub Copilot on every project. Constantly.",
-          "AI assists engineers. The reverse is never true on a client build.",
-          "Every line of code that ships is read by a human who could have written it.",
-          "Every pull request has a reviewer who understands the change well enough to argue with it.",
-          "A senior engineer owns the mental model of the system. Not the AI.",
+          "Maintenance. Monitoring, log analysis, regression-test generation, anomaly alerts on real traffic. The AI watches things humans aren't reading every day.",
+          "Marketing. Content drafts at scale, ad-copy variants, GSC analysis, technical SEO audits, keyword research that used to take a strategist a full day.",
+          "Automation. Workflow plumbing between CRM, email, analytics, and the site. Internal tools for the client's team. Lifecycle email drafts.",
+          "Reporting. Monthly client reports, custom analytics dashboards, anomaly summaries that surface what changed without anyone having to ask.",
         ],
       },
       {
         type: "p",
-        text: "That's not a limitation on speed. It's why a Webgro build still works in 2027, and why the contractor who picks it up after us doesn't quote 2x to start.",
+        text: "Everything in that list is where AI compounds. The code that handles a transaction or stores a customer's data is not. We hold that line on every build, and twelve months in, when the next contractor inherits the codebase, they don't quote 2x to start.",
       },
       {
         type: "p",
