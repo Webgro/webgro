@@ -32,6 +32,153 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "what-is-vibe-coding",
+    category: "Strategy",
+    title: "What 'vibe coding' is, and where it breaks.",
+    excerpt:
+      "Vibe coding turns the AI into the developer and you into the editor. It's brilliant for the first 80% and a slow-motion disaster for the last 20. Here's the line we draw with our clients, and what we use AI for instead.",
+    date: "May 2026",
+    readTime: "6 min read",
+    accent: "blue",
+    author: "Webgro Studio",
+    heroImage: "/articles/what-is-vibe-coding.jpg",
+    relatedService: "consultancy",
+    body: [
+      {
+        type: "p",
+        text: "Andrej Karpathy coined 'vibe coding' in February 2025: 'fully give in to the vibes, embrace exponentials, and forget that the code even exists.' You describe what you want, the AI writes it, you ship it without reading the diff. Eighteen months later, it's the dominant way the indie web ships. Lovable, Bolt, v0, Cursor's agent mode, Replit Agent, Claude Code without read-the-diff discipline. Anyone with a prompt and a credit card has a working app by lunch.",
+      },
+      {
+        type: "p",
+        text: "We use these tools every day. But there's a precise difference between AI-assisted engineering (a senior dev steering the model) and vibe coding (the model steering itself). The first compounds your output. The second compounds your technical debt. This piece is about where the line sits.",
+      },
+
+      { type: "h2", text: "What it actually is" },
+      {
+        type: "p",
+        text: "The phrase comes from a tweet. The premise is simple. You stop reading the code. You stop maintaining a model of the system in your head. You talk to the AI in plain English, you accept what comes back, and you only intervene when something visibly breaks. The codebase is a black box. The AI is the engineer. You are the editor.",
+      },
+      {
+        type: "p",
+        text: "Eighteen months on, this isn't fringe. Tools designed for unsupervised generation ship a meaningful share of new web projects. Marketing teams build their own micro-sites. Solo founders ship MVPs in a weekend. Non-developers get further than they could two years ago. Some of that is genuinely good.",
+      },
+
+      { type: "h3", text: "The line that matters" },
+      {
+        type: "p",
+        text: "AI-assisted engineering: an engineer who can read code is driving. The AI is a 10x typing speed and a 2x recall of the docs. Mistakes get caught at code review because the reviewer could write the change themselves.",
+      },
+      {
+        type: "p",
+        text: "Vibe coding: the AI is driving. The human shipping the code probably can't audit it. There is no code review. Mistakes ship.",
+      },
+      {
+        type: "p",
+        text: "Same tools, totally different practice. Conflating the two is where most of the confusion in this debate comes from.",
+      },
+
+      { type: "h2", text: "What it gets right" },
+      {
+        type: "p",
+        text: "We're not anti-this. We use AI heavily. Here is where vibe coding, even the unsupervised flavour, is genuinely good news:",
+      },
+      {
+        type: "ul",
+        items: [
+          "Throwaway scripts. One-off data wrangling, a quick log parser, anything you'll run twice and delete.",
+          "Prototype UIs. The point of a prototype is to be wrong fast. Code quality is irrelevant.",
+          "Internal tools with one user. The one user is you. Fix it when it breaks, throw it away in six months.",
+          "Solo founder MVPs in the pre product-market fit stage. The only thing that matters is whether anyone wants the thing. The code is disposable.",
+          "Landing pages with a six-week lifespan. A campaign micro-site, an event registration page, anything that's going in the bin by next quarter.",
+          "Non-developer empowerment. Marketing can finally ship the landing page they wanted last Tuesday without filing a ticket.",
+        ],
+      },
+      {
+        type: "callout",
+        text: "The first draft is where AI shines. The production version is where it doesn't.",
+        accent: "blue",
+      },
+
+      { type: "h2", text: "What we see in the inbox" },
+      {
+        type: "p",
+        text: "Clients arrive at Webgro carrying vibe-coded codebases more often than they used to. A typical week brings two or three. The failure modes are remarkably consistent.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Credentials in source. API keys, database passwords, third-party secrets hard-coded into files that get pushed to a public repo. We've audited dozens. About three in four had at least one credential we could find with a five-minute git history scan.",
+          "Security shortcuts. Missing CSRF protection, SQL constructed with string concatenation, auth flows that don't actually check anything on the server. The AI knew the right pattern. The prompt didn't ask for it.",
+          "Plugin and dependency sprawl. WordPress builds with thirty-plus plugins because each chat session added 'whatever's easiest'. Six of them conflict. Nobody knows which.",
+          "Performance neglected. Lighthouse scores in the 30s. Hundreds of unused dependencies in the bundle. Images at full resolution. No caching strategy.",
+          "Edge cases ignored. The app works in the demo and dies the first time a real user pastes a comma into a name field or a Unicode character into a search box.",
+          "No tests, no observability. When it breaks in production, the team has no way to find out where, or to verify a fix.",
+          "Maintenance impossibility. A future contractor quotes 2x because they have to read code nobody understands, then rewrite half of it before they can touch the rest. That cost lands twelve months in.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Each of those issues is fixable in isolation. The compounding one is harder. Every new vibe-coded change is built on the previous one, and the previous one's bugs are now load-bearing. Refactoring isn't possible because nobody has a mental model to refactor toward. The codebase becomes archaeological.",
+      },
+      {
+        type: "callout",
+        text: "Vibe coding gets you off the ground. It does not get you to scale.",
+        accent: "blue",
+      },
+
+      { type: "h2", text: "Where to draw the line" },
+      {
+        type: "p",
+        text: "The honest position isn't 'don't vibe code'. It's 'know what stage you're in'.",
+      },
+      { type: "h3", text: "Pre product-market fit" },
+      {
+        type: "p",
+        text: "You're trying to find out if anyone wants the thing. Vibe code freely. The code is throwaway and you'll learn nothing from optimising it. Speed beats craft.",
+      },
+      { type: "h3", text: "After product-market fit, before scale" },
+      {
+        type: "p",
+        text: "Customers exist. Their data is in your system. You're charging money, or running ads to it, or collecting personal information. This is where the lifecycle turns. The vibe-coded prototype that got you here was correct. Continuing to vibe-code from here is a strategic mistake.",
+      },
+      { type: "h3", text: "At scale" },
+      {
+        type: "p",
+        text: "Anyone who's maintained a codebase past the two-year mark knows what 'load-bearing accident' means. You need someone who could write any line in the system from scratch, supervising every line the AI writes. The AI is now a multiplier on the engineer, not a substitute for one.",
+      },
+
+      { type: "h3", text: "The 'I think it's still an MVP' trap" },
+      {
+        type: "p",
+        text: "The most expensive single mistake we see: a vibe-coded app that's been charging customers for nine months but the founder still thinks of it as an MVP. The framing is doing the damage. Once a customer paid you, it's not an MVP. The bar shifted. The codebase didn't.",
+      },
+
+      { type: "h2", text: "How we use AI for client work" },
+      {
+        type: "p",
+        text: "We don't write less code with AI. We write more. The difference is who's driving.",
+      },
+      {
+        type: "ul",
+        items: [
+          "We use Claude, Cursor, and GitHub Copilot on every project. Constantly.",
+          "AI assists engineers. The reverse is never true on a client build.",
+          "Every line of code that ships is read by a human who could have written it.",
+          "Every pull request has a reviewer who understands the change well enough to argue with it.",
+          "A senior engineer owns the mental model of the system. Not the AI.",
+        ],
+      },
+      {
+        type: "p",
+        text: "That's not a limitation on speed. It's why a Webgro build still works in 2027, and why the contractor who picks it up after us doesn't quote 2x to start.",
+      },
+      {
+        type: "p",
+        text: "Vibe coding will keep getting better. So will the people charging real money to clean it up after the fact. Pick which side of that you want to be on before the customers arrive.",
+      },
+    ],
+  },
+  {
     slug: "ai-2026-boring-wins",
     category: "AI",
     title: "AI in 2026: the boring wins.",
