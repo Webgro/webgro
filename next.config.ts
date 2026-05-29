@@ -31,7 +31,8 @@ const legacyRedirects = async () => {
   // --- Specific services ---------------------------------------------------
   const services: R[] = [
     r("/services/seo-packages", "/services/seo"),
-    r("/services/seo", "/services/seo"),
+    // No /services/seo self-redirect: that's the real page. A redirect
+    // from /services/seo to /services/seo caused infinite ERR_TOO_MANY_REDIRECTS.
     r("/services/ecommerce", "/services/consultancy"),
     r("/services/maintenance", "/services/websites"),
   ];
