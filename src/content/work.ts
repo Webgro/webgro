@@ -277,9 +277,9 @@ export const caseStudies: CaseStudy[] = [
     heroImage: "/work/gieves-hawkes.webp",
     heroImageAlt: "Gieves & Hawkes digital flagship",
     excerpt:
-      "A ground-up Shopify rebuild for the Savile Row house after the Frasers takeover. Ranked #1 on Google UK for 'luxury suit', from zero.",
+      "A second ground-up Shopify build for the Savile Row house. Custom-built sections replaced eight third-party apps, mobile Lighthouse climbed from 64 to 85, and £300 a month came off the app bill. Our best work to date.",
     services: ["Shopify build", "eCommerce consultancy", "SEO", "Email marketing"],
-    stack: ["Shopify", "Custom theme"],
+    stack: ["Shopify", "Custom theme", "SimplyBookMe API"],
     timeline: "Ongoing partnership",
     url: "https://gievesandhawkes.com",
     featured: true,
@@ -287,7 +287,7 @@ export const caseStudies: CaseStudy[] = [
     body: [
       {
         type: "intro",
-        text: "Gieves & Hawkes have tailored for British royalty since 1771. When Frasers Group took over the brand, the digital estate needed rebuilding from the ground up. A platform the new operation could own, edit, and scale without calling developers for every season.",
+        text: "Gieves & Hawkes have tailored for British royalty since 1771. We rebuilt their Shopify storefront after the Frasers takeover in 2014 and have run the eCommerce side of the brand since. The most recent piece of work, a full ground-up theme rebuild, is the best we've shipped.",
       },
 
       // ── Chapter 01 ─────────────────────────────────────────────
@@ -297,15 +297,51 @@ export const caseStudies: CaseStudy[] = [
         num: "01",
         label: "Website",
         description:
-          "A ground-up Shopify rebuild with a custom theme tuned for luxury. Quiet typography, considered pacing, a checkout that stays calm under high-intent traffic.",
+          "A second ground-up Shopify build. Custom-built sections replaced eight third-party apps, mobile Lighthouse went from 64 to 85, and the in-house team got a theme they own end to end.",
       },
       {
         type: "section",
-        eyebrow: "The rebuild",
-        heading: "Shopify, ground-up",
+        eyebrow: "The brief",
+        heading: "A theme the in-house team own",
         body: [
-          "We rebuilt the storefront on Shopify with a custom theme tuned for luxury. Quiet typography, considered pacing, heavyweight imagery, and a checkout that stays calm under high-intent traffic.",
-          "Nothing templated, nothing borrowed. Every section, every block, every product template built for Gieves.",
+          "The 2014 build did its job. The estate ran on it for years. But like every Shopify store that gets to age four, the app stack had quietly grown. Twelve apps for predictive search, wishlists, size guides, bundles, back-in-stock alerts, and the rest. Each one a monthly fee, a render-blocking script, and a thing that breaks when someone else updates it.",
+          "The new brief was different. Rebuild from scratch. Move every app function into the theme itself. Make every section editor-friendly so the in-house team can extend without a developer. Pull the mobile performance up. Two months, head down.",
+        ],
+      },
+      {
+        type: "section",
+        eyebrow: "What got rebuilt",
+        heading: "Eight apps replaced with theme code",
+        body: [
+          "Predictive search, size guides, wishlists that sync to Klaviyo, bundle merchandising, and back-in-stock alerts. All built natively into the theme. No third-party scripts, no app fees, no rendering layer to wait for. The pieces that used to cost £300 a month now ship as part of the codebase Gieves own.",
+          "The made-to-measure flow is the one exception. We integrated SimplyBookMe via their API so MTM appointments connect to the calendar the team already use. Booking logic stays in a tool built for it; the booking UI lives in the theme.",
+        ],
+      },
+      {
+        type: "statGroup",
+        items: [
+          {
+            eyebrow: "Mobile Lighthouse",
+            value: "+21",
+            label: "from 64 to 85",
+            footnote: "Average across home, PLP, and PDP.",
+          },
+          {
+            eyebrow: "Shopify apps retired",
+            value: "8",
+            label: "12 down to 4",
+            footnote: "Replaced with native theme sections.",
+          },
+          {
+            eyebrow: "App bill, off",
+            value: "£300",
+            label: "per month, saved",
+          },
+          {
+            eyebrow: "Build time",
+            value: "2 mo",
+            label: "start to finish",
+          },
         ],
       },
       {
@@ -313,6 +349,29 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/gieves-and-hawkes/storefront.jpg",
         alt: "Gieves & Hawkes storefront",
         url: "gievesandhawkes.com",
+      },
+      {
+        type: "section",
+        eyebrow: "Templates beyond the catalogue",
+        heading: "Bespoke, made to measure, journal, heritage",
+        body: [
+          "The catalogue is a slice of what Gieves sell. A custom suit, a fitting at the Savile Row showroom, the journal that documents two and a half centuries of tailoring: each one needed its own template, not a sales page in costume.",
+          "Five additional template families ship with the new theme: bespoke, made to measure, journal, a heritage page with the brand's full timeline, and the showroom locator. Each one shares the theme's vocabulary but has its own pace and its own way of presenting the work.",
+        ],
+        phone: {
+          src: "/work/gieves-and-hawkes/mobile.jpg",
+          alt: "Gieves & Hawkes new theme on mobile",
+          caption: "Mobile · the new build",
+        },
+      },
+      {
+        type: "section",
+        eyebrow: "Design, top to bottom",
+        heading: "No templated component left behind",
+        body: [
+          "Every section was designed individually. The luxury web is full of stores where the homepage is considered and the PDP is the same generic Shopify component shipped with most themes. We didn't ship one of those.",
+          "Quiet typography, generous whitespace, motion that's intentional rather than busy. The same restraint applied to every page template, every block, every state.",
+        ],
       },
 
       // ── Chapter 02 ─────────────────────────────────────────────
@@ -380,7 +439,11 @@ export const caseStudies: CaseStudy[] = [
         heading: "Deliverables",
         items: [
           "Shopify build",
-          "Custom theme",
+          "Custom theme (second ground-up)",
+          "Eight custom theme sections replacing apps",
+          "SimplyBookMe API integration for MTM",
+          "Heritage, bespoke, MTM, journal, showroom templates",
+          "Performance + accessibility overhaul",
           "Ongoing eCommerce consultancy",
           "SEO program",
           "Email marketing",
