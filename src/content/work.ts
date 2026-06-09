@@ -389,8 +389,8 @@ export const caseStudies: CaseStudy[] = [
         heading: "From rebuild to category leader",
         body: "Content, structure, links, and a technical foundation that reads cleanly to both Google and LLMs. Within months, Gieves ranked #1 in the UK for 'luxury suit'. The organic engine has compounded ever since.",
         phone: {
-          src: "/work/gieves-and-hawkes/mobile.jpg",
-          alt: "Gieves & Hawkes storefront on mobile",
+          src: "/work/gieves-and-hawkes/mobile-2.jpg",
+          alt: "Gieves & Hawkes product view on mobile",
           caption: "Mobile · product view",
         },
       },
