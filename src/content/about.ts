@@ -100,13 +100,6 @@ export const about = {
       photo: "/team/kira.jpg",
       accent: "blue",
     },
-    {
-      name: "Macey",
-      role: "Marketing & Social",
-      bio: "Paid, lifecycle email, and social campaigns. Runs programs across both Webgro clients and the Broadbridge brands, so the playbooks compound in both directions.",
-      photo: "/team/macey.jpg",
-      accent: "violet",
-    },
   ] satisfies TeamMember[],
 
   /**
