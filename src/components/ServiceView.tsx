@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import useIsomorphicLayoutEffect from "@/lib/useIsomorphicLayoutEffect";
 import type { Service, ServiceMedia } from "@/content/services";
 import type { Accent, CaseStudy } from "@/content/work";
