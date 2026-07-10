@@ -34,6 +34,18 @@
     keeps working. If webgro.co.uk isn't live when you save, swap in
     your current *.vercel.app URL temporarily, then re-save once the
     custom domain is active.
+
+  Cache-busting when you refresh the photo:
+    Gmail (and your browser) cache the image against the URL string.
+    Overwriting /public/team/michael.jpg on the server does NOT
+    invalidate that cache; the URL is unchanged, so Gmail keeps
+    serving its old copy. The ?v=N query string on the src below is
+    the cache-buster. When you update the photo, bump v=2 to v=3, save
+    the file, then re-copy this signature into Gmail. Gmail treats
+    "michael.jpg?v=3" as a new URL and re-fetches. The Vercel/Next
+    static handler ignores the query string and serves whatever is
+    currently at /public/team/michael.jpg, so nothing on the server
+    side has to change.
 -->
 <body style="margin:0;padding:32px;background:#f6f7f9;font-family:Arial,Helvetica,sans-serif;">
   <p style="font-size:12px;color:#6b7280;max-width:520px;margin:0 0 16px;">
@@ -49,7 +61,7 @@
            will show a square, which still looks tidy. -->
       <td valign="top" style="padding-right:18px;vertical-align:top;">
         <img
-          src="https://webgro.co.uk/team/michael.jpg"
+          src="https://webgro.co.uk/team/michael.jpg?v=2"
           width="80"
           height="80"
           alt="Michael Broadbridge"
