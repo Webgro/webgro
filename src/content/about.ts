@@ -45,7 +45,7 @@ export const about = {
     eyebrow: "The studio",
     heading: "Fourteen years, one studio, same pair at the top.",
     body: [
-      "Webgro was co-founded in 2012 by Michael and Lily Broadbridge. Same two people running it today, now with a small senior team and a vetted specialist network sitting behind them.",
+      "Webgro was co-founded in 2012 by Michael and Lily. Same two people running it today, now with a small senior team and a vetted specialist network sitting behind them.",
       "We work hand-in-hand with clients as partners, not as the agency on the end of a monthly invoice. That framing comes from somewhere real: we've been the client as often as we've been the agency.",
     ],
   },
@@ -71,7 +71,7 @@ export const about = {
    */
   team: [
     {
-      name: "Michael Broadbridge",
+      name: "Michael",
       role: "Co-Founder & CEO",
       bio: "Fifteen years on Shopify, WordPress, and the bits in between. Runs strategy, platform, and the AI workstream. Also owns four of the businesses we run inside Broadbridge Group.",
       photo: "/team/michael.jpg",
@@ -79,7 +79,7 @@ export const about = {
       since: "2012",
     },
     {
-      name: "Lily Broadbridge",
+      name: "Lily",
       role: "Co-Founder",
       bio: "Runs operations across the group. The person who keeps projects honest against timelines and budgets, and who you'll hear from most after go-live.",
       photo: "/team/lily.jpg",
