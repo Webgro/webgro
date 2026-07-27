@@ -674,22 +674,22 @@ export const caseStudies: CaseStudy[] = [
     slug: "twisted-tailor",
     client: "Twisted Tailor",
     tag: "Fashion · eCommerce · AI",
-    year: "2024",
+    year: "2024 to present",
     accent: "teal",
     heroImage: "/work/twisted-tailor.jpg",
     heroImageAlt: "Twisted Tailor storefront",
     excerpt:
-      "A Shopify rebuild for one of London's most-recognisable menswear names, with custom suit-set functionality and an AI support agent that halved customer-service hours.",
+      "A ground-up Shopify rebuild for the London menswear house. Eight third-party apps replaced with native theme code, roughly $250 a month off the app bill, and a custom size-persistence system called MyFitt that follows the customer around the store.",
     services: ["Shopify build", "eCommerce consultancy", "SEO", "AI support agent"],
     stack: ["Shopify", "Custom theme", "Claude API"],
-    timeline: "8 weeks",
+    timeline: "Ongoing partnership",
     url: "https://twistedtailor.com",
     featured: true,
     categories: ["ecommerce", "ai"],
     body: [
       {
         type: "intro",
-        text: "Twisted Tailor sell suits, but standard Shopify treats a jacket and trousers as two separate products. Customers were adding half a suit to basket. We fixed it, then automated the support queue that came from years of confusion.",
+        text: "Twisted Tailor is one of London's most recognisable menswear names, and one we've worked with for years. The most recent chapter is a full ground-up theme rebuild. Eight third-party apps rewritten as native sections, a custom size-persistence system, and a support agent that halved the inbox.",
       },
 
       // ── Chapter 01 ─────────────────────────────────────────────
@@ -699,27 +699,83 @@ export const caseStudies: CaseStudy[] = [
         num: "01",
         label: "Website",
         description:
-          "A Shopify rebuild with custom suit-pairing functionality to solve the jacket-and-trousers problem at source.",
+          "A second ground-up Shopify build. Eight apps replaced with theme code, roughly $250 a month off the app bill, and a size-persistence system built to the brand.",
       },
       {
         type: "section",
-        eyebrow: "The problem",
-        heading: "A suit is not two products",
+        eyebrow: "The brief",
+        heading: "Eight apps in, one theme out",
         body: [
-          "Out of the box, Shopify doesn't know that a jacket and a trouser belong together. Customers were buying one half. Customer service were spending hours untangling it. Refunds climbed. Conversion dropped on what should have been a simple sale.",
-          "We built custom functionality that pairs jacket and trouser as one item. Sizing logic, one add-to-basket moment, one sale on the ledger. The confusion stopped.",
+          "The prior build worked, but the app stack had crept up the way every Shopify stack does when a store gets to age three. Cart recommendations, a 'buy the trousers, save 10%' upsell, a size recommender, a size guide app, a gallery app, a wishlist, a bundle app for suits-as-separates, and back-in-stock alerts. Each one a monthly fee, a script, and a thing that broke when someone else updated it.",
+          "The new brief was different. Rebuild from scratch. Move every app function into the theme itself. Make every section editor-friendly so the team can extend without a developer. Head down, ship it.",
         ],
-        phone: {
-          src: "/work/twisted-tailor/mobile.jpg",
-          alt: "Twisted Tailor on mobile",
-          caption: "Mobile · suit pairing",
-        },
+      },
+      {
+        type: "section",
+        eyebrow: "What got rebuilt",
+        heading: "Eight apps replaced with theme code",
+        body: [
+          "Cart recommendations, the 'complete the suit' trouser upsell, the size recommender, the size guide, the gallery, the wishlist, the bundle logic for suits sold as separates, and back-in-stock alerts. All rewritten as native theme sections. No third-party scripts, no render blockers, no app fees.",
+          "The bundle piece matters most. Twisted's suits sell as jacket, trouser, and waistcoat priced individually, but the PDP has to feel like one product. Jacket size and trouser size pick their own dropdowns, the exclusive TT suit carrier drops in as a toggle, and the basket lines up the pieces together. All in the theme, no bundle app underneath it.",
+        ],
+      },
+      {
+        type: "statGroup",
+        items: [
+          {
+            eyebrow: "Shopify apps retired",
+            value: "8",
+            label: "replaced with theme sections",
+          },
+          {
+            eyebrow: "App bill, off",
+            value: "$250",
+            label: "per month, saved",
+          },
+          {
+            eyebrow: "MyFitt",
+            value: "Live",
+            label: "size follows the customer",
+          },
+          {
+            eyebrow: "Build",
+            value: "8 weeks",
+            label: "start to finish",
+          },
+        ],
       },
       {
         type: "browser",
-        src: "/work/twisted-tailor/storefront.jpg",
-        alt: "Twisted Tailor storefront",
+        src: "/work/twisted-tailor/storefront-2.jpg",
+        alt: "Twisted Tailor product page with separate jacket and trouser size dropdowns",
         url: "twistedtailor.com",
+      },
+      {
+        type: "section",
+        eyebrow: "MyFitt",
+        heading: "A size that follows the customer",
+        body: [
+          "Twisted sell across jackets, trousers, waistcoats, and casualwear, each with their own sizing grid. Asking a customer to remember four numbers between visits is asking to lose the sale.",
+          "MyFitt is our answer. Customers set their sizes once, in a single drawer, and the site remembers. Sizes pre-select on the PDP, collection pages hide styles that aren't in stock in their size, and because it's tied to their customer account the setting follows them cross-device the moment they sign in.",
+        ],
+        phone: {
+          src: "/work/twisted-tailor/mobile.jpg",
+          alt: "MyFitt size drawer on mobile",
+          caption: "Mobile · MyFitt",
+        },
+      },
+      {
+        type: "section",
+        eyebrow: "The basket",
+        heading: "A suit lands as a suit",
+        body: [
+          "The pieces sell separately but the basket has to read as one purchase. Jacket, trouser, and the optional TT suit carrier show as clean line items, the free-shipping threshold sits at the top, and a 'complete the look' rail replaces the cart-recommendations app that used to charge a fee to do the same thing.",
+        ],
+        phone: {
+          src: "/work/twisted-tailor/mobile-2.jpg",
+          alt: "Twisted Tailor basket showing jacket, trouser and TT suit carrier",
+          caption: "Mobile · basket",
+        },
       },
 
       // ── Chapter 02 ─────────────────────────────────────────────
@@ -727,7 +783,7 @@ export const caseStudies: CaseStudy[] = [
         type: "chapter",
         id: "apps",
         num: "02",
-        label: "Custom Apps",
+        label: "AI Support",
         description:
           "An AI customer-service agent that halved support hours while keeping the brand voice intact.",
       },
@@ -746,32 +802,17 @@ export const caseStudies: CaseStudy[] = [
         caption: "AI support agent · live product view",
       },
       {
-        type: "statGroup",
-        items: [
-          {
-            eyebrow: "Customer service hours",
-            value: "−50%",
-            label: "saved each week",
-            footnote: "AI-drafted, human-approved.",
-          },
-          {
-            eyebrow: "Custom build",
-            value: "Suit pairing",
-            label: "one item, one sale",
-          },
-          {
-            eyebrow: "AI agent",
-            value: "Live",
-            label: "in production",
-          },
-        ],
-      },
-      {
         type: "deliverables",
         heading: "Deliverables",
         items: [
-          "Shopify build",
-          "Custom suit-pairing functionality",
+          "Shopify build (second ground-up)",
+          "Custom theme",
+          "Suits-as-separates bundle logic (app replaced)",
+          "Native wishlist (app replaced)",
+          "Native size recommender + size guide (2 apps replaced)",
+          "Cart recommendations + trouser upsell (2 apps replaced)",
+          "Native gallery + back-in-stock alerts (2 apps replaced)",
+          "MyFitt cross-device size persistence",
           "AI customer service agent",
           "eCommerce consultancy",
           "SEO program",
