@@ -95,8 +95,9 @@ export const caseStudies: CaseStudy[] = [
     heroImage: "/work/fun-cases.jpg",
     heroImageAlt: "Fun Cases storefront",
     excerpt:
-      "A Shopify storefront, a custom inventory system, and three production-grade AI tools. Built for a team that ships designs faster than most brands ship campaigns.",
+      "A complete rebrand and a ground-up Shopify theme for a business shipping thousands of phone cases a week. Logo, tone of voice, website, socials, and email, plus a custom product personaliser that replaced an app costing nearly £5,000 a year.",
     services: [
+      "Rebrand",
       "Shopify",
       "AI integrations",
       "Custom WMS",
@@ -112,7 +113,7 @@ export const caseStudies: CaseStudy[] = [
     body: [
       {
         type: "intro",
-        text: "Fun Cases ship thousands of phone cases across custom designs and licensed ranges. The old workflow turned ten new designs into a day of manual uploads. The new one does it in under ten minutes. Customer service hours are down 70%. And revenue is up 300% over the last five years.",
+        text: "Fun Cases ship thousands of phone cases across custom designs and licensed ranges, and we've run their eCommerce since 2012. The latest chapter is the biggest: a complete rebrand and a ground-up new theme, with a custom product personaliser that took a five-figure app bill off the books. Revenue is up 300% over the last five years.",
       },
 
       // ── Chapter 01 ─────────────────────────────────────────────
@@ -120,22 +121,66 @@ export const caseStudies: CaseStudy[] = [
         type: "chapter",
         id: "website",
         num: "01",
-        label: "Website",
+        label: "Rebrand & Website",
         description:
-          "A Shopify storefront rebuilt for speed, merchandising flexibility, and a checkout that holds up on peak sales days.",
+          "A full rebrand (logo, tone of voice, socials, email) carried into a ground-up Shopify theme, with a custom personaliser replacing a £5,000-a-year app.",
       },
       {
         type: "section",
-        eyebrow: "The partnership",
-        heading: "Built to keep up with the pace",
+        eyebrow: "The rebrand",
+        heading: "A new identity, everywhere at once",
         body: [
-          "Fun Cases design and ship quickly. The site had to match. We rebuilt on Shopify with a focus on speed, merchandising flexibility, and a checkout that holds up on their best sales days.",
-          "One partnership, long-term. Continuously iterated against live business pressure rather than launched once and left.",
+          "Fun Cases had outgrown its old look. We rebuilt the brand from the logo up: a bold pop-art identity, a new tone of voice, and a design system of rounded blocks, ink outlines, and a palette that actually feels fun. Sacred things stayed sacred, like the promise that every order plants a tree.",
+          "Then we carried it everywhere at once. Website, social templates, and a new email marketing system in Klaviyo, all launched together so no channel lagged behind the new look.",
         ],
+        phone: {
+          src: "/work/fun-cases/mobile-home.jpg",
+          alt: "Fun Cases homepage in the new brand on mobile",
+          caption: "Mobile · the new brand",
+        },
+      },
+      {
+        type: "section",
+        eyebrow: "The theme",
+        heading: "A ground-up build for a 20,000-product catalogue",
+        body: [
+          "The new theme was built from scratch around how people actually buy phone cases. A mega menu built for licensed ranges, predictive search, a native wishlist, and a slide-out cart with free-shipping and free-gift progress built in.",
+          "Every section is editor-friendly, the whole palette is a theme setting, and the in-house team can restyle or rearrange without a developer in the loop.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/fun-cases/desktop-megamenu.jpg",
+        alt: "Fun Cases mega menu with trending collections and products",
+        url: "funcases.com",
+      },
+      {
+        type: "section",
+        eyebrow: "Phone model selector",
+        heading: "Pick your phone once, the site follows",
+        body: [
+          "Nobody browsing 20,000 designs wants to check compatibility on every one. So the site asks once. Choose your phone model and it follows you everywhere: every product image across every collection, search result, and product page shows the case on your exact phone.",
+          "It removes the single biggest point of friction in buying a phone case: wondering whether the one you love fits the phone you own.",
+        ],
+      },
+      {
+        type: "section",
+        eyebrow: "The personaliser",
+        heading: "Design your own, without the app fee",
+        body: [
+          "Custom cases are a huge slice of the business, and the previous designer tool was a third-party app costing nearly £5,000 a year. We replaced it with our own: a full-screen editor built into the theme where customers add photos, text, and stickers to a live mockup of their exact phone and case type.",
+          "It exports a print-ready file straight into the order, so the studio prints from what the customer approved. No app, no monthly fee, no third-party checkout scripts. The tool now belongs to Fun Cases outright.",
+        ],
+        phone: {
+          src: "/work/fun-cases/mobile-personaliser.jpg",
+          alt: "Fun Cases personaliser editor on mobile",
+          caption: "Mobile · the personaliser",
+        },
       },
       {
         type: "statGroup",
         items: [
+          { eyebrow: "App bill, off", value: "£5k", label: "per year, saved" },
           { eyebrow: "Revenue growth · 5 years", value: "+300%", label: "year-on-year" },
           { eyebrow: "Avg. conversion rate", value: "6.0%", label: "worldwide" },
           { eyebrow: "Peak CR · Dec 2025", value: "11.2%", label: "highest day" },
@@ -143,8 +188,8 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         type: "browser",
-        src: "/work/fun-cases/storefront.jpg",
-        alt: "Fun Cases storefront",
+        src: "/work/fun-cases/desktop-pdp.jpg",
+        alt: "Fun Cases product page with phone model and case type selectors",
         url: "funcases.com",
       },
 
@@ -205,7 +250,24 @@ export const caseStudies: CaseStudy[] = [
         num: "03",
         label: "Custom Apps",
         description:
-          "Three production AI tools and a custom Stock System. Each one built into the Fun Cases workflow, earning its keep daily.",
+          "Three production AI tools, a custom Stock System, and an order-routing app feeding the print floor. Each one built into the Fun Cases workflow, earning its keep daily.",
+      },
+      {
+        type: "section",
+        eyebrow: "Order routing",
+        heading: "From checkout to printed in two minutes",
+        body: [
+          "Fun Cases invested in state-of-the-art automatic printing machines, but not every order can go to them. Which route an order takes depends on the phone model and case type the customer chose.",
+          "So we built a custom routing app that makes the call on every order as it lands. Machine-compatible orders go straight to the automatic printers, no human in the loop; the rest are queued for in-house manual printing. On the automatic route, an order can be placed and printed within two minutes.",
+        ],
+      },
+      {
+        type: "statGroup",
+        items: [
+          { eyebrow: "Order to print", value: "2 min", label: "on the automatic route" },
+          { eyebrow: "Routing decisions", value: "Every order", label: "no human in the loop" },
+          { eyebrow: "Customer service hours", value: "−70%", label: "with AI triage" },
+        ],
       },
       {
         type: "section",
@@ -255,7 +317,13 @@ export const caseStudies: CaseStudy[] = [
         type: "deliverables",
         heading: "Deliverables",
         items: [
-          "Shopify storefront",
+          "Full rebrand (logo, tone of voice, design system)",
+          "Custom Shopify theme (ground-up)",
+          "Product personaliser (app replaced, £5k/yr saved)",
+          "Phone model selector (site-wide persistence)",
+          "Native wishlist",
+          "Social + email template system",
+          "Order routing app (auto-print vs in-house)",
           "Custom WMS + Shopify integration",
           "AI customer service agent",
           "AI product generator",
