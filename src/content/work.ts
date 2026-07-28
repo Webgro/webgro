@@ -113,7 +113,7 @@ export const caseStudies: CaseStudy[] = [
     body: [
       {
         type: "intro",
-        text: "Fun Cases ship thousands of phone cases across custom designs and licensed ranges, and we've run their eCommerce since 2012. The latest chapter is the biggest: a complete rebrand and a ground-up new theme, with a custom product personaliser that took a five-figure app bill off the books. Revenue is up 300% over the last five years.",
+        text: "Fun Cases ship thousands of phone cases a week across a catalogue of over 20,000 designs, and we've run their eCommerce since 2012. The latest chapter is the biggest: a complete rebrand and a ground-up new theme, with a custom product personaliser that took a five-figure app bill off the books. Revenue is up 300% over the last five years.",
       },
 
       // ── Chapter 01 ─────────────────────────────────────────────
@@ -144,7 +144,7 @@ export const caseStudies: CaseStudy[] = [
         eyebrow: "The theme",
         heading: "A ground-up build for a 20,000-product catalogue",
         body: [
-          "The new theme was built from scratch around how people actually buy phone cases. A mega menu built for licensed ranges, predictive search, a native wishlist, and a slide-out cart with free-shipping and free-gift progress built in.",
+          "The new theme was built from scratch around how people actually buy phone cases. A mega menu with trending collections and products built in, predictive search, a native wishlist, and a slide-out cart with free-shipping and free-gift progress built in.",
           "Every section is editor-friendly, the whole palette is a theme setting, and the in-house team can restyle or rearrange without a developer in the loop.",
         ],
       },
@@ -260,6 +260,11 @@ export const caseStudies: CaseStudy[] = [
           "Fun Cases invested in state-of-the-art automatic printing machines, but not every order can go to them. Which route an order takes depends on the phone model and case type the customer chose.",
           "So we built a custom routing app that makes the call on every order as it lands. Machine-compatible orders go straight to the automatic printers, no human in the loop; the rest are queued for in-house manual printing. On the automatic route, an order can be placed and printed within two minutes.",
         ],
+      },
+      {
+        type: "uiMock",
+        name: "fun-cases-order-routing",
+        caption: "Order routing · live product view",
       },
       {
         type: "statGroup",
