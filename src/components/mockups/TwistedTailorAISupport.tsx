@@ -1,16 +1,23 @@
+"use client";
+
+import { useState } from "react";
+import { useLiveLoop } from "./useLiveLoop";
+
+type Status = "review" | "drafted" | "sent";
+
 const tickets = [
   {
     initial: "T",
     name: "Theo Bennett",
     subject: "What's the fit on the Vegas two-piece?",
-    status: "drafted" as const,
+    status: "drafted" as Status,
     time: "3m",
   },
   {
     initial: "R",
     name: "Rhea Kapoor",
     subject: "Can I return a jacket without the trouser?",
-    status: "drafted" as const,
+    status: "drafted" as Status,
     time: "11m",
     active: true,
   },
@@ -18,16 +25,18 @@ const tickets = [
     initial: "C",
     name: "Callum Owens",
     subject: "Order #TT-48201, shipping to Dublin",
-    status: "sent" as const,
+    status: "sent" as Status,
     time: "24m",
   },
-  {
-    initial: "N",
-    name: "Nadia Ferrell",
-    subject: "Tailoring on the Monarch tux, possible?",
-    status: "review" as const,
-    time: "1h",
-  },
+];
+
+// Rotating pool for the live top slot.
+const incoming = [
+  { initial: "G", name: "George Adeyemi", subject: "Can I buy the waistcoat on its own?" },
+  { initial: "S", name: "Sadie Brennan", subject: "How do I update my MyFitt sizes?" },
+  { initial: "H", name: "Harvey Cole", subject: "Black tie for a June wedding, what do I need?" },
+  { initial: "I", name: "Imani Walker", subject: "Order #TT-48388 · delivery to Belfast?" },
+  { initial: "N", name: "Nadia Ferrell", subject: "Tailoring on the Monarch tux, possible?" },
 ];
 
 const statusLabel: Record<string, string> = {
@@ -47,8 +56,22 @@ function statusChip(status: string): React.CSSProperties {
 }
 
 export function TwistedTailorAISupport() {
+  const [live, setLive] = useState({ i: 0, phase: 0 as 0 | 1 | 2, drafted: 9, sent: 14 });
+
+  const ref = useLiveLoop(() => {
+    setLive((s) => {
+      if (s.phase === 0) return { ...s, phase: 1, drafted: s.drafted + 1 };
+      if (s.phase === 1) return { ...s, phase: 2, drafted: s.drafted - 1, sent: s.sent + 1 };
+      return { ...s, i: (s.i + 1) % incoming.length, phase: 0 };
+    });
+  }, 2900);
+
+  const liveTicket = incoming[live.i];
+  const liveStatus: Status = live.phase === 0 ? "review" : live.phase === 1 ? "drafted" : "sent";
+
   return (
     <div
+      ref={ref}
       className="overflow-hidden rounded-3xl border border-black/10 bg-white shadow-2xl shadow-black/40"
       style={{ fontFamily: "var(--font-poppins), Poppins, system-ui, sans-serif" }}
     >
@@ -75,11 +98,12 @@ export function TwistedTailorAISupport() {
         </div>
         <div className="hidden items-center gap-5 text-[10px] font-medium uppercase tracking-[0.22em] text-zinc-500 md:flex">
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-black" />9 drafted
+            <span className="h-1.5 w-1.5 rounded-full bg-black" />
+            {live.drafted} drafted
           </span>
           <span className="inline-flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-zinc-400" />
-            14 sent · today
+            {live.sent} sent · today
           </span>
         </div>
       </div>
@@ -106,6 +130,31 @@ export function TwistedTailorAISupport() {
             </div>
           </div>
           <div className="divide-y divide-zinc-100">
+            {/* Live slot: arrives, drafts, sends, rotates */}
+            <div
+              key={`live-${live.i}`}
+              className="mock-row-in flex items-start gap-3 px-5 py-3.5"
+              style={liveStatus === "review" ? { backgroundColor: "#fafafa" } : undefined}
+            >
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-black text-xs font-semibold text-white">
+                {liveTicket.initial}
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center justify-between gap-2">
+                  <p className="truncate text-xs font-medium text-zinc-900">{liveTicket.name}</p>
+                  <span className="shrink-0 text-[10px] text-zinc-400">now</span>
+                </div>
+                <p className="mt-1 truncate text-[11px] leading-snug text-zinc-600">{liveTicket.subject}</p>
+                <div className="mt-1.5">
+                  <span
+                    className="inline-block rounded-full border px-2 py-0.5 text-[9px] font-medium uppercase tracking-[0.18em] transition-colors duration-300"
+                    style={statusChip(liveStatus)}
+                  >
+                    {statusLabel[liveStatus]}
+                  </span>
+                </div>
+              </div>
+            </div>
             {tickets.map((t, i) => (
               <div
                 key={i}

@@ -206,6 +206,12 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: "/Users/michaelbroadbridge/Desktop/Claude/webgro-site",
   },
+  experimental: {
+    // Shared-element morphs between the work grids and case-study heroes.
+    // Uses React's <ViewTransition>; browsers without the View Transitions
+    // API just navigate normally.
+    viewTransition: true,
+  },
   redirects: legacyRedirects,
 };
 

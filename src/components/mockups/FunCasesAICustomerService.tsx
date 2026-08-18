@@ -1,11 +1,27 @@
+"use client";
+
+import { useState } from "react";
+import { useLiveLoop } from "./useLiveLoop";
+
 const PINK = "#F496BE";
 const PINK_DEEP = "#B14F7C";
 
+type Status = "review" | "drafted" | "sent";
+
 const tickets = [
-  { initial: "J", name: "Jess Morgan", subject: "Is the iPhone 15 Pro case MagSafe compatible?", status: "drafted" as const, time: "2m" },
-  { initial: "A", name: "Aran Patel", subject: "Order #27481 · when will it ship?", status: "sent" as const, time: "14m" },
-  { initial: "L", name: "Lola Garcia", subject: "Received wrong model, need a swap", status: "drafted" as const, time: "22m", active: true },
-  { initial: "M", name: "Marcus Leung", subject: "Can I customise an existing design?", status: "review" as const, time: "1h" },
+  { initial: "J", name: "Jess Morgan", subject: "Is the iPhone 15 Pro case MagSafe compatible?", status: "drafted" as Status, time: "2m" },
+  { initial: "A", name: "Aran Patel", subject: "Order #27481 · when will it ship?", status: "sent" as Status, time: "14m" },
+  { initial: "L", name: "Lola Garcia", subject: "Received wrong model, need a swap", status: "drafted" as Status, time: "22m", active: true },
+];
+
+// Rotating pool for the live top slot: each ticket arrives, gets an AI
+// draft, is approved and sent, then the next one lands.
+const incoming = [
+  { initial: "S", name: "Sofia Reyes", subject: "Do you do cases for the Pixel 10?" },
+  { initial: "K", name: "Kai Werner", subject: "Will the Tough case fit a 16 Pro with a lens protector?" },
+  { initial: "P", name: "Priya Nair", subject: "Can I add a name to the Daisy Chain design?" },
+  { initial: "O", name: "Ollie Marsh", subject: "Tracking says delivered but no parcel here" },
+  { initial: "E", name: "Elsa Lindqvist", subject: "Do Tough cases work with wireless charging?" },
 ];
 
 const statusLabel: Record<string, string> = {
@@ -25,8 +41,24 @@ function statusChip(status: string): React.CSSProperties {
 }
 
 export function FunCasesAICustomerService() {
+  // Live slot state: which incoming ticket occupies the top row, how far
+  // through its life it is, and the running header counters.
+  const [live, setLive] = useState({ i: 0, phase: 0 as 0 | 1 | 2, drafted: 12, sent: 4 });
+
+  const ref = useLiveLoop(() => {
+    setLive((s) => {
+      if (s.phase === 0) return { ...s, phase: 1, drafted: s.drafted + 1 };
+      if (s.phase === 1) return { ...s, phase: 2, drafted: s.drafted - 1, sent: s.sent + 1 };
+      return { ...s, i: (s.i + 1) % incoming.length, phase: 0 };
+    });
+  }, 2600);
+
+  const liveTicket = incoming[live.i];
+  const liveStatus: Status = live.phase === 0 ? "review" : live.phase === 1 ? "drafted" : "sent";
+
   return (
     <div
+      ref={ref}
       className="overflow-hidden rounded-3xl border border-black/10 bg-white shadow-2xl shadow-black/40"
       style={{ fontFamily: "var(--font-poppins), Poppins, system-ui, sans-serif" }}
     >
@@ -54,11 +86,11 @@ export function FunCasesAICustomerService() {
         <div className="hidden items-center gap-5 text-[10px] font-medium uppercase tracking-[0.22em] text-zinc-500 md:flex">
           <span className="inline-flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: PINK }} />
-            12 drafted
+            {live.drafted} drafted
           </span>
           <span className="inline-flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            4 sent · today
+            {live.sent} sent · today
           </span>
         </div>
       </div>
@@ -85,6 +117,34 @@ export function FunCasesAICustomerService() {
             </div>
           </div>
           <div className="divide-y divide-zinc-100">
+            {/* Live slot: arrives, drafts, sends, rotates */}
+            <div
+              key={`live-${live.i}`}
+              className="mock-row-in flex items-start gap-3 px-5 py-3.5"
+              style={liveStatus === "review" ? { backgroundColor: `${PINK}08` } : undefined}
+            >
+              <div
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white"
+                style={{ backgroundColor: PINK }}
+              >
+                {liveTicket.initial}
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center justify-between gap-2">
+                  <p className="truncate text-xs font-medium text-zinc-900">{liveTicket.name}</p>
+                  <span className="shrink-0 text-[10px] text-zinc-400">now</span>
+                </div>
+                <p className="mt-1 truncate text-[11px] leading-snug text-zinc-600">{liveTicket.subject}</p>
+                <div className="mt-1.5">
+                  <span
+                    className="inline-block rounded-full border px-2 py-0.5 text-[9px] font-medium uppercase tracking-[0.18em] transition-colors duration-300"
+                    style={statusChip(liveStatus)}
+                  >
+                    {statusLabel[liveStatus]}
+                  </span>
+                </div>
+              </div>
+            </div>
             {tickets.map((t, i) => (
               <div
                 key={i}

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { ContactForm } from "@/components/ContactForm";
+import { ReceptionistOrb } from "@/components/ReceptionistOrb";
 
 /**
  * Homepage contact section. The form itself lives in <ContactForm /> so the
@@ -148,6 +149,10 @@ export function ContactSection() {
               <p className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.22em] text-white/50">
                 Usually reply within one working day
               </p>
+            </div>
+
+            <div data-contact-meta className="mt-12 border-t border-white/10 pt-10">
+              <ReceptionistOrb />
             </div>
           </div>
 

@@ -7,6 +7,7 @@ import useIsomorphicLayoutEffect from "@/lib/useIsomorphicLayoutEffect";
 import type { Accent } from "@/content/work";
 import { contact } from "@/content/contact";
 import { ContactForm } from "@/components/ContactForm";
+import { ReceptionistOrb } from "@/components/ReceptionistOrb";
 
 const accentDot: Record<Accent, string> = {
   blue: "bg-wg-blue",
@@ -325,6 +326,9 @@ export function ContactView() {
                   with a one-liner. We&rsquo;ll reply with a couple of
                   questions, no scoping expected.
                 </p>
+              </div>
+              <div data-contactpg-reveal className="mt-10">
+                <ReceptionistOrb />
               </div>
             </div>
             <div className="md:col-span-7">

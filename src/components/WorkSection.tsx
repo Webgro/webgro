@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { ViewTransition } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 type Accent = "blue" | "violet" | "teal";
@@ -229,12 +230,14 @@ export function WorkSection() {
                 data-cursor="hover"
                 className="absolute inset-0 block"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={c.image}
-                  alt={c.client}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
-                />
+                <ViewTransition name={`case-${c.slug}`} share="morph" default="none">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={c.image}
+                    alt={c.client}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
+                  />
+                </ViewTransition>
 
                 {/* Bottom gradient for text readability */}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-wg-ink via-wg-ink/30 to-transparent" />

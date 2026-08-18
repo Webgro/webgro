@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, ViewTransition } from "react";
 import {
   categoryLabel,
   type Accent,
@@ -110,12 +110,14 @@ function Card({ c }: { c: CaseStudy }) {
 
       <div className={`relative ${aspect} overflow-hidden`}>
         {c.heroImage ? (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
-            src={c.heroImage}
-            alt={c.heroImageAlt}
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
-          />
+          <ViewTransition name={`case-${c.slug}`} share="morph" default="none">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={c.heroImage}
+              alt={c.heroImageAlt}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
+            />
+          </ViewTransition>
         ) : (
           <div
             className={`absolute inset-0 flex items-center justify-center bg-gradient-to-br ${accentGradient[c.accent]} via-wg-ink-raised to-wg-ink`}

@@ -219,3 +219,74 @@ h1, h2, h3, h4, h5, h6 {
 [data-contactpg-step] {
   opacity: 0;
 }
+
+/* ---------------------------------------------------------------------------
+   View transitions: shared-element morph between work-grid cards and
+   case-study heroes (see <ViewTransition share="morph"> usages). The blur
+   keyframe hides interpolation artifacts mid-flight.
+--------------------------------------------------------------------------- */
+::view-transition-group(.morph) {
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: wg-morph-blur;
+}
+@keyframes wg-morph-blur {
+  30% {
+    filter: blur(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
+/* Live mockup rows: entrance for newly-arrived feed items. */
+.mock-row-in {
+  animation: wg-row-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes wg-row-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mock-row-in {
+    animation: none;
+  }
+}
+
+/* Receptionist orb: tiny equaliser bars while the assistant speaks. */
+.wg-eq-bar {
+  display: inline-block;
+  width: 3px;
+  height: 10px;
+  border-radius: 2px;
+  background: linear-gradient(to top, var(--color-wg-blue, #2d8dff), var(--color-wg-teal, #00c9a7));
+  animation: wg-eq 700ms ease-in-out infinite alternate;
+  transform-origin: bottom;
+}
+@keyframes wg-eq {
+  from {
+    transform: scaleY(0.35);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wg-eq-bar {
+    animation: none;
+  }
+}

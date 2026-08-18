@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, ViewTransition } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import useIsomorphicLayoutEffect from "@/lib/useIsomorphicLayoutEffect";
 import type { Accent, CaseBlock, CaseStudy } from "@/content/work";
@@ -695,12 +695,14 @@ export function CaseStudyView({
       <div className="relative">
         <div className="relative aspect-[16/9] w-full overflow-hidden bg-wg-ink-raised md:aspect-[21/9]">
           {caseStudy.heroImage ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img
-              src={caseStudy.heroImage}
-              alt={caseStudy.heroImageAlt}
-              className="absolute inset-0 h-full w-full object-cover"
-            />
+            <ViewTransition name={`case-${caseStudy.slug}`} share="morph" default="none">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={caseStudy.heroImage}
+                alt={caseStudy.heroImageAlt}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </ViewTransition>
           ) : (
             <Placeholder client={caseStudy.client} accent={caseStudy.accent} />
           )}
@@ -774,12 +776,14 @@ export function CaseStudyView({
               <div className="grid grid-cols-1 md:grid-cols-12">
                 <div className="relative aspect-[16/11] md:col-span-7 md:aspect-auto">
                   {next.heroImage ? (
-                    /* eslint-disable-next-line @next/next/no-img-element */
-                    <img
-                      src={next.heroImage}
-                      alt={next.heroImageAlt}
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
-                    />
+                    <ViewTransition name={`case-${next.slug}`} share="morph" default="none">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={next.heroImage}
+                        alt={next.heroImageAlt}
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+                      />
+                    </ViewTransition>
                   ) : (
                     <Placeholder client={next.client} accent={next.accent} />
                   )}

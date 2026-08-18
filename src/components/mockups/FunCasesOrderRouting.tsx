@@ -1,3 +1,8 @@
+"use client";
+
+import { useState } from "react";
+import { useLiveLoop } from "./useLiveLoop";
+
 type RoutedOrder = {
   order: string;
   item: string;
@@ -9,6 +14,18 @@ type RoutedOrder = {
   statusKind: "printed" | "printing" | "queued";
   highlight?: boolean;
 };
+
+// Rotating pool of arriving orders for the live feed.
+const arrivals: Array<Pick<RoutedOrder, "item" | "model" | "caseType" | "route">> = [
+  { item: "Clean Girl", model: "iPhone 16 Pro", caseType: "Standard", route: "auto" },
+  { item: "Sour Pattern", model: "Galaxy S26", caseType: "Standard MagSafe", route: "auto" },
+  { item: "Custom Photo", model: "iPhone 15", caseType: "Tough", route: "manual" },
+  { item: "Daisy Chain", model: "iPhone 14 Pro", caseType: "Clear", route: "auto" },
+  { item: "Norris Helmet Pattern", model: "Pixel 9 Pro", caseType: "MagSafe Tough", route: "manual" },
+  { item: "Smelly Cat Friends", model: "iPhone 16", caseType: "Standard", route: "auto" },
+];
+
+const machines = ["Machine 1", "Machine 2", "Machine 3"];
 
 const orders: RoutedOrder[] = [
   { order: "FC351208", item: "Strawberry Stripes", model: "iPhone 16", caseType: "Standard", route: "auto", destination: "Machine 2", status: "Printed · 1m 52s", statusKind: "printed" },
@@ -26,8 +43,58 @@ const GREEN = "#16a34a";
 const AMBER = "#b45309";
 
 export function FunCasesOrderRouting() {
+  // Live feed: new orders land on top, auto ones print through, counters run.
+  const [state, setState] = useState({
+    feed: orders,
+    auto: 318,
+    manual: 86,
+    nextNum: 351209,
+    poolIdx: 0,
+  });
+
+  const ref = useLiveLoop(() => {
+    setState((s) => {
+      // Progress the oldest in-flight print to done, deterministic timing.
+      let printedOne = false;
+      const progressed = s.feed.map((o) => {
+        if (!printedOne && o.statusKind === "printing") {
+          printedOne = true;
+          return {
+            ...o,
+            highlight: false,
+            statusKind: "printed" as const,
+            status: `Printed · 1m ${44 + (s.nextNum % 17)}s`,
+          };
+        }
+        return { ...o, highlight: false };
+      });
+
+      // A new order lands and gets routed.
+      const a = arrivals[s.poolIdx];
+      const isAuto = a.route === "auto";
+      const queueDepth = progressed.filter((o) => o.statusKind === "queued").length;
+      const landed: RoutedOrder = {
+        ...a,
+        order: `FC${s.nextNum}`,
+        destination: isAuto ? machines[s.nextNum % machines.length] : "In-house queue",
+        statusKind: isAuto ? "printing" : "queued",
+        status: isAuto ? "Printing…" : `Queued · #${queueDepth + 1}`,
+        highlight: true,
+      };
+
+      return {
+        feed: [landed, ...progressed].slice(0, 8),
+        auto: isAuto ? s.auto + 1 : s.auto,
+        manual: isAuto ? s.manual : s.manual + 1,
+        nextNum: s.nextNum + 1,
+        poolIdx: (s.poolIdx + 1) % arrivals.length,
+      };
+    });
+  }, 3000);
+
   return (
     <div
+      ref={ref}
       className="overflow-hidden rounded-3xl border border-black/10 bg-white shadow-2xl shadow-black/40"
       style={{ fontFamily: "var(--font-poppins), Poppins, system-ui, sans-serif" }}
     >
@@ -77,7 +144,7 @@ export function FunCasesOrderRouting() {
               </p>
             </div>
             <div className="mt-1 flex items-baseline gap-2">
-              <p className="text-lg font-bold tracking-tight text-zinc-900 md:text-xl">318</p>
+              <p className="text-lg font-bold tracking-tight text-zinc-900 md:text-xl">{state.auto}</p>
               <p className="text-[10px] text-zinc-500">orders today · avg 1m 48s to print</p>
             </div>
           </div>
@@ -91,8 +158,10 @@ export function FunCasesOrderRouting() {
               </p>
             </div>
             <div className="mt-1 flex items-baseline gap-2">
-              <p className="text-lg font-bold tracking-tight text-zinc-900 md:text-xl">86</p>
-              <p className="text-[10px] text-zinc-500">orders today · queue of 4</p>
+              <p className="text-lg font-bold tracking-tight text-zinc-900 md:text-xl">{state.manual}</p>
+              <p className="text-[10px] text-zinc-500">
+                orders today · queue of {state.feed.filter((o) => o.statusKind === "queued").length}
+              </p>
             </div>
           </div>
         </div>
@@ -111,8 +180,12 @@ export function FunCasesOrderRouting() {
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-100 text-[11px] text-zinc-700">
-              {orders.map((o, i) => (
-                <tr key={i} style={o.highlight ? { backgroundColor: `${PINK}14` } : undefined}>
+              {state.feed.map((o) => (
+                <tr
+                  key={o.order}
+                  className={o.highlight ? "mock-row-in" : undefined}
+                  style={o.highlight ? { backgroundColor: `${PINK}14` } : undefined}
+                >
                   <td className="hidden px-3 py-2.5 text-[10px] text-zinc-500 lg:table-cell">
                     {o.order}
                   </td>
