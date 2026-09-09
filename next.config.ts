@@ -213,6 +213,16 @@ const nextConfig: NextConfig = {
     viewTransition: true,
   },
   redirects: legacyRedirects,
+  async rewrites() {
+    return [
+      // Clean URLs for client proposals stored as static HTML in
+      // /public/proposals. Middleware password-gates the whole path.
+      {
+        source: "/proposals/seo/origin-architectural",
+        destination: "/proposals/seo/origin-architectural.html",
+      },
+    ];
+  },
 };
 
 export default nextConfig;

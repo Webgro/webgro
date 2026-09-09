@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Origin Architectural SEO Audit &amp; Proposal | Webgro</title>
+<meta name="description" content="Organic search audit and proposal for Origin Architectural, prepared by Webgro. Findings from a full crawl of 1,168 URLs and Semrush UK data, September 2026.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Origin Architectural SEO Audit &amp; Proposal">
+<meta property="og:description" content="Organic search audit and proposal prepared by Webgro, September 2026.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+:root{
+  --ink:#07080c; --raised:#0d1117; --raised-2:#131a24;
+  --line:#1e2733; --line-soft:#182029;
+  --fg:#edeff4; --fg-dim:#a8b3c7; --slate:#6b7a99;
+  --blue:#2d8dff; --violet:#7c3aed; --teal:#00c9a7;
+  --crit:#ff4d5e; --warn:#ffa726;
+  --display:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;
+  --body:"Inter",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --pad:clamp(20px,5vw,64px);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ink);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.68;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+.wrap{max-width:1080px;margin:0 auto;padding:0 var(--pad)}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15;letter-spacing:-.02em}
+p{margin:0}
+a{color:var(--blue)}
+.stack{display:flex;flex-direction:column}
+.g16{gap:16px}.g24{gap:24px}
+
+.masthead{border-bottom:1px solid var(--line);background:radial-gradient(1100px 420px at 12% -10%,rgba(45,141,255,.16),transparent 60%),radial-gradient(800px 380px at 88% 0%,rgba(124,58,237,.13),transparent 62%)}
+.masthead .wrap{padding-top:36px;padding-bottom:56px}
+.brandbar{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:64px}
+.logo{font-family:var(--display);font-weight:800;font-size:23px;letter-spacing:-.045em;color:var(--fg)}
+.logo span{color:var(--blue)}
+.brandmeta{font-family:var(--mono);font-size:11px;color:var(--slate);text-align:right;line-height:1.7;letter-spacing:.02em}
+.eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}
+h1{font-size:clamp(32px,5.2vw,55px);font-weight:800;letter-spacing:-.035em;max-width:18ch}
+.dek{font-size:clamp(16.5px,2vw,19px);color:var(--fg-dim);max-width:66ch;line-height:1.62}
+
+.verdict{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--raised)}
+.vinner{max-width:1080px;margin:0 auto;padding:0 var(--pad);display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.vcell{padding:26px 26px 26px 0;border-right:1px solid var(--line-soft)}
+.vcell + .vcell{padding-left:26px}
+.vcell:last-child{border-right:none;padding-right:0}
+.vnum{font-family:var(--display);font-size:clamp(28px,4.2vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.vnum.bad{color:var(--crit)}.vnum.warn{color:var(--warn)}.vnum.good{color:var(--teal)}
+.vlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--slate);margin-top:10px}
+.vsub{font-size:13px;color:var(--fg-dim);margin-top:6px;line-height:1.5}
+
+section{padding:70px 0;border-bottom:1px solid var(--line-soft)}
+section:last-of-type{border-bottom:none}
+.sechead{display:flex;align-items:baseline;gap:16px;margin-bottom:10px;flex-wrap:wrap}
+.secnum{font-family:var(--mono);font-size:11px;color:var(--slate);letter-spacing:.1em;padding-top:6px}
+h2{font-size:clamp(24px,3.3vw,34px);font-weight:700}
+.lede{color:var(--fg-dim);max-width:68ch;font-size:17px}
+h3{font-size:20px;font-weight:700}
+.prose{max-width:68ch;color:var(--fg-dim)}
+.prose strong{color:var(--fg);font-weight:600}
+.prose p + p{margin-top:15px}
+
+.chartbox{background:var(--raised);border:1px solid var(--line);border-radius:10px;padding:24px;margin-top:32px}
+.chartlegend{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:18px;font-family:var(--mono);font-size:11.5px;color:var(--fg-dim)}
+.swatch{display:inline-block;width:22px;height:3px;border-radius:2px;vertical-align:middle;margin-right:8px}
+.chartscroll{overflow-x:auto}
+.chartnote{font-size:12.5px;color:var(--slate);margin-top:14px;max-width:74ch;line-height:1.6}
+
+.findings{display:flex;flex-direction:column;gap:18px;margin-top:34px}
+.finding{background:var(--raised);border:1px solid var(--line);border-left:3px solid var(--slate);border-radius:0 8px 8px 0;padding:22px 26px}
+.finding.critical{border-left-color:var(--crit)}
+.finding.high{border-left-color:var(--warn)}
+.finding.good{border-left-color:var(--teal)}
+.fhead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:11px}
+.sev{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 9px;border-radius:3px}
+.sev.critical{background:rgba(255,77,94,.15);color:var(--crit)}
+.sev.high{background:rgba(255,167,38,.15);color:var(--warn)}
+.sev.good{background:rgba(0,201,167,.15);color:var(--teal)}
+.finding h3{font-size:18.5px;letter-spacing:-.015em}
+.finding p{color:var(--fg-dim);font-size:15.5px;max-width:76ch}
+.finding p + p{margin-top:13px}
+
+.tablescroll{overflow-x:auto;margin-top:26px;border:1px solid var(--line);border-radius:8px;background:var(--raised)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--slate);text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;white-space:nowrap}
+td{padding:13px 18px;border-bottom:1px solid var(--line-soft);color:var(--fg-dim);vertical-align:top;line-height:1.55}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.url{font-family:var(--mono);font-size:12.5px;color:var(--fg);word-break:break-all}
+.pos{font-family:var(--mono);font-weight:700;font-variant-numeric:tabular-nums}
+.pos.p1{color:var(--teal)}.pos.p2{color:var(--warn)}.pos.p3{color:var(--crit)}
+.us{color:var(--fg);font-weight:600}
+.verdict-keep{color:var(--teal);font-weight:600}
+.verdict-merge{color:var(--warn);font-weight:600}
+.flag{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--crit)}
+
+.phases{display:flex;flex-direction:column;margin-top:34px;border-left:1px solid var(--line)}
+.phase{padding:0 0 34px 28px;position:relative}
+.phase:last-child{padding-bottom:0}
+.phase::before{content:"";position:absolute;left:-5px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px var(--ink)}
+.phase.later::before{background:var(--slate)}
+.ptime{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);margin-bottom:7px}
+.phase.later .ptime{color:var(--slate)}
+.phase h3{font-size:18px;margin-bottom:10px}
+.phase ul{margin:0;padding-left:19px;color:var(--fg-dim);font-size:15px}
+.phase li{margin-bottom:7px;line-height:1.6}
+.phase li::marker{color:var(--slate)}
+
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(262px,1fr));gap:18px;margin-top:36px;align-items:start}
+.tier{background:var(--raised);border:1px solid var(--line);border-radius:10px;padding:28px 26px;display:flex;flex-direction:column;gap:18px}
+.tier.pick{border-color:var(--blue);background:linear-gradient(180deg,rgba(45,141,255,.07),var(--raised) 220px);position:relative}
+.pickflag{position:absolute;top:-1px;right:20px;background:var(--blue);color:#04070d;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:5px 11px;border-radius:0 0 4px 4px}
+.tname{font-family:var(--display);font-size:21px;font-weight:700;letter-spacing:-.02em}
+.tfor{font-size:13.5px;color:var(--slate);margin-top:5px;line-height:1.55}
+.tprice{font-family:var(--display);font-size:38px;font-weight:800;letter-spacing:-.04em;font-variant-numeric:tabular-nums;line-height:1}
+.tprice small{font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:0;color:var(--slate);display:block;margin-top:8px}
+.tier ul{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:14.5px;color:var(--fg-dim)}
+.tier li{padding-left:22px;position:relative;line-height:1.55}
+.tier li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:2px;background:var(--blue);border-radius:1px}
+.tier.base li::before{background:var(--slate)}
+.terms{font-size:13.5px;color:var(--slate);margin-top:26px;max-width:76ch;line-height:1.7}
+
+.callout{background:var(--raised-2);border:1px solid var(--line);border-radius:10px;padding:26px 28px;margin-top:32px}
+.callout .eyebrow{margin-bottom:11px;display:block}
+.callout p{color:var(--fg-dim);max-width:74ch}
+.callout p + p{margin-top:13px}
+
+footer{background:var(--raised);border-top:1px solid var(--line);padding:48px 0 56px}
+.fgrid{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;align-items:flex-start}
+.fmeta{font-family:var(--mono);font-size:12px;color:var(--slate);line-height:1.9}
+.fmeta a{color:var(--blue);text-decoration:none}
+.fmeta a:hover{text-decoration:underline}
+
+a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:640px){
+  .vcell,.vcell + .vcell{border-right:none;border-bottom:1px solid var(--line-soft);padding:22px 0}
+  .vcell:last-child{border-bottom:none}
+  .brandbar{margin-bottom:40px}
+  section{padding:52px 0}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="brandbar">
+      <div class="logo">web<span>gro</span></div>
+      <div class="brandmeta">
+        Prepared for Origin Architectural<br>
+        9 September 2026 &middot; Commercial in confidence
+      </div>
+    </div>
+    <div class="stack g24">
+      <span class="eyebrow">Organic Search Audit &amp; Proposal</span>
+      <h1>Your organic traffic was already falling before the replatform, and it hasn't stopped.</h1>
+      <p class="dek">This document sets out what the search data actually shows, what we think is causing it, what it would take to put right, and how to get your components appearing in AI assistant answers while that market is still early. Everything here comes from a full crawl of all 1,168 URLs on originarchitectural.co.uk and from Semrush UK data, both carried out on 9 September 2026.</p>
+    </div>
+  </div>
+</header>
+
+<div class="verdict">
+  <div class="vinner">
+    <div class="vcell">
+      <div class="vnum bad">473</div>
+      <div class="vlabel">Monthly organic sessions</div>
+      <div class="vsub">Estimated, against 2,585 in July 2025</div>
+    </div>
+    <div class="vcell">
+      <div class="vnum bad">209</div>
+      <div class="vlabel">Of 236 blog posts</div>
+      <div class="vsub">Rank for nothing at all in the UK index</div>
+    </div>
+    <div class="vcell">
+      <div class="vnum warn">9</div>
+      <div class="vlabel">Overlapping landing pages</div>
+      <div class="vsub">Between 92% and 99% identical text</div>
+    </div>
+    <div class="vcell">
+      <div class="vnum good">53&times;</div>
+      <div class="vlabel">Gap to the category leader</div>
+      <div class="vsub">The Glass Warehouse, on the same terms</div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+<section>
+  <div class="sechead"><span class="secnum">01</span><h2>Two separate things have happened</h2></div>
+  <p class="lede">Telling them apart matters, because only one of them is still costing you money.</p>
+
+  <div class="chartbox">
+    <div class="chartlegend">
+      <span><span class="swatch" style="background:#2d8dff"></span>Estimated organic sessions</span>
+      <span><span class="swatch" style="background:#7c3aed"></span>Ranking keywords</span>
+    </div>
+    <div class="chartscroll"><svg id="trend" viewBox="0 0 940 340" width="100%" style="min-width:620px;display:block" role="img" aria-label="Organic sessions and ranking keywords for originarchitectural.co.uk from July 2024 to September 2026. Sessions peak at 2,585 in July 2025 and fall to 473. Keywords decline steadily and drop sharply after the February 2026 Shopify migration."></svg></div>
+    <p class="chartnote">Semrush UK database, monthly snapshots on a consistent methodology since 2022. These are modelled estimates and will not match your analytics exactly, though the shape of the trend is dependable.</p>
+  </div>
+
+  <div class="prose" style="margin-top:30px">
+    <p>Organic traffic reached an estimated peak of 2,585 sessions in July 2025 and had fallen to 641 by that December, losing roughly three quarters of its volume across five months while the site was still running on WordPress. That period accounts for the bulk of the damage, and it happened well before the replatform, which means the cause sits in how the pages themselves were built and organised rather than in anything that changed in February.</p>
+    <p>The migration to Shopify then removed a large number of legacy URLs, and that is what produces the steep fall in ranking keyword count between February and May 2026. Those pages were, for the most part, earning very little, which is why the traffic line moves far less than the keyword line across the same window. Clearing out low value pages during a replatform is normal practice and the keyword count reads worse than the commercial reality behind it.</p>
+    <p><strong>The migration explains the keyword count. It does not explain the traffic.</strong> The recoverable ground is in the 2025 decline, and that is where the work below is aimed.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">02</span><h2>Nine pages competing to be the same page</h2></div>
+  <p class="lede">Whichever way the traffic history is read, this is the problem sitting underneath it.</p>
+
+  <div class="findings">
+    <div class="finding critical">
+      <div class="fhead"><span class="sev critical">Critical</span><h3>A test page is live, indexable, and 99.2% identical to your main commercial page</h3></div>
+      <p>The URL <span class="us">/pages/duplicate-of-glass-balustrades-for-testing</span> returns a 200 status, carries its own self-referencing canonical tag, appears in your XML sitemap, and shares an identical title tag and H1 heading with <span class="us">/pages/glass-balustrades</span>. We measured the body text overlap between the two at 99.2 per cent, which leaves Google holding two effectively identical documents and being asked to work out which of them should rank for your most commercially important term.</p>
+      <p>Sitting alongside it, <span class="us">/pages/test-iframe</span> is also live and indexable with 34 words of content on it.</p>
+    </div>
+
+    <div class="finding critical">
+      <div class="fhead"><span class="sev critical">Critical</span><h3>Seven landing pages built from a single template</h3></div>
+      <p>Garden, patio, outdoor, decking, indoor, balcony and stairs each have a dedicated page under /pages/, and the word counts across all seven land between 3,459 and 3,483. Text overlap against the main balustrade page runs between 92.4 and 93.3 per cent, while garden measured against patio comes out at 94.8 per cent, which tells you they were produced from one template with the modifier swapped rather than written as pages in their own right.</p>
+      <p>The search intent behind garden, patio and outdoor glass balustrades is close enough to identical that Google returns broadly the same results for all three, so what could have been one authoritative page has instead been divided into several weak ones, and Google's guidance on scaled content abuse addresses this pattern directly.</p>
+    </div>
+
+    <div class="finding critical">
+      <div class="fhead"><span class="sev critical">Critical</span><h3>The same topic covered twice, under /pages/ and again under /collections/</h3></div>
+      <p>You are running both <span class="us">/pages/juliet-balconies</span> and <span class="us">/collections/juliet-balconies</span>, and the same duplication exists between <span class="us">/pages/glass-balustrade-stairs</span> and <span class="us">/collections/staircase-balustrades</span>. Semrush attributes 28 keywords to each of the two Juliet URLs, which is the signature of Google alternating between them rather than settling on one, and neither URL accumulates the authority it would need to compete properly.</p>
+      <p>For comparison, The Glass Warehouse holds first place for "juliet balcony" at 8,100 searches a month using a single URL. You sit at thirteenth using two.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">03</span><h2>What the content programme has produced</h2></div>
+  <p class="lede">There are 236 blog posts on the site. We checked every one of them against the UK search index, and 209 rank for nothing whatsoever. Five of them account for all the blog traffic the site receives.</p>
+
+  <div class="findings">
+    <div class="finding critical">
+      <div class="fhead"><span class="sev critical">Critical</span><h3>Fifty nine location posts for towns you have no presence in</h3></div>
+      <p>The blog carries 59 posts following the pattern "Glass Balustrade in Lisburn", "Glass Balustrade in Bingley", "Glass Balustrade in Chorley", "Glass Balustrade in Twickenham" and so on through Wigan, Poole, Wakefield, Preston, Oldham, Taunton, Southall, Kensington and roughly fifty more. The median length is 370 words and 38 of the 59 fall under 400 words.</p>
+      <p>Three of those 59 posts appear anywhere in the UK index. To be fair to the work, these were individually written rather than mechanically spun, and we measured the text overlap between them at only 7 to 9 per cent, so real effort went into producing them. The difficulty is strategic. You are a national supplier shipping components across the country, you hold no premises in Bingley or Taunton, and Google has no reason to treat you as a local result in those places. The budget was spent on a strategy that could not have worked.</p>
+    </div>
+
+    <div class="finding high">
+      <div class="fhead"><span class="sev high">High</span><h3>The blog competes against itself on the questions that matter</h3></div>
+      <p>Several of your highest intent topics have been written multiple times, so the posts split the signal between them in exactly the way the landing pages do. Cost is covered by "How much does a glass balustrade cost?", "How much is a Glass Balustrade per meter?", "The Cost-Effectiveness Of Glass Balustrades" and "Is a Glass Balustrade Expensive?". Height and regulations are covered by "What height should a glass balustrade be?", "What is the Legal Height for a Glass Balustrade?", "Balustrade Regulations UK", "A Complete Guide to Glass Balustrade Regulations in the UK" and "Understanding UK Building Regulations for Glass Balustrades in 2026". Installation is covered by both "How to install a glass balustrade" and "How to fit a glass balustrade".</p>
+      <p>Our clustering found <strong>18 groups of near duplicate topics covering 115 of the 236 posts</strong>. Seven pairs share an exactly identical title, including two posts both called "Glass Balustrade", two called "glass balustrade blog" and two asking whether you need planning permission for a Juliet balcony.</p>
+    </div>
+
+    <div class="finding high">
+      <div class="fhead"><span class="sev high">High</span><h3>The library is too thin to compete on the terms it targets</h3></div>
+      <p>The median blog post runs to 399 words, 119 of the 236 fall under 400 words, and 218 of them fall under 700. Cost, regulations and specification questions are exactly where a supplier can win authority in this category, and they are also the questions where the competing results are thorough guides rather than short posts.</p>
+      <p>Worth noting that the raw material is here. Your guide to UK glass balustrade loading requirements already picks up 7 keywords including "bs 6180:2011", which shows the technical angle works when it is given proper depth.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="eyebrow">The scale of it</span>
+    <p>Across the whole site, 1,168 URLs are indexed and <strong>112 of them rank for a single keyword or more</strong>. Twenty two generate any traffic. Put another way, more than nine in ten pages on the site are doing nothing at all in search, and a substantial share of them were created deliberately as part of a content programme.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">04</span><h2>Titles and descriptions across the catalogue</h2></div>
+  <p class="lede">We pulled the title tag and meta description from every URL on the site. These are the gaps, and each one is a place where Google is either given nothing to work with or given the same thing twice.</p>
+
+  <div class="tablescroll">
+    <table>
+      <thead><tr><th>Issue</th><th class="num">URLs affected</th><th>What it means in practice</th></tr></thead>
+      <tbody>
+        <tr><td class="us">Product titles over 60 characters</td><td class="num">312</td><td>Truncated in search results, so the distinguishing part of the name is frequently cut off. That is 42% of the catalogue</td></tr>
+        <tr><td class="us">Products sharing a duplicate title</td><td class="num">95</td><td>Across 38 groups. Seven separate products are all titled "Aluminium Deep U Channel | Length 2.49m | Shower U Channel"</td></tr>
+        <tr><td class="us">Products sharing a duplicate description</td><td class="num">62</td><td>Across 24 groups, so variants that differ by glass thickness or finish are described identically</td></tr>
+        <tr><td class="us">URLs with no meta description at all</td><td class="num">55</td><td>21 products, 15 blog posts, 12 pages and 7 collections, leaving Google to invent the snippet</td></tr>
+        <tr><td class="us">Collection pages under 200 words</td><td class="num">15</td><td>Too thin to rank for the category terms they are built around</td></tr>
+        <tr><td class="us">Blog posts sharing an exact duplicate title</td><td class="num">14</td><td>Seven pairs, including two posts both titled simply "Glass Balustrade"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="prose" style="margin-top:24px">None of this is complicated to fix, and none of it is the reason your traffic halved. It is included because it is measurable, because it accumulates, and because the duplicate titles in particular tell you the catalogue has not been reviewed as a whole in some time. A product range where seven items carry the same title is a range Google cannot tell apart.</p>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">05</span><h2>Where the traffic actually comes from</h2></div>
+  <p class="lede">Organic traffic across the whole site totals an estimated 473 sessions a month, and it breaks down as follows.</p>
+
+  <div class="tablescroll">
+    <table>
+      <thead><tr><th>Page</th><th class="num">Sessions</th><th class="num">Share</th><th>What it represents</th></tr></thead>
+      <tbody>
+        <tr><td class="url">/ (homepage)</td><td class="num">168</td><td class="num">35.5%</td><td>People searching for your brand name, who would have found you regardless</td></tr>
+        <tr><td class="url">/blogs/general/12-common-questions-about-french-balconies</td><td class="num">74</td><td class="num">15.6%</td><td>Definition queries carrying almost no buying intent</td></tr>
+        <tr><td class="url">/products/spanner-10mm-head</td><td class="num">72</td><td class="num">15.2%</td><td>Second place for "10mm spanner", where the searcher wants a hand tool</td></tr>
+        <tr><td class="url">/blogs/general/can-you-sit-on-a-juliet-balcony</td><td class="num">35</td><td class="num">7.4%</td><td>Curiosity rather than purchase intent</td></tr>
+        <tr><td class="url">/collections/glass-clamps</td><td class="num">29</td><td class="num">6.1%</td><td>Commercial traffic against a genuine product category</td></tr>
+        <tr><td class="url">/collections/juliet-balconies</td><td class="num">13</td><td class="num">2.7%</td><td>Your flagship category, at thirteen sessions a month</td></tr>
+        <tr><td class="url">All remaining URLs (1,162 of them)</td><td class="num">82</td><td class="num">17.3%</td><td>Effectively dormant</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="prose" style="margin-top:26px">
+    <p>Once the brand searches and the spanner are set aside, a substantial share of what remains is people asking what a French balcony is. Your Juliet balcony category page, competing in a market where the head term alone carries 8,100 monthly searches, brings in thirteen sessions.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">06</span><h2>The commercial terms you are missing</h2></div>
+  <p class="lede">These are your current positions on the terms that carry buying intent. Very little here needs a new page, and most of it needs the existing pages to stop competing with each other.</p>
+
+  <div class="tablescroll">
+    <table>
+      <thead><tr><th>Keyword</th><th class="num">UK volume</th><th class="num">You</th><th class="num">Glass Warehouse</th><th>Page currently ranking</th></tr></thead>
+      <tbody>
+        <tr><td class="us">balustrade</td><td class="num">12,100</td><td class="num"><span class="pos p3">&mdash;</span></td><td class="num"><span class="pos p1">3</span></td><td>Nothing ranking</td></tr>
+        <tr><td class="us">juliet balcony</td><td class="num">8,100</td><td class="num"><span class="pos p2">13</span></td><td class="num"><span class="pos p1">1</span></td><td>/collections/juliet-balconies</td></tr>
+        <tr><td class="us">glass balustrade</td><td class="num">5,400</td><td class="num"><span class="pos p3">31</span></td><td class="num"><span class="pos p1">&mdash;</span></td><td>A blog post rather than the category</td></tr>
+        <tr><td class="us">juliette balcony</td><td class="num">3,600</td><td class="num"><span class="pos p3">&mdash;</span></td><td class="num"><span class="pos p1">1</span></td><td>Nothing ranking</td></tr>
+        <tr><td class="us">glass banister</td><td class="num">2,400</td><td class="num"><span class="pos p3">31</span></td><td class="num"><span class="pos p1">&mdash;</span></td><td>/pages/glass-balustrade-stairs</td></tr>
+        <tr><td class="us">decking balustrade</td><td class="num">1,900</td><td class="num"><span class="pos p3">&mdash;</span></td><td class="num"><span class="pos p1">&mdash;</span></td><td>Nothing ranking</td></tr>
+        <tr><td class="us">balustrade staircases</td><td class="num">1,600</td><td class="num"><span class="pos p3">24</span></td><td class="num"><span class="pos p1">&mdash;</span></td><td>/pages/glass-balustrade-stairs</td></tr>
+        <tr><td class="us">frameless glass balustrade</td><td class="num">1,000</td><td class="num"><span class="pos p3">&mdash;</span></td><td class="num"><span class="pos p1">&mdash;</span></td><td>Nothing ranking</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="prose" style="margin-top:24px">Those eight terms carry roughly <strong>36,000 monthly searches</strong> between them and you currently capture a negligible share. Lifting <span class="us">/collections/juliet-balconies</span> from thirteenth into the top five on "juliet balcony" alone would bring in more traffic than the entire site earns at present.</p>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">07</span><h2>Which of the landing pages are worth keeping</h2></div>
+  <p class="lede">Merging all seven would be the wrong call. Four of them sit on distinct demand and deserve rewriting properly, while three are chasing the same searches as each other and should be consolidated.</p>
+
+  <div class="tablescroll">
+    <table>
+      <thead><tr><th>Page</th><th class="num">Cluster volume</th><th class="num">Difficulty</th><th>Recommendation</th></tr></thead>
+      <tbody>
+        <tr><td class="us">Decking</td><td class="num">2,860</td><td class="num">5&ndash;9</td><td><span class="verdict-keep">Keep and rewrite.</span> "Decking balustrade" alone carries 1,900 searches at low difficulty, competes against timber and composite suppliers rather than glass ones, and answers a specific fixing problem.</td></tr>
+        <tr><td class="us">Frameless</td><td class="num">1,000</td><td class="num">16</td><td><span class="verdict-keep">Keep and rewrite.</span> A product type rather than a location, so the buyer is choosing a system and needs different information.</td></tr>
+        <tr><td class="us">Stairs</td><td class="num">1,000</td><td class="num">19</td><td><span class="verdict-keep">Keep and rewrite.</span> Distinct application with its own regulations and measuring requirements, and it already holds 57 keywords.</td></tr>
+        <tr><td class="us">Balcony</td><td class="num">800</td><td class="num">12&ndash;20</td><td><span class="verdict-keep">Keep and rewrite.</span> Genuinely different from a ground level installation and it overlaps usefully with your Juliet range.</td></tr>
+        <tr><td class="us">Outdoor</td><td class="num">390</td><td class="num">20</td><td><span class="verdict-merge">Keep as the umbrella.</span> Absorbs garden and patio, which lifts its combined relevance to roughly 890 searches.</td></tr>
+        <tr><td class="us">Garden</td><td class="num">430</td><td class="num">4&ndash;12</td><td><span class="verdict-merge">Merge into outdoor,</span> with a 301 redirect. Google already returns near identical results for both.</td></tr>
+        <tr><td class="us">Patio</td><td class="num">170</td><td class="num">8</td><td><span class="verdict-merge">Merge into outdoor,</span> with a 301 redirect.</td></tr>
+        <tr><td class="us">Indoor</td><td class="num">110</td><td class="num">8</td><td><span class="verdict-merge">Merge into the main balustrade page.</span> The volume does not support a standalone page and the intent is already covered.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="prose" style="margin-top:26px">
+    <p>The reasoning is that intent decides this rather than volume alone. Somebody searching for a garden glass balustrade and somebody searching for a patio glass balustrade want the same product in the same setting, and Google treats those searches as the same question, so running separate pages for each divides one signal into three weak ones and produces exactly the duplication described in section 02.</p>
+    <p>Decking is a different proposition. The buyer has a timber or composite substrate, a specific fixing problem and a set of competitors who are not glass specialists at all, so there is a real page to be written there and 2,860 monthly searches to justify writing it. Rewriting all seven would spend seven times the content budget to chase 710 combined searches across garden, patio and indoor, which is a poor use of the money when four of the pages sit on demand worth having.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">08</span><h2>Where you sit against the market</h2></div>
+  <p class="lede">Five direct competitors drawn from keyword overlap. Authority Score is Semrush's nought to one hundred measure of link strength.</p>
+
+  <div class="tablescroll">
+    <table>
+      <thead><tr><th>Domain</th><th class="num">Authority</th><th class="num">Ref. domains</th><th class="num">Keywords</th><th class="num">Est. traffic</th></tr></thead>
+      <tbody>
+        <tr><td class="us">theglasswarehouse.co.uk</td><td class="num">31</td><td class="num">569</td><td class="num">4,518</td><td class="num">25,141</td></tr>
+        <tr><td>balconette.co.uk</td><td class="num">30</td><td class="num">981</td><td class="num">2,298</td><td class="num">4,757</td></tr>
+        <tr><td>diometonline.co.uk</td><td class="num">16</td><td class="num">707</td><td class="num">2,389</td><td class="num">4,363</td></tr>
+        <tr><td>balustradesuperstore.co.uk</td><td class="num">24</td><td class="num">371</td><td class="num">1,172</td><td class="num">2,432</td></tr>
+        <tr><td>julietbalcony.co.uk</td><td class="num">10</td><td class="num">380</td><td class="num">274</td><td class="num">1,588</td></tr>
+        <tr style="background:rgba(255,77,94,.06)"><td class="us">originarchitectural.co.uk</td><td class="num">22</td><td class="num">325</td><td class="num">518</td><td class="num">473</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="prose" style="margin-top:26px">
+    <p>The row worth studying is julietbalcony.co.uk, which holds an Authority Score of 10 against your 22 and roughly half your ranking keywords, yet takes <strong>3.3 times your traffic</strong>. They are ahead of you because their small number of pages each do one job cleanly, which is the whole argument for the remediation work rather than for anything more elaborate.</p>
+    <p>Your 325 referring domains is the smallest figure in the table, and after two years of active search work that number is the clearest single indicator that the effort went into publishing rather than into earning authority.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">09</span><h2>Buyers are starting to ask assistants instead of Google</h2></div>
+  <p class="lede">Choosing balustrade components is a specification matching problem, which happens to be exactly the kind of question people now put to ChatGPT and similar tools rather than to a search box.</p>
+
+  <div class="prose" style="margin-top:24px">
+    <p>Somebody working out which clamp suits 13.5mm glass on a 48mm post, or whether a particular spigot meets the loading requirement for a domestic landing, is asking a question with a single correct answer that depends on matching several numbers together. Assistants handle that far better than a list of blue links does, and the people asking are frequently installers and specifiers rather than browsers, which makes them the enquiries you most want to win. Your catalogue of 738 components is genuinely well suited to being the source those answers get drawn from, provided the information is presented in a form a machine can read with confidence.</p>
+  </div>
+
+  <div class="findings">
+    <div class="finding good">
+      <div class="fhead"><span class="sev good">Already right</span><h3>Nothing is blocking the AI crawlers</h3></div>
+      <p>Your robots.txt declares rules for only two agents, the wildcard and adsbot-google, which means GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended and the rest all have unrestricted access to the site today. A surprising number of Shopify stores have quietly blocked these, so there is nothing to undo before the rest of the work can start.</p>
+    </div>
+
+    <div class="finding high">
+      <div class="fhead"><span class="sev high">High</span><h3>Your agent instructions file describes nothing about your products</h3></div>
+      <p>Shopify publishes an <span class="us">/agents.md</span> file for your store and lists it in your sitemap, so shopping agents are being pointed at it. The version currently live is Shopify's managed default, which directs agents towards Shopify's own purchasing tools and tells them nothing whatsoever about what you sell, which glass thicknesses you serve, how your systems differ from one another, or how somebody should choose between them.</p>
+      <p>It can be replaced. Adding an <span class="us">agents.md.liquid</span> template to the theme overrides the managed file, and because the same template is the fallback for <span class="us">/llms.txt</span> and <span class="us">/llms-full.txt</span>, one piece of work covers all three agent discovery URLs. The trade off is that a custom file stops updating itself in step with your commerce configuration, so somebody has to keep it accurate as ranges change, which is precisely the sort of thing that gets written once and then quietly goes stale.</p>
+      <p>That file is the closest thing you have to a briefing document for every AI agent that visits, and at present it is doing none of that work.</p>
+    </div>
+
+    <div class="finding high">
+      <div class="fhead"><span class="sev high">High</span><h3>Your specifications are readable by people and invisible to machines</h3></div>
+      <p>On the component pages we examined, glass thickness, material, finish, fixing type and load information appear in prose and inside a single HTML table, while the Product structured data carries no additionalProperty entries at all, which is the field designed to hold exactly this information in a form a machine can parse without guessing.</p>
+      <p>Specifications written only into sentences are the first thing lost when a model condenses a page, so a component that is perfectly well described for a human reader can still fail to surface when an assistant is matching a 13.5mm panel to a compatible clamp. The 95 products currently sharing a duplicate title compound this, because an assistant asked to distinguish between them has nothing to distinguish them by.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="eyebrow">How we would measure it</span>
+    <p>Worth being straight about this, because a good deal of what is currently sold as AI optimisation is difficult to hold anyone to. There is no dependable rank tracker for assistant answers in the way there is for Google positions, so we would measure it through referral traffic arriving from assistant sources in GA4, through crawler activity in your server logs, and through running a fixed set of buying questions against the major assistants each month and recording whether you are cited. That gives you a directional read rather than a precise one, and we would rather set that expectation now than report against a number that cannot be verified.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">10</span><h2>What we would do, and in what order</h2></div>
+  <p class="lede">Sequenced by impact and by what has to happen before something else can work. The first two months are deliberately unglamorous.</p>
+
+  <div class="phases">
+    <div class="phase">
+      <div class="ptime">Months 1 to 2 &middot; Remediation</div>
+      <h3>Remove the duplication and recover what the migration dropped</h3>
+      <ul>
+        <li>Remove the two test pages and clear them from the XML sitemap</li>
+        <li>Merge garden, patio and indoor into their parent pages with 301 redirects in place</li>
+        <li>Resolve the /pages/ against /collections/ conflicts so that one canonical URL owns each topic, redirecting the other</li>
+        <li>Consolidate the duplicated blog topics on cost, height, regulations and installation into one authoritative post each, redirecting the rest</li>
+        <li>Decide the fate of the 59 location posts, consolidating the handful with any traction and retiring the remainder</li>
+        <li>Audit the February migration redirects and recover any URLs that were ranking and were retired without a redirect pointing somewhere sensible</li>
+        <li>Establish a Search Console and Analytics baseline so that everything after this can be measured against it</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="ptime">Months 3 to 6 &middot; Rebuild</div>
+      <h3>Make the pages that survive worth ranking</h3>
+      <ul>
+        <li>Rewrite the Juliet balcony and glass balustrade categories as proper buying pages, covering system comparison, glass specification, loading requirements under BS 6180:2011, and lead times</li>
+        <li>Rewrite decking, frameless, stairs and balcony as four genuinely distinct pages rather than one template</li>
+        <li>Clear the duplicate product titles and descriptions, starting with the 38 groups where multiple items share a name</li>
+        <li>Rewrite the over-length product titles so the distinguishing detail survives into the search result</li>
+        <li>Build a custom agents.md.liquid template so the file briefs AI agents properly on your ranges, glass thicknesses and system differences, covering /agents.md, /llms.txt and /llms-full.txt in one go</li>
+        <li>Add structured specification data to product pages, covering glass thickness, fixing type, material, finish and load rating</li>
+        <li>Start the monthly article programme, aimed at the specification questions your customers ask before they buy</li>
+      </ul>
+    </div>
+    <div class="phase later">
+      <div class="ptime">Month 6 onward &middot; Authority and reach</div>
+      <h3>Close the referring domain gap and widen where you appear</h3>
+      <ul>
+        <li>Sustained link acquisition through trade and specification placements, built up steadily rather than in bursts, which also feeds AI visibility because assistants lean on sources they see corroborated elsewhere</li>
+        <li>Extend the structured specification work across the remainder of the 738 product catalogue</li>
+        <li>Build the compatibility and selection content that answers "which component do I need" directly, in the format assistants quote from</li>
+        <li>Move on the head terms you are absent from, starting with "balustrade" at 12,100 searches a month</li>
+        <li>Restructure internal linking so that authority reaches the pages that carry commercial value</li>
+        <li>Content aimed at architects, builders and self builders, where the enquiry values are highest</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">11</span><h2>Pricing</h2></div>
+  <p class="lede">Three ways of working together, all of which weight the remediation work into the opening months, because very little else pays back while the duplication is still in place.</p>
+
+  <div class="tiers">
+    <div class="tier base">
+      <div>
+        <div class="tname">Foundation</div>
+        <div class="tfor">Clearing the structural problems and rebuilding the pages that already carry demand.</div>
+      </div>
+      <div class="tprice">&pound;950<small>per month, excl. VAT</small></div>
+      <ul>
+        <li>Full duplication and cannibalisation remediation across pages, collections and the blog</li>
+        <li>Redirect mapping, implementation and testing</li>
+        <li>Post migration recovery audit</li>
+        <li>One researched article every month, written around specification and buying questions</li>
+        <li>Two quality link placements every month</li>
+        <li>Ongoing monitoring with alerts when something regresses</li>
+        <li>Monthly report built on your Search Console data</li>
+        <li>Direct access to us by phone and email</li>
+      </ul>
+    </div>
+
+    <div class="tier pick">
+      <div class="pickflag">Recommended</div>
+      <div>
+        <div class="tname">Growth</div>
+        <div class="tfor">Everything above, plus the work that puts your components into AI answers as well as search results.</div>
+      </div>
+      <div class="tprice">&pound;1,350<small>per month, excl. VAT</small></div>
+      <ul>
+        <li>Everything included in Foundation</li>
+        <li>Two researched articles every month instead of one</li>
+        <li>Four quality link placements every month</li>
+        <li>AI visibility programme: agents.md rebuilt, structured specification data rolled out across the catalogue range by range, and compatibility content written in the format assistants quote from</li>
+        <li>Monthly assistant citation testing against a fixed set of buying questions</li>
+        <li>Fifteen product descriptions and titles rewritten every month</li>
+        <li>One category or landing page rewritten every month</li>
+        <li>Quarterly strategy session with the team</li>
+      </ul>
+    </div>
+
+    <div class="tier">
+      <div>
+        <div class="tname">Scale</div>
+        <div class="tfor">For closing the gap to the category leader rather than steadying the ship, with the AI work done across the whole catalogue up front.</div>
+      </div>
+      <div class="tprice">&pound;1,750<small>per month, excl. VAT</small></div>
+      <ul>
+        <li>Everything included in Growth</li>
+        <li>Three researched articles every month</li>
+        <li>Six quality link placements every month, which is the rate that actually moves a 325 domain profile</li>
+        <li>Structured specification data completed across the full 738 product catalogue within the first quarter rather than progressively</li>
+        <li>Forty product descriptions and titles rewritten every month, clearing the duplicate title groups inside six months</li>
+        <li>Digital PR aimed at trade and architectural press</li>
+        <li>Specifier and trade segment strategy, targeting the higher value enquiries</li>
+        <li>Monthly reporting call instead of quarterly</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="terms">Three month minimum on any tier, after which it runs monthly with 30 days notice on both sides. All prices exclude VAT. Link placements are covered within the fee and carry no separate media budget. The structured specification work in Growth is rolled out progressively across the 738 product catalogue, prioritising the ranges that already attract traffic, whereas Scale completes it within the first quarter. You can move between tiers at any point once the first three months are complete.</p>
+</section>
+
+<section>
+  <div class="sechead"><span class="secnum">12</span><h2>Next step</h2></div>
+  <div class="prose stack g16" style="margin-top:18px">
+    <p>Half an hour on a call. We will take you through the duplicate pages on screen so that you can see them for yourself, and answer whatever this raises, with no obligation to go any further afterwards.</p>
+    <p>One thing worth saying before you read too much into the figures. Every traffic and keyword number in this document is a Semrush estimate, and while the trend is dependable because the methodology has not changed in three years, the absolute values will not match your analytics. The crawl findings in sections 03 and 04 are different, because those come from fetching every URL on your site directly and counting what we found, so those numbers are exact. Give us read access to Search Console and Google Analytics and we will rebuild the whole audit on your own data at no charge before you commit to anything. If that exercise shows a better picture than this one, we will tell you so.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap fgrid">
+    <div>
+      <div class="logo" style="margin-bottom:12px">web<span>gro</span></div>
+      <div class="fmeta">
+        Michael Broadbridge<br>
+        <a href="mailto:hello@webgro.co.uk">hello@webgro.co.uk</a><br>
+        <a href="tel:+447393370612">+44 7393 370612</a><br>
+        <a href="https://webgro.co.uk">webgro.co.uk</a>
+      </div>
+    </div>
+    <div class="fmeta" style="text-align:right">
+      Origin Architectural &middot; Organic Search Audit<br>
+      Full crawl of 1,168 URLs, 9 September 2026<br>
+      Semrush UK database and live site crawl<br>
+      Commercial in confidence
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var traffic=[1718,1366,1511,1894,1852,1337,1204,1046,1427,1823,1633,1859,2585,1564,2082,1283,983,641,835,1212,763,682,560,582,771,490,473];
+  var kws=[1469,1307,1210,1232,1241,1145,1069,1020,1020,1106,1089,1216,1189,935,922,891,823,751,830,906,768,562,492,496,485,506,518];
+  var months=["Jul 24","Aug","Sep","Oct","Nov","Dec","Jan 25","Feb","Mar","Apr","May","Jun","Jul 25","Aug","Sep","Oct","Nov","Dec","Jan 26","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep 26"];
+  var W=940,H=340,L=54,R=54,T=30,B=46,iw=W-L-R,ih=H-T-B,maxT=2600,maxK=1600,n=traffic.length;
+  function x(i){return L+(iw*i/(n-1));}
+  function yT(v){return T+ih-(v/maxT)*ih;}
+  function yK(v){return T+ih-(v/maxK)*ih;}
+  function path(a,f){return a.map(function(v,i){return (i?"L":"M")+x(i).toFixed(1)+" "+f(v).toFixed(1);}).join(" ");}
+  var s='';
+  [0,650,1300,1950,2600].forEach(function(v){
+    var y=yT(v);
+    s+='<line x1="'+L+'" y1="'+y.toFixed(1)+'" x2="'+(W-R)+'" y2="'+y.toFixed(1)+'" stroke="#1e2733" stroke-width="1" fill="none"/>';
+    s+='<text x="'+(L-10)+'" y="'+(y+4).toFixed(1)+'" fill="#6b7a99" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="end">'+v+'</text>';
+  });
+  [0,400,800,1200,1600].forEach(function(v){
+    s+='<text x="'+(W-R+10)+'" y="'+(yK(v)+4).toFixed(1)+'" fill="#6b7a99" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="start">'+v+'</text>';
+  });
+  months.forEach(function(m,i){
+    if(i%3!==0 && i!==n-1) return;
+    s+='<text x="'+x(i).toFixed(1)+'" y="'+(T+ih+22)+'" fill="#6b7a99" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">'+m+'</text>';
+  });
+  s+='<line x1="'+x(19).toFixed(1)+'" y1="'+T+'" x2="'+x(19).toFixed(1)+'" y2="'+(T+ih)+'" stroke="#6b7a99" stroke-width="1" stroke-dasharray="3 4"/>';
+  s+='<text x="'+(x(19)-7).toFixed(1)+'" y="'+(T-9)+'" fill="#a8b3c7" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="end" letter-spacing="0.5">SHOPIFY MIGRATION</text>';
+  s+='<path d="'+path(kws,yK)+'" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" opacity="0.85"/>';
+  s+='<path d="'+path(traffic,yT)+'" fill="none" stroke="#2d8dff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>';
+  s+='<circle cx="'+x(n-1).toFixed(1)+'" cy="'+yT(traffic[n-1]).toFixed(1)+'" r="4.5" fill="#2d8dff" stroke="#07080c" stroke-width="2"/>';
+  s+='<circle cx="'+x(n-1).toFixed(1)+'" cy="'+yK(kws[n-1]).toFixed(1)+'" r="4" fill="#7c3aed" stroke="#07080c" stroke-width="2"/>';
+  s+='<circle cx="'+x(12).toFixed(1)+'" cy="'+yT(2585).toFixed(1)+'" r="4" fill="#07080c" stroke="#2d8dff" stroke-width="2"/>';
+  s+='<text x="'+(x(12)+9).toFixed(1)+'" y="'+(yT(2585)+4).toFixed(1)+'" fill="#edeff4" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700">2,585</text>';
+  s+='<text x="'+(x(n-1)-8).toFixed(1)+'" y="'+(yT(473)-10).toFixed(1)+'" fill="#edeff4" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="end">473</text>';
+  document.getElementById('trend').innerHTML=s;
+})();
+</script>
+</body>
+</html>
