@@ -1,36 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
+import { PROPOSALS_COOKIE, PROPOSALS_TOKEN } from "@/lib/proposals";
 
 /**
- * Gate for client proposals under /proposals. HTTP Basic Auth: any
- * username, password below. Also stamps X-Robots-Tag so nothing under
- * the path can be indexed even if a crawler gets past robots.txt
- * (robots.ts already disallows /proposals/).
+ * Gate for client proposals under /proposals. Unlocked visitors carry a
+ * cookie set by /api/proposals/unlock; everyone else sees the branded
+ * unlock form (rewritten in place, so the proposal URL never changes).
+ * Every response is stamped noindex on top of the robots.txt disallow.
  */
-const PROPOSALS_PASSWORD = "Webgro!";
-
 export function middleware(req: NextRequest) {
-  const auth = req.headers.get("authorization");
+  const unlocked = req.cookies.get(PROPOSALS_COOKIE)?.value === PROPOSALS_TOKEN;
 
-  if (auth?.startsWith("Basic ")) {
-    try {
-      const [, password] = atob(auth.slice(6)).split(":");
-      if (password === PROPOSALS_PASSWORD) {
-        const res = NextResponse.next();
-        res.headers.set("X-Robots-Tag", "noindex, nofollow");
-        return res;
-      }
-    } catch {
-      // Malformed header, fall through to the challenge.
-    }
+  if (unlocked) {
+    const res = NextResponse.next();
+    res.headers.set("X-Robots-Tag", "noindex, nofollow");
+    return res;
   }
 
-  return new NextResponse("Authentication required", {
-    status: 401,
-    headers: {
-      "WWW-Authenticate": 'Basic realm="Webgro proposals"',
-      "X-Robots-Tag": "noindex, nofollow",
-    },
-  });
+  const unlock = new URL("/proposals-unlock", req.url);
+  unlock.searchParams.set("next", req.nextUrl.pathname);
+  if (req.nextUrl.searchParams.get("error")) {
+    unlock.searchParams.set("error", "1");
+  }
+  const res = NextResponse.rewrite(unlock);
+  res.headers.set("X-Robots-Tag", "noindex, nofollow");
+  return res;
 }
 
 export const config = {

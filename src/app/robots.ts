@@ -17,6 +17,8 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           // Client-specific proposal PDFs/decks we generate under /proposals
           "/proposals/",
+          // The password form those proposals rewrite to
+          "/proposals-unlock",
           // Link-only brief forms — shared directly with clients, never
           // surfaced through nav, footer, or sitemap. Hard-disallow
           // crawling so a leaked URL doesn't accidentally get indexed.
