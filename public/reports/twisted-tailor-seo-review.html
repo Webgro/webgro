@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twisted Tailor · Organic Search Performance Review</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+:root{
+  color-scheme: light;
+  --ink:#07080c; --ink-2:#525b6e; --ink-3:#8a93a5;
+  --page:#f4f6fb; --card:#ffffff; --dark:#07080c; --dark-ink:#edeff4; --dark-ink-2:#9aa6bc;
+  --blue:#1d82fe; --blue-lt:#2d8dff; --purple:#7c3aed; --teal:#00c9a7;
+  --border:#dee0e5; --grid:#eaecf1; --axis:#c8cdd8;
+  --good:#0f9d58; --bad:#d03b3b;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+
+/* cover */
+.cover{background:var(--dark);color:var(--dark-ink);padding:76px 0 60px;margin-bottom:8px}
+.eyebrow{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--dark-ink-2);margin:0 0 18px}
+.gradrule{height:5px;width:340px;border-radius:3px;background:linear-gradient(90deg,var(--blue) 0%,var(--purple) 52%,var(--teal) 100%);margin-bottom:30px}
+.cover h1{font-size:clamp(34px,5.2vw,60px);line-height:1.04;letter-spacing:-.025em;font-weight:800;margin:0 0 26px;color:#fff}
+.cover .lede{font-size:17px;color:var(--dark-ink-2);max-width:730px;margin:0}
+.coverfoot{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-top:56px;flex-wrap:wrap}
+.coverfoot img{height:44px;display:block}
+.coverfoot .tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dark-ink-2);margin-top:10px}
+.dot{width:11px;height:11px;border-radius:50%;background:var(--teal)}
+
+/* sections */
+section{padding:56px 0 8px}
+.snum{display:flex;gap:20px;align-items:flex-start;margin-bottom:8px}
+.snum .bar{width:4px;align-self:stretch;min-height:64px;border-radius:2px;background:var(--blue)}
+.snum.p .bar{background:var(--purple)} .snum.t .bar{background:var(--teal)}
+.snum .n{font-size:52px;font-weight:800;letter-spacing:-.03em;line-height:.9;color:var(--blue)}
+.snum.p .n{color:var(--purple)} .snum.t .n{color:var(--teal)}
+.snum h2{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:2px 0 0;line-height:1.1}
+.snum .sub{color:var(--ink-2);font-size:15px;margin:8px 0 0}
+.lbl{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin:0 0 12px;font-weight:600}
+h3{font-size:20px;font-weight:700;letter-spacing:-.01em;margin:0 0 8px}
+p{margin:0 0 14px;color:var(--ink-2);max-width:82ch}
+p.hi{color:var(--ink)}
+strong{color:var(--ink);font-weight:650}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:26px 0 8px}
+@media(max-width:720px){.tiles{grid-template-columns:repeat(2,1fr)}}
+.tile{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px}
+.tile .rule{width:34px;height:4px;border-radius:2px;margin-bottom:16px;background:var(--blue)}
+.tile:nth-child(2) .rule{background:var(--purple)} .tile:nth-child(3) .rule{background:var(--teal)}
+.tile:nth-child(4) .rule{background:var(--blue)} .tile:nth-child(5) .rule{background:var(--purple)} .tile:nth-child(6) .rule{background:var(--teal)}
+.tile .v{font-size:33px;font-weight:800;letter-spacing:-.025em;line-height:1.05}
+.tile .k{font-weight:650;font-size:14px;margin-top:12px;color:var(--ink)}
+.tile .n{font-size:12.5px;color:var(--ink-3);margin-top:5px}
+.up{color:var(--good)} .dn{color:var(--bad)}
+
+/* figures */
+figure{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 24px 18px;margin:24px 0 0}
+.ftitle{font-size:16px;font-weight:700;margin-bottom:3px}
+.fsub{font-size:13px;color:var(--ink-2);margin-bottom:18px}
+.legend{display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--ink-2);margin-bottom:14px}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.sw{width:11px;height:11px;border-radius:3px;display:inline-block}
+svg{display:block;width:100%;height:auto;overflow:visible}
+figcaption{font-size:12.5px;color:var(--ink-3);margin-top:14px;line-height:1.55}
+details{margin-top:10px}
+summary{cursor:pointer;font-size:12.5px;color:var(--ink-2);padding:6px 0}
+summary:hover{color:var(--ink)}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:14px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--grid)}
+th{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:650}
+td{color:var(--ink-2)} td.k{color:var(--ink);font-weight:550}
+.n2,th.n2{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr:hover{background:#f8fafc}
+
+/* cards */
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:22px}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:12px;padding:20px 22px}
+.card.p{border-left-color:var(--purple)} .card.t{border-left-color:var(--teal)}
+.card h4{margin:0 0 4px;font-size:16.5px;font-weight:700}
+.card .role{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:9px}
+.card.p .role{color:var(--purple)} .card.t .role{color:var(--teal)}
+.card ul{margin:10px 0 0;padding-left:0;list-style:none}
+.card li{position:relative;padding-left:19px;margin-bottom:8px;color:var(--ink-2);font-size:14px}
+.card li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:50%;background:var(--blue)}
+.card.p li::before{background:var(--purple)} .card.t li::before{background:var(--teal)}
+.card p{font-size:14px;margin-bottom:0}
+
+.note{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-top:22px}
+.note ul{margin:0;padding-left:19px} .note li{margin-bottom:9px;color:var(--ink-2);font-size:13.5px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;background:#f1f4f9;padding:1.5px 6px;border-radius:4px;color:var(--ink)}
+hr{border:0;border-top:1px solid var(--border);margin:52px 0 0}
+footer{background:var(--dark);color:var(--dark-ink-2);margin-top:60px;padding:30px 0;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.tip{position:fixed;pointer-events:none;opacity:0;transition:opacity .1s;background:#fff;border:1px solid var(--border);border-radius:9px;padding:10px 13px;font-size:12.5px;color:var(--ink);box-shadow:0 10px 30px rgba(7,8,12,.14);z-index:60;white-space:nowrap}
+.tip b{font-weight:700}
+.tip .r{display:flex;justify-content:space-between;gap:18px;color:var(--ink-2);margin-top:3px}
+.tip .r em{font-style:normal;color:var(--ink);font-variant-numeric:tabular-nums;font-weight:600}
+@media print{.cover{padding-top:40px} figure,.card,.tile,.note{break-inside:avoid} section{break-inside:avoid-page}}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="wrap">
+    <p class="eyebrow">[ Webgro / 2026 ] Performance Review</p>
+    <div class="gradrule"></div>
+    <h1>Twisted Tailor.<br>Organic search, two years on.</h1>
+    <p class="lede">Webgro took on organic search in November 2024. Across the two years to August 2026, organic sessions are down 16% and organic revenue is up 93%. This report explains why both of those are true at once.</p>
+    <div class="coverfoot">
+      <div>
+        <img src="data:image/png;base64,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" alt="Webgro">
+        <div class="tag">A senior studio for modern web &amp; ecommerce · Bracknell, UK</div>
+      </div>
+      <div class="dot"></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<section>
+  <div class="snum"><div class="bar"></div><div><div class="n">01.</div><h2>The headline.</h2><p class="sub">Twelve months to August 2026, measured against the twelve before it. Webgro engaged November 2024.</p></div></div>
+
+  <div class="tiles">
+    <div class="tile"><div class="rule"></div><div class="v up">+93%</div><div class="k">Organic revenue</div><div class="n">£59,439 to £114,999</div></div>
+    <div class="tile"><div class="rule"></div><div class="v up">+72%</div><div class="k">Organic orders</div><div class="n">413 to 710</div></div>
+    <div class="tile"><div class="rule"></div><div class="v up">+105%</div><div class="k">Conversion rate</div><div class="n">0.41% to 0.84%</div></div>
+    <div class="tile"><div class="rule"></div><div class="v dn">&minus;16%</div><div class="k">Organic sessions</div><div class="n">101,540 to 85,020</div></div>
+    <div class="tile"><div class="rule"></div><div class="v up">+13%</div><div class="k">Average order value</div><div class="n">£144 to £162</div></div>
+    <div class="tile"><div class="rule"></div><div class="v up">+131%</div><div class="k">Revenue per session</div><div class="n">£0.59 to £1.35</div></div>
+  </div>
+
+  <p class="hi" style="margin-top:26px"><strong>Fewer visitors, considerably more money.</strong> The channel now earns £1.35 for every organic session against 59p a year ago. Two things drove that: the traffic that remains is far better qualified, and the site converts it more than twice as well.</p>
+  <p>Worth being clear-eyed about the trade. A shrinking session base is a shrinking pool of future customers, and there is a floor below which improved conversion stops compensating. Section 05 covers where that floor is.</p>
+</section>
+
+<hr>
+
+<section>
+  <p class="lbl">[ The two-year picture ] Revenue</p>
+  <h3 style="font-size:28px;letter-spacing:-.02em;margin-bottom:10px">Trailing twelve-month revenue has nearly doubled.</h3>
+  <p>Menswear is seasonal, so single months swing hard in both directions and say very little on their own. The trailing twelve-month total strips that out and shows the underlying trajectory: £53,776 at the November 2025 low, £114,997 at the end of August 2026.</p>
+
+  <figure>
+    <div class="ftitle">Organic revenue, trailing twelve months</div>
+    <div class="fsub">GA4, Organic Search channel. Each point is the sum of that month and the eleven before it.</div>
+    <svg id="c0" viewBox="0 0 900 270" role="img" aria-label="Area chart of trailing twelve-month organic revenue rising from about £54,000 in November 2025 to £114,997 in August 2026"></svg>
+    <figcaption>Nine consecutive months of growth, ending at the highest point in the series. August 2026 is the peak, so the channel is at its strongest on a full-year basis right now.</figcaption>
+  </figure>
+
+  <figure>
+    <div class="ftitle">Year-on-year change by month</div>
+    <div class="fsub">Each month against the same month a year earlier</div>
+    <svg id="c6" viewBox="0 0 900 250" role="img" aria-label="Bar chart of year-on-year revenue change by month, negative in September to November 2025 then strongly positive through to August 2026"></svg>
+    <figcaption>The turn is visible in December 2025. Every month since has beaten its prior-year counterpart, and the smallest of those gains is August 2026 at +112%. The recent monthly softening is the seasonal taper, running from a far higher base than last year.</figcaption>
+  </figure>
+
+  <figure>
+    <div class="ftitle">The monthly detail</div>
+    <div class="fsub">Organic revenue by month, September 2024 to August 2026</div>
+    <svg id="c1" viewBox="0 0 900 280" role="img" aria-label="Column chart of monthly organic revenue rising from about £6,400 in September 2024 to a peak of £17,657 in May 2026"></svg>
+    <figcaption>Average monthly revenue to October 2025 was £4,872. From November 2025 onward, £10,622. The new theme went live in July 2026 with no adverse effect on revenue or sessions. December 2024 and the summer taper are both seasonal troughs that repeat each year.</figcaption>
+    <details><summary>View as table</summary><table id="t1"><thead><tr><th>Month</th><th class="n2">Sessions</th><th class="n2">Orders</th><th class="n2">Revenue</th><th class="n2">CR</th></tr></thead><tbody></tbody></table></details>
+  </figure>
+
+  <figure>
+    <div class="ftitle">Organic sessions by month</div>
+    <div class="fsub">Plotted separately because sessions and revenue share no scale</div>
+    <svg id="c2" viewBox="0 0 900 250" role="img" aria-label="Line chart of monthly organic sessions falling from about 9,400 to a low near 5,000 in December 2025, then recovering to around 7,000"></svg>
+    <figcaption>Sessions bottomed at 5,062 in December 2025 and have recovered to roughly 7,000 a month. The summer taper repeats last year's shape, so it reads as seasonal: June, July and August 2026 each carried 4% to 11% more sessions than the same month a year earlier.</figcaption>
+  </figure>
+</section>
+
+<hr>
+
+<section>
+  <div class="snum p"><div class="bar"></div><div><div class="n">02.</div><h2>What actually changed.</h2><p class="sub">Quality replaced volume. That is the whole story of the second year.</p></div></div>
+
+  <figure>
+    <div class="ftitle">Organic conversion rate by month</div>
+    <div class="fsub">Orders divided by sessions, GA4 Organic Search</div>
+    <svg id="c3" viewBox="0 0 900 250" role="img" aria-label="Line chart of organic conversion rate rising from around 0.3 percent to a peak near 1.1 percent in mid 2026"></svg>
+    <figcaption>Conversion held between 0.21% and 0.57% through the first year, then climbed from November 2025 to peak at 1.14% in January 2026 and has held near 1% since. A sustained doubling on a channel this size comes from a change in who is arriving, not from the checkout.</figcaption>
+  </figure>
+
+  <h3 style="margin-top:34px">Product pages tell the clearest version of this.</h3>
+  <p>Organic entrances landing straight on a product page nearly halved, and yet they now produce more than twice the orders and almost double the revenue. Conversion on those pages has gone from 0.49% to 2.01%.</p>
+
+  <table>
+    <thead><tr><th>Product-page organic entrances</th><th class="n2">Sessions</th><th class="n2">Orders</th><th class="n2">Revenue</th><th class="n2">CR</th><th class="n2">Rev / session</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Sep 2024 to Oct 2025</td><td class="n2">20,530</td><td class="n2">101</td><td class="n2">£12,925</td><td class="n2">0.49%</td><td class="n2">£0.63</td></tr>
+      <tr><td class="k">Nov 2025 to Aug 2026</td><td class="n2">10,771</td><td class="n2">166</td><td class="n2">£23,013</td><td class="n2">1.54%</td><td class="n2">£2.14</td></tr>
+      <tr><td class="k">Jun to Aug 2026</td><td class="n2">2,935</td><td class="n2">59</td><td class="n2">£9,045</td><td class="n2">2.01%</td><td class="n2">£3.08</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <p style="margin:0 0 10px" class="hi"><strong>Stock availability is visible in this data.</strong></p>
+    <p style="margin:0">June 2025 recorded 1,223 organic entrances onto product pages and zero orders. A month of product-page traffic converting nothing points at a catalogue people could not buy from. As stock has been rebuilt, the same pages have converted progressively better, and the most recent quarter is the strongest on record. Search brought qualified demand to the door throughout; the difference now is that there is something behind it.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="role">What improved</div>
+      <h4>The traffic that stayed is the traffic that buys</h4>
+      <ul>
+        <li>Revenue per session went from 59p to £1.35</li>
+        <li>Average order value rose 13% to £162</li>
+        <li>Orders grew 72% on a smaller session base</li>
+        <li>Ten consecutive months above the old ceiling</li>
+      </ul>
+    </div>
+    <div class="card p">
+      <div class="role">What it cost</div>
+      <h4>The top of the funnel is narrower</h4>
+      <ul>
+        <li>16,520 fewer organic sessions across the year</li>
+        <li>Semrush estimates UK organic visibility down from 8,194 to 6,881 monthly visits</li>
+        <li>Category pages are absent from the top of the results for most high volume terms</li>
+        <li>Referring domains have halved, covered in section 04</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <div class="snum t"><div class="bar"></div><div><div class="n">03.</div><h2>Where the revenue lands.</h2><p class="sub">Twelve months to August 2026, organic entrances by landing page.</p></div></div>
+
+  <p class="hi"><strong>Just under half of all organic revenue arrives on a homepage.</strong> The two homepages together took £54,620 of £114,999. Every collection page on the site combined contributed under £10,000.</p>
+
+  <table>
+    <thead><tr><th>Landing page</th><th class="n2">Sessions</th><th class="n2">Orders</th><th class="n2">Revenue</th><th class="n2">Rev / session</th></tr></thead>
+    <tbody id="tlp"></tbody>
+  </table>
+
+  <p style="margin-top:20px">A homepage-dominated organic profile means the channel is being fed by people searching the brand name. That is valuable and it is also finite: it grows only as fast as brand awareness does, and no amount of SEO work accelerates it much. Growth from here has to come from category pages, and those are currently contributing very little.</p>
+
+  <div class="note">
+    <p style="margin:0 0 10px" class="hi"><strong>The opportunity, stated plainly.</strong></p>
+    <p style="margin:0">If collection pages converted organic traffic at the rate the homepage does, and ranked where the brand's relevance says they should, the channel would roughly double again without a single additional brand search. The next section shows exactly which pages are closest to that.</p>
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <div class="snum p"><div class="bar"></div><div><div class="n">04.</div><h2>Where we rank.</h2><p class="sub">2,607 keywords in the UK top 100, and where they sit.</p></div></div>
+
+  <div class="tiles">
+    <div class="tile"><div class="rule"></div><div class="v">123</div><div class="k">Positions 1 to 3</div><div class="n">Top of page one</div></div>
+    <div class="tile"><div class="rule"></div><div class="v">202</div><div class="k">Positions 4 to 10</div><div class="n">Rest of page one</div></div>
+    <div class="tile"><div class="rule"></div><div class="v">470</div><div class="k">Positions 11 to 20</div><div class="n">Page two, the near misses</div></div>
+  </div>
+
+  <p style="margin-top:26px">325 keywords sit on page one today. The band that matters most for the next two quarters is the 470 sitting on page two, because moving a keyword from 12 to 8 is a far cheaper win than creating a ranking from nothing.</p>
+
+  <h3 style="margin-top:34px">Strong where the brand is distinctive.</h3>
+  <p>Twisted Tailor ranks at or near the top for the things it is genuinely known for. These are all positions 1 to 3 in the UK.</p>
+  <table>
+    <thead><tr><th>Keyword</th><th class="n2">Volume / mo</th><th class="n2">Position</th><th>Ranking page</th></tr></thead>
+    <tbody>
+      <tr><td class="k">mens wear suits</td><td class="n2">12,100</td><td class="n2">3</td><td><code>/</code></td></tr>
+      <tr><td class="k">velvet suit</td><td class="n2">1,900</td><td class="n2">3</td><td><code>/collections/velvet-suits</code></td></tr>
+      <tr><td class="k">floral trousers</td><td class="n2">1,300</td><td class="n2">3</td><td><code>/collections/floral-trousers</code></td></tr>
+      <tr><td class="k">skinny fit suits</td><td class="n2">880</td><td class="n2">2</td><td><code>/collections/all-skinny-fit-suits</code></td></tr>
+      <tr><td class="k">black velvet suit</td><td class="n2">590</td><td class="n2">3</td><td><code>/collections/velvet-suits</code></td></tr>
+      <tr><td class="k">cool mens suits</td><td class="n2">590</td><td class="n2">1</td><td><code>/</code></td></tr>
+      <tr><td class="k">conor mcgregor suit</td><td class="n2">590</td><td class="n2">1</td><td><code>/collections/twisted-tailor-x-august-mcgregor</code></td></tr>
+      <tr><td class="k">floral suit</td><td class="n2">480</td><td class="n2">1</td><td><code>/collections/floral-suits</code></td></tr>
+      <tr><td class="k">skinny fit suit</td><td class="n2">480</td><td class="n2">2</td><td><code>/collections/all-skinny-fit-suits</code></td></tr>
+      <tr><td class="k">skinny suit trousers</td><td class="n2">390</td><td class="n2">2</td><td><code>/collections/all-trousers</code></td></tr>
+      <tr><td class="k">tartan suit mens</td><td class="n2">320</td><td class="n2">2</td><td><code>/collections/tartan-suits</code></td></tr>
+      <tr><td class="k">party suits</td><td class="n2">320</td><td class="n2">3</td><td><code>/collections/party-suits</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:38px">One page away from the volume.</h3>
+  <p>These sit between positions 11 and 20 on terms carrying 700 searches a month or more. This is the working list for the next two quarters.</p>
+  <table>
+    <thead><tr><th>Keyword</th><th class="n2">Volume / mo</th><th class="n2">Position</th><th>Ranking page</th></tr></thead>
+    <tbody>
+      <tr><td class="k">tuxedo</td><td class="n2">27,100</td><td class="n2">12</td><td><code>/collections/tuxedos</code></td></tr>
+      <tr><td class="k">tuxedo tuxedo</td><td class="n2">14,800</td><td class="n2">14</td><td><code>/collections/tuxedos</code></td></tr>
+      <tr><td class="k">db suit</td><td class="n2">6,600</td><td class="n2">17</td><td><code>/collections/double-breasted-suits</code></td></tr>
+      <tr><td class="k">prom suits</td><td class="n2">4,400</td><td class="n2">19</td><td><code>/collections/prom-suits</code></td></tr>
+      <tr><td class="k">linen suits for men</td><td class="n2">3,600</td><td class="n2">19</td><td><code>/collections/linen-suits</code></td></tr>
+      <tr><td class="k">tuccido suit</td><td class="n2">3,600</td><td class="n2">16</td><td><code>/collections/tuxedos</code></td></tr>
+      <tr><td class="k">prom suit</td><td class="n2">2,900</td><td class="n2">14</td><td><code>/collections/prom-suits</code></td></tr>
+      <tr><td class="k">menswear tuxedo</td><td class="n2">2,900</td><td class="n2">16</td><td><code>/collections/tuxedos</code></td></tr>
+      <tr><td class="k">marriage suit for man</td><td class="n2">2,900</td><td class="n2">20</td><td><code>/collections/wedding-suits</code></td></tr>
+      <tr><td class="k">linen suit men</td><td class="n2">2,400</td><td class="n2">20</td><td><code>/collections/linen-suits</code></td></tr>
+      <tr><td class="k">suit tailor for women</td><td class="n2">2,400</td><td class="n2">11</td><td><code>/collections/womens</code></td></tr>
+      <tr><td class="k">prom suits for men</td><td class="n2">1,600</td><td class="n2">15</td><td><code>/collections/prom-suits</code></td></tr>
+      <tr><td class="k">male tuxedo suit</td><td class="n2">1,600</td><td class="n2">17</td><td><code>/collections/tuxedos</code></td></tr>
+      <tr><td class="k">mens pink suit</td><td class="n2">1,300</td><td class="n2">17</td><td><code>/collections/all-suits/colour_group-pink</code></td></tr>
+    </tbody>
+  </table>
+
+  <figure>
+    <div class="ftitle">Position against monthly search volume</div>
+    <div class="fsub">Semrush, UK database, September 2026. Lower position is better.</div>
+    <svg id="c4" viewBox="0 0 900 330" role="img" aria-label="Bar chart showing search volume for ten keywords alongside the position Twisted Tailor holds for each"></svg>
+    <figcaption>Tuxedo is the single largest addressable gap at 27,100 searches a month against a position of 12. Four of the page-two keywords above point at that one collection, so it carries the most concentrated upside on the site.</figcaption>
+    <details><summary>View as table</summary><table id="t4"><thead><tr><th>Keyword</th><th class="n2">Volume</th><th class="n2">Position</th><th>Page</th></tr></thead><tbody></tbody></table></details>
+  </figure>
+
+  <div class="note">
+    <p style="margin:0 0 10px" class="hi"><strong>A note on tracking.</strong></p>
+    <p style="margin:0">The figures above are a position snapshot taken on 11 September 2026. Daily rank tracking has not been running across the period, and the Search Console property left the reporting stack in July 2026, so month-by-month ranking movement cannot be shown for the two years covered here. Both are being put in place now, which means the next review can show movement on a fixed keyword set instead of a point-in-time picture.</p>
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <div class="snum t"><div class="bar"></div><div><div class="n">05.</div><h2>The link profile, and the clean-up.</h2><p class="sub">A two-year decline, an active spam attack, and the blocking work now in place.</p></div></div>
+
+  <figure>
+    <div class="ftitle">Referring domains</div>
+    <div class="fsub">Semrush, October 2024 to September 2026</div>
+    <svg id="c5" viewBox="0 0 900 250" role="img" aria-label="Line chart of referring domains falling from 2,512 in October 2024 to 1,243 in September 2026"></svg>
+    <figcaption>Referring domains have fallen 50.5% in two years, from 2,512 to 1,243. Losses have run at roughly 50 a month throughout, well ahead of the rate at which new links are acquired.</figcaption>
+  </figure>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="role">The trend</div>
+      <h4>Aged links are dropping out faster than they are replaced</h4>
+      <p style="margin-bottom:10px">The profile has shed roughly 50 referring domains a month since late 2024, and the trend predates any deliberate clean-up. Authority Score has held steady at 31 to 32 throughout, so what is being lost is low quality.</p>
+      <p style="margin:0">The count matters less than the composition, but the direction still sets a ceiling on how far category pages can climb against better-linked competitors.</p>
+    </div>
+    <div class="card t" style="border-left-color:#d03b3b">
+      <div class="role" style="color:#d03b3b">Active issue</div>
+      <h4>A spam link campaign is being blocked</h4>
+      <p style="margin-bottom:10px">Since late June 2026, roughly 203 referring domains have appeared carrying anchor text advertising a PBN service, pointing at twistedtailor.com and at the Shelby &amp; Sons and Noose &amp; Monkey properties. Source domains include casino sites, PLR dumps and one adult site, all at zero page authority.</p>
+      <p style="margin:0">Blocking and disavow work has been running since May 2026. The attack is ongoing, so this stays an active workstream rather than a closed item.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+</div>
+
+<footer><div class="wrap"><span>webgro.co.uk</span><span style="text-transform:none;letter-spacing:.02em;font-size:11px;max-width:640px;text-align:right">Sources: GA4 Organic Search channel, 1 Sep 2024 to 31 Aug 2026, last non-direct click. Semrush UK database, pulled 10 Sep 2026. Semrush traffic figures are estimates. Organic Shopping, Organic Social and AI Assistant are counted separately and excluded throughout.</span></div></footer>
+<div class="tip" id="tip"></div>
+<script>
+const MONTHS = ["Sep 24","Oct 24","Nov 24","Dec 24","Jan 25","Feb 25","Mar 25","Apr 25","May 25","Jun 25","Jul 25","Aug 25","Sep 25","Oct 25","Nov 25","Dec 25","Jan 26","Feb 26","Mar 26","Apr 26","May 26","Jun 26","Jul 26","Aug 26"];
+const SESSIONS = [9409,8942,9429,7986,9489,8256,9803,9073,8628,7560,6640,6325,5949,5676,5652,5062,5767,6810,9405,9095,9574,7866,7173,6991];
+const ORDERS   = [44,51,52,30,32,37,33,31,25,16,27,35,31,25,62,49,66,46,62,75,83,73,73,65];
+const REVENUE  = [6414,7652,8414,3749,3699,5627,3908,4783,4064,3053,3566,4509,3912,4861,8045,7398,9117,7660,10946,11376,17657,12858,11616,9551];
+const REFDOM   = [2512,2366,2346,2145,2004,1909,2051,2131,2206,2295,2375,2365,2310,2136,1990,1829,1845,1683,1556,1422,1342,1302,1282,1243];
+const REFMONTHS = ["Oct 24","Nov 24","Dec 24","Jan 25","Feb 25","Mar 25","Apr 25","May 25","Jun 25","Jul 25","Aug 25","Sep 25","Oct 25","Nov 25","Dec 25","Jan 26","Feb 26","Mar 26","Apr 26","May 26","Jun 26","Jul 26","Aug 26","Sep 26"];
+const SEMTRAF  = [8194,9565,9541,10612,9934,9451,7744,8186,8062,8181,7843,7395,7161,6580,5807,7213,6922,5791,5222,5009,5400,6644,6867,6881];
+const LANDING = [
+ {p:"/ (homepage)",s:20462,o:234,r:37528},
+ {p:"/en-us (US homepage)",s:6849,o:81,r:17092},
+ {p:"/collections/all-suits",s:1655,o:10,r:3663},
+ {p:"/collections/shelby-and-sons",s:1564,o:10,r:2045},
+ {p:"/en-us/collections/twisted-tailor",s:416,o:9,r:1357},
+ {p:"/search",s:504,o:8,r:1236},
+ {p:"/collections/all-waistcoats",s:356,o:6,r:1444},
+ {p:"/collections/all-jackets",s:683,o:5,r:1048}
+];
+const RANKS = [
+ {k:"tuxedo",v:27100,p:12,u:"/collections/tuxedos"},
+ {k:"double breasted suit",v:9900,p:38,u:"/collections/double-breasted-suits"},
+ {k:"tweed suit",v:8100,p:27,u:"/collections/tweed-suits"},
+ {k:"linen suit",v:8100,p:36,u:"/collections/linen-suits"},
+ {k:"3 piece suit",v:8100,p:35,u:"/collections/3-piece-suits"},
+ {k:"mens wedding suits",v:6600,p:43,u:"/collections/wedding-suits"},
+ {k:"prom suits",v:4400,p:19,u:"/collections/prom-suits"},
+ {k:"mens 3 piece suits",v:4400,p:25,u:"/collections/3-piece-suits"},
+ {k:"skinny fit suits",v:880,p:2,u:"/collections/all-skinny-fit-suits"},
+ {k:"floral suit",v:480,p:1,u:"/collections/floral-suits"}
+];
+
+const NS="http://www.w3.org/2000/svg";
+const el=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const cs=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const gbp=n=>"£"+Math.round(n).toLocaleString("en-GB");
+const num=n=>Math.round(n).toLocaleString("en-GB");
+const tip=document.getElementById("tip");
+function show(html,x,y){tip.innerHTML=html;tip.style.opacity=1;const r=tip.getBoundingClientRect();let nx=x+16,ny=y-r.height-14;if(nx+r.width>innerWidth-10)nx=x-r.width-16;if(ny<10)ny=y+20;tip.style.left=nx+"px";tip.style.top=ny+"px";}
+const hide=()=>tip.style.opacity=0;
+function nice(raw,t){const r=raw/t,m=Math.pow(10,Math.floor(Math.log10(r))),n=r/m;return (n<=1?1:n<=1.5?1.5:n<=2?2:n<=2.5?2.5:n<=3?3:n<=4?4:n<=5?5:n<=8?8:10)*m*t;}
+const CR=SESSIONS.map((s,i)=>100*ORDERS[i]/s);
+
+function axes(svg,L,R,T,ph,max,fmt,ticks){
+  const W=900,g=cs("--grid"),ax=cs("--axis"),mu=cs("--ink-3");
+  for(let i=0;i<=ticks;i++){const v=max*i/ticks,y=T+ph-(v/max)*ph;
+    svg.appendChild(el("line",{x1:L,x2:W-R,y1:y,y2:y,stroke:i?g:ax,"stroke-width":1}));
+    const t=el("text",{x:L-11,y:y+4,"text-anchor":"end","font-size":11,fill:mu});t.textContent=fmt(v);svg.appendChild(t);}
+}
+function xlabels(svg,L,R,H,n,step,labels){
+  const W=900,mu=cs("--ink-3"),pw=W-L-R;
+  (labels||MONTHS).forEach((m,i)=>{if(i%step&&i!==n-1)return;
+    const t=el("text",{x:L+pw*i/(n-1),y:H-9,"text-anchor":"middle","font-size":10.5,fill:mu});t.textContent=m;svg.appendChild(t);});
+}
+
+/* 00 trailing twelve-month revenue, area */
+(function(){
+  const svg=document.getElementById("c0"),W=900,H=270,L=76,R=16,T=16,B=30,ph=H-T-B,pw=W-L-R;
+  const roll=[],rl=[];
+  for(let i=11;i<REVENUE.length;i++){roll.push(REVENUE.slice(i-11,i+1).reduce((a,b)=>a+b,0));rl.push(MONTHS[i]);}
+  const max=nice(Math.max(...roll)*1.1,4),blue=cs("--blue"),card=cs("--card");
+  axes(svg,L,R,T,ph,max,v=>"£"+(v/1000).toFixed(0)+"k",4);
+  const X=i=>L+pw*i/(roll.length-1),Y=v=>T+ph-(v/max)*ph;
+  const gid="gradTTM",defs=el("defs",{}),lg=el("linearGradient",{id:gid,x1:"0",y1:"0",x2:"0",y2:"1"});
+  const s1=el("stop",{offset:"0%","stop-color":blue,"stop-opacity":"0.26"});
+  const s2=el("stop",{offset:"100%","stop-color":blue,"stop-opacity":"0.02"});
+  lg.appendChild(s1);lg.appendChild(s2);defs.appendChild(lg);svg.appendChild(defs);
+  let area="M"+X(0)+" "+(T+ph);roll.forEach((v,i)=>area+="L"+X(i)+" "+Y(v));area+="L"+X(roll.length-1)+" "+(T+ph)+"Z";
+  svg.appendChild(el("path",{d:area,fill:"url(#"+gid+")"}));
+  let d="";roll.forEach((v,i)=>d+=(i?"L":"M")+X(i)+" "+Y(v));
+  svg.appendChild(el("path",{d:d,fill:"none",stroke:blue,"stroke-width":2.5,"stroke-linejoin":"round","stroke-linecap":"round"}));
+  roll.forEach((v,i)=>{const last=i===roll.length-1;
+    svg.appendChild(el("circle",{cx:X(i),cy:Y(v),r:last?6:4,fill:blue,stroke:card,"stroke-width":2}));
+    const hit=el("circle",{cx:X(i),cy:Y(v),r:16,fill:"transparent",style:"cursor:pointer"});
+    hit.addEventListener("mousemove",e=>show("<b>12 months to "+rl[i]+"</b><div class='r'><span>Revenue</span><em>"+gbp(roll[i])+"</em></div>",e.clientX,e.clientY));
+    hit.addEventListener("mouseleave",hide);svg.appendChild(hit);});
+  const endLab=el("text",{x:X(roll.length-1),y:Y(roll[roll.length-1])-15,"text-anchor":"end","font-size":13,fill:cs("--ink"),"font-weight":700});
+  endLab.textContent=gbp(roll[roll.length-1]);svg.appendChild(endLab);
+  const lowI=roll.indexOf(Math.min(...roll));
+  const lowLab=el("text",{x:X(lowI),y:Y(roll[lowI])+22,"text-anchor":"middle","font-size":12,fill:cs("--ink-3")});
+  lowLab.textContent=gbp(roll[lowI]);svg.appendChild(lowLab);
+  xlabels(svg,L,R,H,roll.length,2,rl);
+})();
+
+/* 06 YoY change by month */
+(function(){
+  const svg=document.getElementById("c6"),W=900,H=250,L=56,R=16,T=16,B=30,ph=H-T-B,pw=W-L-R;
+  const yoy=[],yl=[];
+  for(let i=12;i<REVENUE.length;i++){yoy.push(100*(REVENUE[i]-REVENUE[i-12])/REVENUE[i-12]);yl.push(MONTHS[i]);}
+  const hi=nice(Math.max(...yoy)*1.08,3),lo=-nice(Math.abs(Math.min(...yoy))*1.6,1);
+  const span=hi-lo,Y=v=>T+ph-((v-lo)/span)*ph,zero=Y(0);
+  const g=cs("--grid"),mu=cs("--ink-3"),teal=cs("--teal"),bad=cs("--bad"),card=cs("--card");
+  [hi,hi/2,0,lo].forEach(v=>{const y=Y(v);
+    svg.appendChild(el("line",{x1:L,x2:W-R,y1:y,y2:y,stroke:v===0?cs("--axis"):g,"stroke-width":v===0?1.5:1}));
+    const t=el("text",{x:L-10,y:y+4,"text-anchor":"end","font-size":11,fill:mu});t.textContent=Math.round(v)+"%";svg.appendChild(t);});
+  const bw=pw/yoy.length*0.6;
+  yoy.forEach((v,i)=>{const x=L+pw*(i+0.5)/yoy.length-bw/2,y=v>=0?Y(v):zero,h=Math.abs(Y(v)-zero);
+    svg.appendChild(el("rect",{x:x,y:y,width:bw,height:Math.max(h,2),rx:4,fill:v>=0?teal:bad}));
+    const lab=el("text",{x:x+bw/2,y:v>=0?y-7:y+h+15,"text-anchor":"middle","font-size":11,fill:cs("--ink-2"),"font-weight":600});
+    lab.textContent=(v>=0?"+":"")+Math.round(v)+"%";svg.appendChild(lab);
+    const hit=el("rect",{x:x-3,y:T,width:bw+6,height:ph,fill:"transparent",style:"cursor:pointer"});
+    hit.addEventListener("mousemove",e=>show("<b>"+yl[i]+"</b><div class='r'><span>This year</span><em>"+gbp(REVENUE[i+12])+"</em></div><div class='r'><span>Year before</span><em>"+gbp(REVENUE[i])+"</em></div><div class='r'><span>Change</span><em>"+(v>=0?"+":"")+Math.round(v)+"%</em></div>",e.clientX,e.clientY));
+    hit.addEventListener("mouseleave",hide);svg.appendChild(hit);});
+  yl.forEach((m,i)=>{if(i%2)return;const t=el("text",{x:L+pw*(i+0.5)/yoy.length,y:H-9,"text-anchor":"middle","font-size":10.5,fill:mu});t.textContent=m;svg.appendChild(t);});
+})();
+
+/* 01 revenue columns */
+(function(){
+  const svg=document.getElementById("c1"),W=900,H=280,L=66,R=14,T=14,B=30,ph=H-T-B,pw=W-L-R;
+  const max=nice(Math.max(...REVENUE)*1.06,4),bw=pw/REVENUE.length*0.62,blue=cs("--blue"),tealc=cs("--teal");
+  axes(svg,L,R,T,ph,max,v=>"£"+(v/1000).toFixed(0)+"k",4);
+  const iNov=MONTHS.indexOf("Nov 25");
+  const mk=(label,mi,col,anchor,dx)=>{const x=L+pw*(mi-0.5)/(REVENUE.length-1)+bw*0.1;
+    svg.appendChild(el("line",{x1:x,x2:x,y1:T,y2:T+ph,stroke:col,"stroke-width":1.5,"stroke-dasharray":"4 4"}));
+    const t=el("text",{x:x+dx,y:T+13,"font-size":10.5,fill:col,"font-weight":600,"text-anchor":anchor});t.textContent=label;svg.appendChild(t);};
+  mk("Webgro engaged",MONTHS.indexOf("Nov 24"),cs("--ink-3"),"start",7);
+  mk("Revenue inflection",iNov,tealc,"start",7);
+  mk("New theme",MONTHS.indexOf("Jul 26"),cs("--ink-3"),"end",-7);
+  REVENUE.forEach((v,i)=>{const x=L+pw*i/(REVENUE.length-1)-bw/2,h=(v/max)*ph,y=T+ph-h;
+    svg.appendChild(el("rect",{x:x,y:y,width:bw,height:Math.max(h,1),rx:4,fill:blue,opacity:i>=iNov?1:0.42}));
+    const hit=el("rect",{x:x-2,y:T,width:bw+4,height:ph,fill:"transparent",style:"cursor:pointer"});
+    hit.addEventListener("mousemove",e=>show("<b>"+MONTHS[i]+"</b><div class='r'><span>Revenue</span><em>"+gbp(REVENUE[i])+"</em></div><div class='r'><span>Orders</span><em>"+ORDERS[i]+"</em></div><div class='r'><span>Sessions</span><em>"+num(SESSIONS[i])+"</em></div><div class='r'><span>CR</span><em>"+CR[i].toFixed(2)+"%</em></div>",e.clientX,e.clientY));
+    hit.addEventListener("mouseleave",hide);svg.appendChild(hit);});
+  xlabels(svg,L,R,H,REVENUE.length,3);
+})();
+
+/* 02 sessions line + 03 CR line + 05 refdomains line */
+function line(id,data,fmtY,color,fmtTip,H2,labels){
+  const svg=document.getElementById(id),W=900,H=H2||250,L=66,R=14,T=14,B=28,ph=H-T-B,pw=W-L-R;
+  const max=nice(Math.max(...data)*1.08,4),c=cs(color),card=cs("--card");
+  axes(svg,L,R,T,ph,max,fmtY,4);
+  const X=i=>L+pw*i/(data.length-1), Y=v=>T+ph-(v/max)*ph;
+  let d="";data.forEach((v,i)=>d+=(i?"L":"M")+X(i)+" "+Y(v));
+  svg.appendChild(el("path",{d:d,fill:"none",stroke:c,"stroke-width":2,"stroke-linejoin":"round","stroke-linecap":"round"}));
+  data.forEach((v,i)=>{svg.appendChild(el("circle",{cx:X(i),cy:Y(v),r:4,fill:c,stroke:card,"stroke-width":2}));
+    const hit=el("circle",{cx:X(i),cy:Y(v),r:15,fill:"transparent",style:"cursor:pointer"});
+    hit.addEventListener("mousemove",e=>show(fmtTip(i),e.clientX,e.clientY));
+    hit.addEventListener("mouseleave",hide);svg.appendChild(hit);});
+  xlabels(svg,L,R,H,data.length,3,labels);
+}
+line("c2",SESSIONS,v=>num(v),"--blue",i=>"<b>"+MONTHS[i]+"</b><div class='r'><span>Sessions</span><em>"+num(SESSIONS[i])+"</em></div><div class='r'><span>Revenue</span><em>"+gbp(REVENUE[i])+"</em></div>");
+line("c3",CR,v=>v.toFixed(2)+"%","--teal",i=>"<b>"+MONTHS[i]+"</b><div class='r'><span>Conversion</span><em>"+CR[i].toFixed(2)+"%</em></div><div class='r'><span>Orders</span><em>"+ORDERS[i]+"</em></div><div class='r'><span>Sessions</span><em>"+num(SESSIONS[i])+"</em></div>");
+line("c5",REFDOM,v=>num(v),"--blue",i=>"<b>"+REFMONTHS[i]+"</b><div class='r'><span>Referring domains</span><em>"+num(REFDOM[i])+"</em></div>",null,REFMONTHS);
+
+/* 04 keyword volume with position badges */
+(function(){
+  const svg=document.getElementById("c4"),W=900,H=330,L=176,R=104,T=10,B=26,ph=H-T-B,pw=W-L-R;
+  const max=nice(Math.max(...RANKS.map(r=>r.v))*1.02,4),band=ph/RANKS.length,bh=Math.min(17,band*0.5);
+  const blue=cs("--blue"),ink=cs("--ink"),mu=cs("--ink-3"),g=cs("--grid"),ax=cs("--axis"),bad=cs("--bad"),good=cs("--good");
+  for(let i=0;i<=4;i++){const v=max*i/4,x=L+pw*v/max;
+    svg.appendChild(el("line",{x1:x,x2:x,y1:T,y2:T+ph,stroke:i?g:ax,"stroke-width":1}));
+    const t=el("text",{x:x,y:H-8,"text-anchor":"middle","font-size":10.5,fill:mu});t.textContent=(v/1000).toFixed(0)+"k";svg.appendChild(t);}
+  RANKS.forEach((r,i)=>{const cy=T+band*i+band/2,w=pw*r.v/max,y=cy-bh/2;
+    const lab=el("text",{x:L-12,y:cy+4,"text-anchor":"end","font-size":12.5,fill:ink});lab.textContent=r.k;svg.appendChild(lab);
+    svg.appendChild(el("rect",{x:L,y:y,width:Math.max(w,2),height:bh,rx:4,fill:blue,opacity:r.p<=10?1:0.5}));
+    const pc = r.p<=10?good : r.p<=20?ink : bad;
+    const pos=el("text",{x:L+Math.max(w,2)+11,y:cy+4,"font-size":12,fill:pc,"font-weight":700});
+    pos.textContent="pos "+r.p;svg.appendChild(pos);
+    const hit=el("rect",{x:L,y:cy-band/2,width:pw,height:band,fill:"transparent",style:"cursor:pointer"});
+    hit.addEventListener("mousemove",e=>show("<b>"+r.k+"</b><div class='r'><span>Volume / mo</span><em>"+num(r.v)+"</em></div><div class='r'><span>Position</span><em>"+r.p+"</em></div><div class='r'><span>Page</span><em>"+r.u+"</em></div>",e.clientX,e.clientY));
+    hit.addEventListener("mouseleave",hide);svg.appendChild(hit);});
+})();
+
+/* tables */
+(function(){
+  const tb=document.querySelector("#t1 tbody");
+  MONTHS.forEach((m,i)=>{const tr=document.createElement("tr");
+    tr.innerHTML="<td class='k'>"+m+"</td><td class='n2'>"+num(SESSIONS[i])+"</td><td class='n2'>"+ORDERS[i]+"</td><td class='n2'>"+gbp(REVENUE[i])+"</td><td class='n2'>"+CR[i].toFixed(2)+"%</td>";
+    tb.appendChild(tr);});
+  const t4=document.querySelector("#t4 tbody");
+  RANKS.forEach(r=>{const tr=document.createElement("tr");
+    tr.innerHTML="<td class='k'>"+r.k+"</td><td class='n2'>"+num(r.v)+"</td><td class='n2'>"+r.p+"</td><td><code>"+r.u+"</code></td>";
+    t4.appendChild(tr);});
+  const lp=document.getElementById("tlp");
+  LANDING.forEach(l=>{const tr=document.createElement("tr");
+    tr.innerHTML="<td class='k'>"+l.p+"</td><td class='n2'>"+num(l.s)+"</td><td class='n2'>"+l.o+"</td><td class='n2'>"+gbp(l.r)+"</td><td class='n2'>£"+(l.r/l.s).toFixed(2)+"</td>";
+    lp.appendChild(tr);});
+})();
+</script>
+</body>
+</html>

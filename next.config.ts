@@ -221,6 +221,20 @@ const nextConfig: NextConfig = {
         source: "/proposals/seo/origin-architectural",
         destination: "/proposals/seo/origin-architectural.html",
       },
+      // Client reports: link-only static HTML in /public/reports.
+      // No password, but never indexable (robots.txt + header below).
+      {
+        source: "/reports/twisted-tailor-seo-review",
+        destination: "/reports/twisted-tailor-seo-review.html",
+      },
+    ];
+  },
+  async headers() {
+    return [
+      {
+        source: "/reports/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
     ];
   },
 };
