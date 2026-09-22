@@ -1,0 +1,167 @@
+/* ── Phone menu (below 900px) ─────────────────────────────────────────── */
+
+/* Toggle: two lines that fold into a cross. */
+.pv-nav-toggle {
+  position: relative; display: inline-grid; place-items: center; flex: none;
+  width: 48px; height: 48px; padding: 0; border-radius: 50%;
+  border: 1px solid currentColor; background: none; color: inherit; cursor: pointer;
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  transition: transform 0.35s var(--pv-ease), background-color 0.35s ease, border-color 0.35s ease;
+}
+.pv-nav-toggle:active { transform: scale(0.92); }
+.pv-nav-toggle:focus-visible { outline: 2px solid var(--pv-blue); outline-offset: 3px; }
+.pv-nav-toggle-lines { position: relative; display: block; width: 18px; height: 8px; }
+.pv-nav-toggle-lines i {
+  position: absolute; left: 0; width: 100%; height: 1.6px; border-radius: 2px; background: currentColor;
+  transition: transform 0.55s var(--pv-ease), width 0.55s var(--pv-ease);
+}
+.pv-nav-toggle-lines i:first-child { top: 0; }
+.pv-nav-toggle-lines i:last-child { bottom: 0; width: 64%; }
+.pv-nav.is-open .pv-nav-toggle { border-color: color-mix(in srgb, var(--pv-paper) 38%, transparent); }
+.pv-nav.is-open .pv-nav-toggle-lines i { width: 100%; }
+.pv-nav.is-open .pv-nav-toggle-lines i:first-child { transform: translateY(3.2px) rotate(45deg); }
+.pv-nav.is-open .pv-nav-toggle-lines i:last-child { transform: translateY(-3.2px) rotate(-45deg); }
+
+/* Sheet: an ink circle that grows out of the toggle. */
+.pv-nav-sheet {
+  --pv-sheet-x: calc(100% - 44px);
+  --pv-sheet-y: 44px;
+  --pv-sheet-r: 150vmax;
+  --pv-sheet-rule: color-mix(in srgb, var(--pv-paper) 16%, transparent);
+  position: fixed; top: 0; left: 0; right: 0; z-index: -2;
+  height: 100vh; height: 100dvh;
+  display: flex; flex-direction: column;
+  padding: calc(104px + env(safe-area-inset-top, 0px)) var(--pv-pad) calc(28px + env(safe-area-inset-bottom, 0px));
+  overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  background: var(--pv-ink); color: var(--pv-paper);
+  font-family: var(--pv-display); font-size: 17px;
+  clip-path: circle(0px at var(--pv-sheet-x) var(--pv-sheet-y));
+  visibility: hidden;
+  transition: clip-path 0.62s cubic-bezier(0.6, 0, 0.3, 1), visibility 0s linear 0.62s;
+}
+.pv-nav.is-open .pv-nav-sheet {
+  clip-path: circle(var(--pv-sheet-r) at var(--pv-sheet-x) var(--pv-sheet-y));
+  visibility: visible;
+  transition: clip-path 0.85s cubic-bezier(0.65, 0, 0.2, 1), visibility 0s;
+}
+.pv-nav-sheet::-webkit-scrollbar { display: none; }
+/* The circle reaches the logo about a third of the way through opening, so the logo turns light then and not before. */
+.pv-nav.is-open .pv-nav-logo img { transition: opacity 0.25s ease 0.3s; }
+.pv-nav-sheet a, .pv-nav-sheet button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+.pv-nav-sheet a:focus-visible, .pv-nav-sheet button:focus-visible { outline: 2px solid var(--pv-blue); outline-offset: 4px; border-radius: 4px; }
+
+/* Main links: big rows, each rising out of a mask over a rule that draws in. */
+.pv-nav-sheet-nav { flex: none; }
+.pv-nav-sheet-list, .pv-nav-sheet-subs, .pv-nav-sheet-branches { list-style: none; margin: 0; padding: 0; }
+.pv-nav-sheet-item { position: relative; }
+.pv-nav-sheet-item::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--pv-sheet-rule);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease;
+}
+.pv-nav.is-open .pv-nav-sheet-item::after {
+  transform: none; transition: transform 1s var(--pv-ease) calc(0.3s + var(--i) * 0.07s);
+}
+.pv-nav-sheet-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%;
+  padding: 0.16em 0 0.12em; border: 0; background: none; color: inherit; text-align: left; cursor: pointer;
+  font: 700 clamp(2.5rem, 12.5vw, 3.6rem) / 1 var(--pv-display); letter-spacing: -0.035em;
+}
+/* Room below the text for the brush, which sits under the baseline. */
+.pv-nav-sheet-mask { display: block; overflow: hidden; padding: 0.04em 0.14em 0.26em; margin: 0 -0.14em; }
+.pv-nav-sheet-rise {
+  display: block; transform: translate3d(0, 135%, 0);
+  transition: transform 0.35s cubic-bezier(0.5, 0, 0.75, 0);
+}
+.pv-nav.is-open .pv-nav-sheet-rise {
+  transform: none; transition: transform 1s var(--pv-ease) calc(0.22s + var(--i) * 0.07s);
+}
+.pv-nav-sheet-row .pv-brushed { white-space: nowrap; }
+.pv-nav-sheet .pv-nav-sheet-brush { bottom: -0.1em; height: 0.26em; clip-path: inset(0 100% 0 0); transition: clip-path 0.3s ease; }
+.pv-nav.is-open .pv-nav-sheet .pv-nav-sheet-brush { clip-path: inset(0 0 0 0); transition: clip-path 0.8s var(--pv-ease) 0.85s; }
+
+/* Services: a plus that turns into a minus, and a group that opens its height. */
+.pv-nav-sheet-sign {
+  position: relative; flex: none; width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--pv-sheet-rule); margin-right: 4px;
+  opacity: 0; transform: scale(0.6);
+  transition: opacity 0.25s ease, transform 0.3s ease, background-color 0.4s ease, border-color 0.4s ease;
+}
+.pv-nav.is-open .pv-nav-sheet-sign {
+  opacity: 1; transform: none;
+  transition: opacity 0.5s ease 0.55s, transform 0.8s var(--pv-ease) 0.55s, background-color 0.4s ease, border-color 0.4s ease;
+}
+.pv-nav-sheet-sign i {
+  position: absolute; left: 50%; top: 50%; width: 14px; height: 1.6px; border-radius: 2px; background: currentColor;
+  transform: translate(-50%, -50%); transition: transform 0.5s var(--pv-ease);
+}
+.pv-nav-sheet-sign i:last-child { transform: translate(-50%, -50%) rotate(90deg); }
+.pv-nav-sheet-row.is-open .pv-nav-sheet-sign { background: var(--pv-blue); border-color: var(--pv-blue); color: #fff; }
+.pv-nav-sheet-row.is-open .pv-nav-sheet-sign i:last-child { transform: translate(-50%, -50%) rotate(0deg); }
+
+.pv-nav-sheet-sub {
+  display: grid; grid-template-rows: 0fr; visibility: hidden;
+  transition: grid-template-rows 0.5s var(--pv-ease), visibility 0s linear 0.5s;
+}
+.pv-nav-sheet-sub.is-open {
+  grid-template-rows: 1fr; visibility: visible;
+  transition: grid-template-rows 0.6s var(--pv-ease), visibility 0s;
+}
+.pv-nav-sheet-sub-inner { min-height: 0; overflow: hidden; }
+.pv-nav-sheet-subs { padding: 6px 0 22px; }
+.pv-nav-sheet-subs li {
+  opacity: 0; transform: translate3d(0, 10px, 0);
+  transition: opacity 0.2s ease, transform 0.3s ease;
+}
+.pv-nav-sheet-sub.is-open .pv-nav-sheet-subs li {
+  opacity: 1; transform: none;
+  transition: opacity 0.45s ease calc(0.08s + var(--i) * 0.035s), transform 0.7s var(--pv-ease) calc(0.08s + var(--i) * 0.035s);
+}
+.pv-nav-sheet-subs a {
+  display: flex; align-items: center; gap: 0.5em; min-height: 44px; padding: 0.2em 0;
+  font: 500 1.35rem / 1.15 var(--pv-display); letter-spacing: -0.015em;
+  color: color-mix(in srgb, var(--pv-paper) 86%, transparent);
+  transition: color 0.25s ease, transform 0.35s var(--pv-ease);
+}
+.pv-nav-sheet-subs a:active { transform: translateX(4px); }
+.pv-nav-sheet-subs a[aria-current="page"] { color: var(--pv-blue); }
+.pv-nav-sheet-subs a[aria-current="page"]::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex: none;
+}
+.pv-nav-sheet-all { color: var(--pv-paper) !important; }
+.pv-nav-sheet-all[aria-current="page"] { color: var(--pv-blue) !important; }
+.pv-nav-sheet-all svg { width: 0.8em; height: 0.8em; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.pv-nav-sheet-branches { margin: 0 0 4px 3px; padding-left: 18px; border-left: 1px solid var(--pv-sheet-rule); }
+.pv-nav-sheet-branches a { min-height: 40px; font-size: 1.12rem; color: color-mix(in srgb, var(--pv-paper) 62%, transparent); }
+
+/* Foot: the enquiry button, then email and phone. */
+.pv-nav-sheet-foot {
+  margin-top: auto; padding-top: 40px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 24px;
+  opacity: 0; transform: translate3d(0, 16px, 0);
+  transition: opacity 0.2s ease, transform 0.3s ease;
+}
+.pv-nav.is-open .pv-nav-sheet-foot {
+  opacity: 1; transform: none;
+  transition: opacity 0.6s ease 0.6s, transform 0.9s var(--pv-ease) 0.6s;
+}
+.pv-nav-sheet .pv-nav-sheet-cta { font-size: 1.05rem; }
+.pv-nav-sheet-contact { display: grid; gap: 2px; font: 500 1rem / 1.3 var(--pv-display); }
+.pv-nav-sheet-contact a {
+  display: inline-flex; align-items: center; min-height: 36px;
+  color: color-mix(in srgb, var(--pv-paper) 72%, transparent); transition: color 0.25s ease;
+}
+.pv-nav-sheet-contact a:hover, .pv-nav-sheet-contact a:active { color: var(--pv-paper); }
+
+@media (min-width: 900px) {
+  .pv-nav-toggle, .pv-nav-sheet { display: none !important; }
+}
+
+/* Reduced motion: no reveal, no stagger, the sheet is just there. */
+@media (prefers-reduced-motion: reduce) {
+  .pv-nav-sheet, .pv-nav.is-open .pv-nav-sheet { clip-path: none; transition: none; }
+  .pv-nav-sheet *, .pv-nav-sheet *::after, .pv-nav-toggle, .pv-nav-toggle * { transition: none !important; }
+  .pv-nav-sheet-rise, .pv-nav-sheet-item::after, .pv-nav-sheet-sign, .pv-nav-sheet-foot, .pv-nav-sheet-subs li { opacity: 1; transform: none; }
+  .pv-nav-sheet .pv-nav-sheet-brush { clip-path: none; }
+  .pv-nav.is-open .pv-nav-logo img { transition: none; }
+}

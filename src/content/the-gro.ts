@@ -40,7 +40,7 @@ export const articles: Article[] = [
     date: "May 2026",
     readTime: "6 min read",
     accent: "blue",
-    author: "Webgro Studio",
+    author: "Michael Broadbridge",
     heroImage: "/articles/what-is-vibe-coding.jpg",
     relatedService: "consultancy",
     body: [
@@ -190,7 +190,7 @@ export const articles: Article[] = [
     date: "Apr 2026",
     readTime: "5 min read",
     accent: "teal",
-    author: "Webgro Studio",
+    author: "Michael Broadbridge",
     heroImage: "/articles/ai-2026-boring-wins.jpg",
     relatedService: "automation-ai",
     body: [
@@ -322,7 +322,7 @@ export const articles: Article[] = [
     date: "Apr 2026",
     readTime: "6 min read",
     accent: "violet",
-    author: "Webgro Studio",
+    author: "Michael Broadbridge",
     heroImage: "/articles/seo-ai-overviews.jpg",
     relatedService: "seo",
     body: [
@@ -438,7 +438,7 @@ export const articles: Article[] = [
     date: "Apr 2026",
     readTime: "6 min read",
     accent: "blue",
-    author: "Webgro Studio",
+    author: "Michael Broadbridge",
     heroImage: "/articles/shopify-vs-headless.jpg",
     relatedService: "websites",
     body: [
@@ -529,7 +529,7 @@ export const articles: Article[] = [
     date: "Apr 2026",
     readTime: "4 min read",
     accent: "teal",
-    author: "Webgro Studio",
+    author: "Michael Broadbridge",
     heroImage: "/articles/five-ai-integrations.jpg",
     relatedService: "automation-ai",
     body: [
@@ -615,7 +615,7 @@ export const articles: Article[] = [
     date: "Mar 2026",
     readTime: "7 min read",
     accent: "violet",
-    author: "Webgro Studio",
+    author: "Michael Broadbridge",
     heroImage: "/articles/cms-complexity.jpg",
     relatedService: "websites",
     body: [

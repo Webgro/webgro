@@ -1,0 +1,235 @@
+/* Work index at /work. Every class is prefixed pv-work-.
+   The CSS default is the finished, readable page. On desktop that is an index
+   of names with no imagery in the list, and scripts add the travelling viewer,
+   WebGL and motion. On phones every row carries its own photo in the markup. */
+
+.pv-work {
+  position: relative;
+  --pv-work-cols: minmax(0, 1fr) clamp(170px, 17vw, 250px) clamp(140px, 13vw, 190px);
+}
+
+.pv-work-canvas { display: none; }
+.pv-work.is-glon .pv-work-canvas {
+  display: block; position: fixed; inset: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none;
+}
+.pv-work-sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+.pv-work-hero {
+  display: grid; align-content: center; gap: clamp(40px, 7vh, 72px);
+  min-height: 100svh;
+  padding: clamp(104px, 15vh, 190px) var(--pv-pad) clamp(140px, 18vh, 200px);
+}
+.pv-work-kicker {
+  font-family: var(--pv-display); font-weight: 500; font-size: clamp(1rem, 1.25vw, 1.2rem);
+  margin-bottom: 1.4em; animation: pvFadeUp 0.9s var(--pv-ease) 0.05s both;
+}
+.pv-work-hero .pv-work-title { font-size: clamp(2.5rem, 10.6vw, 4rem); }
+.pv-work-hero .pv-line > span { animation: pvLineUp 1.15s var(--pv-ease) both; }
+.pv-work-hero .pv-line:nth-child(2) > span { animation-delay: 0.09s; }
+.pv-work-hero .pv-line:nth-child(3) > span { animation-delay: 0.18s; }
+.pv-work-count-in { display: block; }
+.pv-work-hero .pv-work-intro { margin-top: clamp(24px, 4vh, 44px); max-width: 47ch; animation: pvFadeUp 1s var(--pv-ease) 0.5s both; }
+
+/* A cascade of every project. Steps widen as the filter thins the deck out. */
+.pv-work-deck { position: relative; width: 100%; aspect-ratio: 1 / 0.72; --n: 12; }
+.pv-work-card {
+  --i: 0;
+  --sx: min(calc(21.9% / max(1, var(--n) - 1)), 4.4%);
+  --sy: min(calc(31.6% / max(1, var(--n) - 1)), 6.4%);
+  position: absolute; left: 0; bottom: 0; width: 82%; aspect-ratio: 3 / 2;
+  transform: translate3d(calc(var(--i) * var(--sx)), calc(var(--i) * var(--sy) * -1), 0);
+  translate: 0 0;
+  transition: transform 1s var(--pv-ease), translate 0.9s var(--pv-ease);
+}
+.pv-work-card.is-off { translate: 110vw 0; transition: transform 1s var(--pv-ease), translate 0.8s cubic-bezier(0.55, 0, 0.8, 0.3); }
+.pv-work-card.is-out { display: none; }
+.pv-work-card-deal {
+  width: 100%; height: 100%;
+  animation: pvWorkDeal 1.25s var(--pv-ease) both; animation-delay: calc(0.2s + var(--d, 0) * 0.05s);
+}
+.pv-work-card-in {
+  width: 100%; height: 100%; border-radius: 10px; overflow: hidden;
+  background: #1a1b20; box-shadow: 0 0 0 1px rgba(242, 239, 233, 0.14);
+}
+.pv-work-card-in img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
+@keyframes pvWorkDeal { from { transform: translate3d(0, 100vh, 0); } to { transform: none; } }
+
+@media (min-width: 900px) {
+  .pv-work-hero { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); align-items: center; column-gap: 5vw; }
+  .pv-work-hero .pv-work-title { font-size: min(4.6vw, 9.2vh); }
+  .pv-work-deck { width: min(100%, 80vh); justify-self: end; }
+}
+
+/* ── Index section ────────────────────────────────────────────────────── */
+.pv-work-index { position: relative; padding: clamp(70px, 12vh, 150px) var(--pv-pad) clamp(170px, 24vh, 260px); }
+.pv-work-cols { display: none; }
+.pv-work-empty { padding-top: 40px; }
+
+.pv-work-list { position: relative; }
+.pv-work-item.is-out { display: none; }
+.pv-work-link { display: block; }
+.pv-work-link:focus-visible { outline: 2px solid var(--pv-blue); outline-offset: 6px; border-radius: 4px; }
+.pv-work-text { position: relative; }
+.pv-work-rule {
+  position: absolute; left: 0; right: 0; top: 0; height: 1px; transform-origin: left;
+  background: color-mix(in srgb, currentColor 18%, transparent);
+}
+
+.pv-work-name {
+  margin: 0; font-family: var(--pv-display); font-weight: 700; letter-spacing: -0.04em; line-height: 0.98;
+  font-size: clamp(2.1rem, 10vw, 3.4rem); text-wrap: balance;
+}
+.pv-work-name-mask { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; transition: transform 0.6s var(--pv-ease); }
+.pv-work-name-in { display: block; }
+
+.pv-work-figure { display: flex; align-items: baseline; gap: 0.55em; }
+.pv-work-figure strong { font: 700 1.3rem / 1 var(--pv-display); letter-spacing: -0.03em; white-space: nowrap; }
+.pv-work-figure span { font-size: 0.9rem; line-height: 1.3; }
+.pv-work-meta { display: flex; flex-wrap: wrap; gap: 0.1em 1em; font-family: var(--pv-display); font-weight: 500; font-size: 0.9rem; }
+.pv-work-media img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
+
+/* Index view. The travelling image keeps to its own column on the right, so it
+   never crosses the names. (An earlier version let it roam and inverted the text
+   over it with mix-blend-mode: that cost a full-screen blend every frame.) */
+.pv-work-list.is-index { border-bottom: 1px solid var(--pv-rule); }
+.pv-work-list.is-index .pv-work-text {
+  display: grid; gap: 8px; padding: clamp(18px, 2.3vw, 34px) 0; transition: opacity 0.45s ease;
+}
+.pv-work-list.is-index.has-active .pv-work-item:not(.is-active) .pv-work-text { opacity: 0.3; }
+.pv-work-list.is-index .pv-work-item.is-active .pv-work-name-mask { transform: translateX(clamp(8px, 1.3vw, 22px)); }
+.pv-work-list.is-index .pv-work-figure span,
+.pv-work-list.is-index .pv-work-meta { color: var(--pv-muted); }
+.pv-work-list.is-index .pv-work-blurb,
+.pv-work-list.is-index .pv-work-go { display: none; }
+.pv-work-list.is-index .pv-work-media {
+  position: fixed; left: 0; top: 0; z-index: 4; display: block;
+  width: min(38vw, 30svh); aspect-ratio: 4 / 5; border-radius: 12px; overflow: hidden;
+  background: #1a1b20; pointer-events: none;
+  transform: scaleY(0); transform-origin: 0 0;
+}
+
+@media (min-width: 900px) {
+  .pv-work-index.is-index .pv-work-cols {
+    display: grid; grid-template-columns: var(--pv-work-cols); column-gap: 3vw; padding-bottom: 16px;
+  }
+  .pv-work-cols p:last-child { text-align: right; }
+  .pv-work-index.is-index { --pv-work-viewer: clamp(280px, 26vw, 440px); }
+  .pv-work-index.is-index .pv-work-cols,
+  .pv-work-list.is-index .pv-work-text { padding-right: calc(var(--pv-work-viewer) + 3vw); }
+  .pv-work-list.is-index .pv-work-name { font-size: clamp(2.6rem, 4.5vw, 5.4rem); }
+  .pv-work-list.is-index .pv-work-text { grid-template-columns: var(--pv-work-cols); column-gap: 3vw; align-items: end; }
+  .pv-work-list.is-index .pv-work-name { grid-column: 1; }
+  .pv-work-list.is-index .pv-work-figure { grid-column: 2; display: grid; gap: 6px; padding-bottom: 0.35em; }
+  .pv-work-list.is-index .pv-work-figure strong { font-size: clamp(1.8rem, 2.5vw, 2.7rem); }
+  .pv-work-list.is-index .pv-work-figure span { max-width: 24ch; }
+  .pv-work-list.is-index .pv-work-meta { grid-column: 3; flex-direction: column; align-items: flex-end; text-align: right; padding-bottom: 0.45em; }
+  .pv-work-list.is-index .pv-work-media { width: var(--pv-work-viewer); aspect-ratio: 4 / 3; }
+}
+
+/* Phones: no travelling viewer (there's no hover, and a floating picture would
+   sit over the list). Each row shows its own photo at 3:2 between the meta and
+   the figure. The text box steps aside (display: contents) so the name, meta,
+   photo and figure can be ordered as one column, and the rule then measures
+   against the link. Scripts only add the reveal: the photo wipes up through a
+   clip-path mask and the name rises out of its own mask. */
+@media (max-width: 899px) {
+  .pv-work-list.is-index .pv-work-link {
+    position: relative; display: grid; row-gap: 10px; padding: 24px 0 34px;
+    -webkit-tap-highlight-color: transparent; transition: opacity 0.25s ease;
+  }
+  .pv-work-list.is-index .pv-work-link:active { opacity: 0.72; }
+  .pv-work-list.is-index .pv-work-text { display: contents; }
+  .pv-work-list.is-index .pv-work-name { order: 1; }
+  .pv-work-list.is-index .pv-work-meta { order: 2; }
+  .pv-work-list.is-index .pv-work-media {
+    order: 3; position: relative; left: auto; top: auto; z-index: auto;
+    width: 100%; aspect-ratio: 3 / 2; margin-top: 8px; border-radius: 10px;
+    background: color-mix(in srgb, var(--pv-fg) 9%, transparent);
+    transform: none; transform-origin: 50% 50%;
+  }
+  .pv-work-list.is-index .pv-work-figure { order: 4; margin-top: 4px; }
+  .pv-work-list.is-index .pv-work-figure strong { font-size: 1.5rem; }
+}
+
+/* Grid view. */
+.pv-work-list.is-grid { display: grid; gap: clamp(56px, 9vh, 110px) clamp(24px, 4.5vw, 80px); }
+.pv-work-list.is-grid .pv-work-media {
+  position: relative; display: block; aspect-ratio: 3 / 2; border-radius: 12px; overflow: hidden;
+  background: color-mix(in srgb, var(--pv-fg) 9%, transparent);
+}
+.pv-work-list.is-grid .pv-work-text { display: grid; gap: 12px; justify-items: start; padding-top: 22px; }
+.pv-work-list.is-grid .pv-work-rule { display: none; }
+.pv-work-list.is-grid .pv-work-name { order: 1; font-size: clamp(1.75rem, 2.7vw, 2.8rem); line-height: 1.02; letter-spacing: -0.035em; }
+.pv-work-list.is-grid .pv-work-meta { order: 2; color: var(--pv-muted); }
+.pv-work-list.is-grid .pv-work-blurb { order: 3; max-width: 46ch; color: var(--pv-muted); }
+.pv-work-list.is-grid .pv-work-figure { order: 4; display: grid; gap: 6px; margin-top: 6px; }
+.pv-work-list.is-grid .pv-work-figure strong { font-size: clamp(2.8rem, 4.6vw, 4.8rem); line-height: 0.9; letter-spacing: -0.05em; color: var(--pv-blue-text); }
+.pv-work-list.is-grid .pv-work-figure span { max-width: 28ch; line-height: 1.35; }
+.pv-work-go {
+  order: 5; display: inline-flex; align-items: center; gap: 0.6em; margin-top: 4px;
+  font-family: var(--pv-display); font-weight: 500;
+}
+.pv-work-go svg {
+  width: 1.2em; height: 1.2em; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+  transition: transform 0.6s var(--pv-ease);
+}
+@media (hover: hover) {
+  .pv-work-link:hover .pv-work-go svg { transform: translateX(7px); }
+}
+@media (min-width: 900px) {
+  .pv-work-list.is-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-bottom: clamp(60px, 12vh, 140px); }
+  .pv-work-list.is-grid .pv-work-item[data-col="1"] { position: relative; top: clamp(60px, 12vh, 140px); }
+}
+
+/* ── The bar: filters and layout, docked to the bottom of the screen ──── */
+.pv-work-bar {
+  position: sticky; bottom: clamp(12px, 2.4vh, 24px); z-index: 20;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 10px;
+  width: fit-content; max-width: calc(100% - 24px); margin: -118px auto 60px; padding: 6px; border-radius: 18px;
+  background: var(--pv-fg); color: var(--pv-bg); box-shadow: 0 12px 34px rgba(13, 13, 15, 0.2);
+  animation: pvFadeUp 1s var(--pv-ease) 0.8s both;
+}
+.pv-work-seg { position: relative; display: flex; align-items: center; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.pv-work-seg::-webkit-scrollbar { display: none; }
+.pv-work-thumb {
+  position: absolute; left: 0; top: 0; bottom: 0; width: var(--w, 0px); border-radius: 12px; background: var(--pv-blue);
+  transform: translateX(var(--x, 0px)); transition: transform 0.55s var(--pv-ease), width 0.55s var(--pv-ease);
+}
+.pv-work-seg button {
+  position: relative; z-index: 1; display: inline-flex; align-items: flex-start; gap: 0.3em;
+  margin: 0; padding: 0.8em 0.72em; border: 0; border-radius: 12px; background: none; color: inherit;
+  font: 500 0.84rem / 1 var(--pv-display); white-space: nowrap; cursor: pointer;
+  transition: color 0.35s ease, opacity 0.35s ease;
+}
+.pv-work-seg button[aria-pressed="false"] { opacity: 0.62; }
+.pv-work-seg button[aria-pressed="false"]:hover { opacity: 1; }
+.pv-work-seg button:focus-visible { outline: 2px solid var(--pv-blue); outline-offset: 2px; }
+.pv-work-bar.is-ready button[aria-pressed="true"] { color: #fff; }
+.pv-work-seg sup { position: static; font-size: 0.7em; line-height: 1; opacity: 0.7; }
+.pv-work-long { display: none; }
+@media (min-width: 640px) {
+  .pv-work-long { display: inline; }
+  .pv-work-seg button { padding: 0.9em 1.05em; font-size: 0.92rem; }
+}
+
+/* ── Outro ────────────────────────────────────────────────────────────── */
+.pv-work-outro { display: grid; gap: clamp(36px, 7vh, 80px); padding: clamp(110px, 22vh, 260px) var(--pv-pad); }
+.pv-work-outro-line {
+  margin: 0; font-family: var(--pv-display); font-weight: 500; font-size: clamp(1.6rem, 3.6vw, 3.6rem);
+  line-height: 1.14; letter-spacing: -0.028em; max-width: 24em;
+}
+.pv-work-outro-foot { display: grid; gap: 26px; }
+.pv-work-outro-links { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; }
+@media (min-width: 900px) {
+  .pv-work-outro-foot { grid-template-columns: minmax(0, 44ch) auto; justify-content: space-between; align-items: end; gap: 6vw; }
+}
+
+/* Once a photograph is drawn in WebGL its DOM twin steps aside. */
+.pv-work .pv-work-card-in.is-gl, .pv-work .pv-work-list .pv-work-media.is-gl { background: transparent; box-shadow: none; }
+.pv-work .pv-work-card-in.is-gl img, .pv-work .pv-work-list .pv-work-media.is-gl img { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pv-work-kicker, .pv-work-hero .pv-line > span, .pv-work-hero .pv-work-intro, .pv-work-card-deal, .pv-work-bar { animation: none; }
+  .pv-work-card, .pv-work-thumb, .pv-work-name-mask { transition: none; }
+}

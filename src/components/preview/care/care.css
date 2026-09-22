@@ -1,0 +1,337 @@
+/* Care plans page in the redesign concept. Every class is prefixed pv-care-.
+   The hero and FAQs reuse the service pages' pv-svc- classes. The defaults
+   below are the finished, readable state: GSAP sets the starting states
+   itself, so the page works before JS and with reduced motion. */
+
+.pv-care-sr {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.pv-care-tick { display: block; width: 22px; height: 22px; flex: none; overflow: visible; }
+.pv-care-tick path {
+  fill: none; stroke: var(--pv-blue-text); stroke-width: 4.6; stroke-linecap: round; stroke-linejoin: round;
+}
+/* Inline text links keep their look but get a finger-sized hit area. */
+.pv-care-hit { position: relative; }
+.pv-care-hit::after { content: ""; position: absolute; inset: -12px -6px; }
+.pv-care-mask { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+.pv-care-mask > span { display: block; }
+
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+.pv-care-hero { padding-bottom: clamp(80px, 14vh, 170px); }
+@media (min-width: 1100px) {
+  .pv-care-hero {
+    display: grid; grid-template-columns: minmax(0, 1fr) clamp(380px, 35vw, 580px);
+    column-gap: 5vw; align-items: center;
+  }
+  .pv-care-hero .pv-svc-h1 { font-size: min(5.2vw, 11vh); }
+  .pv-care-hero .pv-svc-hero-row { grid-template-columns: minmax(0, 1fr); align-items: start; gap: 28px; }
+}
+
+/* Site health panel: the hero image. An illustration in the style of the
+   site's live product mockups, in the concept's own colours. The markup is
+   the finished state; while the scene is loading it is hidden (is-scene
+   without is-ready), with a timed fallback in case scripts never arrive. */
+.pv-care-hp-wrap { margin: clamp(48px, 8vh, 80px) 0 0; max-width: 560px; animation: pvFadeUp 1.1s var(--pv-ease) 0.6s both; }
+@media (min-width: 1100px) { .pv-care-hp-wrap { margin: 0; max-width: none; } }
+.pv-care-hp {
+  --hp-ink: #0d0d0f; --hp-muted: rgba(13, 13, 15, 0.56); --hp-rule: rgba(13, 13, 15, 0.08);
+  --hp-soft: #f6f4f0; --hp-blue: #2d8dff; --hp-blue-text: #1a6fd6; --hp-blue-soft: rgba(45, 141, 255, 0.1);
+  position: relative; overflow: hidden; border-radius: clamp(18px, 1.7vw, 24px);
+  background: #fff; color: var(--hp-ink);
+  box-shadow: 0 0 0 1px rgba(13, 13, 15, 0.07), 0 40px 80px -40px rgba(13, 13, 15, 0.4), 0 12px 24px -16px rgba(13, 13, 15, 0.18);
+  font-size: 0.9rem; line-height: 1.35;
+}
+.pv-care-hp.is-scene:not(.is-ready) { animation: pvCareHpFallback 0.6s ease 4s both; }
+@keyframes pvCareHpFallback { from { opacity: 0; } to { opacity: 1; } }
+
+.pv-care-hp-top {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px clamp(16px, 1.6vw, 22px); border-bottom: 1px solid var(--hp-rule);
+}
+.pv-care-hp-title { font: 700 1.02rem / 1.2 var(--pv-display); letter-spacing: -0.015em; }
+.pv-care-hp-site { font-size: 0.78rem; color: var(--hp-muted); }
+.pv-care-hp-chip {
+  padding: 4px 10px; border-radius: 999px; border: 1px solid var(--hp-rule); background: var(--hp-soft);
+  font-size: 0.75rem; font-weight: 500; color: var(--hp-muted);
+}
+.pv-care-hp-label {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--hp-muted);
+}
+.pv-care-hp-sub { font-size: 0.76rem; color: var(--hp-muted); }
+.pv-care-hp-block { padding: 14px clamp(16px, 1.6vw, 22px); border-bottom: 1px solid var(--hp-rule); }
+.pv-care-hp-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+
+/* Uptime */
+.pv-care-hp-up {
+  display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px 3px 8px; border-radius: 999px;
+  background: var(--hp-blue-soft); color: var(--hp-blue-text); font-size: 0.76rem; font-weight: 600;
+}
+.pv-care-hp-up-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--hp-blue); }
+.pv-care-hp-sparkbox { position: relative; height: clamp(44px, 4.2vw, 56px); margin: 10px 0 8px; }
+.pv-care-hp-spark { display: block; width: 100%; height: 100%; overflow: visible; }
+.pv-care-hp-area { fill: var(--hp-blue-soft); }
+.pv-care-hp-line {
+  fill: none; stroke: var(--hp-blue); stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+.pv-care-hp-dot {
+  position: absolute; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%;
+  background: var(--hp-blue); box-shadow: 0 0 0 2px #fff;
+}
+.pv-care-hp-meta { display: flex; justify-content: space-between; gap: 12px; font-size: 0.76rem; color: var(--hp-muted); }
+.pv-care-hp-ms { font-variant-numeric: tabular-nums; color: var(--hp-ink); font-weight: 600; }
+
+/* Backup and speed tiles */
+.pv-care-hp-tiles {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;
+  padding: 14px clamp(16px, 1.6vw, 22px); border-bottom: 1px solid var(--hp-rule); background: var(--hp-soft);
+}
+.pv-care-hp-tile {
+  display: grid; gap: 5px; align-content: start; min-width: 0;
+  padding: 12px 14px; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px var(--hp-rule);
+}
+.pv-care-hp-backup {
+  font: 700 clamp(1.05rem, 1.35vw, 1.3rem) / 1.15 var(--pv-display); letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.pv-care-hp-speed { grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px; }
+.pv-care-hp-speed-text { display: grid; gap: 4px; min-width: 0; }
+.pv-care-hp-ring { position: relative; display: block; width: clamp(50px, 4.4vw, 60px); aspect-ratio: 1; }
+.pv-care-hp-ring svg { display: block; width: 100%; height: 100%; transform: rotate(-90deg); }
+.pv-care-hp-ring circle { fill: none; stroke-width: 6; }
+.pv-care-hp-ring-bg { stroke: rgba(13, 13, 15, 0.08); }
+.pv-care-hp-ring-arc { stroke: var(--hp-blue); stroke-linecap: round; }
+.pv-care-hp-score {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font: 700 clamp(1rem, 1.25vw, 1.2rem) / 1 var(--pv-display); letter-spacing: -0.02em; font-variant-numeric: tabular-nums;
+}
+
+/* Plugin updates */
+.pv-care-hp-count { font-size: 0.76rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.pv-care-hp-list { list-style: none; margin: 8px 0 0; padding: 0; }
+.pv-care-hp-plugin {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(40px, 22%) 6.4em; align-items: center; gap: 12px;
+  padding: 8px 0; border-top: 1px solid var(--hp-rule);
+}
+.pv-care-hp-plugin:first-child { border-top: 0; }
+.pv-care-hp-name { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pv-care-hp-bar { display: block; height: 4px; border-radius: 4px; background: rgba(13, 13, 15, 0.07); overflow: hidden; }
+.pv-care-hp-bar-fill { display: block; height: 100%; background: var(--hp-blue); transform-origin: left; }
+.pv-care-hp-state { display: flex; align-items: center; justify-content: flex-end; gap: 6px; font-size: 0.78rem; color: var(--hp-muted); }
+.pv-care-hp-plugin.is-running .pv-care-hp-state { color: var(--hp-blue-text); }
+.pv-care-hp-plugin.is-done .pv-care-hp-state { color: var(--hp-ink); }
+.pv-care-hp-tick { width: 16px; height: 16px; flex: none; }
+.pv-care-hp-tick path {
+  fill: none; stroke: var(--hp-blue); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 0.45s var(--pv-ease);
+}
+.pv-care-hp-plugin:not(.is-done) .pv-care-hp-tick path, .pv-care-hp-report:not(.is-done) .pv-care-hp-tick path { stroke-dashoffset: 1; }
+
+/* Report */
+.pv-care-hp-report {
+  display: flex; align-items: center; gap: 10px; padding: 14px clamp(16px, 1.6vw, 22px);
+  font-weight: 600; color: var(--hp-muted); transition: color 0.4s ease;
+}
+.pv-care-hp-report.is-done { color: var(--hp-ink); }
+.pv-care-hp-doc { width: 20px; height: 20px; flex: none; }
+.pv-care-hp-doc path { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; stroke-linecap: round; }
+.pv-care-hp-report-text { flex: 1; }
+
+.pv-care-hp-caption { margin-top: 14px; font-size: 0.85rem; color: var(--pv-muted); }
+
+/* Phones: the same panel, tightened up. */
+@media (max-width: 600px) {
+  .pv-care-hp { font-size: 0.84rem; }
+  .pv-care-hp-top, .pv-care-hp-block, .pv-care-hp-tiles, .pv-care-hp-report { padding: 12px 14px; }
+  .pv-care-hp-tiles { gap: 8px; }
+  .pv-care-hp-tile { padding: 10px 11px; gap: 4px; }
+  .pv-care-hp-backup { font-size: 0.98rem; }
+  .pv-care-hp-speed { gap: 9px; }
+  .pv-care-hp-ring { width: 44px; }
+  .pv-care-hp-score { font-size: 0.95rem; }
+  .pv-care-hp-plugin { grid-template-columns: minmax(0, 1fr) 44px 5.8em; gap: 10px; padding: 7px 0; }
+  .pv-care-hp-sparkbox { height: 38px; margin: 8px 0 6px; }
+}
+@media (max-width: 359px) {
+  .pv-care-hp-tiles { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pv-care-hp-wrap, .pv-care-hp.is-scene:not(.is-ready) { animation: none; }
+  .pv-care-hp-tick path { transition: none; }
+}
+
+/* ── Plans (the signature scene) ──────────────────────────────────────── */
+.pv-care-plans { padding: clamp(90px, 16vh, 190px) var(--pv-pad) clamp(90px, 16vh, 190px); }
+.pv-care-plans-head { display: grid; gap: 20px; margin-bottom: clamp(44px, 8vh, 96px); }
+.pv-care-plans-head .pv-lede { max-width: 48ch; }
+@media (min-width: 900px) {
+  .pv-care-plans-head { grid-template-columns: 1.2fr 1fr; align-items: end; column-gap: 6vw; }
+  .pv-care-plans-head .pv-label { grid-column: 1 / -1; }
+}
+
+.pv-care-plans-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: clamp(14px, 1.4vw, 22px);
+}
+@media (min-width: 900px) {
+  .pv-care-plans-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
+}
+.pv-care-plan { display: flex; min-width: 0; }
+.pv-care-card {
+  position: relative; flex: 1; display: flex; min-width: 0; overflow: hidden;
+  border-radius: 22px; border: 1px solid var(--pv-rule);
+  background: color-mix(in srgb, var(--pv-fg) 5%, transparent);
+}
+.pv-care-card-body {
+  position: relative; z-index: 1; flex: 1; min-width: 0;
+  display: flex; flex-direction: column; gap: 18px;
+  padding: clamp(24px, 2.5vw, 40px);
+}
+.pv-care-plan-name {
+  margin: 0; font: 700 clamp(1.45rem, 1.9vw, 1.9rem) / 1.1 var(--pv-display); letter-spacing: -0.03em;
+}
+.pv-care-price { font-family: var(--pv-display); font-weight: 500; font-size: 1.05rem; color: var(--pv-muted); }
+.pv-care-price strong {
+  display: inline-block; margin-right: 0.18em; color: var(--pv-fg);
+  font-weight: 700; font-size: clamp(3.2rem, 5.4vw, 5.4rem); line-height: 0.92; letter-spacing: -0.05em;
+}
+.pv-care-plan-for { color: var(--pv-muted); font-size: 1rem; line-height: 1.5; max-width: 38ch; }
+@media (min-width: 900px) { .pv-care-plan-for { min-height: 4.5em; } }
+
+.pv-care-facts { margin: 4px 0 0; border-top: 1px solid var(--pv-rule); }
+.pv-care-fact {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 14px;
+  padding: 12px 0; border-bottom: 1px solid var(--pv-rule);
+}
+.pv-care-fact dt { color: var(--pv-muted); font-size: 0.93rem; }
+.pv-care-fact dd { margin: 0 0 0 auto; font: 500 1rem / 1.3 var(--pv-display); text-align: right; }
+
+.pv-care-inc-label { margin-top: 6px; font: 500 0.95rem / 1.3 var(--pv-display); color: var(--pv-muted); }
+.pv-care-inc { list-style: none; margin: -6px 0 0; padding: 0; display: grid; gap: 11px; }
+.pv-care-inc li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; align-items: start; }
+.pv-care-inc .pv-care-tick { width: 18px; height: 18px; margin-top: 0.2em; }
+.pv-care-inc li span { font-size: 1rem; line-height: 1.45; }
+.pv-care-card-cta { margin-top: auto; padding-top: 12px; }
+.pv-care-card-cta .pv-btn { min-height: 48px; }
+
+/* The Growth card: paper underneath, then the blue dome fills it. Ink text
+   reads on both, and ink on #2d8dff clears AA contrast. */
+.pv-care-plan.is-featured .pv-care-card {
+  border-color: transparent; background: var(--pv-paper); color: var(--pv-ink);
+  --pv-fg: var(--pv-ink); --pv-muted: rgba(13, 13, 15, 0.8); --pv-rule: rgba(13, 13, 15, 0.2);
+}
+.pv-care-card-fill { position: absolute; inset: 0; z-index: 0; background: var(--pv-blue); pointer-events: none; }
+.pv-care-plan.is-featured .pv-care-tick path { stroke: var(--pv-ink); }
+@media (min-width: 900px) {
+  .pv-care-plan.is-featured .pv-care-card-body { padding-top: clamp(40px, 4vw, 64px); padding-bottom: clamp(40px, 4vw, 64px); }
+  .pv-care-plan.is-featured { margin-block: calc(-1 * clamp(10px, 1.2vw, 22px)); }
+}
+
+.pv-care-plans-note {
+  display: grid; gap: 18px; margin-top: clamp(40px, 7vh, 80px); padding-top: 26px; border-top: 1px solid var(--pv-rule);
+}
+.pv-care-plans-note p { color: var(--pv-muted); font-size: clamp(1rem, 1.15vw, 1.12rem); line-height: 1.55; max-width: 56ch; }
+.pv-care-plans-note .pv-textlink { color: var(--pv-fg); }
+@media (min-width: 900px) { .pv-care-plans-note { grid-template-columns: 1fr 1fr; column-gap: 6vw; } }
+
+/* ── Compare ──────────────────────────────────────────────────────────── */
+.pv-care-cmp { padding: clamp(90px, 16vh, 190px) var(--pv-pad); }
+.pv-care-cmp-head { display: grid; gap: 16px; margin-bottom: clamp(36px, 6vh, 72px); }
+.pv-care-cmp-table { position: relative; }
+.pv-care-cmp-group { display: block; }
+.pv-care-cmp-groupname {
+  margin: 0; padding: clamp(30px, 4.5vh, 52px) 0 14px;
+  font: 700 clamp(1.15rem, 1.4vw, 1.4rem) / 1.2 var(--pv-display); letter-spacing: -0.02em;
+}
+.pv-care-cmp-cols + .pv-care-cmp-group .pv-care-cmp-groupname { padding-top: 8px; }
+.pv-care-cmp-row { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.pv-care-cmp-rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--pv-rule); transform-origin: left; }
+.pv-care-cmp-group:last-of-type .pv-care-cmp-row:last-child { border-bottom: 1px solid var(--pv-rule); }
+.pv-care-cmp-feature {
+  grid-column: 1 / -1; padding: 16px 0 8px;
+  font: 500 clamp(1.02rem, 1.2vw, 1.15rem) / 1.3 var(--pv-display); letter-spacing: -0.01em;
+}
+.pv-care-cmp-feature em {
+  font-style: normal; margin-left: 0.55em; color: var(--pv-muted); font-size: 0.82em; white-space: nowrap;
+}
+.pv-care-cmp-mask { display: block; overflow: hidden; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+.pv-care-cmp-mask > span { display: block; }
+.pv-care-cmp-cell {
+  display: grid; gap: 4px; align-content: start; justify-items: start; min-width: 0;
+  margin: 0 0 14px; padding: 8px 10px; border-radius: 10px;
+  font-size: 0.95rem; line-height: 1.3;
+}
+.pv-care-cmp-cell.is-featured { background: color-mix(in srgb, var(--pv-blue) 13%, transparent); }
+.pv-care-cmp-plan { font: 500 0.78rem / 1.2 var(--pv-display); color: var(--pv-muted); }
+.pv-care-cmp-val { overflow-wrap: anywhere; }
+.pv-care-cmp-none { display: block; width: 14px; height: 1.5px; margin: 0.6em 0; background: var(--pv-muted); }
+.pv-care-cmp-tick { width: 20px; height: 20px; }
+
+/* On a phone the column heads are for screen readers only: each cell carries its plan name. */
+.pv-care-cmp-cols {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+@media (min-width: 900px) {
+  .pv-care-cmp { display: grid; grid-template-columns: 0.55fr 1.9fr; column-gap: 5vw; align-items: start; }
+  .pv-care-cmp-head { position: sticky; top: 16vh; }
+  .pv-care-cmp-table { --pv-care-cols: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)); }
+  /* A continuous tint behind the Growth column: it starts after 2.5 of 4.5 fractions. */
+  .pv-care-cmp-table::before {
+    content: ""; position: absolute; top: 0; bottom: 0; left: calc(100% * 2.5 / 4.5); width: calc(100% / 4.5);
+    border-radius: 16px; background: color-mix(in srgb, var(--pv-blue) 11%, transparent); pointer-events: none;
+  }
+  .pv-care-cmp-cols { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; }
+  .pv-care-cmp-colrow, .pv-care-cmp-row { display: grid; grid-template-columns: var(--pv-care-cols); }
+  .pv-care-cmp-colhead { display: grid; gap: 4px; justify-items: center; text-align: center; padding: 22px 12px 18px; }
+  .pv-care-cmp-colhead strong { font: 700 1.3rem / 1.1 var(--pv-display); letter-spacing: -0.02em; }
+  .pv-care-cmp-colhead span { color: var(--pv-muted); font-size: 0.92rem; }
+  .pv-care-cmp-colhead.is-featured strong { color: var(--pv-blue-text); }
+  .pv-care-cmp-groupname { padding-left: 0; }
+  .pv-care-cmp-cols + .pv-care-cmp-group .pv-care-cmp-groupname { padding-top: 22px; }
+  .pv-care-cmp-feature { grid-column: auto; padding: 18px 16px 18px 0; }
+  .pv-care-cmp-cell { justify-items: center; align-content: center; text-align: center; margin: 0; padding: 18px 12px; border-radius: 0; }
+  .pv-care-cmp-cell.is-featured { background: none; }
+  .pv-care-cmp-plan { display: none; }
+  .pv-care-cmp-none { margin: 0.6em auto; }
+}
+
+/* ── What happens each month ──────────────────────────────────────────── */
+.pv-care-steps { display: grid; gap: clamp(36px, 6vh, 70px); padding: clamp(90px, 16vh, 190px) var(--pv-pad); }
+.pv-care-steps-head { display: grid; gap: 16px; align-content: start; }
+.pv-care-steps-track { position: relative; padding-left: clamp(22px, 3vw, 48px); }
+.pv-care-steps-track::before,
+.pv-care-steps-progress { position: absolute; left: 0; top: 0; bottom: 0; width: 2px; border-radius: 2px; }
+.pv-care-steps-track::before { content: ""; background: var(--pv-rule); }
+.pv-care-steps-progress { background: var(--pv-blue); transform-origin: top; }
+.pv-care-steps-list { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--pv-rule); }
+.pv-care-step {
+  position: relative; display: grid; grid-template-columns: clamp(44px, 5vw, 96px) minmax(0, 1fr);
+  gap: 8px; padding: clamp(24px, 3vw, 44px) 0;
+}
+.pv-care-step-rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--pv-rule); transform-origin: left; }
+.pv-care-step-num { display: block; overflow: hidden; font: 500 1rem / 1.5 var(--pv-display); color: var(--pv-muted); }
+.pv-care-step-num > span { display: block; }
+.pv-care-step h3 { margin: 0 0 10px; font: 700 clamp(1.4rem, 2.1vw, 2rem) / 1.1 var(--pv-display); letter-spacing: -0.03em; }
+.pv-care-step p { color: var(--pv-muted); max-width: 52ch; font-size: clamp(1rem, 1.15vw, 1.12rem); line-height: 1.55; }
+@media (min-width: 900px) {
+  .pv-care-steps { grid-template-columns: 0.8fr 1.55fr; column-gap: 6vw; align-items: start; }
+  .pv-care-steps-head { position: sticky; top: 18vh; }
+}
+
+/* ── Who it's for ─────────────────────────────────────────────────────── */
+.pv-care-you { display: grid; gap: clamp(36px, 6vh, 70px); padding: clamp(90px, 16vh, 190px) var(--pv-pad) clamp(40px, 8vh, 100px); }
+.pv-care-you-head { display: grid; gap: 16px; align-content: start; }
+.pv-care-you-head h2 { max-width: 17ch; }
+.pv-care-you-list { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(22px, 3.6vh, 44px); }
+.pv-care-you-item { display: grid; grid-template-columns: clamp(26px, 2.6vw, 44px) minmax(0, 1fr); gap: clamp(12px, 1.5vw, 26px); align-items: start; }
+.pv-care-you-item .pv-care-tick { width: 100%; height: auto; aspect-ratio: 1; margin-top: 0.05em; }
+.pv-care-you-item p {
+  font-family: var(--pv-display); font-weight: 500; font-size: clamp(1.3rem, 2.4vw, 2.4rem); line-height: 1.16;
+  letter-spacing: -0.025em; max-width: 29ch;
+}
+@media (min-width: 900px) {
+  .pv-care-you { grid-template-columns: 0.8fr 1.7fr; column-gap: 6vw; align-items: start; }
+  .pv-care-you-head { position: sticky; top: 18vh; }
+}

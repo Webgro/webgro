@@ -1,0 +1,238 @@
+/* Local pages (/web-design/<town> and the Berkshire hub). Every class is
+   prefixed pv-local-. The defaults are the finished layout, so the pages read
+   the same before JS and with reduced motion. */
+
+.pv-local-hero h1, .pv-local-card h3, .pv-local-map h2, .pv-local-biz h2, .pv-local-work h2, .pv-local-near h2 { margin: 0; }
+.pv-local-svc svg, .pv-local-near-row svg {
+  fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* ── Hero, with the map ─────────────────────────────────────────────────
+   Below 1100px it stacks: copy, then a smaller map, then the facts. From
+   1100px the map takes the right-hand side of the first screen and the facts
+   run under both columns. */
+.pv-local-hero {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  padding: clamp(116px, 17vh, 190px) var(--pv-pad) clamp(64px, 11vh, 130px);
+  overflow-x: clip;
+}
+.pv-local-hero-copy { min-width: 0; }
+.pv-local-crumbs {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0 0.55em; margin-bottom: 1.2em;
+  font-family: var(--pv-display); font-weight: 500; font-size: clamp(0.95rem, 1.1vw, 1.1rem); color: var(--pv-muted);
+  animation: pvFadeUp 0.9s var(--pv-ease) 0.05s both;
+}
+.pv-local-crumbs a {
+  display: inline-flex; align-items: center; min-height: 40px; color: var(--pv-fg);
+  background: linear-gradient(currentColor, currentColor) 0 calc(50% + 0.7em) / 0% 1px no-repeat;
+  transition: background-size 0.45s var(--pv-ease);
+}
+.pv-local-crumbs a:hover { background-size: 100% 1px; }
+.pv-local-h1 { font-size: clamp(2.1rem, 7.4vw, 7.2rem); line-height: 0.96; }
+.pv-local-hero .pv-line > span { animation: pvLineUp 1.15s var(--pv-ease) both; }
+.pv-local-hero .pv-line:nth-child(2) > span { animation-delay: 0.09s; }
+.pv-local-hero .pv-line:nth-child(3) > span { animation-delay: 0.18s; }
+.pv-local-hero .pv-line:nth-child(4) > span { animation-delay: 0.27s; }
+.pv-local-hero-row { display: grid; gap: 28px; margin-top: clamp(28px, 4.4vh, 52px); animation: pvFadeUp 1s var(--pv-ease) 0.45s both; }
+.pv-local-hero-intro { font-size: clamp(1.05rem, 1.3vw, 1.28rem); line-height: 1.5; color: var(--pv-muted); max-width: 56ch; }
+.pv-local-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; }
+.pv-local-hero-actions .pv-textlink { display: inline-block; padding-top: 10px; padding-bottom: 10px; background-position: 0 calc(100% - 8px); }
+.pv-local-hero-map { min-width: 0; margin-top: clamp(44px, 7vh, 72px); }
+.pv-local-facts {
+  display: grid; gap: 26px 4vw; margin: clamp(48px, 8vh, 90px) 0 0;
+  animation: pvFadeUp 1s var(--pv-ease) 0.6s both;
+}
+.pv-local-fact { position: relative; display: grid; gap: 6px; align-content: start; padding-top: 18px; }
+.pv-local-fact-rule { position: absolute; inset: 0 0 auto 0; height: 1px; background: var(--pv-rule); transform-origin: 0 50%; }
+.pv-local-fact dt { font-family: var(--pv-display); font-weight: 500; font-size: 0.92rem; color: var(--pv-muted); }
+.pv-local-fact dd { margin: 0; font: 700 clamp(1.15rem, 1.7vw, 1.6rem) / 1.2 var(--pv-display); letter-spacing: -0.025em; max-width: 22ch; }
+@media (min-width: 900px) {
+  .pv-local-hero-row { grid-template-columns: minmax(0, 56ch) auto; justify-content: space-between; align-items: end; gap: 4vw; }
+  .pv-local-facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1100px) {
+  .pv-local-hero {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); column-gap: 3vw; align-items: center;
+    padding-top: clamp(110px, 15vh, 170px); padding-bottom: clamp(56px, 9vh, 110px);
+  }
+  .pv-local-h1 { font-size: min(5.3vw, 11vh); }
+  .pv-local-hero-row { grid-template-columns: minmax(0, 1fr); justify-content: start; align-items: start; gap: 30px; }
+  .pv-local-hero-intro { max-width: 46ch; }
+  /* Labels near the right of the map can run into the page margin. */
+  .pv-local-hero-map { margin: 0; }
+  .pv-local-facts { grid-column: 1 / -1; margin-top: clamp(40px, 6vh, 72px); }
+}
+
+/* ── The map ──────────────────────────────────────────────────────────── */
+.pv-local-mapbox { position: relative; }
+.pv-local-drift { position: relative; }
+.pv-local-svg {
+  position: relative; display: block; width: 100%; height: auto; aspect-ratio: 1000 / 700; overflow: hidden;
+  /* Soft edges, so the outer ring fades out instead of being cut. */
+  -webkit-mask: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent), linear-gradient(transparent, #000 7%, #000 93%, transparent);
+  -webkit-mask-composite: source-in;
+  mask: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent), linear-gradient(transparent, #000 7%, #000 93%, transparent);
+  mask-composite: intersect;
+}
+.pv-local-grid circle { fill: color-mix(in srgb, var(--pv-fg) 16%, transparent); }
+.pv-local-ring { fill: none; stroke: color-mix(in srgb, var(--pv-fg) 30%, transparent); stroke-width: 2; stroke-dasharray: 4 12; }
+.pv-local-ctx { fill: color-mix(in srgb, var(--pv-fg) 34%, transparent); }
+.pv-local-route { fill: none; stroke: var(--pv-blue); stroke-width: 5; stroke-linecap: round; }
+.pv-local-town { fill: color-mix(in srgb, var(--pv-fg) 55%, transparent); }
+.pv-local-town.is-on { fill: var(--pv-bg); stroke: var(--pv-blue); stroke-width: 6; }
+.pv-local-ripple { fill: none; stroke: var(--pv-blue); stroke-width: 3; opacity: 0; }
+.pv-local-traveller { fill: var(--pv-blue); stroke: var(--pv-bg); stroke-width: 4; opacity: 0; }
+.pv-local-office { fill: var(--pv-blue); }
+.pv-local-office-halo { fill: color-mix(in srgb, var(--pv-blue) 20%, transparent); }
+
+.pv-local-labels { position: absolute; inset: 0 0 auto 0; aspect-ratio: 1000 / 700; pointer-events: none; }
+.pv-local-pin, .pv-local-ctxlabel, .pv-local-ringlabel { position: absolute; white-space: nowrap; }
+/* Labels sit on a patch of page colour so the grid and routes never run
+   through the text. The offsets allow for that padding. */
+.pv-local-at--right { transform: translate(8px, -50%); }
+.pv-local-at--left { transform: translate(calc(-100% - 8px), -50%); text-align: right; }
+.pv-local-at--above { transform: translate(-50%, calc(-100% - 7px)); text-align: center; }
+.pv-local-at--below { transform: translate(-50%, 7px); text-align: center; }
+@media (max-width: 599px) {
+  .pv-local-atn--right { transform: translate(8px, -50%); text-align: left; }
+  .pv-local-atn--left { transform: translate(calc(-100% - 8px), -50%); text-align: right; }
+  .pv-local-atn--above { transform: translate(-50%, calc(-100% - 7px)); text-align: center; }
+  .pv-local-atn--below { transform: translate(-50%, 7px); text-align: center; }
+}
+/* The office label hangs just below the routes leaving the office eastwards. */
+.pv-local-pin:has(.pv-local-tag--office) { transform: translate(10px, -6px); }
+.pv-local-tag { display: grid; gap: 1px; padding: 4px 6px; border-radius: 6px; background: var(--pv-bg); }
+.pv-local-tag strong { font: 700 clamp(0.82rem, 1.25vw, 1.12rem) / 1.1 var(--pv-display); letter-spacing: -0.01em; color: color-mix(in srgb, var(--pv-fg) 72%, transparent); }
+.pv-local-tag small { font: 500 clamp(0.75rem, 0.9vw, 0.86rem) / 1.2 var(--pv-display); color: var(--pv-muted); }
+.pv-local-pin.is-on strong, .pv-local-tag--office strong { color: var(--pv-fg); }
+.pv-local-tag--office small { color: var(--pv-blue-text); }
+.pv-local-ctxlabel, .pv-local-ringlabel { display: none; font: 500 0.78rem / 1 var(--pv-display); color: color-mix(in srgb, var(--pv-fg) 46%, transparent); }
+.pv-local-ctxlabel { padding: 2px 5px; border-radius: 4px; background: var(--pv-bg); }
+.pv-local-ctxlabel.pv-local-at--right { transform: translate(6px, -50%); }
+.pv-local-ctxlabel.pv-local-at--above { transform: translate(-50%, calc(-100% - 6px)); }
+.pv-local-ctxlabel.pv-local-at--below { transform: translate(-50%, 6px); }
+.pv-local-ringlabel { transform: translate(-50%, -50%); padding: 2px 5px; background: var(--pv-bg); }
+.pv-local-mapnote { margin-top: 14px; max-width: 52ch; font-size: 0.86rem; line-height: 1.45; color: var(--pv-muted); }
+@media (min-width: 600px) {
+  .pv-local-ctxlabel, .pv-local-ringlabel { display: block; }
+}
+
+/* First-screen scene: GSAP places these before they show. The class is in the
+   markup so nothing jumps after hydration; reduced motion never hides them, and the
+   late animation is a fallback in case the script never runs. */
+@media (prefers-reduced-motion: no-preference) {
+  .pv-local-mapbox.is-scene:not(.is-ready) :is(.pv-local-grid, .pv-local-ring, .pv-local-ctx, .pv-local-route, .pv-local-town, .pv-local-office, .pv-local-office-halo, .pv-local-tag, .pv-local-ctxlabel, .pv-local-ringlabel) {
+    visibility: hidden; animation: pvLocalShow 0s 4s forwards;
+  }
+}
+@keyframes pvLocalShow { to { visibility: visible; } }
+
+/* ── Where we are ─────────────────────────────────────────────────────── */
+.pv-local-map {
+  display: grid; gap: clamp(40px, 7vh, 80px);
+  padding: clamp(80px, 15vh, 180px) var(--pv-pad);
+}
+.pv-local-map-text { display: grid; gap: 20px; align-content: start; justify-items: start; min-width: 0; }
+.pv-local-map-h2 { font-size: clamp(1.9rem, 3.4vw, 3.4rem); }
+.pv-local-map-p { max-width: 50ch; color: var(--pv-muted); font-size: clamp(1rem, 1.15vw, 1.12rem); }
+.pv-local-map-aside { display: grid; gap: 22px; align-content: start; min-width: 0; }
+.pv-local-address {
+  display: grid; gap: 2px; padding-top: 20px; border-top: 1px solid var(--pv-rule); width: 100%;
+  font: 700 clamp(1.5rem, 2.4vw, 2.4rem) / 1.2 var(--pv-display); font-style: normal; letter-spacing: -0.03em;
+}
+.pv-local-address .pv-label { margin-bottom: 10px; letter-spacing: 0; }
+.pv-local-map-links { display: flex; flex-wrap: wrap; gap: 4px 26px; }
+.pv-local-map-links .pv-textlink { display: inline-block; padding-top: 10px; padding-bottom: 10px; background-position: 0 calc(100% - 8px); }
+.pv-local-hub-list { display: grid; width: 100%; margin-bottom: 18px; }
+@media (min-width: 900px) {
+  .pv-local-map { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); column-gap: 6vw; align-items: start; }
+  .pv-local-map-aside { padding-top: clamp(36px, 5vh, 56px); }
+}
+
+/* ── Local businesses and services ────────────────────────────────────── */
+.pv-local-biz { display: grid; gap: clamp(48px, 8vh, 90px); padding: clamp(90px, 16vh, 190px) var(--pv-pad); }
+.pv-local-biz-head { display: grid; gap: 22px; align-content: start; }
+.pv-local-biz-p { max-width: 54ch; color: var(--pv-muted); font-size: clamp(1rem, 1.2vw, 1.15rem); }
+.pv-local-svcs { display: grid; align-content: start; min-width: 0; }
+.pv-local-svcs > .pv-label { margin-bottom: 14px; }
+.pv-local-svc {
+  position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center;
+  gap: 4px 20px; padding: clamp(18px, 2vw, 26px) 0;
+}
+.pv-local-svc:last-child { border-bottom: 1px solid var(--pv-rule); }
+.pv-local-svc-rule { position: absolute; inset: 0 0 auto 0; height: 1px; background: var(--pv-rule); transform-origin: 0 50%; }
+.pv-local-svc-mask { display: block; grid-column: 1; overflow: hidden; padding-bottom: 0.1em; }
+.pv-local-svc-mask > span { display: block; }
+.pv-local-svc-mask--name > span { font: 700 clamp(1.3rem, 2vw, 1.9rem) / 1.1 var(--pv-display); letter-spacing: -0.03em; transition: color 0.3s ease; }
+.pv-local-svc-mask--price > span { font-family: var(--pv-display); font-weight: 500; color: var(--pv-blue-text); }
+.pv-local-svc-mask--body > span { color: var(--pv-muted); font-size: 0.98rem; line-height: 1.45; max-width: 52ch; }
+.pv-local-svc svg { grid-column: 2; grid-row: 1 / span 3; width: 1.6em; height: 1.6em; transition: transform 0.6s var(--pv-ease); }
+@media (hover: hover) {
+  .pv-local-svc:hover .pv-local-svc-mask--name > span { color: var(--pv-blue-text); }
+  .pv-local-svc:hover svg { transform: translateX(6px); }
+}
+@media (min-width: 900px) {
+  .pv-local-biz { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); column-gap: 6vw; align-items: start; }
+  .pv-local-biz-head { position: sticky; top: 16vh; }
+}
+
+/* ── Work ─────────────────────────────────────────────────────────────── */
+.pv-local-work { padding: clamp(90px, 16vh, 190px) var(--pv-pad) clamp(80px, 14vh, 160px); }
+.pv-local-work-head { display: grid; gap: 22px; margin-bottom: clamp(48px, 9vh, 100px); }
+.pv-local-cards { display: grid; gap: clamp(56px, 9vh, 100px) 5vw; }
+.pv-local-card { display: grid; gap: clamp(22px, 2.6vw, 34px); align-content: start; min-width: 0; }
+.pv-local-card-media {
+  position: relative; display: block; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 14px;
+  background: color-mix(in srgb, var(--pv-fg) 8%, var(--pv-bg));
+}
+.pv-local-card-media img { position: absolute; left: 0; top: -8%; width: 100%; height: 116%; max-width: none; object-fit: cover; }
+.pv-local-card-text { display: grid; gap: 12px; justify-items: start; }
+.pv-local-card-where { font-family: var(--pv-display); font-weight: 500; font-size: 0.92rem; color: var(--pv-blue-text); }
+.pv-local-card h3 { font: 700 clamp(1.6rem, 2.5vw, 2.5rem) / 1 var(--pv-display); letter-spacing: -0.035em; }
+.pv-local-card-line { color: var(--pv-muted); max-width: 46ch; }
+.pv-local-card-fig { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 4px 0 2px; }
+.pv-local-card-fig strong { font: 700 clamp(2rem, 3.2vw, 3rem) / 1 var(--pv-display); letter-spacing: -0.045em; color: var(--pv-blue-text); }
+.pv-local-card-fig span { color: var(--pv-muted); font-size: 0.95rem; }
+.pv-local-card-text .pv-textlink { display: inline-block; padding-top: 10px; padding-bottom: 10px; background-position: 0 calc(100% - 8px); }
+.pv-local-quote { margin: clamp(80px, 14vh, 160px) 0 0; max-width: 34em; }
+.pv-local-quote blockquote { margin: 0; }
+.pv-local-quote p { font: 500 clamp(1.4rem, 2.6vw, 2.4rem) / 1.25 var(--pv-display); letter-spacing: -0.025em; }
+.pv-local-quote figcaption { margin-top: 22px; color: var(--pv-muted); font-size: 0.95rem; }
+.pv-local-work-foot { margin-top: clamp(56px, 10vh, 110px); }
+@media (min-width: 900px) {
+  .pv-local-work-head { grid-template-columns: 1.2fr 1fr; align-items: end; gap: 22px 6vw; }
+  .pv-local-work-head .pv-label { grid-column: 1 / -1; }
+  .pv-local-cards { grid-template-columns: 1fr 1fr; }
+  .pv-local-card:nth-child(even) { margin-top: clamp(60px, 14vh, 160px); }
+  .pv-local-card-media { border-radius: 18px; }
+}
+
+/* ── Other areas and industries ───────────────────────────────────────── */
+.pv-local-near { padding: clamp(90px, 15vh, 170px) var(--pv-pad) clamp(80px, 13vh, 150px); }
+.pv-local-near-head { display: grid; gap: 16px; margin-bottom: clamp(36px, 6vh, 64px); }
+.pv-local-near-cols { display: grid; gap: 56px 6vw; }
+.pv-local-near-list { display: grid; align-content: start; min-width: 0; }
+.pv-local-near-list > .pv-label { margin-bottom: 12px; }
+.pv-local-near-row {
+  position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center;
+  gap: 4px 20px; min-height: 44px; padding: clamp(16px, 1.8vw, 24px) 0;
+}
+.pv-local-near-row:last-child { border-bottom: 1px solid var(--pv-rule); }
+.pv-local-near-rule { position: absolute; inset: 0 0 auto 0; height: 1px; background: var(--pv-rule); transform-origin: 0 50%; }
+.pv-local-near-mask { display: block; grid-column: 1; overflow: hidden; padding-bottom: 0.1em; }
+.pv-local-near-mask > span { display: block; }
+.pv-local-near-mask--name > span { font: 700 clamp(1.25rem, 1.9vw, 1.8rem) / 1.1 var(--pv-display); letter-spacing: -0.03em; transition: color 0.3s ease; }
+.pv-local-near-mask--sub > span { color: var(--pv-muted); font-size: 0.95rem; line-height: 1.4; max-width: 48ch; }
+.pv-local-near-row svg { grid-column: 2; grid-row: 1 / span 2; width: 1.6em; height: 1.6em; transition: transform 0.6s var(--pv-ease); }
+@media (hover: hover) {
+  .pv-local-near-row:hover .pv-local-near-mask--name > span { color: var(--pv-blue-text); }
+  .pv-local-near-row:hover svg { transform: translateX(6px); }
+}
+@media (min-width: 900px) {
+  .pv-local-near-cols { grid-template-columns: 1fr 1fr; }
+  .pv-local-near-cols--one { grid-template-columns: minmax(0, 1fr); max-width: 60rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pv-local-hero .pv-line > span, .pv-local-crumbs, .pv-local-hero-row, .pv-local-facts { animation: none; }
+}

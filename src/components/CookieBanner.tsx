@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { readConsent, writeConsent } from "@/lib/consent";
 
 /**
@@ -21,9 +22,21 @@ import { readConsent, writeConsent } from "@/lib/consent";
  * respect `prefers-reduced-motion` — currently only used for the slight
  * mount delay.
  */
+/**
+ * The routes that still use the old chrome and therefore need this banner.
+ * Everything else on the site renders PreviewCookieBanner inside PreviewShell,
+ * including the 404, which can appear at any path.
+ */
+const LEGACY_PATHS = ["/onboarding", "/forms", "/proposals-unlock"];
+
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
+  // Every page built in the redesign renders its own banner inside
+  // PreviewShell (PreviewCookieBanner), so this one would be a duplicate.
+  // These are the only routes left that are not rendered through PreviewShell.
+  const pathname = usePathname() ?? "";
+  const onLegacyPage = LEGACY_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`));
 
   useEffect(() => {
     setMounted(true);
@@ -44,7 +57,7 @@ export function CookieBanner() {
     setVisible(false);
   };
 
-  if (!mounted || !visible) return null;
+  if (!mounted || !visible || !onLegacyPage) return null;
 
   return (
     <div

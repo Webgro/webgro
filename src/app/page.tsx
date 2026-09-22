@@ -1,25 +1,13 @@
-import { Nav } from "@/components/Nav";
-import { Hero } from "@/components/Hero";
-import { WorkSection } from "@/components/WorkSection";
-import { ServicesSection } from "@/components/ServicesSection";
-import { TheGroSection } from "@/components/TheGroSection";
-import { FAQSection } from "@/components/FAQSection";
-import { ContactSection } from "@/components/ContactSection";
-import { Footer } from "@/components/Footer";
+import type { Metadata } from "next";
+import { PAGE_META, pageMeta } from "@/components/preview/seo";
+import { preload } from "react-dom";
+import { PreviewHome } from "@/components/preview/PreviewHome";
 
-export default function Home() {
-  return (
-    <>
-      <Nav />
-      <main className="flex-1">
-        <Hero />
-        <WorkSection />
-        <ServicesSection />
-        <TheGroSection />
-        <FAQSection />
-        <ContactSection />
-      </main>
-      <Footer />
-    </>
-  );
+export const metadata: Metadata = pageMeta({ ...PAGE_META.home, path: "/" });
+
+export default function PreviewPage() {
+  // The display face sets the whole first screen, so fetch it with the HTML rather than after the CSS.
+  preload("/fonts/satoshi-700.woff2?v=2", { as: "font", type: "font/woff2", crossOrigin: "anonymous" });
+  preload("/fonts/satoshi-500.woff2?v=2", { as: "font", type: "font/woff2", crossOrigin: "anonymous" });
+  return <PreviewHome darkHero />;
 }

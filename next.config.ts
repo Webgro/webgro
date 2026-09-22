@@ -18,6 +18,23 @@ const legacyRedirects = async () => {
   });
 
   // --- Legacy service-location pages (hundreds, wildcards only) -----------
+  // Towns with a page of their own go there, other Berkshire towns go to the
+  // Berkshire hub, and everything else falls through to /services/websites.
+  // These must stay above the wildcards below, because the first match wins.
+  // Old slugs may carry a suffix (e.g. "reading-berkshire"), so each town
+  // matches its name followed by anything.
+  const LOCAL_PREFIXES = ["web-design-development", "shopify-web-design", "wordpress-web-design"];
+  const TOWNS = ["bracknell", "reading", "wokingham", "windsor", "maidenhead", "berkshire"];
+  const BERKSHIRE_TOWNS = [
+    "ascot", "binfield", "crowthorne", "sandhurst", "twyford", "slough", "newbury",
+    "finchampstead", "winnersh", "woodley", "earley", "sunningdale", "sunninghill",
+    "eton", "thatcham", "hungerford",
+  ];
+  const localTowns: R[] = LOCAL_PREFIXES.flatMap((prefix) => [
+    ...TOWNS.map((t) => r(`/services/${prefix}/:slug(${t}.*)`, `/web-design/${t}`)),
+    ...BERKSHIRE_TOWNS.map((t) => r(`/services/${prefix}/:slug(${t}.*)`, "/web-design/berkshire")),
+  ]);
+
   // The :city* capture matches any depth of trailing path segments.
   const serviceLocation: R[] = [
     r("/services/web-design-development", "/services/websites"),
@@ -62,6 +79,7 @@ const legacyRedirects = async () => {
     r("/twisted-tailor", "/work/twisted-tailor"),
     r("/gieves-and-hawkes", "/work/gieves-and-hawkes"),
     r("/sublishop", "/work/sublishop"),
+    r("/anyprint", "/work/anyprint"),
   ];
 
   // --- Portfolio we didn't port → /work -----------------------------------
@@ -73,7 +91,6 @@ const legacyRedirects = async () => {
     "/kibble-watches",
     "/georgina-bywater",
     "/vagamundo",
-    "/anyprint",
     "/kim-duffy",
     "/tc4re",
     "/lawnify",
@@ -187,6 +204,7 @@ const legacyRedirects = async () => {
   ];
 
   return [
+    ...localTowns,
     ...serviceLocation,
     ...services,
     ...topLevel,
@@ -211,6 +229,9 @@ const nextConfig: NextConfig = {
     // Uses React's <ViewTransition>; browsers without the View Transitions
     // API just navigate normally.
     viewTransition: true,
+    // Styles arrive inside the HTML instead of as separate render-blocking
+    // files. Most visitors are first-time visitors, which is where this helps.
+    inlineCss: true,
   },
   redirects: legacyRedirects,
   async rewrites() {

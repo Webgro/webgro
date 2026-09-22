@@ -95,7 +95,7 @@ export const caseStudies: CaseStudy[] = [
     heroImage: "/work/fun-cases.jpg",
     heroImageAlt: "Fun Cases storefront",
     excerpt:
-      "A complete rebrand and a ground-up Shopify theme for a business shipping thousands of phone cases a week. Logo, tone of voice, website, socials, and email, plus a custom product personaliser that replaced an app costing nearly £5,000 a year.",
+      "A rebrand and a new Shopify theme built from scratch for a business that ships thousands of phone cases a week. The work covered the logo, tone of voice, website, social templates and email, plus a custom product personaliser that replaced an app costing nearly £5,000 a year.",
     services: [
       "Rebrand",
       "Shopify",
@@ -113,7 +113,7 @@ export const caseStudies: CaseStudy[] = [
     body: [
       {
         type: "intro",
-        text: "Fun Cases ship thousands of phone cases a week across a catalogue of over 20,000 designs, and we've run their eCommerce since 2012. The latest chapter is the biggest: a complete rebrand and a ground-up new theme, with a custom product personaliser that took a five-figure app bill off the books. Revenue is up 300% over the last five years.",
+        text: "Fun Cases ship thousands of phone cases a week from a catalogue of over 20,000 designs, and we've run their eCommerce since 2012, before we were called Webgro. The most recent project was a full rebrand and a new Shopify theme built from scratch, including a custom product personaliser that replaced a paid third-party app. Revenue is up 300% over the last five years.",
       },
 
       // ── Chapter 01 ─────────────────────────────────────────────
@@ -123,15 +123,15 @@ export const caseStudies: CaseStudy[] = [
         num: "01",
         label: "Rebrand & Website",
         description:
-          "A full rebrand (logo, tone of voice, socials, email) carried into a ground-up Shopify theme, with a custom personaliser replacing a £5,000-a-year app.",
+          "A full rebrand (logo, tone of voice, social, email) and a new Shopify theme built from scratch, with a custom personaliser that replaced a £5,000-a-year app.",
       },
       {
         type: "section",
         eyebrow: "The rebrand",
-        heading: "A new identity, everywhere at once",
+        heading: "A new brand across every channel",
         body: [
-          "Fun Cases had outgrown its old look. We rebuilt the brand from the logo up: a bold pop-art identity, a new tone of voice, and a design system of rounded blocks, ink outlines, and a palette that actually feels fun. Sacred things stayed sacred, like the promise that every order plants a tree.",
-          "Then we carried it everywhere at once. Website, social templates, and a new email marketing system in Klaviyo, all launched together so no channel lagged behind the new look.",
+          "Fun Cases had outgrown its old look. We rebuilt the brand starting with the logo: a bold pop-art identity, a new tone of voice, and a design system of rounded blocks, ink outlines and a colour palette chosen to feel fun. Some things stayed the same, including the promise that every order plants a tree.",
+          "The website, social templates and a new email marketing system in Klaviyo all launched at the same time, so every channel moved to the new brand together.",
         ],
         phone: {
           src: "/work/fun-cases/mobile-home.jpg",
@@ -142,10 +142,10 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "section",
         eyebrow: "The theme",
-        heading: "A ground-up build for a 20,000-product catalogue",
+        heading: "A new theme for a 20,000-product catalogue",
         body: [
-          "The new theme was built from scratch around how people actually buy phone cases. A mega menu with trending collections and products built in, predictive search, a native wishlist, and a slide-out cart with free-shipping and free-gift progress built in.",
-          "Every section is editor-friendly, the whole palette is a theme setting, and the in-house team can restyle or rearrange without a developer in the loop.",
+          "We built the new theme from scratch around how people shop for phone cases. It has a mega menu with trending collections and products, predictive search, a native wishlist, and a slide-out cart that shows progress towards free shipping and a free gift.",
+          "Every section can be edited in the theme editor and the colour palette is a theme setting, so the in-house team can restyle or rearrange pages without a developer.",
         ],
       },
       {
@@ -157,19 +157,19 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "section",
         eyebrow: "Phone model selector",
-        heading: "Pick your phone once, the site follows",
+        heading: "Choose your phone model once",
         body: [
-          "Nobody browsing 20,000 designs wants to check compatibility on every one. So the site asks once. Choose your phone model and it follows you everywhere: every product image across every collection, search result, and product page shows the case on your exact phone.",
-          "It removes the single biggest point of friction in buying a phone case: wondering whether the one you love fits the phone you own.",
+          "With 20,000 designs, customers shouldn't have to check compatibility on every product. The site asks for their phone model once and remembers it. From then on, every product image in collections, search results and product pages shows the case on that exact phone.",
+          "This removes the biggest source of doubt when buying a phone case: whether the design the customer likes will fit the phone they own.",
         ],
       },
       {
         type: "section",
         eyebrow: "The personaliser",
-        heading: "Design your own, without the app fee",
+        heading: "A custom case designer built into the theme",
         body: [
-          "Custom cases are a huge slice of the business, and the previous designer tool was a third-party app costing nearly £5,000 a year. We replaced it with our own: a full-screen editor built into the theme where customers add photos, text, and stickers to a live mockup of their exact phone and case type.",
-          "It exports a print-ready file straight into the order, so the studio prints from what the customer approved. No app, no monthly fee, no third-party checkout scripts. The tool now belongs to Fun Cases outright.",
+          "Custom cases are a large part of the business. The previous design tool was a third-party app costing nearly £5,000 a year. We replaced it with our own full-screen editor, built into the theme, where customers add photos, text and stickers to a live mockup of their exact phone and case type.",
+          "The editor adds a print-ready file to the order, so the studio prints exactly what the customer approved. There's no monthly fee or third-party checkout script, and Fun Cases own the tool outright.",
         ],
         phone: {
           src: "/work/fun-cases/mobile-personaliser.jpg",
@@ -180,10 +180,10 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "statGroup",
         items: [
-          { eyebrow: "App bill, off", value: "£5k", label: "per year, saved" },
-          { eyebrow: "Revenue growth · 5 years", value: "+300%", label: "year-on-year" },
-          { eyebrow: "Avg. conversion rate", value: "6.0%", label: "worldwide" },
-          { eyebrow: "Peak CR · Dec 2025", value: "11.2%", label: "highest day" },
+          { eyebrow: "App cost saved", value: "£5k", label: "per year" },
+          { eyebrow: "Revenue growth", value: "+300%", label: "over 5 years" },
+          { eyebrow: "Average conversion rate", value: "6.0%", label: "worldwide" },
+          { eyebrow: "Peak conversion rate", value: "11.2%", label: "best day, Dec 2025" },
         ],
       },
       {
@@ -191,6 +191,17 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/fun-cases/desktop-pdp.jpg",
         alt: "Fun Cases product page with phone model and case type selectors",
         url: "funcases.com",
+      },
+      {
+        type: "browser",
+        src: "/work/fun-cases/live-collection.jpg",
+        alt: "Fun Cases phone case collection page",
+        url: "funcases.com/collections/phone-cases",
+        caption: "A collection page, with filters for design and phone model.",
+        phone: {
+          src: "/work/fun-cases/live-mobile-product.jpg",
+          alt: "Fun Cases design-your-own product page on a phone",
+        },
       },
 
       // ── Chapter 02 ─────────────────────────────────────────────
@@ -200,32 +211,32 @@ export const caseStudies: CaseStudy[] = [
         num: "02",
         label: "Marketing & SEO",
         description:
-          "A growth loop that earns out each quarter across paid, lifecycle, and organic. Built on a technical SEO foundation that reads cleanly to Google and LLMs.",
+          "Paid search, paid social, email and organic search, built on technical SEO that Google and LLMs can read easily.",
       },
       {
         type: "section",
         eyebrow: "SEO",
         heading: "Ranked #1 for 'Phone Cases'",
         body: [
-          "SEO was built into the rebuild, not bolted on after. Content architecture, internal linking, technical foundations, and a content program tied to the merch calendar.",
-          "Fun Cases have since peaked at #1 on Google UK for 'Phone Cases', one of the most competitive category terms in the space.",
+          "We built SEO into the rebuild from the start: content architecture, internal linking, technical foundations, and a content programme tied to the merchandising calendar.",
+          "Fun Cases have since reached #1 on Google UK for 'Phone Cases', one of the most competitive category terms in the market.",
         ],
       },
       {
         type: "statGroup",
         items: [
-          { eyebrow: "Revenue via email", value: "30%", label: "of total revenue" },
-          { eyebrow: "Paid spend · monthly", value: "£35k", label: "across Google & Meta" },
+          { eyebrow: "Revenue from email", value: "30%", label: "of total revenue" },
+          { eyebrow: "Monthly paid spend", value: "£35k", label: "across Google and Meta" },
           { eyebrow: "Blended ROAS", value: "8+", label: "sustained" },
         ],
       },
       {
         type: "section",
         eyebrow: "Email marketing",
-        heading: "Thirty percent of revenue, earned quietly",
+        heading: "Over 30% of revenue from email",
         body: [
-          "Email is the highest-leverage channel in Fun Cases' stack. Lifecycle flows on Klaviyo, campaign design tied to the merch drop calendar, segmentation on real behaviour rather than vanity fields.",
-          "Over 30% of total revenue now comes through email. The kind of compounding margin that doesn't need more ad spend to stand up.",
+          "Email brings in more for its cost than any other channel Fun Cases use. We run lifecycle flows in Klaviyo, design campaigns around the product drop calendar, and segment customers on what they do rather than on vanity fields.",
+          "Over 30% of total revenue now comes through email, and that revenue doesn't depend on extra ad spend.",
         ],
         phone: {
           src: "/work/fun-cases/email.png",
@@ -236,10 +247,10 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "section",
         eyebrow: "PPC",
-        heading: "£35k a month, returning 8× and climbing",
+        heading: "£35k a month on Google and Meta",
         body: [
-          "Paid media on Google and Meta. Combined spend around £35,000 a month, blended ROAS consistently above 8. Search, Shopping, Performance Max, paid social all tuned against actual product margins rather than top-line revenue alone.",
-          "No spikes. No hero launches. Compounding spend against a catalogue that keeps widening, shepherded week-to-week.",
+          "We run paid media on Google and Meta, with combined spend of around £35,000 a month and blended ROAS consistently above 8. Search, Shopping, Performance Max and paid social campaigns are all optimised against product margins rather than top-line revenue alone.",
+          "We manage the spend week to week as the catalogue grows.",
         ],
       },
 
@@ -250,15 +261,15 @@ export const caseStudies: CaseStudy[] = [
         num: "03",
         label: "Custom Apps",
         description:
-          "Three production AI tools, a custom Stock System, and an order-routing app feeding the print floor. Each one built into the Fun Cases workflow, earning its keep daily.",
+          "Three AI tools in daily use, a custom Stock System, and an order-routing app that sends orders to the print floor, all built around how Fun Cases work.",
       },
       {
         type: "section",
         eyebrow: "Order routing",
-        heading: "From checkout to printed in two minutes",
+        heading: "Automatic order routing",
         body: [
-          "Fun Cases invested in state-of-the-art automatic printing machines, but not every order can go to them. Which route an order takes depends on the phone model and case type the customer chose.",
-          "So we built a custom routing app that makes the call on every order as it lands. Machine-compatible orders go straight to the automatic printers, no human in the loop; the rest are queued for in-house manual printing. On the automatic route, an order can be placed and printed within two minutes.",
+          "Fun Cases invested in automatic printing machines, but not every order can go to them. It depends on the phone model and case type the customer chose.",
+          "We built a routing app that checks every order as it comes in. Orders the machines can handle go straight to the automatic printers with no manual step, and the rest are queued for manual printing in-house. On the automatic route, an order can be placed and printed within two minutes.",
         ],
       },
       {
@@ -270,14 +281,14 @@ export const caseStudies: CaseStudy[] = [
         type: "statGroup",
         items: [
           { eyebrow: "Order to print", value: "2 min", label: "on the automatic route" },
-          { eyebrow: "Routing decisions", value: "Every order", label: "no human in the loop" },
+          { eyebrow: "Routing decisions", value: "Every order", label: "made automatically" },
           { eyebrow: "Customer service hours", value: "−70%", label: "with AI triage" },
         ],
       },
       {
         type: "section",
         heading: "AI customer service",
-        body: "Every incoming ticket is triaged, summarised, and drafted by AI. A human reviews, edits, and sends. Customer service hours are down 70%. Response times are up. Tone stays on-brand because humans still sign off.",
+        body: "AI triages and summarises every incoming ticket and drafts a reply. A member of the team then reviews, edits and sends it. Customer service hours are down 70% and customer satisfaction has improved. Replies stay in the brand's tone because a person signs off each one.",
       },
       {
         type: "uiMock",
@@ -287,7 +298,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "section",
         heading: "AI product generator",
-        body: "Drop in a design and a collection title. The tool generates and publishes a full range (Phone Cases, Laptop Sleeves, Lunchboxes, Keyrings, Posters) in under ten minutes. Mockups, SKUs, variants, imagery, copy. Merchandising went from cutting a range in a day to cutting it before lunch.",
+        body: "Staff enter a design and a collection title, and the tool generates and publishes a full range (Phone Cases, Laptop Sleeves, Lunchboxes, Keyrings, Posters) in under ten minutes, including mockups, SKUs, variants, imagery and copy. Creating a range used to take the merchandising team a day.",
       },
       {
         type: "uiMock",
@@ -297,7 +308,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "section",
         heading: "AI image generator",
-        body: "Upload a product mockup. Get back Instagram-ready lifestyle imagery in two clicks. Model shots, environments, angles. Ready for social without a photographer on the books.",
+        body: "Staff upload a product mockup and get back lifestyle images for Instagram in two clicks, with models, settings and different angles. The images can go straight to social without booking a photographer.",
       },
       {
         type: "uiMock",
@@ -307,10 +318,10 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "section",
         eyebrow: "Stock System",
-        heading: "A WMS that actually fits the business",
+        heading: "A custom warehouse management system",
         body: [
-          "Off-the-shelf warehouse management was either too big or too limited. We built a custom WMS tailored to the Fun Cases operation. Integrated directly with Shopify, live stock, no middleware headaches, owned outright by the client.",
-          "The platform also runs a productivity tracker across the pick-and-pack team, AI-driven restock and fulfilment recommendations, and a growing set of small tools the ops team ask for and we ship. It's less of a product and more of a living system.",
+          "Off-the-shelf warehouse management software was either too big or too limited for Fun Cases, so we built a custom WMS for their operation. It connects directly to Shopify, shows live stock without any middleware, and the client owns it outright.",
+          "The system also includes a productivity tracker for the pick-and-pack team, AI restock and fulfilment recommendations, and a set of smaller tools we build as the ops team ask for them. We keep adding to it.",
         ],
       },
       {
@@ -323,17 +334,17 @@ export const caseStudies: CaseStudy[] = [
         heading: "Deliverables",
         items: [
           "Full rebrand (logo, tone of voice, design system)",
-          "Custom Shopify theme (ground-up)",
+          "Custom Shopify theme (built from scratch)",
           "Product personaliser (app replaced, £5k/yr saved)",
-          "Phone model selector (site-wide persistence)",
+          "Phone model selector (remembered across the site)",
           "Native wishlist",
-          "Social + email template system",
-          "Order routing app (auto-print vs in-house)",
-          "Custom WMS + Shopify integration",
+          "Social and email templates",
+          "Order routing app (automatic print or in-house)",
+          "Custom WMS with Shopify integration",
           "AI customer service agent",
           "AI product generator",
           "AI lifestyle image generator",
-          "SEO program",
+          "SEO programme",
           "Paid media (Google · Meta)",
           "Email marketing (Klaviyo)",
         ],
@@ -345,12 +356,12 @@ export const caseStudies: CaseStudy[] = [
     slug: "gieves-and-hawkes",
     client: "Gieves & Hawkes",
     tag: "Luxury eCommerce",
-    year: "2014 to present",
+    year: "2023 to present",
     accent: "violet",
     heroImage: "/work/gieves-hawkes.webp",
-    heroImageAlt: "Gieves & Hawkes digital flagship",
+    heroImageAlt: "Gieves & Hawkes website",
     excerpt:
-      "A second ground-up Shopify build for the Savile Row house. Custom-built sections replaced eight third-party apps, mobile Lighthouse climbed from 64 to 85, and £300 a month came off the app bill. Our best work to date.",
+      "Our second Shopify build from scratch for the Savile Row house. Custom theme sections replaced eight third-party apps, mobile Lighthouse went from 64 to 85, and the app bill dropped by £300 a month.",
     services: ["Shopify build", "eCommerce consultancy", "SEO", "Email marketing"],
     stack: ["Shopify", "Custom theme", "SimplyBookMe API"],
     timeline: "Ongoing partnership",
@@ -360,7 +371,7 @@ export const caseStudies: CaseStudy[] = [
     body: [
       {
         type: "intro",
-        text: "Gieves & Hawkes have tailored for British royalty since 1771. We rebuilt their Shopify storefront after the Frasers takeover in 2014 and have run the eCommerce side of the brand since. The most recent piece of work, a full ground-up theme rebuild, is the best we've shipped.",
+        text: "Gieves & Hawkes have tailored for British royalty since 1771. We've worked with them since 2023 and run the brand's eCommerce. We built their first Shopify store after the Frasers takeover, launched in 2024, and rebuilt it from scratch in 2026.",
       },
 
       // ── Chapter 01 ─────────────────────────────────────────────
@@ -370,24 +381,24 @@ export const caseStudies: CaseStudy[] = [
         num: "01",
         label: "Website",
         description:
-          "A second ground-up Shopify build. Custom-built sections replaced eight third-party apps, mobile Lighthouse went from 64 to 85, and the in-house team got a theme they own end to end.",
+          "Our second Shopify build from scratch. Custom sections replaced eight third-party apps, mobile Lighthouse went from 64 to 85, and the in-house team now have a theme they fully control.",
       },
       {
         type: "section",
         eyebrow: "The brief",
-        heading: "A theme the in-house team own",
+        heading: "A theme the in-house team can manage",
         body: [
-          "The 2014 build did its job. The estate ran on it for years. But like every Shopify store that gets to age four, the app stack had quietly grown. Twelve apps for predictive search, wishlists, size guides, bundles, back-in-stock alerts, and the rest. Each one a monthly fee, a render-blocking script, and a thing that breaks when someone else updates it.",
-          "The new brief was different. Rebuild from scratch. Move every app function into the theme itself. Make every section editor-friendly so the in-house team can extend without a developer. Pull the mobile performance up. Two months, head down.",
+          "The first store we built for them launched in 2024. By the time we started the rebuild, it relied on twelve apps for predictive search, wishlists, size guides, bundles, back-in-stock alerts and other features. Each one added a monthly fee and a render-blocking script, and could break when its developer pushed an update.",
+          "The brief was to rebuild the theme from scratch, move every app's function into the theme itself, and make every section editable so the in-house team could add to the site without a developer. Mobile performance also had to improve. The build took two months.",
         ],
       },
       {
         type: "section",
-        eyebrow: "What got rebuilt",
+        eyebrow: "What we rebuilt",
         heading: "Eight apps replaced with theme code",
         body: [
-          "Predictive search, size guides, wishlists that sync to Klaviyo, bundle merchandising, and back-in-stock alerts. All built natively into the theme. No third-party scripts, no app fees, no rendering layer to wait for. The pieces that used to cost £300 a month now ship as part of the codebase Gieves own.",
-          "The made-to-measure flow is the one exception. We integrated SimplyBookMe via their API so MTM appointments connect to the calendar the team already use. Booking logic stays in a tool built for it; the booking UI lives in the theme.",
+          "We built predictive search, size guides, wishlists that sync to Klaviyo, bundle merchandising and back-in-stock alerts directly into the theme. None of them rely on third-party scripts or app fees now. Features that used to cost £300 a month are part of a codebase Gieves own.",
+          "The made-to-measure booking flow is the one exception. We connected SimplyBookMe through its API so MTM appointments go into the calendar the team already use. SimplyBookMe handles the booking logic, and the booking screens are part of the theme.",
         ],
       },
       {
@@ -397,18 +408,18 @@ export const caseStudies: CaseStudy[] = [
             eyebrow: "Mobile Lighthouse",
             value: "+21",
             label: "from 64 to 85",
-            footnote: "Average across home, PLP, and PDP.",
+            footnote: "Average of the homepage, collection pages and product pages.",
           },
           {
-            eyebrow: "Shopify apps retired",
+            eyebrow: "Shopify apps removed",
             value: "8",
             label: "12 down to 4",
-            footnote: "Replaced with native theme sections.",
+            footnote: "Replaced with sections built into the theme.",
           },
           {
-            eyebrow: "App bill, off",
+            eyebrow: "App costs saved",
             value: "£300",
-            label: "per month, saved",
+            label: "per month",
           },
           {
             eyebrow: "Build time",
@@ -424,12 +435,30 @@ export const caseStudies: CaseStudy[] = [
         url: "gievesandhawkes.com",
       },
       {
+        type: "browser",
+        src: "/work/gieves-and-hawkes/live-collection.jpg",
+        alt: "Gieves & Hawkes AW26 collection page",
+        url: "gievesandhawkes.com/collections/aw26-collection",
+        caption: "The AW26 collection page.",
+        phone: {
+          src: "/work/gieves-and-hawkes/live-mobile-product.jpg",
+          alt: "Gieves & Hawkes product page on a phone",
+        },
+      },
+      {
+        type: "browser",
+        src: "/work/gieves-and-hawkes/live-product.jpg",
+        alt: "Gieves & Hawkes product page for the Newton Donegal lambswool suit",
+        url: "gievesandhawkes.com/products/newton-donegal-lambswool-suit-brown",
+        caption: "A product page, with separate jacket and trouser sizing.",
+      },
+      {
         type: "section",
-        eyebrow: "Templates beyond the catalogue",
+        eyebrow: "Other page templates",
         heading: "Bespoke, made to measure, journal, heritage",
         body: [
-          "The catalogue is a slice of what Gieves sell. A custom suit, a fitting at the Savile Row showroom, the journal that documents two and a half centuries of tailoring: each one needed its own template, not a sales page in costume.",
-          "Five additional template families ship with the new theme: bespoke, made to measure, journal, a heritage page with the brand's full timeline, and the showroom locator. Each one shares the theme's vocabulary but has its own pace and its own way of presenting the work.",
+          "The product catalogue is only part of what Gieves sell. Bespoke suits, fittings at the Savile Row showroom, and a journal covering two and a half centuries of tailoring each needed their own page template rather than a reworked product page.",
+          "The new theme includes five more template families: bespoke, made to measure, journal, a heritage page with the brand's full timeline, and the showroom locator. They use the same design system as the rest of the theme, with layouts suited to their content.",
         ],
         phone: {
           src: "/work/gieves-and-hawkes/mobile.jpg",
@@ -439,11 +468,11 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         type: "section",
-        eyebrow: "Design, top to bottom",
-        heading: "No templated component left behind",
+        eyebrow: "Design",
+        heading: "Every section designed individually",
         body: [
-          "Every section was designed individually. The luxury web is full of stores where the homepage is considered and the PDP is the same generic Shopify component shipped with most themes. We didn't ship one of those.",
-          "Quiet typography, generous whitespace, motion that's intentional rather than busy. The same restraint applied to every page template, every block, every state.",
+          "We designed every section of the site individually, including the product page, rather than using the standard Shopify components that come with most themes.",
+          "The design uses restrained typography, plenty of whitespace and motion used sparingly, applied consistently across every page template, block and state.",
         ],
       },
 
@@ -454,13 +483,13 @@ export const caseStudies: CaseStudy[] = [
         num: "02",
         label: "Marketing & SEO",
         description:
-          "A technical SEO foundation and content program that took the brand to #1 on Google UK for 'luxury suit'. Organic traffic compounds month on month.",
+          "Technical SEO and a content programme that took the brand to #1 on Google UK for 'luxury suit'. Organic traffic has grown month on month.",
       },
       {
         type: "section",
         eyebrow: "SEO",
-        heading: "From rebuild to category leader",
-        body: "Content, structure, links, and a technical foundation that reads cleanly to both Google and LLMs. Within months, Gieves ranked #1 in the UK for 'luxury suit'. The organic engine has compounded ever since.",
+        heading: "#1 on Google UK for 'luxury suit'",
+        body: "We worked on content, site structure, links and technical SEO so the site is easy for both Google and LLMs to read. Within months, Gieves ranked #1 in the UK for 'luxury suit', and organic traffic has kept growing since.",
         phone: {
           src: "/work/gieves-and-hawkes/mobile-2.jpg",
           alt: "Gieves & Hawkes product view on mobile",
@@ -496,15 +525,15 @@ export const caseStudies: CaseStudy[] = [
         num: "03",
         label: "Consultancy",
         description:
-          "The eCommerce team Gieves don't need to hire. Ongoing strategy, platform guidance, and hands-on delivery, plugged in week to week.",
+          "Ongoing strategy, platform advice and hands-on delivery, working alongside the in-house team week to week.",
       },
       {
         type: "section",
         eyebrow: "Ongoing partnership",
-        heading: "Blending into the team",
+        heading: "Working with the in-house team",
         body: [
-          "Our team blends in where there are gaps in theirs. Strategic calls, specialist one-off work, and growth programs that sit outside the day-to-day but still need senior eCommerce eyes on them.",
-          "We liquify around whatever the in-house team is running. Strategy, platform decisions, and growth planning when the conversation goes bigger. Hands-on delivery when scope widens. A vetted network of marketing, design, and dev specialists pulled in per project when the work calls for it. Same consistent point of contact, shape-shifting scope.",
+          "We fill the gaps in the Gieves in-house team. That covers strategic decisions, specialist one-off projects, and growth work that sits outside the day-to-day but still needs senior eCommerce input.",
+          "The scope changes with what the in-house team is working on. For bigger decisions we help with strategy, platform choices and growth planning, and when the scope widens we take on the delivery ourselves. For some projects we bring in marketing, design and development specialists from a vetted network. Gieves keep the same point of contact throughout.",
         ],
       },
       {
@@ -512,15 +541,309 @@ export const caseStudies: CaseStudy[] = [
         heading: "Deliverables",
         items: [
           "Shopify build",
-          "Custom theme (second ground-up)",
+          "Custom theme (second full rebuild)",
           "Eight custom theme sections replacing apps",
           "SimplyBookMe API integration for MTM",
           "Heritage, bespoke, MTM, journal, showroom templates",
-          "Performance + accessibility overhaul",
+          "Performance and accessibility improvements",
           "Ongoing eCommerce consultancy",
-          "SEO program",
+          "SEO programme",
           "Email marketing",
           "Growth planning",
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "valuepet",
+    client: "ValuePet",
+    tag: "eCommerce · Pet retail",
+    year: "2026",
+    accent: "blue",
+    heroImage: "/work/valuepet.jpg",
+    heroImageAlt: "A dog and a cat asleep together on a sofa",
+    excerpt:
+      "A Shopify redesign for one of Ireland's biggest pet retailers, with a Pet Hub that personalises the shop to each customer's pets and a custom app that keeps stock in sync between two stores. Average order value rose from €42.51 to €69.03 in the week after launch.",
+    services: ["Shopify redesign", "Custom app", "Email marketing"],
+    stack: ["Shopify", "Custom app", "Klaviyo"],
+    timeline: "8 weeks",
+    url: "https://valuepet.ie",
+    categories: ["ecommerce"],
+    body: [
+      {
+        type: "intro",
+        text: "ValuePet have been selling pet food and supplies in Ireland since 1993. We redesigned their Shopify store in 2026, added a Pet Hub that tailors the shop to each customer's pets, and built an app that keeps stock in sync with their second Shopify store. We've since taken over their email marketing too.",
+      },
+
+      // ── Chapter 01 ─────────────────────────────────────────────
+      {
+        type: "chapter",
+        id: "website",
+        num: "01",
+        label: "Website",
+        description:
+          "A Shopify redesign launched in eight weeks, with personalisation built around the customer's own pets.",
+      },
+      {
+        type: "section",
+        eyebrow: "Redesign",
+        heading: "A new Shopify store in eight weeks",
+        body: [
+          "We redesigned the whole store, from the homepage and navigation through to collection and product pages, and launched it eight weeks after starting.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/valuepet/storefront.jpg",
+        alt: "ValuePet homepage",
+        url: "valuepet.ie",
+        phone: {
+          src: "/work/valuepet/mobile.jpg",
+          alt: "ValuePet homepage on a phone, with a personalised search bar",
+        },
+      },
+      {
+        type: "browser",
+        src: "/work/valuepet/live-product.jpg",
+        alt: "ValuePet product page",
+        url: "valuepet.ie/products/hills-science-plan-mature-adult-light-dry-cat-food-1-5kg-chicken",
+        caption: "A product page.",
+        phone: {
+          src: "/work/valuepet/live-mobile-product.jpg",
+          alt: "ValuePet product page on a phone",
+        },
+      },
+      {
+        type: "section",
+        eyebrow: "Pet Hub",
+        heading: "A shop that knows your pets",
+        body: [
+          "Customers can add their pets to their account, with each pet's type, breed and age. The store uses those details to personalise what they see.",
+          "The search bar asks what their pet needs by name, headings change to match, and product recommendations are chosen for each pet's type and life stage.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/valuepet/live-home-scroll.jpg",
+        alt: "ValuePet homepage product rows and the Pet Hub prompt",
+        url: "valuepet.ie",
+        caption: "The homepage, with the Pet Hub prompt in the corner.",
+      },
+      {
+        type: "section",
+        eyebrow: "Custom app",
+        heading: "Stock kept in sync between two stores",
+        body: [
+          "ValuePet run two Shopify stores. We built a custom app that links them, so stock levels stay in sync between the two automatically, without anyone updating them by hand.",
+        ],
+      },
+
+      // ── Chapter 02 ─────────────────────────────────────────────
+      {
+        type: "chapter",
+        id: "email",
+        num: "02",
+        label: "Email marketing",
+        description: "We now run ValuePet's email marketing in Klaviyo.",
+      },
+      {
+        type: "section",
+        eyebrow: "Klaviyo",
+        heading: "Email marketing on Klaviyo",
+        body: [
+          "After launch we took over ValuePet's email marketing, which we run in Klaviyo.",
+        ],
+      },
+      {
+        type: "statGroup",
+        items: [
+          { eyebrow: "Week before launch", value: "€42.51", label: "average order value" },
+          { eyebrow: "Week after launch", value: "€69.03", label: "average order value" },
+          { eyebrow: "Change", value: "+62%", label: "in average order value" },
+          { eyebrow: "Timescale", value: "8 weeks", label: "from start to launch" },
+        ],
+      },
+      {
+        type: "deliverables",
+        heading: "Deliverables",
+        items: [
+          "Shopify redesign",
+          "Pet Hub personalisation",
+          "Custom stock sync app between two Shopify stores",
+          "Klaviyo email marketing",
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "architectural-fx",
+    client: "Architectural FX",
+    tag: "WordPress · Lighting",
+    year: "2026",
+    accent: "teal",
+    heroImage: "/work/architectural-fx.jpg",
+    heroImageAlt: "A curved white room lit by warm LED strip lighting along the floor and walls",
+    excerpt:
+      "A custom WordPress plugin for Architectural FX, a lighting distributor in Wokingham. Products are published from the team's Google Sheet, and the new products page has live filters and a configurator that produces spec sheets.",
+    services: ["WordPress development", "Custom plugin", "Google Sheets integration"],
+    stack: ["WordPress", "Custom plugin", "Google Apps Script"],
+    timeline: "Launched June 2026",
+    url: "https://architecturalfx.co.uk",
+    categories: ["wordpress"],
+    body: [
+      {
+        type: "intro",
+        text: "Architectural FX supply premium LED lighting to architects, lighting designers and specifiers from their office in Wokingham. We rebuilt how their WordPress site handles products. The catalogue now comes from the Google Sheet the team already use, and the products page, product pages and configurator are new.",
+      },
+
+      // ── Chapter 01 ─────────────────────────────────────────────
+      {
+        type: "chapter",
+        id: "catalogue",
+        num: "01",
+        label: "Catalogue",
+        description:
+          "A custom WordPress plugin that publishes products from the team's Google Sheet.",
+      },
+      {
+        type: "section",
+        eyebrow: "The starting point",
+        heading: "The old setup",
+        body: [
+          "Product data lived in a Google Sheet. To change a product, the team emailed the sheet to us and waited for an import to run, so small edits cost time and money.",
+          "The site ran on WooCommerce, with a catalogue-mode plugin and a separate plugin for the product configurator. When we reviewed it in May 2026, the products page took more than six seconds to load.",
+        ],
+      },
+      {
+        type: "section",
+        eyebrow: "Google Sheet",
+        heading: "Publishing from the sheet",
+        body: [
+          "We added an Architectural FX menu to the Google Sheet. When the team have made their changes, they publish from that menu and an Apps Script sends the update to the website.",
+          "Each update is signed, so the site only accepts changes that come from the sheet.",
+        ],
+      },
+      {
+        type: "section",
+        eyebrow: "Custom plugin",
+        heading: "One plugin in place of three",
+        body: [
+          "We wrote a WordPress plugin that holds the catalogue and runs the products page, the product pages and the configurator. It replaced WooCommerce, the catalogue-mode plugin and the old configurator plugin.",
+          "The site went live on the new plugin on 25 June 2026.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/architectural-fx/storefront.jpg",
+        alt: "Architectural FX homepage",
+        url: "architecturalfx.co.uk",
+        phone: {
+          src: "/work/architectural-fx/mobile.jpg",
+          alt: "Architectural FX homepage on a phone",
+        },
+      },
+      {
+        type: "section",
+        eyebrow: "Drawings",
+        heading: "DWG files moved into WordPress",
+        body: [
+          "The CAD drawings for the products were stored in an Amazon S3 bucket. We moved all 128 DWG files into the WordPress media library and mapped each product to its new file.",
+          "We also scanned the media library for files that nothing on the site uses, and listed them for review.",
+        ],
+      },
+
+      // ── Chapter 02 ─────────────────────────────────────────────
+      {
+        type: "chapter",
+        id: "products",
+        num: "02",
+        label: "Products",
+        description:
+          "A new products page, new product pages and a configurator that produces spec sheets.",
+      },
+      {
+        type: "section",
+        eyebrow: "Catalogue",
+        heading: "The products page",
+        body: [
+          "The products page loads the catalogue from the plugin and filters it in the browser, without reloading the page.",
+          "Visitors can search by name or SKU and narrow the list by application, colour, colour temperature, wattage, lumens, CRI, IP rating, mounting and optic.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/architectural-fx/live-products.jpg",
+        alt: "Architectural FX products page with search and filters",
+        url: "architecturalfx.co.uk/products",
+        caption: "The products page, with search and filters.",
+        phone: {
+          src: "/work/architectural-fx/live-mobile-products.jpg",
+          alt: "Architectural FX products page on a phone",
+        },
+      },
+      {
+        type: "section",
+        eyebrow: "Product pages",
+        heading: "Specifications and downloads",
+        body: [
+          "Each product page lists the main specifications, such as dimensions, lifetime, wattage range, LED types and IP rating. It also has downloads for the photometric data, the DWG file and the technical drawing.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/architectural-fx/live-product.jpg",
+        alt: "Architectural FX product page for Integrate 2, with specifications and downloads",
+        url: "architecturalfx.co.uk/product/integrate-2",
+        caption: "A product page.",
+        phone: {
+          src: "/work/architectural-fx/live-mobile-product.jpg",
+          alt: "Architectural FX product page on a phone",
+        },
+      },
+      {
+        type: "section",
+        eyebrow: "Configurator",
+        heading: "Spec sheets from the configurator",
+        body: [
+          "Specifiers pick the LED type, colour temperature and other options, add their project details and download a spec sheet as a PDF. A second button asks the Architectural FX team for help or a quote.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/architectural-fx/live-configurator.jpg",
+        alt: "Architectural FX configurator for Integrate 2, with LED type options and a spec sheet download",
+        url: "architecturalfx.co.uk/product/integrate-2",
+        caption: "The configurator on a product page.",
+      },
+      {
+        type: "section",
+        eyebrow: "Navigation",
+        heading: "Menu and search",
+        body: [
+          "The products menu lists the brands and applications, with the number of products in each application. Site search takes visitors to the products page with their search already applied.",
+        ],
+      },
+      {
+        type: "statGroup",
+        items: [
+          { eyebrow: "Plugins", value: "3", label: "replaced by one custom plugin" },
+          { eyebrow: "Drawings", value: "128", label: "DWG files moved from Amazon S3 into WordPress" },
+          { eyebrow: "Filters", value: "9", label: "ways to narrow the catalogue" },
+        ],
+      },
+      {
+        type: "deliverables",
+        heading: "Deliverables",
+        items: [
+          "Custom WordPress catalogue plugin",
+          "Google Sheet publishing with Apps Script",
+          "Products page with search and filters",
+          "Product page template",
+          "Configurator with PDF spec sheets",
+          "DWG migration from Amazon S3",
+          "Media library audit",
         ],
       },
     ],
@@ -535,7 +858,7 @@ export const caseStudies: CaseStudy[] = [
     heroImage: "/work/anyprint.webp",
     heroImageAlt: "ANYPRINT homepage",
     excerpt:
-      "A WordPress redesign and rebuild with page speed as the design constraint, not an afterthought. Lighthouse Performance from 54 to 99. Accessibility, Best Practices, and SEO all to 100.",
+      "A WordPress redesign and rebuild with page speed as the main requirement. Lighthouse Performance went from 54 to 99, and Accessibility, Best Practices and SEO all went to 100.",
     services: [
       "WordPress",
       "Performance",
@@ -543,14 +866,14 @@ export const caseStudies: CaseStudy[] = [
       "SEO programme",
     ],
     stack: ["WordPress", "Custom theme"],
-    timeline: "Rebuild + ongoing",
+    timeline: "Rebuild, then ongoing",
     url: "https://any-print.co.uk",
     featured: true,
     categories: ["wordpress"],
     body: [
       {
         type: "intro",
-        text: "ANYPRINT had a WordPress site that was holding the brand back. Slow theme, plugin sprawl, an admin panel nobody enjoyed using. We rebuilt it with page speed as the brief, not a feature. The numbers tell the rest.",
+        text: "ANYPRINT's WordPress site was slow, relied on too many plugins, and had an admin panel the team found awkward to use. We rebuilt it with page speed as the main requirement.",
       },
 
       // ── Chapter 01 ─────────────────────────────────────────────
@@ -560,13 +883,13 @@ export const caseStudies: CaseStudy[] = [
         num: "01",
         label: "Rebuild",
         description:
-          "A clean WordPress build with page speed treated as a design constraint. Lighthouse went from a yellow 54 to a green 99.",
+          "A clean WordPress build designed around page speed. Lighthouse Performance went from 54 to 99.",
       },
       {
         type: "section",
         eyebrow: "The starting point",
-        heading: "Good business, slow site",
-        body: "ANYPRINT print products fast. Their site didn't. The old build had layered up over years of small tweaks: heavy theme, plugin sprawl, render-blocking everything. The brief was a rebuild that kept what worked and fixed everything that didn't.",
+        heading: "The old site",
+        body: "The old site had been built up over years of small changes. It had a heavy theme, a lot of plugins and render-blocking scripts throughout. The brief was to rebuild it, keeping what worked and fixing what didn't.",
       },
       {
         type: "beforeAfterStacked",
@@ -578,13 +901,13 @@ export const caseStudies: CaseStudy[] = [
           src: "/work/anyprint/after.jpg",
           alt: "ANYPRINT site after the rebuild, full page screenshot",
         },
-        caption: "Full page, top to bottom. Same business, very different site.",
+        caption: "Full page screenshots before and after the rebuild.",
       },
       {
         type: "section",
-        eyebrow: "Page-speed first",
-        heading: "Performance as a design constraint",
-        body: "Every decision on this build was filtered through one question: will this hurt page speed? Custom theme rather than a page builder, strict image discipline, modern WordPress as a clean publishing tool, no plugin bloat, no third-party scripts unless they earned their place. The result is a site that loads fast on mobile and posts a near-perfect Lighthouse profile.",
+        eyebrow: "Page speed",
+        heading: "Built for page speed",
+        body: "We checked every decision on this build against its effect on page speed. We used a custom theme instead of a page builder, kept image sizes under strict control, used WordPress as a clean publishing tool, kept plugins to a minimum, and only added third-party scripts where they were needed. The site loads fast on mobile and scores close to full marks in Lighthouse.",
       },
       {
         type: "lighthouseScores",
@@ -606,6 +929,24 @@ export const caseStudies: CaseStudy[] = [
           alt: "ANYPRINT on mobile",
         },
       },
+      {
+        type: "browser",
+        src: "/work/anyprint/live-categories.jpg",
+        alt: "ANYPRINT homepage product categories",
+        url: "any-print.co.uk",
+        caption: "Product categories on the homepage.",
+        phone: {
+          src: "/work/anyprint/live-mobile-home.jpg",
+          alt: "ANYPRINT homepage on a phone",
+        },
+      },
+      {
+        type: "browser",
+        src: "/work/anyprint/live-product.jpg",
+        alt: "ANYPRINT standard business cards product page",
+        url: "any-print.co.uk/business-cards/standard",
+        caption: "A product page, with paper, finish and quantity options.",
+      },
 
       // ── Chapter 02 ─────────────────────────────────────────────
       {
@@ -614,13 +955,13 @@ export const caseStudies: CaseStudy[] = [
         num: "02",
         label: "What's next",
         description:
-          "A fast site is rank insurance. The SEO programme is how it actually starts winning queries.",
+          "An ongoing SEO programme to turn the faster site into better rankings.",
       },
       {
         type: "section",
-        eyebrow: "Ongoing",
-        heading: "An SEO programme to match the speed",
-        body: "Speed is necessary for SEO, not sufficient. Pairing the rebuild with a content and technical SEO retainer is how the site converts the page-speed gains into real ranking and traffic. We've started this month, focused on the categories ANYPRINT compete in. This case study will be updated in three to six months once the data tells the truth.",
+        eyebrow: "Next steps",
+        heading: "Ongoing SEO",
+        body: "Page speed helps SEO but doesn't win rankings on its own. We've paired the rebuild with a content and technical SEO retainer, which started this month and focuses on the categories ANYPRINT compete in. We'll update this case study in three to six months when there's data to report.",
       },
       {
         type: "deliverables",
@@ -645,7 +986,7 @@ export const caseStudies: CaseStudy[] = [
     heroImage: "/work/sublishop.jpg",
     heroImageAlt: "Sublishop storefront",
     excerpt:
-      "A Shopify relaunch plus two custom AI apps (an inventory planner and a live competitor tracker) for a B2B print supplier. Sales up 240% in the first three months.",
+      "A Shopify relaunch and two custom AI apps (an inventory planner and a live competitor tracker) for a B2B print supplier. Sales went up 240% in the first three months.",
     services: [
       "Shopify relaunch",
       "Custom AI apps",
@@ -660,7 +1001,7 @@ export const caseStudies: CaseStudy[] = [
     body: [
       {
         type: "intro",
-        text: "Sublishop supply the print trade. The market moves on availability and price. We rebuilt the storefront to load fast and convert harder, then built two custom AI apps to give the team a real edge on inventory and pricing.",
+        text: "Sublishop supply the print trade, where customers buy on availability and price. We rebuilt the storefront to load faster and convert better, then built two custom AI apps to help the team manage inventory and pricing.",
       },
 
       // ── Chapter 01 ─────────────────────────────────────────────
@@ -670,13 +1011,13 @@ export const caseStudies: CaseStudy[] = [
         num: "01",
         label: "Website",
         description:
-          "A Shopify relaunch designed to move stock. Sales up 240% in the first three months.",
+          "A Shopify relaunch built to sell more stock. Sales went up 240% in the first three months.",
       },
       {
         type: "section",
         eyebrow: "The relaunch",
-        heading: "A Shopify rebuild designed to move stock",
-        body: "Clean information architecture, fast product pages, and a checkout that converts on mobile as well as desktop. Three months in, sales are up 240%.",
+        heading: "A Shopify rebuild for a B2B catalogue",
+        body: "We reorganised the site's information architecture, sped up the product pages, and built a checkout that works as well on mobile as on desktop. Three months after the relaunch, sales were up 240%.",
         phone: {
           src: "/work/sublishop/mobile.jpg",
           alt: "Sublishop on mobile",
@@ -690,11 +1031,29 @@ export const caseStudies: CaseStudy[] = [
         url: "sublishop.co.uk",
       },
       {
+        type: "browser",
+        src: "/work/sublishop/live-collection.jpg",
+        alt: "Sublishop latest arrivals collection page",
+        url: "sublishop.co.uk/collections/latest-arrivals",
+        caption: "A collection page, with filters and trade pricing.",
+        phone: {
+          src: "/work/sublishop/live-mobile-home.jpg",
+          alt: "Sublishop homepage on a phone",
+        },
+      },
+      {
+        type: "browser",
+        src: "/work/sublishop/live-product.jpg",
+        alt: "Sublishop product page for a sublimation hoodie",
+        url: "sublishop.co.uk/products/plain-white-adult-100-polyester-sublimation-hoodie",
+        caption: "A product page.",
+      },
+      {
         type: "statGroup",
         items: [
           { eyebrow: "Sales · first 3 months", value: "+240%", label: "after relaunch" },
-          { eyebrow: "Custom AI apps", value: "2", label: "in production" },
-          { eyebrow: "Platform", value: "Shopify", label: "B2B-tuned" },
+          { eyebrow: "Custom AI apps", value: "2", label: "in daily use" },
+          { eyebrow: "Platform", value: "Shopify", label: "set up for B2B" },
         ],
       },
 
@@ -705,13 +1064,13 @@ export const caseStudies: CaseStudy[] = [
         num: "02",
         label: "Custom Apps",
         description:
-          "Two production AI apps that give the team a real edge on inventory and pricing. Built once, owned forever.",
+          "Two custom AI apps the team use to plan inventory and track competitor pricing.",
       },
       {
         type: "section",
-        eyebrow: "AI in production",
+        eyebrow: "AI apps",
         heading: "Inventory planner",
-        body: "A custom app that reads sales velocity, lead times, and seasonality to recommend what to reorder and when. Less dead stock. Fewer stockouts. No more spreadsheet maths on a Friday afternoon.",
+        body: "A custom app that uses sales velocity, lead times and seasonality to recommend what to reorder and when. It helps the team avoid both dead stock and stockouts, and replaces the spreadsheet calculations they used to do by hand.",
       },
       {
         type: "uiMock",
@@ -721,7 +1080,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "section",
         heading: "Competitor tracker",
-        body: "Live and historical competitor sales, inventory, and pricing. Surfaced in one dashboard with email alerts when a rival drops a price, runs out of a line, or pushes a promo. The team acts within hours, not weeks.",
+        body: "The tracker shows live and historical sales, inventory and pricing for competitors in one dashboard. It sends email alerts when a competitor drops a price, runs out of a product line or starts a promotion, so the team can respond within hours.",
       },
       {
         type: "uiMock",
@@ -735,7 +1094,7 @@ export const caseStudies: CaseStudy[] = [
           "Shopify relaunch",
           "Custom AI inventory planner",
           "Custom AI competitor tracker",
-          "SEO program",
+          "SEO programme",
           "Paid media",
           "Email marketing",
         ],
@@ -747,12 +1106,12 @@ export const caseStudies: CaseStudy[] = [
     slug: "twisted-tailor",
     client: "Twisted Tailor",
     tag: "Fashion · eCommerce · AI",
-    year: "2024 to present",
+    year: "2020 to present",
     accent: "teal",
     heroImage: "/work/twisted-tailor.jpg",
     heroImageAlt: "Twisted Tailor storefront",
     excerpt:
-      "A ground-up Shopify rebuild for the London menswear house. Eight third-party apps replaced with native theme code, roughly $250 a month off the app bill, and a custom size-persistence system called MyFitt that follows the customer around the store.",
+      "A Shopify rebuild from scratch for the London menswear brand. We replaced eight third-party apps with theme code, cut roughly $250 a month from the app bill, and built MyFitt, a custom system that remembers each customer's sizes across the store.",
     services: ["Shopify build", "eCommerce consultancy", "SEO", "AI support agent"],
     stack: ["Shopify", "Custom theme", "Claude API"],
     timeline: "Ongoing partnership",
@@ -762,7 +1121,7 @@ export const caseStudies: CaseStudy[] = [
     body: [
       {
         type: "intro",
-        text: "Twisted Tailor is one of London's most recognisable menswear names, and one we've worked with for years. The most recent chapter is a full ground-up theme rebuild. Eight third-party apps rewritten as native sections, a custom size-persistence system, and a support agent that halved the inbox.",
+        text: "Twisted Tailor is one of London's best-known menswear brands, and we've worked with them for years. The latest project was a full theme rebuild from scratch. We rewrote eight third-party apps as native theme sections, built a custom size-persistence system, and set up an AI support agent that halved support hours.",
       },
 
       // ── Chapter 01 ─────────────────────────────────────────────
@@ -772,43 +1131,43 @@ export const caseStudies: CaseStudy[] = [
         num: "01",
         label: "Website",
         description:
-          "A second ground-up Shopify build. Eight apps replaced with theme code, roughly $250 a month off the app bill, and a size-persistence system built to the brand.",
+          "A second Shopify build from scratch. Eight apps replaced with theme code, roughly $250 a month off the app bill, and a size-persistence system built for the brand.",
       },
       {
         type: "section",
         eyebrow: "The brief",
-        heading: "Eight apps in, one theme out",
+        heading: "Replacing the app stack",
         body: [
-          "The prior build worked, but the app stack had crept up the way every Shopify stack does when a store gets to age three. Cart recommendations, a 'buy the trousers, save 10%' upsell, a size recommender, a size guide app, a gallery app, a wishlist, a bundle app for suits-as-separates, and back-in-stock alerts. Each one a monthly fee, a script, and a thing that broke when someone else updated it.",
-          "The new brief was different. Rebuild from scratch. Move every app function into the theme itself. Make every section editor-friendly so the team can extend without a developer. Head down, ship it.",
+          "The previous build worked, but by the time the store was three years old it relied on a lot of apps. They covered cart recommendations, a 'buy the trousers, save 10%' upsell, a size recommender, a size guide, a gallery, a wishlist, a bundle app for suits sold as separates, and back-in-stock alerts. Each one added a monthly fee and a script, and could break when its developer updated it.",
+          "The brief was to rebuild from scratch, move every app's function into the theme, and make every section editable so the team could add to the site without a developer.",
         ],
       },
       {
         type: "section",
-        eyebrow: "What got rebuilt",
+        eyebrow: "What we rebuilt",
         heading: "Eight apps replaced with theme code",
         body: [
-          "Cart recommendations, the 'complete the suit' trouser upsell, the size recommender, the size guide, the gallery, the wishlist, the bundle logic for suits sold as separates, and back-in-stock alerts. All rewritten as native theme sections. No third-party scripts, no render blockers, no app fees.",
-          "The bundle piece matters most. Twisted's suits sell as jacket, trouser, and waistcoat priced individually, but the PDP has to feel like one product. Jacket size and trouser size pick their own dropdowns, the exclusive TT suit carrier drops in as a toggle, and the basket lines up the pieces together. All in the theme, no bundle app underneath it.",
+          "We rewrote all eight as native theme sections: cart recommendations, the 'complete the suit' trouser upsell, the size recommender, the size guide, the gallery, the wishlist, the bundle logic for suits sold as separates, and back-in-stock alerts. None of them need third-party scripts or app fees now.",
+          "The bundle logic was the most important part. Twisted's suits are sold as a jacket, trouser and waistcoat, each priced separately, but the product page has to work as one product. Jacket and trouser sizes each have their own dropdown, the exclusive TT suit carrier is added with a toggle, and the basket groups the pieces together. It all runs in the theme without a bundle app.",
         ],
       },
       {
         type: "statGroup",
         items: [
           {
-            eyebrow: "Shopify apps retired",
+            eyebrow: "Shopify apps removed",
             value: "8",
             label: "replaced with theme sections",
           },
           {
-            eyebrow: "App bill, off",
+            eyebrow: "App costs saved",
             value: "$250",
-            label: "per month, saved",
+            label: "per month",
           },
           {
             eyebrow: "MyFitt",
             value: "Live",
-            label: "size follows the customer",
+            label: "saves each customer's sizes",
           },
           {
             eyebrow: "Build",
@@ -824,12 +1183,30 @@ export const caseStudies: CaseStudy[] = [
         url: "twistedtailor.com",
       },
       {
+        type: "browser",
+        src: "/work/twisted-tailor/live-collection.jpg",
+        alt: "Twisted Tailor new drops collection page",
+        url: "twistedtailor.com/collections/new-drops",
+        caption: "The new drops collection page.",
+        phone: {
+          src: "/work/twisted-tailor/live-mobile-product.jpg",
+          alt: "Twisted Tailor product page on a phone",
+        },
+      },
+      {
+        type: "browser",
+        src: "/work/twisted-tailor/live-product.jpg",
+        alt: "Twisted Tailor product page for the Fleet floral suit",
+        url: "twistedtailor.com/products/fleet-skinny-fit-black-floral-suit",
+        caption: "A product page, with jacket and trouser sizes chosen separately.",
+      },
+      {
         type: "section",
         eyebrow: "MyFitt",
-        heading: "A size that follows the customer",
+        heading: "Saved sizes across the store",
         body: [
-          "Twisted sell across jackets, trousers, waistcoats, and casualwear, each with their own sizing grid. Asking a customer to remember four numbers between visits is asking to lose the sale.",
-          "MyFitt is our answer. Customers set their sizes once, in a single drawer, and the site remembers. Sizes pre-select on the PDP, collection pages hide styles that aren't in stock in their size, and because it's tied to their customer account the setting follows them cross-device the moment they sign in.",
+          "Twisted sell jackets, trousers, waistcoats and casualwear, each with its own sizing grid. Customers who have to remember four sizes between visits are more likely to leave without buying.",
+          "With MyFitt, customers set their sizes once in a single drawer and the site remembers them. Sizes are pre-selected on product pages, and collection pages hide styles that aren't in stock in their size. Because the settings are saved to the customer account, they carry across devices once the customer signs in.",
         ],
         phone: {
           src: "/work/twisted-tailor/mobile.jpg",
@@ -840,9 +1217,9 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "section",
         eyebrow: "The basket",
-        heading: "A suit lands as a suit",
+        heading: "Suits in the basket",
         body: [
-          "The pieces sell separately but the basket has to read as one purchase. Jacket, trouser, and the optional TT suit carrier show as clean line items, the free-shipping threshold sits at the top, and a 'complete the look' rail replaces the cart-recommendations app that used to charge a fee to do the same thing.",
+          "The pieces are sold separately, but the basket needs to show them as one purchase. The jacket, trouser and optional TT suit carrier appear as clear line items, the free-shipping threshold is shown at the top, and a 'complete the look' section replaces the cart recommendations app that used to charge a fee for the same feature.",
         ],
         phone: {
           src: "/work/twisted-tailor/mobile-2.jpg",
@@ -858,15 +1235,15 @@ export const caseStudies: CaseStudy[] = [
         num: "02",
         label: "AI Support",
         description:
-          "An AI customer-service agent that halved support hours while keeping the brand voice intact.",
+          "An AI customer service agent that halved support hours, with replies kept in the brand's tone.",
       },
       {
         type: "section",
         eyebrow: "AI",
-        heading: "A support agent that knows what's routine",
+        heading: "AI customer service agent",
         body: [
-          "Twisted's support inbox ran hot. Sizing, returns, order status, sizing again. We built an AI agent that reads incoming tickets, answers the repetitive ones directly, and summarises the complex ones for a human to sign off.",
-          "Customer service hours are down 50%. Response times are up. Nothing goes out without a human edit.",
+          "Twisted's support inbox was busy, and most tickets were about sizing, returns and order status. We built an AI agent that reads incoming tickets, answers the repetitive ones directly, and summarises the complex ones for a member of the team to sign off.",
+          "Customer service hours are down 50% and customer satisfaction has improved.",
         ],
       },
       {
@@ -878,17 +1255,17 @@ export const caseStudies: CaseStudy[] = [
         type: "deliverables",
         heading: "Deliverables",
         items: [
-          "Shopify build (second ground-up)",
+          "Shopify build (second full rebuild)",
           "Custom theme",
           "Suits-as-separates bundle logic (app replaced)",
           "Native wishlist (app replaced)",
-          "Native size recommender + size guide (2 apps replaced)",
-          "Cart recommendations + trouser upsell (2 apps replaced)",
-          "Native gallery + back-in-stock alerts (2 apps replaced)",
+          "Native size recommender and size guide (2 apps replaced)",
+          "Cart recommendations and trouser upsell (2 apps replaced)",
+          "Native gallery and back-in-stock alerts (2 apps replaced)",
           "MyFitt cross-device size persistence",
           "AI customer service agent",
           "eCommerce consultancy",
-          "SEO program",
+          "SEO programme",
         ],
       },
     ],
@@ -903,7 +1280,7 @@ export const caseStudies: CaseStudy[] = [
     heroImage: "/work/its-pouch.jpg",
     heroImageAlt: "it's Pouch brand world",
     excerpt:
-      "Shopify development and a considered email notification system for a lifestyle brand shipping a new line.",
+      "Shopify development and a set of branded notification emails for a lifestyle brand launching a new product line.",
     services: ["Shopify development", "Email design"],
     stack: ["Shopify", "Klaviyo"],
     timeline: "4 weeks",
@@ -913,7 +1290,7 @@ export const caseStudies: CaseStudy[] = [
     body: [
       {
         type: "intro",
-        text: "A focused build. Shopify development to support a new product line, plus a set of transactional and lifecycle emails designed to match the brand's tone end-to-end.",
+        text: "A small, focused project: Shopify development to support a new product line, and a set of transactional and lifecycle emails designed in the brand's tone.",
       },
 
       // ── Chapter 01 ─────────────────────────────────────────────
@@ -923,13 +1300,13 @@ export const caseStudies: CaseStudy[] = [
         num: "01",
         label: "The build",
         description:
-          "Shopify work to ship the new range cleanly, and an email system that treats transactional moments as brand ones.",
+          "Shopify work to launch the new range, and order and shipping emails designed to match the brand.",
       },
       {
         type: "section",
         eyebrow: "Scope",
-        heading: "Ship and send, calmly",
-        body: "Shopify work to launch the new range cleanly, and an email system that treats order confirmations, shipping updates, and post-purchase sequences as brand moments, not transactional afterthoughts.",
+        heading: "Shopify development and email design",
+        body: "We did the Shopify work to launch the new range. We also designed the order confirmation, shipping update and post-purchase emails so they carry the same branding as the rest of the site.",
       },
       {
         type: "browser",
@@ -940,6 +1317,24 @@ export const caseStudies: CaseStudy[] = [
           src: "/work/its-pouch/mobile.jpg",
           alt: "it's Pouch on mobile",
         },
+      },
+      {
+        type: "browser",
+        src: "/work/its-pouch/live-home.jpg",
+        alt: "it's Pouch homepage",
+        url: "itspouch.com",
+        caption: "The homepage.",
+        phone: {
+          src: "/work/its-pouch/live-mobile-home.jpg",
+          alt: "it's Pouch homepage on a phone",
+        },
+      },
+      {
+        type: "browser",
+        src: "/work/its-pouch/live-collection.jpg",
+        alt: "it's Pouch nicotine pouches collection page",
+        url: "itspouch.com/collections/nicotine-pouches",
+        caption: "A collection page.",
       },
       {
         type: "deliverables",
@@ -962,7 +1357,7 @@ export const caseStudies: CaseStudy[] = [
     heroImage: "/work/origin-architectural.webp",
     heroImageAlt: "Origin Architectural storefront",
     excerpt:
-      "A Shopify replatform out of an over-developed WordPress site. Plus a live Smart Glazier integration and an AI image pipeline that turns customer install photos into uniform, brand-ready imagery.",
+      "A move to Shopify from an over-developed WordPress site, plus a live Smart Glazier integration and an AI image pipeline that turns customer install photos into consistent, on-brand imagery.",
     services: [
       "Shopify replatform",
       "Smart Glazier integration",
@@ -976,7 +1371,7 @@ export const caseStudies: CaseStudy[] = [
     body: [
       {
         type: "intro",
-        text: "Origin came to us with a WordPress site they couldn't change without a developer. Every edit was a ticket. Every ticket was hours. We moved them onto Shopify, wired in their trade software, and solved their imagery problem with a bit of AI.",
+        text: "Origin's WordPress site couldn't be changed without a developer, so every edit meant a ticket and each ticket took hours. We moved them to Shopify, connected their trade software, and used AI to fix their product imagery.",
       },
 
       // ── Chapter 01 ─────────────────────────────────────────────
@@ -986,15 +1381,15 @@ export const caseStudies: CaseStudy[] = [
         num: "01",
         label: "Website",
         description:
-          "A Shopify replatform out of an over-developed WordPress maze. Every page editable in under a minute.",
+          "A move from an over-developed WordPress build to Shopify. Every page can now be edited in under a minute.",
       },
       {
         type: "section",
-        eyebrow: "Out of WordPress, into Shopify",
-        heading: "A platform the team can actually use",
+        eyebrow: "From WordPress to Shopify",
+        heading: "A platform the team can use",
         body: [
-          "The previous WordPress build had been over-developed into a maze. Custom post types, nested blocks, shortcode tangles. Nothing could be edited without a developer on call.",
-          "We replatformed onto Shopify with a lean theme and a clean content model. Every page editable in under a minute. Conversion rate lifted from day one.",
+          "The previous WordPress build had been over-developed, with custom post types, nested blocks and tangled shortcodes. Nothing could be edited without a developer on call.",
+          "We moved the site to Shopify with a lean theme and a simple content model. Every page can be edited in under a minute, and the conversion rate went up straight after launch.",
         ],
         phone: {
           src: "/work/origin-architectural/mobile.jpg",
@@ -1009,11 +1404,29 @@ export const caseStudies: CaseStudy[] = [
         url: "originarchitectural.co.uk",
       },
       {
+        type: "browser",
+        src: "/work/origin-architectural/live-collection.jpg",
+        alt: "Origin Architectural preassembled posts collection page",
+        url: "originarchitectural.co.uk/collections/preassembled-posts",
+        caption: "A collection page.",
+        phone: {
+          src: "/work/origin-architectural/live-mobile-product.jpg",
+          alt: "Origin Architectural Juliet balcony product page on a phone",
+        },
+      },
+      {
+        type: "browser",
+        src: "/work/origin-architectural/live-product.jpg",
+        alt: "Origin Architectural Skyforce Juliet balcony product page",
+        url: "originarchitectural.co.uk/products/skyforce-juliet-balcony",
+        caption: "A product page.",
+      },
+      {
         type: "statGroup",
         items: [
-          { eyebrow: "Dev hours saved", value: "10+", label: "per month, from day one" },
-          { eyebrow: "Conversion rate", value: "Up", label: "immediate lift after replatform" },
-          { eyebrow: "Platform", value: "Shopify", label: "out of an over-developed WP maze" },
+          { eyebrow: "Developer hours saved", value: "10+", label: "per month since launch" },
+          { eyebrow: "Conversion rate", value: "Up", label: "straight after the move to Shopify" },
+          { eyebrow: "Platform", value: "Shopify", label: "moved from WordPress" },
         ],
       },
 
@@ -1024,13 +1437,13 @@ export const caseStudies: CaseStudy[] = [
         num: "02",
         label: "Integration",
         description:
-          "Smart Glazier, live and in sync. One source of truth across the trade operation and the storefront.",
+          "A live Smart Glazier integration, so the trade system and the storefront use the same data.",
       },
       {
         type: "section",
         eyebrow: "Integration",
-        heading: "Smart Glazier, live and in sync",
-        body: "Origin's trade operation runs on Smart Glazier. We built a proper integration. Product data, pricing, and availability flowing into Shopify without manual reconciliation. Fewer errors. Less admin. One source of truth.",
+        heading: "Smart Glazier integration",
+        body: "Origin's trade operation runs on Smart Glazier. We built an integration that sends product data, pricing and availability into Shopify, so nobody has to reconcile them by hand. That means fewer errors, less admin and one source of truth for both systems.",
       },
 
       // ── Chapter 03 ─────────────────────────────────────────────
@@ -1040,27 +1453,27 @@ export const caseStudies: CaseStudy[] = [
         num: "03",
         label: "AI",
         description:
-          "An AI image pipeline that turns customer install photos into uniform, brand-ready imagery.",
+          "An AI image pipeline that turns customer install photos into consistent, on-brand imagery.",
       },
       {
         type: "section",
         eyebrow: "AI",
-        heading: "Making customer photos look like a brand shoot",
+        heading: "Retouching customer photos with AI",
         body: [
-          "Most of Origin's imagery came from installers and customers. Phone shots taken in daylight, different angles, mixed quality. Unusable on the storefront as-is.",
-          "We built an AI retouching pipeline that standardises angles, lighting, and backgrounds across the catalogue. The imagery now reads as one brand, from one camera, on one set.",
+          "Most of Origin's imagery came from installers and customers. The photos were taken on phones in daylight, from different angles and in mixed quality, and couldn't be used on the storefront as they were.",
+          "We built an AI retouching pipeline that standardises angles, lighting and backgrounds across the catalogue, so the product images now look consistent.",
         ],
       },
       {
         type: "beforeAfter",
         before: {
           src: "/work/origin-architectural/customer-photo.jpg",
-          alt: "Customer-shot install photo",
+          alt: "Install photo taken by a customer",
           label: "Customer shot",
         },
         after: {
           src: "/work/origin-architectural/ai-retouched.jpg",
-          alt: "AI-retouched brand-ready image",
+          alt: "The same photo after AI retouching",
           label: "AI retouched",
         },
         aspect: "aspect-[16/10]",
@@ -1088,7 +1501,7 @@ export const caseStudies: CaseStudy[] = [
     heroImage: "/work/threadology.jpg",
     heroImageAlt: "Threadology storefront",
     excerpt:
-      "A clean, mobile-first WordPress build. No custom CMS, no headless front-end. Just a site that earned out on day one and stayed out of the team's way.",
+      "A clean, mobile-first WordPress site built on a block theme, which the Threadology team can edit themselves.",
     services: ["WordPress", "Design"],
     stack: ["WordPress", "Block theme"],
     timeline: "6 weeks",
@@ -1098,7 +1511,7 @@ export const caseStudies: CaseStudy[] = [
     body: [
       {
         type: "intro",
-        text: "Not every project needs reinventing. Threadology needed a well-built WordPress site. Fast, mobile-first, easy to edit. We built exactly that.",
+        text: "Threadology needed a well-built WordPress site that was fast, worked well on mobile and was easy to edit. We built it on a block theme.",
       },
 
       // ── Chapter 01 ─────────────────────────────────────────────
@@ -1108,15 +1521,15 @@ export const caseStudies: CaseStudy[] = [
         num: "01",
         label: "The build",
         description:
-          "A clean WordPress site built to the same standard as our complex projects. Fast, mobile-first, editable by the team.",
+          "A WordPress site built to the same standard as our larger projects: fast, mobile-first and editable by the team.",
       },
       {
         type: "section",
         eyebrow: "Approach",
-        heading: "Simple, fast, maintainable",
+        heading: "How we built it",
         body: [
-          "A block theme, a focused content model, and the same build standard we apply to our complex projects. Same speed target. Same SEO care. Same cleanliness under the hood.",
-          "The team can update any page without calling us. Nothing fancy, which is the point.",
+          "We used a block theme and a focused content model, and applied the same build standards, speed targets and SEO work as on our larger projects.",
+          "The team can update any page without contacting us.",
         ],
       },
       {
@@ -1127,6 +1540,17 @@ export const caseStudies: CaseStudy[] = [
         phone: {
           src: "/work/threadology/mobile.jpg",
           alt: "Threadology on mobile",
+        },
+      },
+      {
+        type: "browser",
+        src: "/work/threadology/live-about.jpg",
+        alt: "Threadology homepage section describing the business",
+        url: "threadology.co.uk",
+        caption: "Further down the homepage.",
+        phone: {
+          src: "/work/threadology/live-mobile-home.jpg",
+          alt: "Threadology homepage on a phone",
         },
       },
       {
@@ -1153,7 +1577,7 @@ export const caseStudies: CaseStudy[] = [
     heroImage: "/work/fandpagency.jpg",
     heroImageAlt: "F&P Agency website",
     excerpt:
-      "A WordPress redesign taking F&P Agency from a standard estate-agency site into a more upmarket, luxury-aligned digital presence, on brief with their rebrand.",
+      "A WordPress redesign that moved F&P Agency from a standard estate agency site to a more upmarket one, in line with their rebrand.",
     services: ["WordPress redesign", "Brand alignment"],
     stack: ["WordPress"],
     timeline: "12 weeks",
@@ -1162,7 +1586,7 @@ export const caseStudies: CaseStudy[] = [
     body: [
       {
         type: "intro",
-        text: "F&P Agency were rebranding upmarket, repositioning the business toward the luxury end of the estate-agency market. The old website told the old story. We rebuilt it to match the new one.",
+        text: "F&P Agency were rebranding to position the business at the luxury end of the estate agency market. The old website reflected the old positioning, so we rebuilt it to match the new one.",
       },
 
       // ── Chapter 01 ─────────────────────────────────────────────
@@ -1172,15 +1596,15 @@ export const caseStudies: CaseStudy[] = [
         num: "01",
         label: "The rebuild",
         description:
-          "A restrained WordPress site that reads upmarket without reaching for the luxury-property formula.",
+          "A restrained WordPress site with an upmarket look that avoids the usual luxury property conventions.",
       },
       {
         type: "section",
         eyebrow: "The rebuild",
-        heading: "Luxury, done without cliché",
+        heading: "An upmarket redesign",
         body: [
-          "Most luxury property sites reach for the same formula. Big hero video, thin serif, the word 'bespoke' three times before the fold. F&P wanted something more considered.",
-          "We built a restrained WordPress site around generous typography, real property imagery, and a quieter pacing that reads confident rather than loud. The brand's upmarket ambition is reinforced by how the site behaves, not what it shouts.",
+          "F&P wanted an upmarket site that avoided the usual luxury property conventions, such as a large hero video, thin serif type and heavy use of the word 'bespoke'.",
+          "We built a restrained WordPress site with generous typography, real property photography and a slower pace between sections.",
         ],
       },
       {
@@ -1192,6 +1616,13 @@ export const caseStudies: CaseStudy[] = [
           src: "/work/fandp-agency/mobile.jpg",
           alt: "F&P Agency on mobile",
         },
+      },
+      {
+        type: "phone",
+        src: "/work/fandp-agency/live-mobile-home.jpg",
+        alt: "F&P Agency homepage on a phone",
+        caption: "The homepage on a phone.",
+        width: "md",
       },
       {
         type: "deliverables",
@@ -1215,7 +1646,7 @@ export const caseStudies: CaseStudy[] = [
     heroImage: "/work/little-muddy-boots.jpg",
     heroImageAlt: "Little Muddy Boots booking site",
     excerpt:
-      "A WordPress redesign lifting a self-built site into a professional, mobile-first booking experience with a custom postcode-search tool.",
+      "A WordPress redesign that replaced a self-built site with a professional, mobile-first booking site, including a custom postcode search tool.",
     services: ["WordPress redesign", "Custom postcode search"],
     stack: ["WordPress"],
     timeline: "5 weeks",
@@ -1224,7 +1655,7 @@ export const caseStudies: CaseStudy[] = [
     body: [
       {
         type: "intro",
-        text: "The original site was self-designed and doing its best, but a service business needs a site that earns trust before the user reads a single word. We rebuilt it properly.",
+        text: "The original site was self-designed. A service business needs a site that looks trustworthy at first glance, so we redesigned and rebuilt it.",
       },
 
       // ── Chapter 01 ─────────────────────────────────────────────
@@ -1234,13 +1665,13 @@ export const caseStudies: CaseStudy[] = [
         num: "01",
         label: "The build",
         description:
-          "A professional, mobile-first booking site, with a custom postcode-search tool so visitors know instantly whether the service covers their area.",
+          "A mobile-first booking site with a custom postcode search tool that tells visitors straight away whether the service covers their area.",
       },
       {
         type: "section",
         eyebrow: "Scope",
-        heading: "Professional, mobile-first, bookable",
-        body: "A full redesign focused on mobile, clearer information architecture, and a booking flow that doesn't make the visitor think. We also built a custom postcode-search tool so visitors instantly know whether the service covers their area.",
+        heading: "Redesign and postcode search",
+        body: "We redesigned the site for mobile, reorganised the content so it's easier to find, and simplified the booking flow. We also built a custom postcode search tool that tells visitors straight away whether the service covers their area.",
       },
       {
         type: "browser",
@@ -1253,13 +1684,27 @@ export const caseStudies: CaseStudy[] = [
         },
       },
       {
+        type: "browser",
+        src: "/work/little-muddy-boots/live-classes.jpg",
+        alt: "Little Muddy Boots classes page",
+        url: "littlemuddyboots.co.uk/classes",
+        caption: "The classes page.",
+      },
+      {
+        type: "browser",
+        src: "/work/little-muddy-boots/live-parties.jpg",
+        alt: "Little Muddy Boots birthday parties page",
+        url: "littlemuddyboots.co.uk/parties",
+        caption: "The birthday parties page.",
+      },
+      {
         type: "deliverables",
         heading: "Deliverables",
         items: [
           "WordPress redesign",
           "Mobile-first UX",
           "Custom postcode search tool",
-          "Bookable IA",
+          "Site structure built around booking",
         ],
       },
     ],
@@ -1274,7 +1719,7 @@ export const caseStudies: CaseStudy[] = [
     heroImage: "/work/space4u.jpg",
     heroImageAlt: "Space 4 U Self Storage",
     excerpt:
-      "A WordPress redesign for a regional self-storage operator. Clarity, speed, and a direct path from visitor to unit enquiry.",
+      "A WordPress redesign for a regional self-storage company, built to make it quick for visitors to find a unit and enquire.",
     services: ["WordPress redesign"],
     stack: ["WordPress"],
     timeline: "4 weeks",
@@ -1283,7 +1728,7 @@ export const caseStudies: CaseStudy[] = [
     body: [
       {
         type: "intro",
-        text: "Self-storage is a simple product, often sold badly online. The site's job is to close quickly: what, how much, how do I get one? We rebuilt the site around that.",
+        text: "Self-storage customers want to know what sizes are available, how much they cost and how to get one. We rebuilt the site around those questions.",
       },
 
       // ── Chapter 01 ─────────────────────────────────────────────
@@ -1293,13 +1738,13 @@ export const caseStudies: CaseStudy[] = [
         num: "01",
         label: "The build",
         description:
-          "A clear, fast WordPress site focused on the three things a storage customer actually needs: sizes, pricing, and an easy enquiry.",
+          "A clear, fast WordPress site built around unit sizes, pricing and a simple way to enquire.",
       },
       {
         type: "section",
         eyebrow: "Scope",
-        heading: "Clarity first",
-        body: "A WordPress redesign focused on the three things a storage customer actually needs: unit sizes, transparent pricing, and an easy way to enquire. Built fast, editable by the team.",
+        heading: "Sizes, pricing and enquiries",
+        body: "We redesigned the WordPress site around the three things storage customers look for: unit sizes, transparent pricing and an easy way to enquire. The site is fast and the team can edit it themselves.",
       },
       {
         type: "browser",
@@ -1310,6 +1755,24 @@ export const caseStudies: CaseStudy[] = [
           src: "/work/space-4-u-self-storage/mobile.jpg",
           alt: "Space 4 U on mobile",
         },
+      },
+      {
+        type: "browser",
+        src: "/work/space-4-u-self-storage/live-home-scroll.jpg",
+        alt: "Space 4 U homepage personal and business storage sections",
+        url: "space4uselfstorage.co.uk",
+        caption: "Personal and business storage on the homepage.",
+        phone: {
+          src: "/work/space-4-u-self-storage/live-mobile-home.jpg",
+          alt: "Space 4 U homepage on a phone",
+        },
+      },
+      {
+        type: "browser",
+        src: "/work/space-4-u-self-storage/live-quote.jpg",
+        alt: "Space 4 U quote request page",
+        url: "space4uselfstorage.co.uk/get-a-quote",
+        caption: "The quote request page.",
       },
       {
         type: "deliverables",
@@ -1332,16 +1795,16 @@ export const caseStudies: CaseStudy[] = [
     heroImage: "/work/paragon-freight.jpg",
     heroImageAlt: "Paragon Freight",
     excerpt:
-      "A WordPress redesign for a freight business, plus ongoing social-media management to match the upgrade online.",
+      "A WordPress redesign for a freight business, plus ongoing social media management.",
     services: ["WordPress redesign", "Currency selector", "Social media management"],
     stack: ["WordPress"],
-    timeline: "8 weeks + retainer",
+    timeline: "8 weeks, then a retainer",
     url: "https://paragonfreight.com",
     categories: ["wordpress"],
     body: [
       {
         type: "intro",
-        text: "Logistics sell on trust. Paragon Freight needed a site that looked the part, and a social presence that reinforced it between visits.",
+        text: "Freight customers need to trust a company before they get in touch. Paragon Freight needed a more credible website and a social media presence to support it.",
       },
 
       // ── Chapter 01 ─────────────────────────────────────────────
@@ -1351,13 +1814,13 @@ export const caseStudies: CaseStudy[] = [
         num: "01",
         label: "Website",
         description:
-          "A WordPress redesign around credibility, service depth, and clear enquiry routes.",
+          "A WordPress redesign focused on credibility, the full range of services and clear ways to enquire.",
       },
       {
         type: "section",
         eyebrow: "Scope",
-        heading: "Site that looks the part",
-        body: "We redesigned the WordPress site around credibility, service depth, and clear enquiry routes. Built fast, editable in-house.",
+        heading: "Website redesign",
+        body: "We redesigned the WordPress site to build credibility, explain the full range of services and give visitors clear ways to enquire. It's fast and the team can edit it in-house.",
         phone: {
           src: "/work/paragon-freight/mobile.jpg",
           alt: "Paragon Freight on mobile",
@@ -1371,10 +1834,28 @@ export const caseStudies: CaseStudy[] = [
         url: "paragonfreight.com",
       },
       {
+        type: "browser",
+        src: "/work/paragon-freight/live-services.jpg",
+        alt: "Paragon Freight services on the homepage",
+        url: "paragonfreight.com",
+        caption: "Services on the homepage.",
+        phone: {
+          src: "/work/paragon-freight/live-mobile-home.jpg",
+          alt: "Paragon Freight homepage on a phone",
+        },
+      },
+      {
+        type: "browser",
+        src: "/work/paragon-freight/live-customs.jpg",
+        alt: "Paragon Freight customs clearance page",
+        url: "paragonfreight.com/services/customs",
+        caption: "The customs clearance page.",
+      },
+      {
         type: "section",
-        eyebrow: "Global audience",
-        heading: "A currency selector, baked in",
-        body: "Paragon's enquiries come in from operators across the EU, the Middle East, and North America. We wired in a clean currency selector so visitors see rates and quotes in their own terms from the first click, no hops, no friction at the point of interest.",
+        eyebrow: "International enquiries",
+        heading: "Currency selector",
+        body: "Paragon get enquiries from operators across the EU, the Middle East and North America. We added a currency selector so visitors see rates and quotes in their own currency from their first visit.",
       },
 
       // ── Chapter 02 ─────────────────────────────────────────────
@@ -1384,13 +1865,13 @@ export const caseStudies: CaseStudy[] = [
         num: "02",
         label: "Social",
         description:
-          "Ongoing social-media management to keep the brand front-of-mind between project enquiries.",
+          "Ongoing social media management to keep the brand visible between project enquiries.",
       },
       {
         type: "section",
         eyebrow: "Retainer",
-        heading: "Front-of-mind between visits",
-        body: "Ongoing social management to match the upgrade online. Brand consistency across site and feed, kept warm week to week.",
+        heading: "Social media management",
+        body: "We manage Paragon's social media week to week and keep the branding consistent with the new website.",
       },
       {
         type: "browser",
@@ -1412,6 +1893,138 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
 
+  {
+    slug: "jbvc-foundation",
+    client: "JBVC Foundation",
+    tag: "Charity · WordPress",
+    year: "2025",
+    accent: "violet",
+    heroImage: "/work/jbvc-foundation.jpg",
+    heroImageAlt: "A young person sitting outside, from the JBVC Foundation website",
+    excerpt:
+      "A single-page WordPress site for the Johnson Beharry VC Foundation, a charity that protects vulnerable children from criminal exploitation and violence.",
+    services: ["WordPress", "Design"],
+    stack: ["WordPress"],
+    timeline: "Single-page build",
+    url: "https://jbvcfoundation.org.uk",
+    categories: ["wordpress"],
+    body: [
+      {
+        type: "intro",
+        text: "The Johnson Beharry VC Foundation works with children aged 10 and above to protect them from criminal exploitation and violence. We designed and built its website as a single WordPress page.",
+      },
+      {
+        type: "section",
+        eyebrow: "The site",
+        heading: "One page, in full-screen sections",
+        body: [
+          "The site is one page split into full-screen sections: what the foundation does, its founder Johnson Beharry VC, why early prevention matters, and its two programmes, Project Alpha and The Regiment.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/jbvc-foundation/storefront.jpg",
+        alt: "JBVC Foundation homepage",
+        url: "jbvcfoundation.org.uk",
+        phone: {
+          src: "/work/jbvc-foundation/mobile.jpg",
+          alt: "JBVC Foundation homepage on a phone",
+        },
+      },
+      {
+        type: "browser",
+        src: "/work/jbvc-foundation/live-founder.jpg",
+        alt: "JBVC Foundation section about its founder, Johnson Beharry VC",
+        url: "jbvcfoundation.org.uk",
+        caption: "The section about the foundation's founder.",
+      },
+      {
+        type: "browser",
+        src: "/work/jbvc-foundation/live-stats.jpg",
+        alt: "JBVC Foundation section on why early prevention matters",
+        url: "jbvcfoundation.org.uk",
+        caption: "Why early prevention matters.",
+      },
+      {
+        type: "browser",
+        src: "/work/jbvc-foundation/live-programmes.jpg",
+        alt: "JBVC Foundation programmes, Project Alpha and The Regiment",
+        url: "jbvcfoundation.org.uk",
+        caption: "The foundation's two programmes.",
+      },
+      {
+        type: "deliverables",
+        heading: "Deliverables",
+        items: ["Website design", "Single-page WordPress build"],
+      },
+    ],
+  },
+  {
+    slug: "toughcode",
+    client: "Tough Code",
+    tag: "Manufacturing · Landing page",
+    year: "2026",
+    accent: "teal",
+    heroImage: "/work/toughcode.jpg",
+    heroImageAlt: "A Tough Code lab technician weighing ingredients",
+    excerpt:
+      "A single-page landing site for Tough Code, a UK manufacturer of oral pouch products, with scroll animations that move the story along as you read.",
+    services: ["Design", "Development"],
+    stack: ["Landing page", "Scroll animation"],
+    timeline: "Single-page build",
+    url: "https://toughcode.com",
+    categories: [],
+    body: [
+      {
+        type: "intro",
+        text: "Tough Code develop and manufacture oral pouch products in the UK for other brands. We designed and built a single landing page for them, with scroll animations that bring each section in as you move down the page.",
+      },
+      {
+        type: "section",
+        eyebrow: "The site",
+        heading: "One page, told through scroll",
+        body: [
+          "The page covers what Tough Code make, their manufacturing capabilities, their facility and their six-step process, and ends with a way to book a meeting. Each section animates in as you scroll.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/toughcode/storefront.jpg",
+        alt: "Tough Code landing page hero",
+        url: "toughcode.com",
+        phone: {
+          src: "/work/toughcode/mobile.jpg",
+          alt: "Tough Code landing page on a phone",
+        },
+      },
+      {
+        type: "browser",
+        src: "/work/toughcode/live-capabilities.jpg",
+        alt: "Tough Code capabilities: product development, precision production, regulatory support and commercial scale",
+        url: "toughcode.com",
+        caption: "The capabilities section.",
+      },
+      {
+        type: "browser",
+        src: "/work/toughcode/live-about.jpg",
+        alt: "Tough Code section about their UK manufacturing facility",
+        url: "toughcode.com",
+        caption: "About the company and its facility.",
+      },
+      {
+        type: "browser",
+        src: "/work/toughcode/live-process.jpg",
+        alt: "Tough Code six-step process and meeting call to action",
+        url: "toughcode.com",
+        caption: "The six-step process.",
+      },
+      {
+        type: "deliverables",
+        heading: "Deliverables",
+        items: ["Landing page design", "Development", "Scroll animations"],
+      },
+    ],
+  },
 ];
 
 export function getCaseBySlug(slug: string): CaseStudy | undefined {

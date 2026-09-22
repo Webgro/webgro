@@ -1,0 +1,260 @@
+/* Legal pages and the 404. Everything is prefixed
+   pv-legal- and leans on the tokens and utilities in ../preview.css. */
+
+.pv-legal {
+  --pv-legal-side: clamp(190px, 19vw, 290px);
+  --pv-legal-gap: clamp(40px, 6.5vw, 120px);
+  --pv-legal-body: color-mix(in srgb, var(--pv-fg) 82%, transparent);
+  position: relative;
+  padding-bottom: clamp(72px, 14vh, 170px);
+}
+
+/* ── Reading progress: a dry blue stroke along the top edge ──────────── */
+.pv-legal-progress { position: fixed; inset: 0 0 auto 0; height: 13px; z-index: 70; overflow: hidden; pointer-events: none; visibility: hidden; }
+.pv-legal-progress-stroke { position: absolute; inset: 0; }
+.pv-legal-progress .pv-brush-svg { left: 0; top: -3px; bottom: auto; width: 100%; height: 18px; z-index: 0; }
+
+/* ── Header ───────────────────────────────────────────────────────────── */
+.pv-legal-head { padding: clamp(124px, 19vh, 200px) var(--pv-pad) clamp(44px, 8vh, 96px); }
+.pv-legal-docs {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 24px;
+  margin-bottom: clamp(26px, 5vh, 52px);
+  font-family: var(--pv-display); font-weight: 500; font-size: 0.95rem;
+}
+.pv-legal-docs .pv-label { margin-right: 8px; }
+.pv-legal .pv-legal-docs a {
+  padding-bottom: 3px; color: var(--pv-muted);
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0% 1px no-repeat;
+  transition: color 0.3s ease, background-size 0.5s var(--pv-ease);
+}
+.pv-legal .pv-legal-docs a:hover,
+.pv-legal .pv-legal-docs a[aria-current="page"] { color: var(--pv-fg); background-size: 100% 1px; }
+
+.pv-h1.pv-legal-title { font-size: clamp(2.5rem, 11vw, 8rem); line-height: 0.96; letter-spacing: -0.045em; text-wrap: nowrap; }
+
+.pv-legal-head-row { display: grid; gap: 22px; margin-top: clamp(28px, 5vh, 56px); }
+.pv-legal-intro { font-size: clamp(1.1rem, 1.5vw, 1.42rem); line-height: 1.5; color: var(--pv-muted); max-width: 56ch; }
+.pv-legal-meta { font-family: var(--pv-display); font-weight: 500; font-size: 0.95rem; }
+
+/* ── Body: index beside a comfortable measure ─────────────────────────── */
+.pv-legal-body { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); padding: 0 var(--pv-pad); }
+.pv-legal-index { display: none; }
+.pv-legal-content { grid-column: 1; grid-row: 1; min-width: 0; max-width: 70ch; padding-bottom: 92px; }
+
+.pv-legal-section { position: relative; padding: clamp(34px, 6vh, 60px) 0 clamp(38px, 7vh, 72px); scroll-margin-top: 104px; }
+.pv-legal-rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--pv-rule); transform-origin: left; }
+.pv-legal-h2 {
+  margin: 0 0 clamp(18px, 3vh, 30px);
+  font-family: var(--pv-display); font-weight: 700; font-size: clamp(1.6rem, 2.6vw, 2.5rem);
+  line-height: 1.08; letter-spacing: -0.03em; text-wrap: balance;
+}
+.pv-legal .pv-legal-prose > * + * { margin-top: 1.15em; }
+.pv-legal-p, .pv-legal-ul { font-size: clamp(1.04rem, 1.2vw, 1.2rem); line-height: 1.7; color: var(--pv-legal-body); }
+.pv-legal .pv-legal-prose > .pv-legal-h3 { margin-top: 2.1em; }
+.pv-legal-h3 {
+  margin: 0; font-family: var(--pv-display); font-weight: 700; font-size: clamp(1.18rem, 1.55vw, 1.45rem);
+  line-height: 1.2; letter-spacing: -0.02em;
+}
+.pv-legal .pv-legal-prose > .pv-legal-h3 + * { margin-top: 0.6em; }
+.pv-legal-prose strong { font-weight: 600; color: var(--pv-fg); }
+.pv-legal-prose code {
+  font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.88em;
+  padding: 0.12em 0.4em; border-radius: 5px; background: color-mix(in srgb, var(--pv-fg) 8%, transparent);
+  overflow-wrap: anywhere;
+}
+.pv-legal-ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7em; }
+.pv-legal-ul > li { position: relative; padding-left: 1.6em; }
+.pv-legal-ul > li::before {
+  content: ""; position: absolute; left: 0; top: 0.78em; width: 0.8em; height: 2px; border-radius: 2px;
+  background: var(--pv-blue); transform: rotate(-4deg);
+}
+.pv-legal .pv-legal-a {
+  color: var(--pv-fg); padding-bottom: 1px; overflow-wrap: anywhere;
+  background: linear-gradient(var(--pv-blue), var(--pv-blue)) 0 100% / 100% 1.5px no-repeat;
+  transition: color 0.3s ease, background-size 0.5s var(--pv-ease);
+}
+.pv-legal .pv-legal-a:hover { color: var(--pv-blue-text); background-size: 0% 1.5px; background-position: 100% 100%; }
+
+/* Tables: none in the current wording, but ready if one is added. */
+.pv-legal-prose table { width: 100%; border-collapse: collapse; font-size: 0.98rem; line-height: 1.5; }
+.pv-legal-prose th { text-align: left; font-family: var(--pv-display); font-weight: 500; color: var(--pv-muted); }
+.pv-legal-prose th, .pv-legal-prose td { padding: 0.8em 1.2em 0.8em 0; border-bottom: 1px solid var(--pv-rule); vertical-align: top; }
+
+/* ── The closing line ─────────────────────────────────────────────────── */
+.pv-legal-end { position: relative; display: grid; gap: 16px; justify-items: start; padding-top: clamp(40px, 7vh, 76px); }
+.pv-legal-ask { font-family: var(--pv-display); font-weight: 700; font-size: clamp(1.5rem, 2.4vw, 2.3rem); line-height: 1.12; letter-spacing: -0.03em; }
+.pv-legal-ask .pv-brush-svg { bottom: -0.1em; }
+.pv-legal-end-body { max-width: 50ch; color: var(--pv-legal-body); font-size: clamp(1.04rem, 1.2vw, 1.2rem); line-height: 1.6; }
+.pv-legal-also { margin-top: 6px; font-size: 0.95rem; color: var(--pv-muted); }
+
+/* ── Phone: the index folds into a jump bar that rides the bottom edge ── */
+.pv-legal-jump { grid-column: 1; grid-row: 1; align-self: end; position: sticky; bottom: 14px; z-index: 20; }
+.pv-legal-jump-bar {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px;
+  width: 100%; padding: 15px 18px; border: 0; border-radius: 16px; cursor: pointer;
+  background: var(--pv-fg); color: var(--pv-bg); text-align: left;
+  font-family: var(--pv-display); font-weight: 500; font-size: 0.95rem; line-height: 1.2;
+  box-shadow: 0 12px 32px rgba(13, 13, 15, 0.2);
+}
+.pv-legal-jump-label { opacity: 0.58; }
+.pv-legal-jump-current { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.pv-legal-jump-bar svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.5s var(--pv-ease); }
+.pv-legal-jump.is-open .pv-legal-jump-bar svg { transform: rotate(180deg); }
+.pv-legal-jump-sheet {
+  position: absolute; left: 0; right: 0; bottom: calc(100% + 8px);
+  max-height: min(56svh, 440px); overflow-y: auto; overscroll-behavior: contain;
+  padding: 8px; border-radius: 16px; background: var(--pv-fg); color: var(--pv-bg);
+  box-shadow: 0 12px 32px rgba(13, 13, 15, 0.2);
+  opacity: 0; visibility: hidden; transform: translate3d(0, 12px, 0);
+  transition: opacity 0.3s ease, transform 0.45s var(--pv-ease), visibility 0s linear 0.45s;
+}
+.pv-legal-jump.is-open .pv-legal-jump-sheet { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.pv-legal-jump-sheet ol { list-style: none; margin: 0; padding: 0; }
+.pv-legal-jump-sheet a {
+  position: relative; display: block; padding: 12px 14px 12px 30px; border-radius: 10px;
+  font-family: var(--pv-display); font-weight: 500; font-size: 1.02rem; line-height: 1.25; opacity: 0.66;
+}
+.pv-legal-jump-sheet a[aria-current="location"] { opacity: 1; }
+.pv-legal-jump-sheet a[aria-current="location"]::before {
+  content: ""; position: absolute; left: 12px; top: 50%; width: 10px; height: 2px; border-radius: 2px;
+  background: var(--pv-blue); transform: rotate(-4deg);
+}
+
+/* ── Desktop: sticky index ────────────────────────────────────────────── */
+@media (min-width: 900px) {
+  .pv-legal-head-row { grid-template-columns: var(--pv-legal-side) minmax(0, 1fr); column-gap: var(--pv-legal-gap); align-items: start; }
+  .pv-legal-intro { grid-column: 2; grid-row: 1; }
+  .pv-legal-meta { grid-column: 1; grid-row: 1; padding-top: 0.45em; }
+
+  .pv-legal-body { grid-template-columns: var(--pv-legal-side) minmax(0, 1fr); column-gap: var(--pv-legal-gap); }
+  .pv-legal-index { display: block; grid-column: 1; grid-row: 1; align-self: start; position: sticky; top: 76px; padding-top: clamp(34px, 6vh, 60px); }
+  .pv-legal-content { grid-column: 2; padding-bottom: 0; }
+  .pv-legal-jump { display: none; }
+
+  .pv-legal-index .pv-label { margin-bottom: 16px; }
+  .pv-legal-index-list { position: relative; padding-left: 20px; }
+  .pv-legal-index-list::before { content: ""; position: absolute; left: 1px; top: 0; bottom: 0; width: 1px; background: var(--pv-rule); }
+  .pv-legal-index-marker {
+    position: absolute; left: 0; top: 0; width: 3px; height: 0; border-radius: 3px; background: var(--pv-blue); opacity: 0;
+    transition: transform 0.6s var(--pv-ease), height 0.6s var(--pv-ease), opacity 0.4s ease;
+  }
+  .pv-legal-index ol { list-style: none; margin: 0; padding: 0; }
+  .pv-legal .pv-legal-index li a {
+    display: block; padding: 7px 0; font-family: var(--pv-display); font-weight: 500; font-size: 0.95rem; line-height: 1.3;
+    color: var(--pv-muted); transition: color 0.3s ease, transform 0.5s var(--pv-ease);
+  }
+  .pv-legal .pv-legal-index li a:hover { color: var(--pv-fg); }
+  .pv-legal .pv-legal-index li a[aria-current="location"] { color: var(--pv-fg); transform: translate3d(5px, 0, 0); }
+}
+
+/* ── Quiet entrance, in CSS so it begins with the first paint ─────────── */
+@keyframes pvLegalLineUp { from { transform: translate3d(0, 110%, 0); } to { transform: none; } }
+@keyframes pvLegalFadeUp { from { opacity: 0; transform: translate3d(0, 20px, 0); } to { opacity: 1; transform: none; } }
+@keyframes pvLegalFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pvLegalWipe { from { clip-path: inset(0% 100% 0% 0%); } to { clip-path: inset(0% 0% 0% 0%); } }
+@keyframes pvLegalRule { from { transform: scaleX(0); } to { transform: none; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .pv-legal-docs { animation: pvLegalFadeUp 0.9s var(--pv-ease) 0.05s both; }
+  .pv-legal-title .pv-line > span { animation: pvLegalLineUp 1.15s var(--pv-ease) both; }
+  .pv-legal-title .pv-line:nth-child(2) > span { animation-delay: 0.1s; }
+  .pv-legal-title .pv-line:nth-child(3) > span { animation-delay: 0.2s; }
+  .pv-legal-title-brush { animation: pvLegalWipe 0.9s var(--pv-ease) 1s both; }
+  .pv-legal-head-row { animation: pvLegalFadeUp 1s var(--pv-ease) 0.45s both; }
+  .pv-legal-index, .pv-legal-jump { animation: pvLegalFade 0.9s ease 0.9s both; }
+  .pv-legal-section:first-child .pv-legal-rule { animation: pvLegalRule 1.2s cubic-bezier(0.65, 0, 0.35, 1) 0.7s both; }
+  .pv-legal-section:first-child .pv-line > span { animation: pvLegalLineUp 1s var(--pv-ease) 0.9s both; }
+  .pv-legal-section:first-child .pv-legal-prose { animation: pvLegalFade 1s ease 1.1s both; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pv-legal-index-marker, .pv-legal-jump-sheet, .pv-legal-jump-bar svg, .pv-legal .pv-legal-index li a { transition: none; }
+}
+
+/* ══ 404 ═══════════════════════════════════════════════════════════════ */
+.pv-legal-nf {
+  position: relative; display: grid; gap: clamp(36px, 6vh, 64px); align-content: center;
+  min-height: 100svh; padding: clamp(112px, 16vh, 170px) var(--pv-pad) clamp(56px, 9vh, 110px);
+}
+.pv-legal-nf-label { margin-bottom: 1.3em; }
+.pv-h1.pv-legal-nf-title { font-size: clamp(2.4rem, 4.5vw, 4.6rem); }
+.pv-legal-nf-rest { display: grid; gap: clamp(22px, 3.4vh, 32px); margin-top: clamp(24px, 4vh, 40px); }
+.pv-legal-nf-body { max-width: 46ch; font-size: clamp(1.04rem, 1.25vw, 1.22rem); line-height: 1.55; color: var(--pv-muted); }
+.pv-legal-nf-path {
+  font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.88em; color: var(--pv-fg);
+  padding: 0.12em 0.4em; border-radius: 5px; background: color-mix(in srgb, var(--pv-fg) 8%, transparent);
+  overflow-wrap: anywhere; -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+.pv-legal-nf-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; }
+.pv-legal-nf-email { font-size: 0.95rem; color: var(--pv-muted); }
+.pv-legal-nf .pv-legal-nf-email a { color: var(--pv-fg); border-bottom: 1px solid var(--pv-rule); transition: border-color 0.3s ease; }
+.pv-legal-nf .pv-legal-nf-email a:hover { border-color: var(--pv-blue); }
+
+.pv-legal-nf-scene { display: grid; gap: 16px; min-width: 0; }
+.pv-legal-nf-tile {
+  border-radius: clamp(8px, 1vw, 16px); overflow: hidden; background: #fff;
+  box-shadow: 0 0 0 0.5px rgba(13, 13, 15, 0.22), 0 clamp(12px, 2vw, 30px) clamp(30px, 5vw, 80px) rgba(13, 13, 15, 0.12);
+}
+.pv-legal-nf-chrome { display: flex; align-items: center; gap: clamp(4px, 0.5vw, 7px); height: clamp(16px, 1.9vw, 28px); padding: 0 clamp(8px, 0.9vw, 14px); background: #e9e6df; }
+.pv-legal-nf-chrome i { width: clamp(5px, 0.55vw, 8px); height: clamp(5px, 0.55vw, 8px); border-radius: 50%; background: rgba(13, 13, 15, 0.22); }
+.pv-legal-nf-frame {
+  position: relative; aspect-ratio: 1600 / 1055; overflow: hidden; background-color: #fbfaf7;
+  background-image: radial-gradient(circle, rgba(13, 13, 15, 0.17) 0.8px, transparent 1.1px); background-size: 14px 14px;
+}
+.pv-legal-nf-wire { position: absolute; inset: 0; width: 100%; height: 100%; color: rgba(13, 13, 15, 0.58); }
+.pv-legal-nf-ghost { opacity: 0.15; }
+/* Resting state: the pencil lines are gone. pathLength is 1, so an offset of 1 hides each stroke. */
+.pv-legal-nf-lines > * { stroke-dasharray: 1; stroke-dashoffset: 1; }
+
+.pv-legal-nf-num { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center; padding: 0 6%; }
+.pv-legal-nf-num svg { display: block; width: 100%; height: auto; overflow: visible; }
+.pv-legal-nf-num text { font-family: var(--pv-display); font-weight: 700; font-size: 480px; fill: var(--pv-blue); }
+
+.pv-legal-nf-frame picture { display: contents; }
+.pv-legal-nf-shot { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; clip-path: inset(0% 0% 100% 0%); }
+.pv-legal-nf-scan { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.pv-legal-nf-scan::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--pv-blue); box-shadow: 0 0 14px var(--pv-blue); }
+
+.pv-legal-nf-caption { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; font-family: var(--pv-display); font-weight: 500; font-size: 0.95rem; color: var(--pv-muted); }
+.pv-legal-nf-replay { border: 0; margin: 0; padding: 0 0 3px; font-size: inherit; color: var(--pv-fg); cursor: pointer; background-color: transparent; }
+
+@media (min-width: 900px) {
+  .pv-legal-nf { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); column-gap: clamp(48px, 6vw, 110px); align-items: center; }
+  /* Keep the whole tile on screen on short laptops. */
+  .pv-legal-nf-scene { width: min(100%, calc((100svh - 250px) * 1.46)); justify-self: end; }
+}
+
+@keyframes pvLegalNfUnpaint { from { clip-path: inset(0% 0% 0% 0%); } to { clip-path: inset(0% 0% 100% 0%); } }
+@keyframes pvLegalNfScanMove { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, -100%, 0); } }
+@keyframes pvLegalNfScanFade { 0%, 100% { opacity: 0; } 5%, 95% { opacity: 1; } }
+@keyframes pvLegalNfRubOut { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 1; } }
+@keyframes pvLegalNfPaintX { from { clip-path: inset(-10% 110% -10% -10%); } to { clip-path: inset(-10% -10% -10% -10%); } }
+@keyframes pvLegalNfPaintY { from { clip-path: inset(-10% -10% 110% -10%); } to { clip-path: inset(-10% -10% -10% -10%); } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .pv-legal-nf-label { animation: pvLegalFadeUp 0.9s var(--pv-ease) 0.05s both; }
+  .pv-legal-nf-title .pv-line > span { animation: pvLegalLineUp 1.15s var(--pv-ease) both; }
+  .pv-legal-nf-title .pv-line:nth-child(2) > span { animation-delay: 0.09s; }
+  .pv-legal-nf-title .pv-line:nth-child(3) > span { animation-delay: 0.18s; }
+  .pv-legal-nf-brush { animation: pvLegalWipe 0.9s var(--pv-ease) 0.95s both; }
+  .pv-legal-nf-rest { animation: pvLegalFadeUp 1s var(--pv-ease) 0.5s both; }
+  .pv-legal-nf-tile.is-first { animation: pvLegalFadeUp 1.1s var(--pv-ease) 0.3s both; }
+
+  /* t0: the finished page holds for a beat. Then it is scanned away from the bottom up,
+     the wireframe under it is rubbed out, and the 404 is painted on, one digit at a time. */
+  .pv-legal-nf-shot { animation: pvLegalNfUnpaint 1.5s cubic-bezier(0.5, 0, 0.5, 1) var(--pv-legal-nf-t0, 1.1s) both; }
+  .pv-legal-nf-scan {
+    animation:
+      pvLegalNfScanMove 1.5s cubic-bezier(0.5, 0, 0.5, 1) var(--pv-legal-nf-t0, 1.1s) both,
+      pvLegalNfScanFade 1.5s linear var(--pv-legal-nf-t0, 1.1s) both;
+  }
+  .pv-legal-nf-lines > * {
+    animation: pvLegalNfRubOut 0.7s cubic-bezier(0.6, 0, 0.4, 1) calc(var(--pv-legal-nf-t0, 1.1s) + 1.35s + var(--i, 0) * 26ms) both;
+  }
+  .pv-legal-nf-num svg { animation: pvLegalNfPaintX 0.75s cubic-bezier(0.3, 0.7, 0.2, 1) calc(var(--pv-legal-nf-t0, 1.1s) + 2.55s) both; }
+  .pv-legal-nf-num svg:nth-child(2) { animation-name: pvLegalNfPaintY; animation-delay: calc(var(--pv-legal-nf-t0, 1.1s) + 2.8s); }
+  .pv-legal-nf-num svg:nth-child(3) { animation-delay: calc(var(--pv-legal-nf-t0, 1.1s) + 3.05s); }
+  .pv-legal-nf-caption { animation: pvLegalFade 1s ease 4.6s both; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pv-legal-nf-replay { display: none; }
+}

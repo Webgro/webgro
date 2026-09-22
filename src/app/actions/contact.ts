@@ -16,7 +16,7 @@
  * the site shippable while the real keys are being provisioned.
  */
 
-import { Resend } from "resend";
+import { escapeHtml, sendTeamEmail, verifyTurnstile } from "@/lib/form-guard";
 
 export type ContactResult =
   | { ok: true }
@@ -30,47 +30,11 @@ export type ContactPayload = {
   service?: string;
   budget?: string;
   message?: string;
-  /** Honeypot — must be empty. Named innocuously so bots auto-fill it. */
+  /** Honeypot: must be empty. Named innocuously so bots auto-fill it. */
   website?: string;
   /** Cloudflare Turnstile response token from the client widget. */
   turnstileToken?: string;
 };
-
-const TURNSTILE_VERIFY =
-  "https://challenges.cloudflare.com/turnstile/v0/siteverify";
-
-async function verifyTurnstile(token: string | undefined): Promise<boolean> {
-  const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret) {
-    // In local dev without a Turnstile key, skip verification. In
-    // production this would fail open, so guard with NODE_ENV so we
-    // never skip for a real deploy.
-    if (process.env.NODE_ENV !== "production") return true;
-    return false;
-  }
-  if (!token) return false;
-
-  try {
-    const res = await fetch(TURNSTILE_VERIFY, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({ secret, response: token }),
-    });
-    const data = (await res.json()) as { success: boolean };
-    return Boolean(data.success);
-  } catch {
-    return false;
-  }
-}
-
-function escapeHtml(s: string): string {
-  return s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
 
 /** Compose the email body as plain-text and HTML. Plain-text keeps it
  *  readable in terminal-style mail clients; HTML gives a nicer layout
@@ -140,75 +104,15 @@ export async function submitContact(
     };
   }
 
-  // 4. Send via Resend
-  const apiKey = process.env.RESEND_API_KEY;
-  const toEmail = process.env.CONTACT_TO_EMAIL ?? "hello@webgro.co.uk";
-  const fromEmail = process.env.CONTACT_FROM_EMAIL ?? "hello@webgro.co.uk";
-
-  if (!apiKey) {
-    // Credentials not set yet — log server-side so the dev still sees the
-    // submission, and tell the user clearly rather than silently swallowing.
-    console.error("[contact] RESEND_API_KEY is not set — form cannot deliver email.");
-    return {
-      ok: false,
-      error:
-        "Email delivery isn't configured on this server yet. Please email hello@webgro.co.uk directly.",
-    };
-  }
-
-  try {
-    const resend = new Resend(apiKey);
-    const { text, html } = buildEmail(payload);
-    const subject = `New brief · ${payload.firstName} ${payload.lastName}${payload.service ? ` · ${payload.service}` : ""}`;
-
-    const { error } = await resend.emails.send({
-      from: `Webgro Contact <${fromEmail}>`,
-      to: [toEmail],
-      replyTo: payload.email,
-      subject,
-      text,
-      html,
-    });
-
-    if (error) {
-      // Log the full object for ops visibility (lands in Vercel runtime logs).
-      console.error("[contact] Resend error:", error);
-
-      // Surface a more specific user-facing message where we safely can.
-      // Resend error shapes vary by failure mode; we keep this conservative.
-      const name = (error as { name?: string }).name ?? "";
-      const message =
-        (error as { message?: string }).message ??
-        "Unknown email delivery error.";
-
-      // Only "safe" Resend errors get echoed to the visitor (no API keys,
-      // no internal infrastructure names). Everything else falls through
-      // to a generic message.
-      const isSafeToShow =
-        name === "validation_error" ||
-        name === "domain_not_found" ||
-        name === "missing_required_field" ||
-        name === "invalid_from_address" ||
-        name === "invalid_to_address" ||
-        message.toLowerCase().includes("domain") ||
-        message.toLowerCase().includes("from address") ||
-        message.toLowerCase().includes("not verified");
-
-      return {
-        ok: false,
-        error: isSafeToShow
-          ? `Email provider rejected the send (${message}). Please email hello@webgro.co.uk directly.`
-          : "Something went wrong sending your message. Please email hello@webgro.co.uk directly.",
-      };
-    }
-
-    return { ok: true };
-  } catch (err) {
-    console.error("[contact] Unexpected error:", err);
-    return {
-      ok: false,
-      error:
-        "Something went wrong. Please email hello@webgro.co.uk directly.",
-    };
-  }
+  // 4. Send via Resend (shared with the guided enquiry in src/lib/form-guard.ts)
+  const { text, html } = buildEmail(payload);
+  const subject = `New brief · ${payload.firstName} ${payload.lastName}${payload.service ? ` · ${payload.service}` : ""}`;
+  return sendTeamEmail({
+    fromName: "Webgro Contact",
+    replyTo: payload.email,
+    subject,
+    text,
+    html,
+    logTag: "[contact]",
+  });
 }

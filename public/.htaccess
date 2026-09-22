@@ -34,6 +34,10 @@
   # Must come FIRST so the city-suffix rules don't get overtaken by the
   # plain /services/ rule below.
   # --------------------------------------------------------------------------
+  # Towns with their own page, then other Berkshire towns to the hub. Keep in
+  # sync with localTowns in next.config.ts.
+  RewriteRule ^services/(?:web-design-development|shopify-web-design|wordpress-web-design)/(bracknell|reading|wokingham|windsor|maidenhead|berkshire)[^/]*/?$ /web-design/$1 [R=301,L]
+  RewriteRule ^services/(?:web-design-development|shopify-web-design|wordpress-web-design)/(?:ascot|binfield|crowthorne|sandhurst|twyford|slough|newbury|finchampstead|winnersh|woodley|earley|sunningdale|sunninghill|eton|thatcham|hungerford)[^/]*/?$ /web-design/berkshire [R=301,L]
   RewriteRule ^services/web-design-development(/.*)?/?$   /services/websites [R=301,L]
   RewriteRule ^services/shopify-web-design(/.*)?/?$        /services/websites [R=301,L]
   RewriteRule ^services/wordpress-web-design(/.*)?/?$      /services/websites [R=301,L]
@@ -83,7 +87,7 @@
   RewriteRule ^kibble-watches/?$                  /work [R=301,L]
   RewriteRule ^georgina-bywater/?$                /work [R=301,L]
   RewriteRule ^vagamundo/?$                       /work [R=301,L]
-  RewriteRule ^anyprint/?$                        /work [R=301,L]
+  RewriteRule ^anyprint/?$                        /work/anyprint [R=301,L]
   RewriteRule ^kim-duffy/?$                       /work [R=301,L]
   RewriteRule ^tc4re/?$                           /work [R=301,L]
   RewriteRule ^lawnify/?$                         /work [R=301,L]

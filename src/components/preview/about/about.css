@@ -1,0 +1,308 @@
+/* About page at /about. Tokens and shared type come from
+   ../preview.css. Everything here is prefixed pv-about-. */
+
+/* Headings with masked line reveals can carry two sets of line breaks. */
+.pv-about-lines-wide { display: none; }
+.pv-about-lines-narrow { display: block; }
+@media (min-width: 900px) {
+  .pv-about-lines-wide { display: block; }
+  .pv-about-lines-narrow { display: none; }
+}
+
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+.pv-about-hero { padding: clamp(116px, 17vh, 190px) var(--pv-pad) clamp(72px, 12vh, 140px); }
+.pv-about-hero-kicker {
+  font-family: var(--pv-display); font-weight: 500; font-size: clamp(1rem, 1.25vw, 1.2rem);
+  margin-bottom: 1.5em; animation: pvFadeUp 0.9s var(--pv-ease) 0.05s both;
+}
+.pv-about-hero-title { font-size: clamp(2.25rem, 6.4vw, 6.4rem); }
+.pv-about-hero-title .pv-line > span { animation: pvLineUp 1.15s var(--pv-ease) both; }
+.pv-about-hero-title .pv-line:nth-child(2) > span { animation-delay: 0.09s; }
+.pv-about-hero-title .pv-line:nth-child(3) > span { animation-delay: 0.18s; }
+.pv-about-hero-title .pv-line:nth-child(4) > span { animation-delay: 0.27s; }
+.pv-about-hero-title .pv-line:nth-child(5) > span { animation-delay: 0.36s; }
+.pv-about-hero-lede {
+  margin-top: clamp(44px, 7vh, 76px); max-width: 58ch;
+  font-size: clamp(1.05rem, 1.35vw, 1.3rem); line-height: 1.5; color: var(--pv-muted);
+  animation: pvFadeUp 1s var(--pv-ease) 0.5s both;
+}
+
+.pv-about-facts {
+  list-style: none; margin: clamp(56px, 10vh, 120px) 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 20px;
+}
+.pv-about-fact { position: relative; display: grid; gap: 10px; align-content: start; padding-top: 18px; }
+.pv-about-fact-rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--pv-rule); transform-origin: left; }
+.pv-about-fact-figure {
+  display: block; overflow: hidden; padding-bottom: 0.06em;
+  font: 700 clamp(2.6rem, 5.2vw, 5.4rem) / 1 var(--pv-display); letter-spacing: -0.045em;
+}
+.pv-about-fact-figure > span { display: block; }
+.pv-about-fact-label { font-size: 0.95rem; line-height: 1.4; color: var(--pv-muted); max-width: 25ch; }
+@media (min-width: 900px) {
+  .pv-about-facts { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 3vw; }
+}
+
+/* The team in the hero. The CSS below is the finished, readable state: the
+   cards and portraits deal in with keyframes, and GSAP only adds the scroll
+   spread and pointer tilt on top of layers it owns (-move, -par, -tilt). */
+.pv-about-hero { overflow-x: clip; }
+.pv-about-deck { display: none; }
+
+/* Phones and tablets: a row of small overlapping portraits under the intro. */
+.pv-about-faces { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px; margin-top: 32px; }
+.pv-about-faces-row { list-style: none; display: flex; margin: 0; padding: 0 0 0 12px; }
+.pv-about-face { margin-left: -12px; }
+.pv-about-face-pop {
+  display: block; width: 52px; height: 52px; border-radius: 50%; overflow: hidden;
+  background: color-mix(in srgb, var(--pv-fg) 10%, transparent); box-shadow: 0 0 0 3px var(--pv-bg);
+  animation: pvAboutPop 0.9s var(--pv-ease) both; animation-delay: calc(0.65s + var(--i, 0) * 0.08s);
+}
+.pv-about-face-pop img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.pv-about-faces-names {
+  font-family: var(--pv-display); font-weight: 500; font-size: 1rem; line-height: 1.35;
+  animation: pvFadeUp 0.9s var(--pv-ease) 0.95s both;
+}
+@keyframes pvAboutPop { from { opacity: 0; transform: translate3d(0, 14px, 0) scale(0.6); } to { opacity: 1; transform: none; } }
+
+@media (min-width: 1100px) {
+  .pv-about-hero {
+    display: grid; grid-template-columns: minmax(0, 1fr) clamp(360px, 36vw, 660px);
+    column-gap: 4.5vw; align-items: center;
+  }
+  .pv-about-hero-title { font-size: min(4.3vw, 9.6vh); }
+  .pv-about-hero-lede { max-width: 50ch; }
+  .pv-about-facts { grid-column: 1 / -1; }
+  .pv-about-faces { display: none; }
+
+  .pv-about-deck {
+    display: block; position: relative; width: 100%; aspect-ratio: 1 / 0.9; margin-top: 1vh;
+  }
+  .pv-about-deck-tilt { position: absolute; inset: 0; }
+  .pv-about-card {
+    --x: 0%; --y: 0%; --r: 0deg;
+    position: absolute; left: calc(50% + var(--x)); top: calc(50% + var(--y)); width: 39%;
+    transform: translate(-50%, -50%) rotate(var(--r)); z-index: calc(var(--i, 0) + 1);
+  }
+  .pv-about-card:nth-child(1) { --x: -32%; --y: 5%; --r: -8deg; }
+  .pv-about-card:nth-child(2) { --x: -10.8%; --y: -2%; --r: -2.5deg; }
+  .pv-about-card:nth-child(3) { --x: 10.8%; --y: 1%; --r: 3deg; }
+  .pv-about-card:nth-child(4) { --x: 32%; --y: 6%; --r: 8.5deg; }
+  .pv-about-card:hover, .pv-about-card:focus-within { z-index: 10; }
+  .pv-about-card-deal { animation: pvAboutDeal 1.25s var(--pv-ease) both; animation-delay: calc(0.3s + var(--i, 0) * 0.1s); }
+
+  .pv-about-card-face {
+    position: relative; margin: 0; aspect-ratio: 4 / 5; border-radius: 14px; overflow: hidden; outline: none;
+    background: color-mix(in srgb, var(--pv-fg) 10%, transparent);
+    box-shadow: 0 0 0 1px rgba(13, 13, 15, 0.08), 0 28px 50px -28px rgba(13, 13, 15, 0.5);
+    transition: transform 0.6s var(--pv-ease), box-shadow 0.6s var(--pv-ease);
+  }
+  .pv-about-card-face img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .pv-about-card-face:hover, .pv-about-card-face:focus-visible {
+    transform: translate3d(0, -5%, 0) scale(1.04);
+    box-shadow: 0 0 0 1px rgba(13, 13, 15, 0.08), 0 40px 60px -30px rgba(13, 13, 15, 0.55);
+  }
+  .pv-about-card-face:focus-visible { box-shadow: 0 0 0 3px var(--pv-bg), 0 0 0 5px var(--pv-blue); }
+  .pv-about-card-label {
+    position: absolute; left: 8px; right: 8px; bottom: 8px; display: grid; gap: 2px;
+    padding: 10px 12px; border-radius: 9px; background: var(--pv-paper); color: var(--pv-ink);
+    opacity: 0; transform: translate3d(0, 10px, 0);
+    transition: opacity 0.35s ease, transform 0.5s var(--pv-ease);
+  }
+  .pv-about-card-face:hover .pv-about-card-label, .pv-about-card-face:focus-visible .pv-about-card-label { opacity: 1; transform: none; }
+  .pv-about-card-name { font: 700 1.05rem / 1.1 var(--pv-display); letter-spacing: -0.02em; }
+  .pv-about-card-role { font-size: 0.8rem; line-height: 1.3; color: rgba(13, 13, 15, 0.64); }
+}
+@keyframes pvAboutDeal {
+  from { transform: translate3d(28vw, 70vh, 0) rotate(22deg); }
+  to { transform: none; }
+}
+
+/* ── Story ────────────────────────────────────────────────────────────── */
+.pv-about-story { position: relative; display: grid; gap: 28px; padding: clamp(64px, 12vh, 150px) var(--pv-pad) clamp(100px, 20vh, 240px); }
+.pv-about-story-rule { position: absolute; left: var(--pv-pad); right: var(--pv-pad); top: 0; height: 1px; background: var(--pv-rule); transform-origin: left; }
+.pv-about-story-main { display: grid; gap: clamp(32px, 6vh, 64px); }
+.pv-about-story-title { max-width: none; }
+.pv-about-story-body {
+  display: grid; gap: 1.3em; max-width: 60ch;
+  font-size: clamp(1.05rem, 1.35vw, 1.3rem); line-height: 1.55; color: var(--pv-muted);
+}
+@media (min-width: 900px) {
+  .pv-about-story { grid-template-columns: 20vw minmax(0, 1fr); column-gap: 0; }
+  .pv-about-story-body { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3.5vw; max-width: none; }
+}
+
+/* ── Years: static layout (reduced motion, before scripts) ────────────── */
+.pv-about-years { padding: clamp(90px, 17vh, 200px) 0; }
+.pv-about-years-stage { padding: 0 var(--pv-pad); }
+.pv-about-years-head { display: grid; gap: 12px; margin-bottom: clamp(40px, 8vh, 90px); }
+.pv-about-years-title { font: 700 clamp(2rem, 4.3vw, 4.2rem) / 1.02 var(--pv-display); letter-spacing: -0.035em; margin: 0; }
+.pv-about-years-note { font-size: clamp(1.05rem, 1.35vw, 1.3rem); color: var(--pv-muted); }
+.pv-about-year, .pv-about-track { display: none; }
+.pv-about-miles { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--pv-rule); }
+.pv-about-mile { border-top: 1px solid var(--pv-rule); padding: clamp(22px, 3vw, 40px) 0; }
+.pv-about-mile-inner { display: grid; gap: 10px; }
+.pv-about-mile-year { font-family: var(--pv-display); font-weight: 500; color: var(--pv-blue-text); }
+.pv-about-mile-title { font: 700 clamp(1.5rem, 2.6vw, 2.6rem) / 1.08 var(--pv-display); letter-spacing: -0.03em; margin: 0; max-width: 24ch; text-wrap: balance; }
+.pv-about-mile-body { color: var(--pv-muted); max-width: 46ch; }
+@media (min-width: 900px) {
+  .pv-about-years:not(.is-scene) .pv-about-mile-inner { grid-template-columns: 20vw minmax(0, 1fr); }
+  .pv-about-years:not(.is-scene) .pv-about-mile-inner > :not(.pv-about-mile-year) { grid-column: 2; }
+  .pv-about-years:not(.is-scene) .pv-about-mile-year { grid-row: 1 / span 2; }
+}
+
+/* ── Years: pinned scene ──────────────────────────────────────────────── */
+.pv-about-years.is-scene { padding: 0; }
+.pv-about-years.is-scene .pv-about-years-stage {
+  --pv-about-ys: min(19vw, 40vh); --pv-about-top: min(15vh, 140px);
+  position: relative; height: 100vh; padding: 0; overflow: hidden;
+}
+.pv-about-years.is-scene .pv-about-years-head {
+  position: absolute; left: var(--pv-pad); right: var(--pv-pad); top: var(--pv-about-top);
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 1.2em; margin: 0;
+}
+.pv-about-years.is-scene .pv-about-years-title { font-size: clamp(1.3rem, 1.9vw, 1.9rem); letter-spacing: -0.02em; line-height: 1.15; }
+.pv-about-years.is-scene .pv-about-years-note { font-size: 1rem; }
+
+.pv-about-years.is-scene .pv-about-year {
+  display: flex; position: absolute; left: var(--pv-pad); top: calc(50% - var(--pv-about-ys) * 0.56);
+  font: 700 var(--pv-about-ys) / 1 var(--pv-display); font-variant-numeric: tabular-nums;
+}
+.pv-about-year > span { display: block; height: 1em; }
+.pv-about-year > span + span { margin-left: -0.035em; }
+.pv-about-year-col { overflow: hidden; }
+.pv-about-year-strip { display: block; }
+.pv-about-year-strip > span { display: block; height: 1em; text-align: center; }
+
+.pv-about-years.is-scene .pv-about-miles { position: absolute; left: 57vw; right: var(--pv-pad); top: 50%; border: 0; }
+.pv-about-years.is-scene .pv-about-mile { position: absolute; left: 0; right: 0; top: 0; border: 0; padding: 0; transform: translateY(-56%); }
+.pv-about-years.is-scene .pv-about-mile-inner { gap: 16px; }
+.pv-about-years.is-scene .pv-about-mile-title { font-size: clamp(1.6rem, 2.7vw, 2.8rem); max-width: none; }
+.pv-about-years.is-scene .pv-about-mile-body { font-size: clamp(1rem, 1.25vw, 1.2rem); }
+
+.pv-about-years.is-scene .pv-about-track { display: block; position: absolute; left: var(--pv-pad); right: var(--pv-pad); bottom: 9vh; height: 44px; }
+.pv-about-track-rule { position: absolute; left: 0; right: 0; top: 7px; height: 1px; background: var(--pv-rule); }
+.pv-about-years-brush.pv-brush-svg { left: 0; bottom: auto; top: -1px; width: 100%; height: 16px; z-index: 0; }
+.pv-about-tick { position: absolute; top: 2px; width: 1px; height: 11px; background: color-mix(in srgb, var(--pv-fg) 38%, transparent); }
+.pv-about-tick.is-labelled { top: -2px; height: 19px; }
+.pv-about-tick.is-on { background: var(--pv-fg); }
+.pv-about-tick em {
+  position: absolute; left: 0; top: 28px; transform: translateX(-50%);
+  font: 500 0.85rem / 1 var(--pv-display); font-style: normal; font-variant-numeric: tabular-nums;
+  color: var(--pv-muted); transition: color 0.35s ease;
+}
+.pv-about-tick.is-on em { color: var(--pv-fg); }
+.pv-about-tick.is-first em { transform: none; }
+.pv-about-tick.is-last em { transform: translateX(-100%); }
+
+@media (max-width: 899px) {
+  .pv-about-years.is-scene .pv-about-years-stage { --pv-about-ys: min(27vw, 17svh); --pv-about-top: max(84px, 11svh); height: 100svh; }
+  .pv-about-years.is-scene .pv-about-year { top: calc(var(--pv-about-top) + 72px); }
+  .pv-about-years.is-scene .pv-about-miles { left: var(--pv-pad); top: calc(var(--pv-about-top) + 72px + var(--pv-about-ys) + 26px); }
+  .pv-about-years.is-scene .pv-about-mile { transform: none; }
+  .pv-about-years.is-scene .pv-about-mile-inner { gap: 12px; }
+  .pv-about-years.is-scene .pv-about-mile-title { font-size: min(1.6rem, 3.6svh); }
+  .pv-about-years.is-scene .pv-about-mile-body { font-size: min(1rem, 2.4svh); line-height: 1.5; }
+  .pv-about-years.is-scene .pv-about-track { bottom: 5svh; }
+  .pv-about-tick.is-tight em { display: none; }
+  /* Two years apart is under 50px on a phone, so the labels shrink to fit side by side. */
+  .pv-about-tick em { font-size: 0.72rem; letter-spacing: -0.01em; }
+}
+@media (max-width: 359px) {
+  .pv-about-tick[data-year="2024"] em { display: none; }
+}
+/* Phones held sideways: counter and cards sit side by side again. */
+@media (max-width: 899px) and (max-height: 540px) {
+  .pv-about-years.is-scene .pv-about-years-stage { --pv-about-ys: min(19vw, 38svh); }
+  .pv-about-years.is-scene .pv-about-years-head { display: none; }
+  .pv-about-years.is-scene .pv-about-year { top: calc(46% - var(--pv-about-ys) * 0.5); }
+  .pv-about-years.is-scene .pv-about-miles { left: 52vw; top: 46%; }
+  .pv-about-years.is-scene .pv-about-mile { transform: translateY(-50%); }
+  .pv-about-years.is-scene .pv-about-mile-title { font-size: 1.15rem; }
+  .pv-about-years.is-scene .pv-about-mile-body { font-size: 0.88rem; }
+}
+
+/* ── Team ─────────────────────────────────────────────────────────────── */
+.pv-about-team { position: relative; padding: clamp(100px, 20vh, 240px) var(--pv-pad) clamp(40px, 8vh, 100px); }
+.pv-about-team-canvas { display: none; }
+.pv-about-team.is-gl-ready .pv-about-team-canvas { display: block; position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 5; pointer-events: none; }
+.pv-about-team-head { display: grid; gap: 28px; margin-bottom: clamp(56px, 10vh, 120px); }
+.pv-about-person { position: relative; display: grid; gap: 28px; padding: clamp(40px, 8vh, 96px) 0; }
+.pv-about-person-rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--pv-rule); transform-origin: left; }
+.pv-about-person-drift { width: min(64vw, 340px); }
+.pv-about-person.is-flipped .pv-about-person-drift { margin-left: auto; }
+.pv-about-person-media { aspect-ratio: 4 / 5; border-radius: 14px; overflow: hidden; background: color-mix(in srgb, var(--pv-fg) 8%, transparent); }
+.pv-about-person-media img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
+.pv-about-person-media.is-gl img { opacity: 0; }
+.pv-about-person-text { display: grid; gap: 14px; align-content: end; }
+.pv-about-person-name {
+  overflow: hidden; margin: 0 0 -0.1em; padding-bottom: 0.2em;
+  font: 700 clamp(3.4rem, 10.5vw, 11rem) / 0.92 var(--pv-display); letter-spacing: -0.055em;
+}
+.pv-about-person-name > span { display: block; }
+.pv-about-person-bio { max-width: 48ch; font-size: clamp(1.05rem, 1.35vw, 1.3rem); line-height: 1.5; color: var(--pv-muted); }
+.pv-about-person.is-type-only .pv-about-person-name { font-size: clamp(4.2rem, 17vw, 19rem); }
+@media (min-width: 900px) {
+  .pv-about-team-head { grid-template-columns: 1.25fr 1fr; align-items: end; gap: 6vw; }
+  .pv-about-person { grid-template-columns: 24vw minmax(0, 1fr); gap: 6vw; align-items: end; }
+  .pv-about-person-drift { width: auto; }
+  .pv-about-person.is-flipped { grid-template-columns: minmax(0, 1fr) 24vw; }
+  .pv-about-person.is-flipped .pv-about-person-drift { order: 2; margin-left: 0; }
+  .pv-about-person.is-type-only { grid-template-columns: minmax(0, 1fr); }
+  .pv-about-person-media { border-radius: 18px; }
+}
+
+.pv-about-network { display: grid; gap: 28px; padding-top: clamp(40px, 8vh, 96px); border-top: 1px solid var(--pv-rule); }
+.pv-about-specialists { font: 700 clamp(1.7rem, 3.6vw, 3.6rem) / 1.12 var(--pv-display); letter-spacing: -0.035em; max-width: 24em; }
+.pv-about-specialist-mask { display: inline-block; max-width: 100%; overflow: hidden; vertical-align: bottom; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+.pv-about-specialist { display: inline-block; }
+.pv-about-network-body { max-width: 54ch; font-size: clamp(1.05rem, 1.35vw, 1.3rem); line-height: 1.5; color: var(--pv-muted); }
+@media (min-width: 900px) {
+  .pv-about-network { grid-template-columns: 20vw minmax(0, 1fr); column-gap: 0; }
+  .pv-about-network-body { grid-column: 2; }
+}
+
+/* ── The room ─────────────────────────────────────────────────────────── */
+.pv-about-room { display: grid; gap: clamp(64px, 12vh, 140px); padding: clamp(90px, 17vh, 200px) var(--pv-pad) clamp(100px, 20vh, 240px); }
+.pv-about-room-top { display: grid; gap: 36px; }
+.pv-about-room-top > div:first-child { display: grid; gap: 24px; align-content: start; }
+.pv-about-room-title { max-width: none; }
+.pv-about-room-body {
+  display: grid; gap: 1.3em; max-width: 58ch;
+  font-size: clamp(1.05rem, 1.35vw, 1.3rem); line-height: 1.55; color: var(--pv-muted);
+}
+.pv-about-sketch { display: grid; gap: clamp(40px, 7vh, 72px); margin: 0; }
+.pv-about-sketch-row { display: grid; gap: 10px; align-content: start; }
+.pv-about-sketch-caption {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px;
+  font-family: var(--pv-display); font-weight: 500; color: var(--pv-muted);
+}
+.pv-about-sketch-time { display: inline-block; font-weight: 700; font-size: clamp(1.25rem, 1.9vw, 1.9rem); letter-spacing: -0.02em; color: var(--pv-fg); }
+.pv-about-sketch svg { display: block; width: 100%; height: auto; overflow: visible; color: color-mix(in srgb, var(--pv-fg) 62%, transparent); }
+.pv-about-sketch-walk { fill: none; stroke: var(--pv-blue); stroke-width: 5; stroke-linecap: round; }
+.pv-about-sketch-coil { fill: none; stroke: var(--pv-fg); stroke-width: 2; stroke-linejoin: round; }
+.pv-about-sketch-ends { display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--pv-muted); }
+.pv-about-sketch figcaption { max-width: 54ch; color: var(--pv-muted); }
+.pv-about-sketch-ends > span { display: inline-block; }
+/* Until Room.tsx has set the hidden stroke and label states (and added
+   is-ready), keep the drawing out of sight so it never shows finished for a
+   frame first. Only when motion is allowed and scripts run: otherwise the
+   finished drawing above is what shows. */
+@media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
+  .pv-about-sketch:not(.is-ready) :is(.pv-about-sketch-desks, .pv-about-sketch-walk, .pv-about-sketch-coil, .pv-about-sketch-time, .pv-about-sketch-ends) { opacity: 0; }
+}
+.pv-about-address { display: grid; gap: 18px; justify-items: start; padding-top: clamp(32px, 6vh, 64px); border-top: 1px solid var(--pv-rule); }
+.pv-about-address address { display: grid; font: 700 clamp(1.7rem, 3.6vw, 3.6rem) / 1.08 var(--pv-display); font-style: normal; letter-spacing: -0.035em; }
+.pv-about-address .pv-textlink { display: inline-block; }
+@media (min-width: 900px) {
+  .pv-about-room-top { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6vw; align-items: end; }
+  .pv-about-sketch { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 6vw; }
+  .pv-about-sketch figcaption { grid-column: 1 / -1; }
+  .pv-about-address { grid-template-columns: 20vw minmax(0, 1fr) auto; column-gap: 0; align-items: end; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pv-about-hero-kicker, .pv-about-hero-lede, .pv-about-hero-title .pv-line > span,
+  .pv-about-card-deal, .pv-about-face-pop, .pv-about-faces-names { animation: none; }
+  .pv-about-card-face, .pv-about-card-label { transition: none; }
+}

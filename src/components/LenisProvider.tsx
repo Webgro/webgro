@@ -53,7 +53,13 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
         lenis.resize();
         ScrollTrigger.refresh();
       };
-      const resizeObserver = new ResizeObserver(syncSizes);
+      // Debounced: pages that animate their own height (filters, accordions)
+      // would otherwise trigger a full ScrollTrigger.refresh() every frame.
+      let resizeTimer: number | undefined;
+      const resizeObserver = new ResizeObserver(() => {
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(syncSizes, 150);
+      });
       resizeObserver.observe(document.body);
 
       const refreshTimers = [
@@ -65,6 +71,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
 
       cleanup = () => {
         refreshTimers.forEach(clearTimeout);
+        window.clearTimeout(resizeTimer);
         resizeObserver.disconnect();
         window.removeEventListener("load", onLoad);
         gsap.ticker.remove(tick);

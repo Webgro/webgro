@@ -1,22 +1,9 @@
 import type { Metadata } from "next";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
-import { ContactView } from "@/components/ContactView";
+import { PAGE_META, pageMeta } from "@/components/preview/seo";
+import { ContactPreview } from "@/components/preview/contact/ContactPreview";
 
-export const metadata: Metadata = {
-  title: "Contact Webgro · Start the conversation",
-  description:
-    "Send a brief, email us, or come by the studio in Bracknell. 30 minutes, no decks, no pressure. Usually reply within one working day.",
-};
+export const metadata: Metadata = pageMeta({ ...PAGE_META.contact, path: "/contact" });
 
-export default function ContactPage() {
-  return (
-    <>
-      <Nav />
-      <main className="flex-1">
-        <ContactView />
-      </main>
-      <Footer />
-    </>
-  );
+export default function PreviewContactPage() {
+  return <ContactPreview />;
 }

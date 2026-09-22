@@ -1,0 +1,385 @@
+/* Contact page concept. Every class is prefixed pv-contact- and leans on the
+   tokens and utilities in ../preview.css. CSS defaults are the finished,
+   readable state; GSAP sets its own starting states for the scroll scenes. */
+
+@keyframes pvContactLineUp { from { transform: translate3d(0, 108%, 0); } to { transform: none; } }
+@keyframes pvContactFadeUp { from { opacity: 0; transform: translate3d(0, 22px, 0); } to { opacity: 1; transform: none; } }
+@keyframes pvContactWipe { from { clip-path: inset(-60% 100% -60% 0%); } to { clip-path: inset(-60% -3% -60% 0%); } }
+@keyframes pvContactDome { from { clip-path: circle(0% at 50% 100%); } to { clip-path: circle(150% at 50% 100%); } }
+@keyframes pvContactNudge { 0%, 100% { transform: none; } 25% { transform: translateX(-5px); } 60% { transform: translateX(4px); } 85% { transform: translateX(-2px); } }
+@keyframes pvContactPulse { from { opacity: 1; } to { opacity: 0.45; } }
+@keyframes pvContactEq { from { transform: scaleY(0.3); } to { transform: scaleY(1); } }
+
+.pv-contact-sr {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+
+.pv-contact-top a:focus-visible, .pv-contact-top button:focus-visible,
+.pv-contact-end a:focus-visible { outline: 2px solid var(--pv-blue); outline-offset: 4px; border-radius: 4px; }
+.pv-contact-top .pv-btn:focus-visible, .pv-contact-top .pv-contact-chip:focus-visible { border-radius: 999px; }
+
+/* ── Headline ─────────────────────────────────────────────────────────── */
+.pv-contact-top { padding: clamp(116px, 17vh, 190px) var(--pv-pad) clamp(90px, 16vh, 200px); }
+.pv-contact-kicker {
+  font-family: var(--pv-display); font-weight: 500; font-size: clamp(1rem, 1.25vw, 1.2rem);
+  margin-bottom: 1.5em; max-width: 36ch;
+}
+.pv-contact-intro {
+  margin-top: clamp(28px, 4.2vh, 48px); max-width: 58ch;
+  font-size: clamp(1.02rem, 1.22vw, 1.2rem); line-height: 1.5; color: var(--pv-muted);
+}
+.pv-contact-intro a, .pv-contact-note a, .pv-contact-agree label a {
+  color: var(--pv-fg); padding-bottom: 1px;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+  transition: background-size 0.5s var(--pv-ease);
+}
+.pv-contact-intro a:hover, .pv-contact-note a:hover, .pv-contact-agree label a:hover { background-size: 0% 1px; background-position: 100% 100%; }
+
+/* ── Letter form ──────────────────────────────────────────────────────── */
+.pv-contact-body { display: grid; gap: clamp(56px, 9vh, 96px); margin-top: clamp(56px, 10vh, 120px); }
+.pv-contact-form {
+  --pv-contact-fs: clamp(1.45rem, 2.7vw, 2.75rem);
+  position: relative; display: grid; gap: clamp(30px, 5vh, 54px); max-width: 62rem; min-width: 0;
+}
+.pv-contact-line {
+  display: block; margin: 0;
+  font-family: var(--pv-display); font-weight: 500; font-size: var(--pv-contact-fs);
+  line-height: 2.05; letter-spacing: -0.025em;
+}
+.pv-contact-pick .pv-contact-line, .pv-contact-message .pv-contact-line { line-height: 1.2; }
+
+.pv-contact-blank {
+  position: relative; display: inline-grid; grid-template-columns: minmax(0, 1fr);
+  max-width: 100%; isolation: isolate; line-height: 1.25; vertical-align: baseline;
+}
+.pv-contact-blank-ghost { grid-area: 1 / 1; visibility: hidden; white-space: pre; min-width: 4.6em; padding-right: 0.12em; }
+.pv-contact-blank input {
+  position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0;
+  border: 0; border-radius: 0; background: none; outline: none; appearance: none;
+  font: inherit; letter-spacing: inherit; color: inherit;
+}
+.pv-contact-blank input::placeholder, .pv-contact-message textarea::placeholder {
+  color: color-mix(in srgb, var(--pv-fg) 34%, transparent); opacity: 1;
+}
+.pv-contact-blank::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0.02em; height: 2px;
+  background: color-mix(in srgb, var(--pv-fg) 34%, transparent);
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+.pv-contact-blank.is-filled::after, .pv-contact-blank.is-invalid::after { background: var(--pv-fg); }
+.pv-contact-blank:focus-within::after { opacity: 0; }
+@media (forced-colors: active) {
+  .pv-contact-blank input:focus, .pv-contact-message textarea:focus { outline: 2px solid; outline-offset: 2px; }
+}
+
+/* The focus state: a dry blue stroke wiped in under whichever blank you're on. */
+.pv-contact-form .pv-contact-blank-brush {
+  left: -2%; width: 104%; bottom: -0.1em; height: 0.24em;
+  clip-path: inset(-60% 100% -60% 0%); visibility: hidden;
+  transition: clip-path 0.6s var(--pv-ease), visibility 0s linear 0.6s;
+}
+.pv-contact-blank:focus-within .pv-contact-blank-brush,
+.pv-contact-message-box:focus-within .pv-contact-blank-brush {
+  clip-path: inset(-60% -3% -60% 0%); visibility: visible;
+  transition: clip-path 0.6s var(--pv-ease), visibility 0s linear 0s;
+}
+
+.pv-contact-blank-cap {
+  position: absolute; left: 0; top: calc(100% + 0.45em); white-space: nowrap;
+  font-size: clamp(0.74rem, 0.82vw, 0.86rem); font-weight: 500; line-height: 1.2; letter-spacing: 0;
+  color: var(--pv-muted); transition: color 0.3s ease;
+}
+.pv-contact-blank:focus-within .pv-contact-blank-cap { color: var(--pv-fg); }
+.pv-contact-blank-err, .pv-contact-agree-err { display: inline-flex; align-items: center; gap: 0.5em; font-weight: 700; color: var(--pv-fg); }
+.pv-contact-blank-err::before, .pv-contact-agree-err::before {
+  content: "!"; flex: none; display: grid; place-items: center; width: 1.35em; height: 1.35em; border-radius: 50%;
+  background: var(--pv-fg); color: var(--pv-bg); font-size: 0.85em; line-height: 1;
+}
+.pv-contact-blank.is-invalid { animation: pvContactNudge 0.45s ease; }
+
+/* Choices */
+.pv-contact-chips { display: flex; flex-wrap: wrap; gap: clamp(8px, 0.8vw, 12px); margin-top: clamp(16px, 2.4vh, 26px); }
+.pv-contact-chip {
+  position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 0.6em;
+  padding: 0.74em 1.3em 0.74em 0.95em; border-radius: 999px;
+  border: 1.5px solid color-mix(in srgb, var(--pv-fg) 30%, transparent);
+  background: none; color: var(--pv-fg);
+  font: 500 clamp(1.02rem, 1.45vw, 1.4rem) / 1 var(--pv-display); letter-spacing: -0.01em;
+  transition: color 0.35s ease, border-color 0.35s ease, background-color 0.35s ease, transform 0.3s var(--pv-ease);
+  -webkit-tap-highlight-color: transparent;
+}
+.pv-contact-chip::before {
+  content: ""; position: absolute; inset: 0; background: var(--pv-blue);
+  transform: translateY(102%); border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  transition: transform 0.5s var(--pv-ease), border-radius 0.5s var(--pv-ease);
+}
+.pv-contact-chip > * { position: relative; }
+.pv-contact-chip:active { transform: scale(0.95); }
+.pv-contact-chip.is-on { background: var(--pv-fg); border-color: var(--pv-fg); color: var(--pv-bg); }
+.pv-contact-chip-mark {
+  flex: none; display: grid; place-items: center; width: 1.05em; height: 1.05em; border-radius: 50%;
+  border: 1.5px solid currentColor; opacity: 0.55; box-sizing: border-box;
+  transition: background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+}
+.pv-contact-chip-mark svg { width: 70%; height: 70%; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.pv-contact-chip-mark path, .pv-contact-agree-box path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 0.4s ease; }
+.pv-contact-chip.is-on .pv-contact-chip-mark { background: var(--pv-blue); border-color: var(--pv-blue); opacity: 1; }
+.pv-contact-chip.is-on path, .pv-contact-agree-box input:checked + svg path { stroke-dashoffset: 0; transition-delay: 0.08s; }
+@media (hover: hover) {
+  .pv-contact-chip:not(.is-on):hover { color: #fff; border-color: var(--pv-blue); }
+  .pv-contact-chip:not(.is-on):hover::before { transform: none; border-radius: 0; }
+}
+.pv-contact-hint { margin-top: 14px; font-size: 0.94rem; color: var(--pv-muted); }
+
+/* Message: ruled like writing paper, and it grows as you write. */
+.pv-contact-message-box { position: relative; isolation: isolate; margin-top: clamp(10px, 1.6vh, 18px); }
+.pv-contact-message textarea {
+  display: block; width: 100%; min-height: 8em; margin: 0; padding: 0; border: 0; border-radius: 0; outline: none;
+  resize: none; overflow: hidden; field-sizing: content; appearance: none;
+  font: 500 clamp(1.1rem, 1.45vw, 1.4rem) / 2em var(--pv-display); letter-spacing: -0.01em; color: inherit;
+  background: linear-gradient(to bottom, transparent calc(2em - 1.5px), color-mix(in srgb, var(--pv-fg) 24%, transparent) calc(2em - 1.5px)) 0 0 / 100% 2em local;
+}
+.pv-contact-message-box .pv-contact-blank-brush { left: -1%; width: 102%; bottom: -5px; height: 12px; }
+
+.pv-contact-signoff {
+  display: grid; gap: 0.1em;
+  font-family: var(--pv-display); font-weight: 500; font-size: var(--pv-contact-fs); line-height: 1.25; letter-spacing: -0.025em;
+}
+.pv-contact-signature { font-weight: 700; overflow-wrap: anywhere; color: color-mix(in srgb, var(--pv-fg) 22%, transparent); transition: color 0.4s ease; }
+.pv-contact-signature.is-signed { color: var(--pv-fg); }
+
+.pv-contact-pot { position: absolute; left: -9999px; width: 0; height: 0; overflow: hidden; opacity: 0; pointer-events: none; }
+
+.pv-contact-foot { display: grid; gap: 26px; justify-items: start; }
+.pv-contact-agree { display: grid; grid-template-columns: auto 1fr; column-gap: 14px; row-gap: 8px; align-items: center; }
+.pv-contact-agree-box { position: relative; display: block; width: 1.65rem; height: 1.65rem; }
+.pv-contact-agree-box input {
+  display: block; width: 100%; height: 100%; margin: 0; appearance: none; box-sizing: border-box;
+  border: 1.5px solid var(--pv-fg); border-radius: 6px; background: none; transition: background-color 0.3s ease;
+}
+.pv-contact-agree-box input:checked { background: var(--pv-fg); }
+.pv-contact-agree-box input:focus-visible { outline: 2px solid var(--pv-blue); outline-offset: 3px; }
+.pv-contact-agree-box svg { position: absolute; inset: 17%; pointer-events: none; fill: none; stroke: var(--pv-bg); stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; }
+.pv-contact-agree.is-invalid .pv-contact-agree-box { animation: pvContactNudge 0.45s ease; }
+.pv-contact-agree.is-invalid input { border-width: 2.5px; }
+.pv-contact-agree-err { grid-column: 2; font-size: 0.9rem; }
+
+.pv-contact-error {
+  display: grid; gap: 4px; max-width: 46rem; padding: 18px 22px; border-radius: 14px;
+  background: var(--pv-fg); color: var(--pv-bg); line-height: 1.45;
+}
+.pv-contact-error:empty { display: none; }
+.pv-contact-error strong { font-family: var(--pv-display); font-weight: 700; }
+
+.pv-contact-send-row { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; }
+.pv-contact-send { border: 0; font-size: 1.12rem; padding: 1.2em 2.2em; transition: color 0.4s ease, opacity 0.3s ease; }
+.pv-contact-send:disabled { opacity: 0.6; }
+.pv-contact-send-note { color: var(--pv-muted); font-size: 0.98rem; }
+
+/* Margin notes */
+.pv-contact-aside { display: grid; gap: 34px; align-content: start; max-width: 30rem; }
+.pv-contact-note, .pv-contact-call { padding-top: 18px; border-top: 1px solid var(--pv-rule); }
+.pv-contact-note { display: grid; gap: 10px; }
+.pv-contact-note p:not(.pv-label) { color: var(--pv-muted); font-size: 1rem; }
+
+.pv-contact-call { display: flex; align-items: center; gap: 18px; }
+.pv-contact-call-btn { position: relative; flex: none; display: grid; place-items: center; width: 60px; height: 60px; padding: 0; border: 0; border-radius: 50%; background: none; }
+.pv-contact-top .pv-contact-call-btn:focus-visible { border-radius: 50%; }
+.pv-contact-call-ring { position: absolute; inset: 0; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--pv-blue) 55%, transparent); transition: transform 0.18s ease; }
+.pv-contact-call-disc {
+  position: relative; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%;
+  background: var(--pv-blue); color: #fff; transition: transform 0.15s ease, background-color 0.3s ease;
+}
+.pv-contact-call-disc svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+.pv-contact-call-stop { width: 14px; height: 14px; border-radius: 3px; background: currentColor; }
+.pv-contact-call.is-connecting .pv-contact-call-disc { animation: pvContactPulse 0.7s ease-in-out infinite alternate; }
+.pv-contact-call-status { font-family: var(--pv-display); font-weight: 500; }
+.pv-contact-call-meta { margin-top: 2px; font-size: 0.92rem; color: var(--pv-muted); }
+.pv-contact-call-eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; margin-left: 8px; }
+.pv-contact-call-eq i { width: 3px; height: 100%; background: var(--pv-blue); transform-origin: bottom; animation: pvContactEq 0.45s ease-in-out infinite alternate; }
+.pv-contact-call-eq i:nth-child(2) { animation-delay: 0.12s; }
+.pv-contact-call-eq i:nth-child(3) { animation-delay: 0.24s; }
+@media (hover: hover) { .pv-contact-call-btn:hover .pv-contact-call-disc { background: var(--pv-fg); color: var(--pv-bg); } }
+
+@media (min-width: 1000px) {
+  .pv-contact-body { grid-template-columns: minmax(0, 1fr) minmax(250px, 23vw); column-gap: 7vw; align-items: start; }
+  .pv-contact-aside { position: sticky; top: 15vh; }
+}
+
+/* ── Sent: the dome rises ─────────────────────────────────────────────── */
+.pv-contact-top.is-done { padding: 0; }
+.pv-contact-done {
+  position: relative; display: grid; align-items: center; overflow: hidden;
+  min-height: 100vh; min-height: 100svh;
+  padding: clamp(120px, 18vh, 200px) var(--pv-pad) clamp(80px, 12vh, 140px); color: #fff;
+}
+.pv-contact-done-fill { position: absolute; inset: 0; background: var(--pv-blue); }
+.pv-contact-done-inner { position: relative; }
+.pv-contact-done-title {
+  margin: 0; outline: none; text-wrap: balance;
+  font-family: var(--pv-display); font-weight: 700; font-size: clamp(2.3rem, 6.4vw, 6.4rem); line-height: 1; letter-spacing: -0.035em;
+}
+.pv-contact-done .pv-brush-svg { color: var(--pv-ink); }
+.pv-contact-done-foot { display: grid; justify-items: start; align-items: center; gap: 28px; margin-top: clamp(40px, 8vh, 90px); }
+.pv-contact-done-foot p { max-width: 48ch; font-size: clamp(1.02rem, 1.25vw, 1.2rem); color: rgba(255, 255, 255, 0.88); }
+.pv-contact-done-foot p a { color: #fff; border-bottom: 1px solid rgba(255, 255, 255, 0.6); }
+.pv-contact-done a:focus-visible { outline-color: #fff; }
+@media (min-width: 900px) { .pv-contact-done-foot { grid-template-columns: auto 1fr; gap: 3.5vw; } }
+
+/* While the confirmation is on screen the page itself is blue, so the nav and
+   its fade sit on the dome instead of on a band of paper. The switch waits for
+   the dome to finish rising. Scoped to this page's sent state only. */
+.pv[data-theme="blue"]:has(.pv-contact-top.is-done) { --pv-bg: var(--pv-blue); --pv-fg: #fff; }
+.pv[data-theme="blue"]:has(.pv-contact-top.is-done:not(.is-settled)) { transition: --pv-bg 0.15s linear 1s, --pv-fg 0.45s ease 0.6s; }
+.pv[data-theme="blue"]:has(.pv-contact-top.is-done) .pv-logo-dark { opacity: 0; }
+.pv[data-theme="blue"]:has(.pv-contact-top.is-done) .pv-logo-light { opacity: 1; }
+.pv[data-theme="blue"]:has(.pv-contact-top.is-done:not(.is-settled)) .pv-nav-logo img { transition-delay: 0.6s; }
+
+/* ── What happens next: static list ───────────────────────────────────── */
+.pv-contact-steps { padding: clamp(90px, 17vh, 200px) var(--pv-pad); }
+.pv-contact-steps-stage { display: grid; gap: clamp(48px, 8vh, 96px); }
+.pv-contact-steps-head { display: grid; gap: 24px; align-content: start; }
+.pv-contact-steps-list { list-style: none; margin: 0; padding: 0; display: grid; }
+.pv-contact-step { display: grid; gap: 12px; align-content: start; padding: clamp(24px, 3vw, 40px) 0; border-top: 1px solid var(--pv-rule); }
+.pv-contact-step:last-child { border-bottom: 1px solid var(--pv-rule); }
+.pv-contact-step-mask { overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+.pv-contact-step-body { color: var(--pv-muted); max-width: 46ch; }
+.pv-contact-rail { display: none; }
+@media (min-width: 900px) {
+  .pv-contact-steps-stage { grid-template-columns: 1fr 1fr; column-gap: 7vw; align-items: start; }
+  .pv-contact-steps-head { position: sticky; top: 16vh; }
+}
+
+/* ── What happens next: pinned scene ──────────────────────────────────── */
+.pv-contact-steps.is-scene { padding: 0; }
+.pv-contact-steps.is-scene .pv-contact-steps-stage {
+  --pv-contact-sheet-h: min(19vh, 190px);
+  --pv-contact-sheet-w: calc(var(--pv-contact-sheet-h) * 0.74);
+  position: relative; height: 100vh; overflow: hidden; align-content: start;
+  padding: min(17vh, 170px) var(--pv-pad) 0;
+}
+.pv-contact-steps.is-scene .pv-contact-steps-head { position: static; }
+.pv-contact-steps.is-scene .pv-h2 { font-size: min(4.3vw, 7.4vh); }
+.pv-contact-steps.is-scene .pv-lede { font-size: clamp(1rem, min(1.35vw, 2.6vh), 1.3rem); }
+.pv-contact-steps.is-scene .pv-contact-step { grid-area: 1 / 1; padding: 0; border: 0; }
+.pv-contact-steps.is-scene .pv-h3 { font-size: min(clamp(1.7rem, 3vw, 3.1rem), 6vh); max-width: 18ch; }
+.pv-contact-steps.is-scene .pv-contact-step-body { font-size: clamp(1rem, min(1.25vw, 2.7vh), 1.2rem); }
+
+.pv-contact-steps.is-scene .pv-contact-rail {
+  display: block; position: absolute; isolation: isolate; height: 18px;
+  left: calc(var(--pv-pad) + var(--pv-contact-sheet-w) / 2);
+  right: calc(var(--pv-pad) + var(--pv-contact-sheet-w) / 2);
+  bottom: calc(7vh + 2.4em);
+}
+.pv-contact-rail-line { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--pv-rule); }
+.pv-contact-rail .pv-contact-rail-brush { left: 0; width: 100%; top: 1px; bottom: auto; height: 16px; z-index: 0; }
+.pv-contact-node { position: absolute; top: 50%; width: 0; height: 0; }
+.pv-contact-node::before, .pv-contact-node i { content: ""; position: absolute; left: -7px; top: -7px; width: 14px; height: 14px; border-radius: 50%; box-sizing: border-box; }
+.pv-contact-node::before { background: var(--pv-bg); border: 1.5px solid color-mix(in srgb, var(--pv-fg) 42%, transparent); }
+.pv-contact-node i { background: var(--pv-blue); box-shadow: 0 0 0 3px var(--pv-bg); }
+.pv-contact-node em {
+  position: absolute; left: 0; top: 19px; transform: translateX(-50%); white-space: nowrap;
+  font: normal 500 clamp(0.8rem, 0.95vw, 0.98rem) / 1.2 var(--pv-display);
+}
+
+.pv-contact-rider {
+  position: absolute; left: 0; bottom: calc(100% + 18px);
+  width: var(--pv-contact-sheet-w); height: var(--pv-contact-sheet-h);
+  margin-left: calc(var(--pv-contact-sheet-w) / -2);
+  font-size: calc(var(--pv-contact-sheet-h) * 0.072);
+}
+.pv-contact-sheet {
+  position: absolute; inset: 0; display: grid; align-content: start; padding: 1.3em 1.15em; border-radius: 0.28em;
+  background: var(--pv-paper); color: var(--pv-ink); box-shadow: 0 0.7em 1.8em rgba(0, 0, 0, 0.5);
+}
+.pv-contact-sheet i { display: block; height: 0.34em; border-radius: 1em; background: color-mix(in srgb, var(--pv-ink) 26%, transparent); }
+.pv-contact-sheet-brief, .pv-contact-sheet-proposal { grid-area: 1 / 1; }
+.pv-contact-sheet-brief i { margin-bottom: 0.72em; }
+.pv-contact-sheet-brief i:nth-child(2) { width: 90%; }
+.pv-contact-sheet-brief i:nth-child(3) { width: 96%; }
+.pv-contact-sheet-brief i:nth-child(4) { width: 82%; }
+.pv-contact-sheet-brief i:nth-child(5) { width: 48%; }
+.pv-contact-sheet--reply { inset: -14% auto auto -36%; width: 80%; height: 60%; background: #fff; }
+.pv-contact-sheet--reply i { margin-bottom: 0.7em; background: color-mix(in srgb, var(--pv-blue) 80%, transparent); }
+.pv-contact-sheet--reply i:last-child { width: 60%; }
+.pv-contact-sheet-proposal b { display: block; margin-bottom: 0.85em; font: 700 1.3em / 1 var(--pv-display); letter-spacing: -0.02em; }
+.pv-contact-sheet-proposal span { display: grid; grid-template-columns: 4.6em 1fr; align-items: center; margin-bottom: 0.7em; font: 500 0.92em / 1 var(--pv-display); }
+.pv-contact-sheet-proposal span i { height: 0.28em; }
+.pv-contact-sheet .pv-contact-sheet-sign { left: 10%; width: 60%; bottom: 9%; height: 1.15em; z-index: 0; }
+
+@media (max-width: 899px) {
+  .pv-contact-steps.is-scene .pv-contact-steps-stage {
+    --pv-contact-sheet-h: 14svh;
+    height: 100svh; padding-top: max(76px, 10svh); row-gap: 2.6svh;
+  }
+  .pv-contact-steps.is-scene .pv-contact-steps-head { gap: 1.2svh; }
+  .pv-contact-steps.is-scene .pv-h2 { font-size: min(1.5rem, 3.4svh); max-width: none; }
+  .pv-contact-steps.is-scene .pv-lede { font-size: min(0.92rem, 2.2svh); line-height: 1.4; max-width: none; }
+  .pv-contact-steps.is-scene .pv-contact-step { gap: 1svh; }
+  .pv-contact-steps.is-scene .pv-contact-step-when { font-size: min(0.9rem, 2.2svh); }
+  .pv-contact-steps.is-scene .pv-h3 { font-size: min(1.55rem, 3.6svh); max-width: none; }
+  .pv-contact-steps.is-scene .pv-contact-step-body { font-size: min(0.98rem, 2.3svh); line-height: 1.45; max-width: none; }
+  .pv-contact-steps.is-scene .pv-contact-rail { bottom: calc(4.5svh + 2.2em); }
+  .pv-contact-node em { font-size: 0.78rem; }
+}
+
+/* ── Ending: the direct lines ─────────────────────────────────────────── */
+.pv-contact-end { padding: clamp(100px, 20vh, 240px) var(--pv-pad) clamp(90px, 16vh, 190px); }
+.pv-contact-end-head { display: grid; gap: 28px; margin-bottom: clamp(40px, 8vh, 90px); }
+.pv-contact-end-email {
+  position: relative; display: inline-block; isolation: isolate; white-space: nowrap;
+  font-family: var(--pv-display); font-weight: 700; font-size: clamp(1.6rem, 8.4vw, 8.4rem); line-height: 1.2; letter-spacing: -0.045em;
+}
+.pv-contact-end-mask { display: block; overflow: hidden; }
+.pv-contact-end-char, .pv-contact-end-roll { display: inline-block; }
+.pv-contact-end-roll { position: relative; transition: transform 0.6s var(--pv-ease); transition-delay: calc(var(--i) * 16ms); }
+.pv-contact-end-roll::after { content: attr(data-char); position: absolute; left: 0; top: 100%; color: var(--pv-blue-text); }
+.pv-contact-end .pv-contact-end-brush { left: -1.5%; width: 103%; bottom: 0.03em; height: 0.13em; }
+@media (hover: hover) { .pv-contact-end-email:hover .pv-contact-end-roll { transform: translateY(-100%); } }
+
+.pv-contact-rows { margin-top: clamp(56px, 10vh, 120px); }
+.pv-contact-row { position: relative; display: grid; gap: 10px; padding: clamp(22px, 2.5vw, 40px) 0; transition: color 0.35s ease; }
+.pv-contact-row:last-child { border-bottom: 1px solid var(--pv-rule); }
+.pv-contact-row-rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--pv-rule); transform-origin: left; }
+.pv-contact-row-fill {
+  position: absolute; inset: 0 calc(var(--pv-pad) * -1); background: var(--pv-blue);
+  transform: scaleY(0); transform-origin: bottom; transition: transform 0.55s var(--pv-ease);
+}
+.pv-contact-row-cell { position: relative; transition: color 0.35s ease; }
+.pv-contact-row-main { display: grid; gap: 8px; }
+.pv-contact-row-value { font-family: var(--pv-display); font-weight: 500; font-size: clamp(1.4rem, 2.75vw, 2.7rem); line-height: 1.1; letter-spacing: -0.025em; }
+.pv-contact-row-meta { color: var(--pv-muted); transition: color 0.35s ease; }
+.pv-contact-row-action { display: inline-flex; align-items: center; gap: 0.7em; white-space: nowrap; font-family: var(--pv-display); font-weight: 500; color: var(--pv-muted); }
+.pv-contact-row-action svg { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.6s var(--pv-ease); }
+@media (hover: hover) {
+  .pv-contact-row:hover, .pv-contact-row:hover .pv-contact-row-cell, .pv-contact-row:hover .pv-contact-row-meta { color: #fff; }
+  .pv-contact-row:hover .pv-contact-row-fill { transform: none; transform-origin: top; }
+  .pv-contact-row:hover .pv-contact-row-action svg { transform: translateX(6px); }
+}
+@media (min-width: 900px) {
+  .pv-contact-end-head { grid-template-columns: 1.25fr 1fr; align-items: end; gap: 6vw; }
+  .pv-contact-row { grid-template-columns: minmax(7em, 16vw) 1fr auto; align-items: end; gap: 4vw; }
+}
+
+/* ── Load-in and sent-state motion ────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .pv-contact-kicker { animation: pvContactFadeUp 0.9s var(--pv-ease) 0.05s both; }
+  .pv-contact-head .pv-line > span { animation: pvContactLineUp 1.15s var(--pv-ease) both; }
+  .pv-contact-head .pv-line:nth-child(2) > span { animation-delay: 0.09s; }
+  .pv-contact-head-brush { animation: pvContactWipe 0.9s var(--pv-ease) 0.95s both; }
+  .pv-contact-intro { animation: pvContactFadeUp 1s var(--pv-ease) 0.45s both; }
+  .pv-contact-form > *:not(.pv-contact-pot) { animation: pvContactFadeUp 1s var(--pv-ease) calc(0.6s + var(--i, 0) * 0.08s) both; }
+  .pv-contact-aside > * { animation: pvContactFadeUp 1s var(--pv-ease) 0.9s both; }
+
+  .pv-contact-done-fill { animation: pvContactDome 1.15s cubic-bezier(0.6, 0, 0.2, 1) both; }
+  .pv-contact-done .pv-line > span { animation: pvContactLineUp 1.1s var(--pv-ease) 0.75s both; }
+  .pv-contact-done .pv-line:nth-child(2) > span { animation-delay: 0.84s; }
+  .pv-contact-done-brush { animation: pvContactWipe 0.9s var(--pv-ease) 1.6s both; }
+  .pv-contact-done-foot > * { animation: pvContactFadeUp 0.9s var(--pv-ease) 1.25s both; }
+  .pv-contact-done-foot > *:nth-child(2) { animation-delay: 1.35s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pv-contact-form .pv-contact-blank-brush, .pv-contact-chip, .pv-contact-chip::before, .pv-contact-end-roll { transition-duration: 0.01s; transition-delay: 0s; }
+  .pv-contact-blank.is-invalid, .pv-contact-agree.is-invalid .pv-contact-agree-box { animation: none; }
+}

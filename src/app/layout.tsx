@@ -42,13 +42,13 @@ const jakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://webgro.co.uk"),
-  title: "Webgro · eCommerce, WordPress, and production AI tools",
+  title: "Shopify & WordPress Web Design Studio in Bracknell | Webgro",
   description:
-    "Shopify and WordPress, hand-built for conversion and speed. AI handles the maintenance, marketing, automation, and reporting around the build. One senior studio, Bracknell-based.",
+    "Webgro designs, builds and looks after Shopify and WordPress websites, with SEO, marketing and AI tools, from a small team in Bracknell, Berkshire.",
   openGraph: {
-    title: "Webgro · Shopify, WordPress, and AI around the build. One studio.",
+    title: "Shopify & WordPress Web Design Studio in Bracknell | Webgro",
     description:
-      "A senior studio. We hand-build eCommerce and WordPress sites, then use AI for the maintenance, marketing, automation, and reporting that keeps them paying back. Based in Bracknell, part of Broadbridge Group.",
+      "Webgro designs, builds and looks after Shopify and WordPress websites, with SEO, marketing and AI tools, from a small team in Bracknell, Berkshire.",
     url: "https://webgro.co.uk",
     siteName: "Webgro",
     locale: "en_GB",
@@ -56,9 +56,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Webgro · Shopify, WordPress, and AI around the build. One studio.",
+    title: "Shopify & WordPress Web Design Studio in Bracknell | Webgro",
     description:
-      "A senior studio. We hand-build eCommerce and WordPress sites, then use AI for the maintenance, marketing, automation, and reporting that keeps them paying back. Based in Bracknell, part of Broadbridge Group.",
+      "Webgro designs, builds and looks after Shopify and WordPress websites, with SEO, marketing and AI tools, from a small team in Bracknell, Berkshire.",
   },
   alternates: {
     // RSS autodiscovery for The Gro. Site-wide so any reader extension
