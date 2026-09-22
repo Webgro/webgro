@@ -6,15 +6,15 @@ import {
   type CharityField,
 } from "@/lib/charity-application";
 import { clientIp, rateLimited } from "@/lib/enquiry/rate-limit";
-import { escapeHtml, sendTeamEmail, verifyTurnstile } from "@/lib/form-guard";
+import { escapeHtml, sendCustomerEmail, sendTeamEmail, verifyTurnstile } from "@/lib/form-guard";
+import { NEWSLETTER_SOURCE, subscribeFormOptIn } from "@/lib/newsletter";
 
 /**
  * POST /api/charity-application
  * The free charity website application from /industries/charities. Checks the
  * honeypot, rate limit, fields and Turnstile the same way the enquiry form
- * does, then emails the application to CONTACT_TO_EMAIL through Resend.
- * The applicant gets the on-page confirmation only: sendTeamEmail can only
- * send to the team address.
+ * does, then emails the application to CONTACT_TO_EMAIL through Resend and
+ * sends the applicant a short confirmation.
  */
 
 export const dynamic = "force-dynamic";
@@ -45,6 +45,7 @@ const Body = z.object({
   email: z.email().max(L.email),
   phone: opt(L.phone),
   agreed: z.literal(true),
+  newsletter: z.boolean().default(false),
   hp: z.string().max(500).optional(),
   turnstileToken: z.string().max(4000).optional(),
 });
@@ -60,6 +61,7 @@ type Application = {
   role: string;
   email: string;
   phone: string;
+  newsletter: boolean;
   submittedAt: string;
 };
 
@@ -71,6 +73,7 @@ function buildEmail(a: Application) {
     ["Contact", `${a.contactName}, ${a.role}`],
     ["Email", a.email],
     ["Phone", a.phone || "None given"],
+    ["Newsletter", a.newsletter ? "Opted in to the newsletter" : "Did not opt in to the newsletter"],
     ["Submitted", a.submittedAt],
   ];
   const answers: [string, string][] = [
@@ -102,6 +105,30 @@ ${answers
 </div>`;
 
   return { subject: oneLine(`Charity website application: ${a.charityName}`), text, html };
+}
+
+/**
+ * The confirmation the applicant gets. It says what actually happens next and
+ * promises no reply time, because applications sit in a queue.
+ */
+function buildConfirmationEmail(a: Application) {
+  const first = a.contactName.split(/\s+/)[0] ?? "";
+  const greeting = first ? `Hi ${first},` : "Hi,";
+  const body = [
+    `We've received the application for ${a.charityName}.`,
+    "The team reads every application and reviews it against our own criteria. We take on one free charity project a month, so there is usually a wait.",
+    "We'll get in touch when we can help.",
+  ];
+
+  const text = [greeting, "", ...body.flatMap((line) => [line, ""]), "Webgro"].join("\n");
+
+  const html = `<div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;font-size:15px;line-height:1.5;color:#0d0d0f">
+<p style="margin:0 0 16px">${escapeHtml(greeting)}</p>
+${body.map((line) => `<p style="margin:0 0 16px">${escapeHtml(line)}</p>`).join("\n")}
+<p style="margin:0">Webgro</p>
+</div>`;
+
+  return { subject: "We've got your charity application", text, html };
 }
 
 export async function POST(request: Request) {
@@ -151,6 +178,7 @@ export async function POST(request: Request) {
     role: oneLine(body.role),
     email: oneLine(body.email),
     phone: oneLine(body.phone),
+    newsletter: body.newsletter,
     submittedAt: new Date().toISOString(),
   };
 
@@ -167,5 +195,31 @@ export async function POST(request: Request) {
     html,
     logTag: "[charity-application]",
   });
+
+  // Confirmation to the address on the application, after the team copy and
+  // only if that one went out: promising a look at something nobody received
+  // would be worse than sending nothing. sendCustomerEmail logs its own
+  // failures and never throws, so this can't fail the application.
+  if (result.ok) {
+    const confirmation = buildConfirmationEmail(application);
+    await sendCustomerEmail({
+      fromName: "Webgro",
+      to: application.email,
+      subject: confirmation.subject,
+      text: confirmation.text,
+      html: confirmation.html,
+      logTag: "[charity-application]",
+    });
+  }
+
+  // The newsletter is a separate consent, so a Klaviyo problem never changes
+  // what the applicant sees. subscribeFormOptIn catches and logs everything.
+  await subscribeFormOptIn({
+    optIn: application.newsletter,
+    email: application.email,
+    source: NEWSLETTER_SOURCE.charity,
+    logTag: "[charity-application]",
+  });
+
   return json(result, result.ok ? 200 : 502);
 }

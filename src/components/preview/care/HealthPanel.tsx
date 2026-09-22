@@ -273,7 +273,6 @@ export function HealthPanel() {
           <Tick />
         </div>
       </div>
-      <figcaption className="pv-care-hp-caption">Illustration of the monthly checks and updates in a care plan.</figcaption>
     </figure>
   );
 }

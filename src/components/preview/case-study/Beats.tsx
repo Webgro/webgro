@@ -68,7 +68,7 @@ function TextBeat({ beat }: { beat: Extract<Beat, { kind: "text" }> }) {
       </div>
       {section.phone && hasPhone && (
         <div className="pv-cs-beat-phone">
-          <PhoneShot src={section.phone.src} alt={section.phone.alt} caption={section.phone.caption} size={section.phone.width ?? "sm"} />
+          <PhoneShot src={section.phone.src} alt={section.phone.alt} size={section.phone.width ?? "sm"} />
         </div>
       )}
       {media.length > 0 && (
@@ -240,8 +240,6 @@ function WipeBeat({ block }: { block: BlockOf<"beforeAfter"> }) {
   const ready = [useHasImage(block.before.src), useHasImage(block.after.src)].every(Boolean);
   const beforeLabel = block.before.label ?? "Before";
   const afterLabel = block.after.label ?? "After";
-  // Captions written for the old drag slider no longer apply.
-  const caption = block.caption && !/drag/i.test(block.caption) ? block.caption : undefined;
 
   useGsap(root, ({ gsap }) => {
     if (!ready) return;
@@ -281,10 +279,6 @@ function WipeBeat({ block }: { block: BlockOf<"beforeAfter"> }) {
           </div>
           <span className="pv-cs-wipe-line" aria-hidden="true" />
         </div>
-        <figcaption className="pv-cs-caption">
-          {caption && <span>{caption} </span>}
-          <span className="pv-cs-wipe-hint">Scroll to compare.</span>
-        </figcaption>
       </div>
     </figure>
   );

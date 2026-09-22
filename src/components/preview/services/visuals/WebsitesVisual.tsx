@@ -52,7 +52,7 @@ function Wire() {
   );
 }
 
-export function WebsitesVisual({ caption, still = false }: { caption?: string; still?: boolean }) {
+export function WebsitesVisual({ still = false }: { still?: boolean }) {
   const root = useRef<HTMLDivElement>(null);
 
   useSceneOnly(root, ({ gsap, inHero, timeline }) => {
@@ -76,8 +76,7 @@ export function WebsitesVisual({ caption, still = false }: { caption?: string; s
       .fromTo(q(".pv-svc-web-tablet"), { autoAlpha: 0, xPercent: -30, yPercent: 18, rotation: -7 },
         { autoAlpha: 1, xPercent: 0, yPercent: 0, rotation: 0, duration: 1.1, ease: "power3.out" }, 3 + d)
       .fromTo(q(".pv-svc-web-phone"), { autoAlpha: 0, xPercent: 40, yPercent: 24, rotation: 8 },
-        { autoAlpha: 1, xPercent: 0, yPercent: 0, rotation: 0, duration: 1.1, ease: "power3.out" }, 3.3 + d)
-      .fromTo(q(".pv-svc-visual-caption"), { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" }, 3.9 + d);
+        { autoAlpha: 1, xPercent: 0, yPercent: 0, rotation: 0, duration: 1.1, ease: "power3.out" }, 3.3 + d);
   }, still);
 
   return (
@@ -101,7 +100,6 @@ export function WebsitesVisual({ caption, still = false }: { caption?: string; s
           <img src="/preview/svc-web-phone.jpg?v=2" alt="A Gieves &amp; Hawkes product page on a phone" width={300} height={649} loading="lazy" decoding="async" />
         </div>
       </div>
-      {caption && <p className="pv-svc-visual-caption">{caption}</p>}
     </div>
   );
 }

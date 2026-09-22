@@ -5,12 +5,13 @@ import { Fragment, useRef } from "react";
 import { getCaseBySlug } from "@/content/work";
 import { pv } from "../links";
 import { reviews, GOOGLE_RATING } from "../reviewData";
+import { ShotDuo } from "../services/body/Frames";
 import { BrushedTitle } from "../services/sections";
 import { SCENE_QUERY, STATIC_QUERY, useGsap } from "../useGsap";
 import { workExtras, workImage } from "../work/data";
 import { industries } from "../industries/content";
 import { MapScene } from "./MapScene";
-import { OFFICE, towns, type Fact, type LocalCase, type LocalService, type TownSlug } from "./content";
+import { OFFICE, towns, type Fact, type LocalCase, type LocalService, type LocalShots, type TownSlug } from "./content";
 
 function Arrow() {
   return (
@@ -205,12 +206,15 @@ export function WorkCards({
   heading,
   intro,
   cases,
+  shots,
   theme,
   review,
 }: {
   heading: string;
   intro: string;
   cases: LocalCase[];
+  /** Two screenshots of one of the clients above, in a browser and a phone. */
+  shots: LocalShots;
   theme: "paper" | "ink";
   /** A featured Google review to close the section with. */
   review?: string;
@@ -264,6 +268,9 @@ export function WorkCards({
         <p className="pv-label">Case studies</p>
         <h2 className="pv-h2">{heading}</h2>
         <p className="pv-lede">{intro}</p>
+      </div>
+      <div className="pv-local-work-shots">
+        <ShotDuo desktop={shots.desktop} phone={shots.phone} />
       </div>
       <div className="pv-local-cards">
         {cases.map((c) => {

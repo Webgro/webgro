@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useId, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { TurnstileWidget } from "@/components/TurnstileWidget";
 import {
   CHARITY_EMAIL_PATTERN,
@@ -12,6 +12,7 @@ import {
   type CharityField,
 } from "@/lib/charity-application";
 import { BrushStroke } from "../Brush";
+import { revealConfirmation } from "../contact/confirmation";
 import { pv } from "../links";
 import { SCENE_QUERY, STATIC_QUERY, useGsap } from "../useGsap";
 import type { ApplyCopy } from "./content";
@@ -139,9 +140,12 @@ export function ApplyForm({ copy }: { copy: ApplyCopy }) {
   const uid = useId();
   const root = useRef<HTMLElement>(null);
   const doneHeading = useRef<HTMLHeadingElement>(null);
+  const donePanel = useRef<HTMLDivElement>(null);
   const [values, setValues] = useState<Values>(EMPTY);
   const [notRegistered, setNotRegistered] = useState(false);
   const [agreed, setAgreed] = useState(false);
+  // Newsletter opt-in. Starts off: a pre-ticked box is not consent.
+  const [newsletter, setNewsletter] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const [error, setError] = useState<string | null>(null);
   const [live, setLive] = useState("");
@@ -190,6 +194,15 @@ export function ApplyForm({ copy }: { copy: ApplyCopy }) {
     return () => mm.revert();
   });
 
+  // Once the confirmation has replaced the form, bring it into view and move
+  // focus to it. The section is shorter now, so the triggers below it need new
+  // positions first. The gap matches jumpTo, which leaves room for the nav.
+  useEffect(() => {
+    if (!sent) return;
+    refresh.current?.();
+    return revealConfirmation(donePanel.current, doneHeading.current, 140);
+  }, [sent]);
+
   function set(key: CharityField, value: string) {
     setValues((v) => ({ ...v, [key]: value }));
     if (errors[key]) setErrors((e) => ({ ...e, [key]: undefined }));
@@ -232,6 +245,7 @@ export function ApplyForm({ copy }: { copy: ApplyCopy }) {
       email: t(values.email),
       ...(t(values.phone) ? { phone: t(values.phone) } : {}),
       agreed: true,
+      newsletter,
       hp: honeypot,
       ...(turnstileToken ? { turnstileToken } : {}),
     };
@@ -246,12 +260,6 @@ export function ApplyForm({ copy }: { copy: ApplyCopy }) {
       if (data.ok) {
         setLive("");
         setSent({ first: body.contactName.split(/\s+/)[0] ?? "", charity: body.charityName });
-        // Wait for the confirmation to render, then take focus to it.
-        // The section is shorter now, so the triggers below it need new positions.
-        requestAnimationFrame(() => {
-          refresh.current?.();
-          jumpTo(doneHeading.current);
-        });
         return;
       }
       if (data.fields && Object.keys(data.fields).length) {
@@ -367,7 +375,7 @@ export function ApplyForm({ copy }: { copy: ApplyCopy }) {
       <p className="pv-contact-sr" aria-live="assertive">{live}</p>
 
       {sent ? (
-        <div className="pv-ind-apply-done">
+        <div className="pv-ind-apply-done" ref={donePanel}>
           <h3 ref={doneHeading} tabIndex={-1}>Application sent</h3>
           <p>
             Thank you{sent.first ? `, ${sent.first}` : ""}. We&rsquo;ve received the application for {sent.charity}.
@@ -447,6 +455,14 @@ export function ApplyForm({ copy }: { copy: ApplyCopy }) {
                 <Link href={pv("/privacy")} target="_blank" rel="noopener noreferrer" data-cursor>Privacy Policy</Link>.
               </>
             ), errors.agreed)}
+
+            {/* Newsletter opt-in, unticked until the person ticks it. */}
+            {check(
+              "newsletter",
+              newsletter,
+              setNewsletter,
+              "Email me Webgro news, new releases and articles from The Gro. You can unsubscribe at any time.",
+            )}
 
             <div className="pv-contact-error" role="alert">
               {error && (

@@ -35,6 +35,8 @@ export const SubmitBody = StepsBody.extend({
     company: z.string().trim().max(LIMITS.company).optional(),
   }),
   agreed: z.literal(true),
+  /** Newsletter opt-in. Off unless the person ticked the box. */
+  newsletter: z.boolean().default(false),
   website: z.string().max(500).optional(),
   turnstileToken: z.string().max(4000).optional(),
 });

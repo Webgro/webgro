@@ -269,7 +269,6 @@ export function MapScene({
           </div>
         </div>
       </div>
-      <p className="pv-local-mapnote">Rings show straight-line distance from our office. Times are by car and depend on traffic.</p>
     </div>
   );
 }

@@ -146,9 +146,6 @@ export function Room() {
             </p>
           </div>
         ))}
-        <figcaption>
-          Designers and developers work in the same room, so they can sort out questions in person.
-        </figcaption>
       </figure>
 
       <div className="pv-about-address">

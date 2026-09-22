@@ -12,15 +12,6 @@ function Tick() {
   );
 }
 
-/** Fades a caption up when it arrives. */
-function captionIn(gsap: Parameters<Parameters<typeof useDrawing>[1]>[0]["gsap"], cap: Element | undefined) {
-  if (!cap) return;
-  gsap.fromTo(cap, { autoAlpha: 0, y: 14 }, {
-    autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out",
-    scrollTrigger: { trigger: cap, start: "top 95%" },
-  });
-}
-
 /* ── Websites: Twisted Tailor's eight apps, rewritten as theme code ────── */
 
 const TT_APPS = [
@@ -44,7 +35,6 @@ export function AppBill() {
     });
     tl.fromTo(q(".pv-svc-d-bill-total"), { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.4 }, TT_APPS.length * 0.3)
       .fromTo(q(".pv-svc-d-bill-total .pv-svc-band"), { clipPath: "inset(-60% 100% -60% 0%)" }, { clipPath: "inset(-60% 0% -60% 0%)", duration: 0.5 }, TT_APPS.length * 0.3 + 0.2);
-    captionIn(gsap, q(".pv-svc-visual-caption")[0]);
   });
 
   return (
@@ -64,9 +54,6 @@ export function AppBill() {
           <BrushBand className="pv-svc-d-bill-band" seed={3} />
         </p>
       </div>
-      <figcaption className="pv-svc-visual-caption">
-        Twisted Tailor&rsquo;s Shopify rebuild: we rewrote all eight apps as native theme sections.
-      </figcaption>
     </figure>
   );
 }
@@ -86,7 +73,6 @@ export function AiAnswer() {
       .fromTo(q(".pv-svc-d-ai-cite"), { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 1.25)
       .fromTo(q(".pv-svc-d-ai-src > *"), { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.25, stagger: 0.1 }, 1.4)
       .fromTo(q(".pv-svc-d-ai-src .is-you"), { backgroundColor: "rgba(13,13,15,0.06)", color: "#0d0d0f" }, { backgroundColor: "#2d8dff", color: "#ffffff", duration: 0.25 }, 1.8);
-    captionIn(gsap, q(".pv-svc-visual-caption")[0]);
   });
 
   return (
@@ -105,9 +91,6 @@ export function AiAnswer() {
           <span className="is-other" aria-hidden="true"><i /></span>
         </div>
       </div>
-      <figcaption className="pv-svc-visual-caption">
-        An illustration of the aim of AIO and GEO: your site cited in the answer. The question is an example.
-      </figcaption>
     </figure>
   );
 }
@@ -134,7 +117,6 @@ export function TechChecklist() {
         .fromTo(row.querySelector(".pv-svc-d-check-box"), { backgroundColor: "rgba(45,141,255,0)" }, { backgroundColor: "rgba(45,141,255,0.14)", duration: 0.2 }, t)
         .fromTo(row.querySelector("span:last-child"), { opacity: 0.4 }, { opacity: 1, duration: 0.2 }, t);
     });
-    captionIn(gsap, q(".pv-svc-visual-caption")[0]);
   });
 
   return (
@@ -153,9 +135,6 @@ export function TechChecklist() {
           ))}
         </ul>
       </div>
-      <figcaption className="pv-svc-visual-caption">
-        The technical checks we work through first. The last four protect rankings during a migration.
-      </figcaption>
     </figure>
   );
 }
@@ -186,7 +165,6 @@ export function SpecialistHub() {
       tl.fromTo(chip.querySelector(".pv-svc-d-hub-drop"), wide ? { scaleY: 0 } : { scaleX: 0 }, wide ? { scaleY: 1, duration: 0.2 } : { scaleX: 1, duration: 0.2 }, 1.2 + i * 0.12)
         .fromTo(chip.querySelector("strong"), { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.3 }, 1.3 + i * 0.12);
     });
-    captionIn(gsap, q(".pv-svc-visual-caption")[0]);
   });
 
   return (
@@ -208,9 +186,6 @@ export function SpecialistHub() {
           </ul>
         </div>
       </div>
-      <figcaption className="pv-svc-visual-caption">
-        Specialists from our vetted network join when a project needs them. You keep one point of contact.
-      </figcaption>
     </figure>
   );
 }
@@ -237,7 +212,6 @@ export function MarginReport() {
         .fromTo(row.querySelector(".is-margin"), { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power1.out" }, 0.9 + i * 0.25);
     });
     tl.fromTo(q(".pv-svc-d-margin-flag"), { autoAlpha: 0, x: 12 }, { autoAlpha: 1, x: 0, duration: 0.3 }, 1.8);
-    captionIn(gsap, q(".pv-svc-visual-caption")[0]);
   });
 
   return (
@@ -260,9 +234,6 @@ export function MarginReport() {
           ))}
         </ul>
       </div>
-      <figcaption className="pv-svc-visual-caption">
-        An illustration with no real figures. The campaign with the most revenue can still lose money once ad spend comes off.
-      </figcaption>
     </figure>
   );
 }
@@ -294,7 +265,6 @@ export function ConsistencyGrid() {
         { rotation: 0, scaleX: 1, scaleY: 1, x: 0, y: 0, color: "#0d0d0f", duration: 1, ease: "power2.inOut" }, 0.3 + i * 0.06);
     });
     tl.fromTo(q(".pv-svc-d-grid-guide"), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4 }, 0.9);
-    captionIn(gsap, q(".pv-svc-visual-caption")[0]);
   });
 
   return (
@@ -308,9 +278,6 @@ export function ConsistencyGrid() {
           </div>
         ))}
       </div>
-      <figcaption className="pv-svc-visual-caption">
-        An illustration: the same logo used six different ways, then set by one set of rules.
-      </figcaption>
     </figure>
   );
 }
@@ -331,7 +298,6 @@ export function EmailShare() {
       .fromTo(q(".pv-svc-d-share-note"), { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.25, stagger: 0.15 }, 0.5)
       .fromTo(q(".pv-svc-d-share-pin"), { left: "0%" }, { left: "60%", duration: 0.8, ease: "power2.out" }, 1)
       .fromTo(q(".pv-svc-d-share-pin strong"), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2 }, 1.6);
-    captionIn(gsap, q(".pv-svc-visual-caption")[0]);
   });
 
   return (
@@ -352,9 +318,6 @@ export function EmailShare() {
           <p className="pv-svc-d-share-note"><i className="is-best" />25 to 40%: the best online shops</p>
         </div>
       </div>
-      <figcaption className="pv-svc-visual-caption">
-        Fun Cases get more than 30% of their revenue from email.
-      </figcaption>
     </figure>
   );
 }
@@ -373,7 +336,6 @@ export function ReportGap() {
       .fromTo(q(".pv-svc-d-gap-col.is-real i"), { scaleY: 0 }, { scaleY: 1, duration: 0.5, ease: "power1.out" }, 0.35)
       .fromTo(q(".pv-svc-d-gap-brace"), { clipPath: "inset(0% 0% 100% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.35 }, 0.9)
       .fromTo(q(".pv-svc-d-gap-brace em"), { autoAlpha: 0, x: -8 }, { autoAlpha: 1, x: 0, duration: 0.25 }, 1.2);
-    captionIn(gsap, q(".pv-svc-visual-caption")[0]);
   });
 
   return (
@@ -390,9 +352,6 @@ export function ReportGap() {
           <p>What your accounts show</p>
         </div>
       </div>
-      <figcaption className="pv-svc-visual-caption">
-        An illustration with no real figures. We measure against what your accounts show.
-      </figcaption>
     </figure>
   );
 }
@@ -420,7 +379,6 @@ export function TemplateGrid() {
       tl.fromTo(t, { autoAlpha: 0, yPercent: 24, rotation: i % 2 ? 5 : -5 }, { autoAlpha: 1, yPercent: 0, rotation: 0, duration: 0.5, ease: "power2.out" }, i * 0.14)
         .fromTo(t.querySelectorAll(".pv-svc-d-tpl-art > *"), { scale: 0.4, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.3, stagger: 0.05, ease: "back.out(1.8)" }, i * 0.14 + 0.25);
     });
-    captionIn(gsap, q(".pv-svc-visual-caption")[0]);
   });
 
   return (
@@ -440,9 +398,6 @@ export function TemplateGrid() {
           </div>
         ))}
       </div>
-      <figcaption className="pv-svc-visual-caption">
-        An example set of post templates, each designed to match the brand and the website.
-      </figcaption>
     </figure>
   );
 }

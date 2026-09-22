@@ -11,8 +11,8 @@ import { PhonePair, ShotDuo, ShotFan } from "./Frames";
 /**
  * The pictures further down each service page, so that scrolling alternates
  * text and imagery. Everything is either the studio's own work (real
- * screenshots and the live product mockups) or a drawing that is labelled as
- * an illustration and shows no invented figures.
+ * screenshots and the live product mockups) or a drawing that shows no
+ * invented figures.
  *
  * `wide` pictures run the full width of their section. The others are small
  * enough to sit in the section's left-hand column beside the text.
@@ -31,7 +31,6 @@ export function forYouVisual(service: PvService): Placed | null {
           <ShotDuo
             desktop={{ src: "/work/gieves-and-hawkes/live-collection.jpg", alt: "Gieves & Hawkes collection page", url: "gievesandhawkes.com" }}
             phone={{ src: "/work/gieves-and-hawkes/mobile-2.jpg", alt: "Gieves & Hawkes on a phone", w: 700, h: 1517 }}
-            caption="Gieves & Hawkes, where we provide ongoing strategy, platform guidance and hands-on delivery each week."
           />
         ),
       };
@@ -39,10 +38,7 @@ export function forYouVisual(service: PvService): Placed | null {
       return {
         wide: true,
         node: (
-          <MockupVisual
-            name="stack-integration-flow"
-            caption="An automation that routes each Shopify order to Xero, Sheets, Klaviyo and Slack."
-          />
+          <MockupVisual name="stack-integration-flow" />
         ),
       };
     case "seo":
@@ -54,7 +50,6 @@ export function forYouVisual(service: PvService): Placed | null {
           <ShotDuo
             desktop={{ src: "/work/fun-cases/live-collection.jpg", alt: "Fun Cases collection page", url: "funcases.com" }}
             phone={{ src: "/preview/cs-fun-cases-email.jpg", alt: "A Fun Cases campaign email on a phone", w: 600, h: 1214 }}
-            caption="Fun Cases, where we've run email and paid ads since their rebrand."
           />
         ),
       };
@@ -71,7 +66,6 @@ export function forYouVisual(service: PvService): Placed | null {
           <ShotDuo
             desktop={{ src: "/work/paragon-freight/live-services.jpg", alt: "Paragon Freight services page", url: "paragonfreight.com" }}
             phone={{ src: "/work/paragon-freight/live-mobile-home.jpg", alt: "Paragon Freight on a phone" }}
-            caption="Paragon Freight. We manage their social channels alongside the website we redesigned."
           />
         ),
       };
@@ -91,7 +85,6 @@ export function getVisual(service: PvService): ReactNode {
             { src: "/work/twisted-tailor/storefront.jpg", alt: "Twisted Tailor Shopify store", url: "twistedtailor.com" },
             { src: "/work/origin-architectural/live-collection.jpg", alt: "Origin Architectural Shopify store", url: "originarchitectural.co.uk" },
           ]}
-          caption="Threadology on WordPress, Twisted Tailor on Shopify, and Origin Architectural, which we moved from WordPress to Shopify."
         />
       );
     case "consultancy":
@@ -108,7 +101,6 @@ export function getVisual(service: PvService): ReactNode {
             { src: "/work/fun-cases/live-product.jpg", alt: "Fun Cases website after the rebrand", url: "funcases.com" },
             { src: "/preview/cs-fandp-agency-storefront.jpg", alt: "F&P Agency website", url: "fandpagency.com" },
           ]}
-          caption="Design work for it's Pouch, Fun Cases and F&P Agency."
         />
       );
     case "email-marketing":
@@ -118,7 +110,6 @@ export function getVisual(service: PvService): ReactNode {
             { src: "/preview/cs-fun-cases-email.jpg", alt: "A Fun Cases campaign email on a phone", w: 600, h: 1214 },
             { src: "/work/fun-cases/live-mobile-product.jpg", alt: "The Fun Cases shop on a phone", w: 700, h: 1515 },
           ]}
-          caption="A campaign email we designed for Fun Cases, and a product page from their shop."
         />
       );
     case "ppc":
@@ -126,7 +117,6 @@ export function getVisual(service: PvService): ReactNode {
         <ShotDuo
           desktop={{ src: "/work/fun-cases/live-product.jpg", alt: "Fun Cases product page", url: "funcases.com" }}
           phone={{ src: "/work/fun-cases/live-mobile-product.jpg", alt: "Fun Cases product page on a phone" }}
-          caption="Fun Cases, where we manage paid search and paid social across Google and Meta."
         />
       );
     case "social-media":

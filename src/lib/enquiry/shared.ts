@@ -45,6 +45,8 @@ export type SubmitBody = {
   steps: EnquiryStepIn[];
   contact: EnquiryContact;
   agreed: boolean;
+  /** Newsletter opt-in. Off unless the person ticked the box. */
+  newsletter?: boolean;
   /** Honeypot. Must be empty. */
   website?: string;
   turnstileToken?: string;

@@ -14,11 +14,11 @@ import { WebsitesVisual } from "./WebsitesVisual";
 export function HeroVisual({ service }: { service: PvService }) {
   switch (service.visual) {
     case "websites":
-      return <WebsitesVisual caption="ANYPRINT on a desktop, Origin Architectural on a tablet and Gieves & Hawkes on a phone." />;
+      return <WebsitesVisual />;
     case "consultancy":
     case "automation": {
       const m = service.mockups?.[0];
-      return m ? <MockupVisual name={m.name} caption={m.caption} /> : null;
+      return m ? <MockupVisual name={m.name} /> : null;
     }
     case "seo":
       return <SeoVisual />;
@@ -48,7 +48,7 @@ export function MiniVisual({ service }: { service: PvService }) {
     case "consultancy":
     case "automation": {
       const m = service.mockups?.[0];
-      return m ? <MockupVisual name={m.name} caption={m.caption} still /> : null;
+      return m ? <MockupVisual name={m.name} still /> : null;
     }
     case "seo":
       return <SeoVisual still />;

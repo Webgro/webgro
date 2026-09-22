@@ -7,6 +7,7 @@ import { Faqs } from "../services/Faqs";
 import { getTown } from "./content";
 import { Business, LocalHero, Nearby, TravelSection, WorkCards } from "./sections";
 import "../services/services.css";
+import "../services/body/body.css";
 import "./local.css";
 
 /**

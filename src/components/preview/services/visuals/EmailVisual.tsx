@@ -62,9 +62,6 @@ export function EmailVisual({ still = false }: { still?: boolean }) {
           </li>
         ))}
       </ul>
-      <p className="pv-svc-visual-caption">
-        Three of the flows we build first. The subject lines are examples only.
-      </p>
     </div>
   );
 }

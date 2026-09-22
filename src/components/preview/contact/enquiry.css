@@ -132,6 +132,8 @@
 
 .pv-enq-foot { display: grid; gap: 22px; justify-items: start; min-width: 0; }
 .pv-enq-foot > * { max-width: 100%; }
+/* Newsletter opt-in: the privacy checkbox's look, with a 44px tap target. */
+.pv-enq-optin label { display: flex; align-items: center; min-height: 44px; }
 .pv-enq-note { color: var(--pv-muted); font-size: 0.98rem; }
 
 /* ── Motion ───────────────────────────────────────────────────────────── */

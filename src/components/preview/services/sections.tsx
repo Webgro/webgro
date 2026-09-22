@@ -286,7 +286,6 @@ export function WhatYouGet({ service }: { service: PvService }) {
       {extra.map((m) => (
         <figure className="pv-svc-get-extra" key={m.name}>
           <div className="pv-svc-demo-screen" aria-hidden="true"><Mockup name={m.name} /></div>
-          <figcaption className="pv-svc-visual-caption">{m.caption}</figcaption>
         </figure>
       ))}
     </section>

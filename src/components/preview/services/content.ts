@@ -59,7 +59,7 @@ export type PvService = {
   get: { heading: string; body: string[]; items: string[] };
   platforms?: Array<{ name: string; body: string }>;
   devices?: string;
-  mockups?: Array<{ name: MockupName; caption: string }>;
+  mockups?: Array<{ name: MockupName }>;
   process: { heading: string; total: string; stages: Stage[] };
   proof: { heading: string; intro: string; figures: Figure[]; cases: string[] };
   faqs: Faq[];
@@ -288,7 +288,7 @@ const consultancy: PvService = {
     ],
   },
   mockups: [
-    { name: "consultancy-audit-board", caption: "An example audit: a scorecard and a prioritised roadmap. Every retainer starts with one." },
+    { name: "consultancy-audit-board" },
   ],
   process: {
     heading: "How consultancy works",
@@ -388,9 +388,9 @@ const automation: PvService = {
     ],
   },
   mockups: [
-    { name: "fun-cases-ai-customer-service", caption: "The AI support queue we built for Fun Cases, used by their team every day." },
-    { name: "fun-cases-ai-product-generator", caption: "The product generator we built for Fun Cases. Staff enter a design and a collection title, and it publishes a five-product range in under ten minutes." },
-    { name: "sublishop-inventory-planner", caption: "The inventory planner we built for Sublishop, one of two custom AI apps their team use to plan stock and track competitor pricing." },
+    { name: "fun-cases-ai-customer-service" },
+    { name: "fun-cases-ai-product-generator" },
+    { name: "sublishop-inventory-planner" },
   ],
   process: {
     heading: "How an automation project works",

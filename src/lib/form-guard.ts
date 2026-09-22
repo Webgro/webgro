@@ -117,3 +117,57 @@ export async function sendTeamEmail(mail: TeamEmail): Promise<SendResult> {
     return { ok: false, error: "Something went wrong. Please email hello@webgro.co.uk directly." };
   }
 }
+
+type CustomerEmail = {
+  /** Display name on the from line, for example "Webgro". */
+  fromName: string;
+  /** The address the person typed into the form. */
+  to: string;
+  subject: string;
+  text: string;
+  html: string;
+  /** Prefix for server logs, for example "[contact]". */
+  logTag: string;
+};
+
+/**
+ * Sends a confirmation to the address the person gave, from the same address
+ * the team email uses. Replies go to CONTACT_TO_EMAIL so they reach the team.
+ *
+ * Only send this after the team email has gone out, and only ever to an
+ * address that came from the form being submitted. Nothing here is shown to
+ * the browser: a failed confirmation is logged and the submission still counts
+ * as a success, because the enquiry has already reached the team.
+ */
+export async function sendCustomerEmail(mail: CustomerEmail): Promise<SendResult> {
+  const apiKey = process.env.RESEND_API_KEY;
+  const toTeam = process.env.CONTACT_TO_EMAIL ?? "hello@webgro.co.uk";
+  const fromEmail = process.env.CONTACT_FROM_EMAIL ?? "hello@webgro.co.uk";
+
+  if (!apiKey) {
+    console.error(`${mail.logTag} RESEND_API_KEY is not set, so no confirmation was sent to the sender.`);
+    return { ok: false, error: "Email delivery isn't configured on this server yet." };
+  }
+
+  try {
+    const resend = new Resend(apiKey);
+    const { error } = await resend.emails.send({
+      from: `${mail.fromName} <${fromEmail}>`,
+      to: [mail.to],
+      replyTo: toTeam,
+      subject: mail.subject,
+      text: mail.text,
+      html: mail.html,
+    });
+
+    if (error) {
+      console.error(`${mail.logTag} Confirmation email was not sent:`, error);
+      return { ok: false, error: "The confirmation email could not be sent." };
+    }
+
+    return { ok: true };
+  } catch (err) {
+    console.error(`${mail.logTag} Confirmation email was not sent:`, err);
+    return { ok: false, error: "The confirmation email could not be sent." };
+  }
+}

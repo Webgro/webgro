@@ -138,7 +138,6 @@
 .pv-care-hp-doc path { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; stroke-linecap: round; }
 .pv-care-hp-report-text { flex: 1; }
 
-.pv-care-hp-caption { margin-top: 14px; font-size: 0.85rem; color: var(--pv-muted); }
 
 /* Phones: the same panel, tightened up. */
 @media (max-width: 600px) {

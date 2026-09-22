@@ -119,6 +119,8 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
   const [contactErrors, setContactErrors] = useState<ContactErrors>({});
   const [agreed, setAgreed] = useState(false);
   const [agreeError, setAgreeError] = useState<string | null>(null);
+  // Newsletter opt-in. Starts off: a pre-ticked box is not consent.
+  const [newsletter, setNewsletter] = useState(false);
   const [honeypot, setHoneypot] = useState("");
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
@@ -305,6 +307,7 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
           ...(contact.company.trim() ? { company: contact.company.trim() } : {}),
         },
         agreed,
+        newsletter,
         website: honeypot,
         turnstileToken: turnstileToken ?? undefined,
       });
@@ -561,6 +564,22 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
             <Link href={pv("/privacy")} target="_blank" rel="noopener noreferrer" data-cursor>Privacy Policy</Link>.
           </label>
           {agreeError && <span id={`${uid}-agreed-err`} className="pv-contact-agree-err">{agreeError}</span>}
+        </div>
+
+        {/* Newsletter opt-in, unticked until the person ticks it. */}
+        <div className="pv-contact-agree pv-enq-optin">
+          <span className="pv-contact-agree-box">
+            <input
+              id={`${uid}-newsletter`}
+              type="checkbox"
+              checked={newsletter}
+              onChange={(e) => setNewsletter(e.target.checked)}
+            />
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path pathLength={1} d="M2.5 8.6l3.6 3.6 7.4-8.2" /></svg>
+          </span>
+          <label htmlFor={`${uid}-newsletter`} data-cursor="hover">
+            Email me Webgro news, new releases and articles from The Gro. You can unsubscribe at any time.
+          </label>
         </div>
 
         <ErrorBox error={error} title="Your enquiry wasn't sent." />

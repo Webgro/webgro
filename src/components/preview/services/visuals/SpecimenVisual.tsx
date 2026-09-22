@@ -23,8 +23,7 @@ export function SpecimenVisual({ still = false }: { still?: boolean }) {
       .fromTo(q(".pv-svc-spec-aa"), { yPercent: 60, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 0.7 }, 0.7)
       .fromTo(q(".pv-svc-spec-dim"), { scaleX: 0 }, { scaleX: 1, duration: 0.5, stagger: 0.15 }, 1.3)
       .to(q(".pv-svc-spec-curve"), { strokeDashoffset: 0, duration: 0.9, ease: "none" }, 1.5)
-      .fromTo(q(".pv-svc-spec-ball"), { xPercent: 0 }, { xPercent: 100, duration: 0.9, ease: "none" }, 1.5)
-      .fromTo(q(".pv-svc-visual-caption"), { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.5 }, 2.2);
+      .fromTo(q(".pv-svc-spec-ball"), { xPercent: 0 }, { xPercent: 100, duration: 0.9, ease: "none" }, 1.5);
   }, still);
 
   return (
@@ -61,9 +60,6 @@ export function SpecimenVisual({ still = false }: { still?: boolean }) {
           <p className="pv-svc-spec-small">One easing curve, used everywhere</p>
         </div>
       </div>
-      <p className="pv-svc-visual-caption">
-        This site&rsquo;s own system, as an example: three colours, one typeface, one button and one easing curve.
-      </p>
     </div>
   );
 }

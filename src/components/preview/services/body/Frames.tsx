@@ -37,7 +37,7 @@ function Phone({ shot, className = "" }: { shot: Shot; className?: string }) {
  * A site on a desktop with the same site on a phone in front of it. As it
  * scrolls through, the window rises into place and the phone overtakes it.
  */
-export function ShotDuo({ desktop, phone, caption }: { desktop: Shot; phone: Shot; caption: string }) {
+export function ShotDuo({ desktop, phone }: { desktop: Shot; phone: Shot }) {
   const root = useRef<HTMLElement>(null);
 
   useDrawing(root, ({ gsap, q, el }) => {
@@ -47,10 +47,6 @@ export function ShotDuo({ desktop, phone, caption }: { desktop: Shot; phone: Sho
     });
     tl.fromTo(q(".pv-svc-b-duo-desk"), { yPercent: 10, rotationX: 10 }, { yPercent: 0, rotationX: 0, duration: 1 }, 0)
       .fromTo(q(".pv-svc-b-duo-phone"), { yPercent: 34 }, { yPercent: 0, duration: 1 }, 0);
-    gsap.fromTo(q(".pv-svc-visual-caption"), { autoAlpha: 0, y: 16 }, {
-      autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out",
-      scrollTrigger: { trigger: q(".pv-svc-visual-caption")[0], start: "top 94%" },
-    });
   });
 
   return (
@@ -59,7 +55,6 @@ export function ShotDuo({ desktop, phone, caption }: { desktop: Shot; phone: Sho
         <Browser shot={desktop} className="pv-svc-b-duo-desk" />
         <Phone shot={phone} className="pv-svc-b-duo-phone" />
       </div>
-      <figcaption className="pv-svc-visual-caption">{caption}</figcaption>
     </figure>
   );
 }
@@ -68,7 +63,7 @@ export function ShotDuo({ desktop, phone, caption }: { desktop: Shot; phone: Sho
  * Several real sites dealt out like cards. They start stacked in the middle
  * and fan out to their places as the row scrolls up the screen.
  */
-export function ShotFan({ shots, caption }: { shots: Shot[]; caption: string }) {
+export function ShotFan({ shots }: { shots: Shot[] }) {
   const root = useRef<HTMLElement>(null);
 
   useDrawing(root, ({ gsap, q, el, wide }) => {
@@ -87,10 +82,6 @@ export function ShotFan({ shots, caption }: { shots: Shot[]; caption: string }) 
         tl.fromTo(card, { yPercent: 18 + i * 10, autoAlpha: 0.2 }, { yPercent: 0, autoAlpha: 1, duration: 0.6 }, i * 0.2);
       }
     });
-    gsap.fromTo(q(".pv-svc-visual-caption"), { autoAlpha: 0, y: 16 }, {
-      autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out",
-      scrollTrigger: { trigger: q(".pv-svc-visual-caption")[0], start: "top 94%" },
-    });
   });
 
   return (
@@ -102,13 +93,12 @@ export function ShotFan({ shots, caption }: { shots: Shot[]; caption: string }) 
           </div>
         ))}
       </div>
-      <figcaption className="pv-svc-visual-caption">{caption}</figcaption>
     </figure>
   );
 }
 
 /** Two phones side by side, one a little lower, drifting at different rates. */
-export function PhonePair({ shots, caption }: { shots: [Shot, Shot]; caption: string }) {
+export function PhonePair({ shots }: { shots: [Shot, Shot] }) {
   const root = useRef<HTMLElement>(null);
 
   useDrawing(root, ({ gsap, q, el }) => {
@@ -127,7 +117,6 @@ export function PhonePair({ shots, caption }: { shots: [Shot, Shot]; caption: st
         <Phone shot={shots[0]} />
         <Phone shot={shots[1]} />
       </div>
-      <figcaption className="pv-svc-visual-caption">{caption}</figcaption>
     </figure>
   );
 }

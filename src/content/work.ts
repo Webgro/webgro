@@ -8,7 +8,7 @@ export type CaseBlock =
       heading: string;
       body: string | string[];
       eyebrow?: string;
-      phone?: { src: string; alt: string; caption?: string; width?: "sm" | "md" | "lg" };
+      phone?: { src: string; alt: string; width?: "sm" | "md" | "lg" };
     }
   | { type: "stats"; items: Array<{ label: string; value: string }> }
   | { type: "heroStat"; value: string; label: string; eyebrow?: string; footnote?: string }
@@ -16,26 +16,24 @@ export type CaseBlock =
       type: "statGroup";
       items: Array<{ value: string; label: string; eyebrow?: string; footnote?: string }>;
     }
-  | { type: "image"; src: string; alt: string; caption?: string; full?: boolean; aspect?: string }
-  | { type: "product"; src: string; alt: string; aspect?: string; fit?: "contain" | "cover"; padded?: boolean; caption?: string }
+  | { type: "image"; src: string; alt: string; full?: boolean; aspect?: string }
+  | { type: "product"; src: string; alt: string; aspect?: string; fit?: "contain" | "cover"; padded?: boolean }
   | {
       type: "browser";
       src: string;
       alt: string;
       url: string;
       aspect?: string;
-      caption?: string;
       phone?: { src: string; alt: string };
     }
-  | { type: "phone"; src: string; alt: string; caption?: string; width?: "sm" | "md" | "lg" }
-  | { type: "uiMock"; name: string; caption?: string }
+  | { type: "phone"; src: string; alt: string; width?: "sm" | "md" | "lg" }
+  | { type: "uiMock"; name: string }
   | { type: "split"; left: { src: string; alt: string }; right: { src: string; alt: string } }
   | {
       type: "beforeAfter";
       before: { src: string; alt: string; label?: string };
       after: { src: string; alt: string; label?: string };
       aspect?: string;
-      caption?: string;
     }
   | {
       /** Side-by-side comparison for tall (portrait) page screenshots.
@@ -136,7 +134,6 @@ export const caseStudies: CaseStudy[] = [
         phone: {
           src: "/work/fun-cases/mobile-home.jpg",
           alt: "Fun Cases homepage in the new brand on mobile",
-          caption: "Mobile · the new brand",
         },
       },
       {
@@ -174,7 +171,6 @@ export const caseStudies: CaseStudy[] = [
         phone: {
           src: "/work/fun-cases/mobile-personaliser.jpg",
           alt: "Fun Cases personaliser editor on mobile",
-          caption: "Mobile · the personaliser",
         },
       },
       {
@@ -197,7 +193,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/fun-cases/live-collection.jpg",
         alt: "Fun Cases phone case collection page",
         url: "funcases.com/collections/phone-cases",
-        caption: "A collection page, with filters for design and phone model.",
         phone: {
           src: "/work/fun-cases/live-mobile-product.jpg",
           alt: "Fun Cases design-your-own product page on a phone",
@@ -241,7 +236,6 @@ export const caseStudies: CaseStudy[] = [
         phone: {
           src: "/work/fun-cases/email.png",
           alt: "Fun Cases email campaign on mobile",
-          caption: "Campaign email · mobile",
         },
       },
       {
@@ -275,7 +269,6 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "uiMock",
         name: "fun-cases-order-routing",
-        caption: "Order routing · live product view",
       },
       {
         type: "statGroup",
@@ -293,7 +286,6 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "uiMock",
         name: "fun-cases-ai-customer-service",
-        caption: "AI support queue · live product view",
       },
       {
         type: "section",
@@ -303,7 +295,6 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "uiMock",
         name: "fun-cases-ai-product-generator",
-        caption: "Product generator · design input to 5-product range",
       },
       {
         type: "section",
@@ -313,7 +304,6 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "uiMock",
         name: "fun-cases-ai-image-generator",
-        caption: "Image generator · mockup to lifestyle variants",
       },
       {
         type: "section",
@@ -327,7 +317,6 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "uiMock",
         name: "fun-cases-wms",
-        caption: "Stock System · movement history · live product view",
       },
       {
         type: "deliverables",
@@ -439,7 +428,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/gieves-and-hawkes/live-collection.jpg",
         alt: "Gieves & Hawkes AW26 collection page",
         url: "gievesandhawkes.com/collections/aw26-collection",
-        caption: "The AW26 collection page.",
         phone: {
           src: "/work/gieves-and-hawkes/live-mobile-product.jpg",
           alt: "Gieves & Hawkes product page on a phone",
@@ -450,7 +438,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/gieves-and-hawkes/live-product.jpg",
         alt: "Gieves & Hawkes product page for the Newton Donegal lambswool suit",
         url: "gievesandhawkes.com/products/newton-donegal-lambswool-suit-brown",
-        caption: "A product page, with separate jacket and trouser sizing.",
       },
       {
         type: "section",
@@ -463,7 +450,6 @@ export const caseStudies: CaseStudy[] = [
         phone: {
           src: "/work/gieves-and-hawkes/mobile.jpg",
           alt: "Gieves & Hawkes new theme on mobile",
-          caption: "Mobile · the new build",
         },
       },
       {
@@ -493,7 +479,6 @@ export const caseStudies: CaseStudy[] = [
         phone: {
           src: "/work/gieves-and-hawkes/mobile-2.jpg",
           alt: "Gieves & Hawkes product view on mobile",
-          caption: "Mobile · product view",
         },
       },
       {
@@ -608,7 +593,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/valuepet/live-product.jpg",
         alt: "ValuePet product page",
         url: "valuepet.ie/products/hills-science-plan-mature-adult-light-dry-cat-food-1-5kg-chicken",
-        caption: "A product page.",
         phone: {
           src: "/work/valuepet/live-mobile-product.jpg",
           alt: "ValuePet product page on a phone",
@@ -628,7 +612,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/valuepet/live-home-scroll.jpg",
         alt: "ValuePet homepage product rows and the Pet Hub prompt",
         url: "valuepet.ie",
-        caption: "The homepage, with the Pet Hub prompt in the corner.",
       },
       {
         type: "section",
@@ -777,7 +760,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/architectural-fx/live-products.jpg",
         alt: "Architectural FX products page with search and filters",
         url: "architecturalfx.co.uk/products",
-        caption: "The products page, with search and filters.",
         phone: {
           src: "/work/architectural-fx/live-mobile-products.jpg",
           alt: "Architectural FX products page on a phone",
@@ -796,7 +778,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/architectural-fx/live-product.jpg",
         alt: "Architectural FX product page for Integrate 2, with specifications and downloads",
         url: "architecturalfx.co.uk/product/integrate-2",
-        caption: "A product page.",
         phone: {
           src: "/work/architectural-fx/live-mobile-product.jpg",
           alt: "Architectural FX product page on a phone",
@@ -815,7 +796,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/architectural-fx/live-configurator.jpg",
         alt: "Architectural FX configurator for Integrate 2, with LED type options and a spec sheet download",
         url: "architecturalfx.co.uk/product/integrate-2",
-        caption: "The configurator on a product page.",
       },
       {
         type: "section",
@@ -934,7 +914,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/anyprint/live-categories.jpg",
         alt: "ANYPRINT homepage product categories",
         url: "any-print.co.uk",
-        caption: "Product categories on the homepage.",
         phone: {
           src: "/work/anyprint/live-mobile-home.jpg",
           alt: "ANYPRINT homepage on a phone",
@@ -945,7 +924,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/anyprint/live-product.jpg",
         alt: "ANYPRINT standard business cards product page",
         url: "any-print.co.uk/business-cards/standard",
-        caption: "A product page, with paper, finish and quantity options.",
       },
 
       // ── Chapter 02 ─────────────────────────────────────────────
@@ -1021,7 +999,6 @@ export const caseStudies: CaseStudy[] = [
         phone: {
           src: "/work/sublishop/mobile.jpg",
           alt: "Sublishop on mobile",
-          caption: "Mobile · B2B catalogue",
         },
       },
       {
@@ -1035,7 +1012,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/sublishop/live-collection.jpg",
         alt: "Sublishop latest arrivals collection page",
         url: "sublishop.co.uk/collections/latest-arrivals",
-        caption: "A collection page, with filters and trade pricing.",
         phone: {
           src: "/work/sublishop/live-mobile-home.jpg",
           alt: "Sublishop homepage on a phone",
@@ -1046,7 +1022,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/sublishop/live-product.jpg",
         alt: "Sublishop product page for a sublimation hoodie",
         url: "sublishop.co.uk/products/plain-white-adult-100-polyester-sublimation-hoodie",
-        caption: "A product page.",
       },
       {
         type: "statGroup",
@@ -1075,7 +1050,6 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "uiMock",
         name: "sublishop-inventory-planner",
-        caption: "AI inventory planner · live product view",
       },
       {
         type: "section",
@@ -1085,7 +1059,6 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "uiMock",
         name: "sublishop-competitor-tracker",
-        caption: "AI competitor tracker · live product view",
       },
       {
         type: "deliverables",
@@ -1187,7 +1160,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/twisted-tailor/live-collection.jpg",
         alt: "Twisted Tailor new drops collection page",
         url: "twistedtailor.com/collections/new-drops",
-        caption: "The new drops collection page.",
         phone: {
           src: "/work/twisted-tailor/live-mobile-product.jpg",
           alt: "Twisted Tailor product page on a phone",
@@ -1198,7 +1170,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/twisted-tailor/live-product.jpg",
         alt: "Twisted Tailor product page for the Fleet floral suit",
         url: "twistedtailor.com/products/fleet-skinny-fit-black-floral-suit",
-        caption: "A product page, with jacket and trouser sizes chosen separately.",
       },
       {
         type: "section",
@@ -1211,7 +1182,6 @@ export const caseStudies: CaseStudy[] = [
         phone: {
           src: "/work/twisted-tailor/mobile.jpg",
           alt: "MyFitt size drawer on mobile",
-          caption: "Mobile · MyFitt",
         },
       },
       {
@@ -1224,7 +1194,6 @@ export const caseStudies: CaseStudy[] = [
         phone: {
           src: "/work/twisted-tailor/mobile-2.jpg",
           alt: "Twisted Tailor basket showing jacket, trouser and TT suit carrier",
-          caption: "Mobile · basket",
         },
       },
 
@@ -1249,7 +1218,6 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "uiMock",
         name: "twisted-tailor-ai-support",
-        caption: "AI support agent · live product view",
       },
       {
         type: "deliverables",
@@ -1323,7 +1291,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/its-pouch/live-home.jpg",
         alt: "it's Pouch homepage",
         url: "itspouch.com",
-        caption: "The homepage.",
         phone: {
           src: "/work/its-pouch/live-mobile-home.jpg",
           alt: "it's Pouch homepage on a phone",
@@ -1334,7 +1301,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/its-pouch/live-collection.jpg",
         alt: "it's Pouch nicotine pouches collection page",
         url: "itspouch.com/collections/nicotine-pouches",
-        caption: "A collection page.",
       },
       {
         type: "deliverables",
@@ -1394,7 +1360,6 @@ export const caseStudies: CaseStudy[] = [
         phone: {
           src: "/work/origin-architectural/mobile.jpg",
           alt: "Origin Architectural on mobile",
-          caption: "Mobile · product page",
         },
       },
       {
@@ -1408,7 +1373,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/origin-architectural/live-collection.jpg",
         alt: "Origin Architectural preassembled posts collection page",
         url: "originarchitectural.co.uk/collections/preassembled-posts",
-        caption: "A collection page.",
         phone: {
           src: "/work/origin-architectural/live-mobile-product.jpg",
           alt: "Origin Architectural Juliet balcony product page on a phone",
@@ -1419,7 +1383,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/origin-architectural/live-product.jpg",
         alt: "Origin Architectural Skyforce Juliet balcony product page",
         url: "originarchitectural.co.uk/products/skyforce-juliet-balcony",
-        caption: "A product page.",
       },
       {
         type: "statGroup",
@@ -1477,7 +1440,6 @@ export const caseStudies: CaseStudy[] = [
           label: "AI retouched",
         },
         aspect: "aspect-[16/10]",
-        caption: "Drag the divider to compare",
       },
       {
         type: "deliverables",
@@ -1547,7 +1509,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/threadology/live-about.jpg",
         alt: "Threadology homepage section describing the business",
         url: "threadology.co.uk",
-        caption: "Further down the homepage.",
         phone: {
           src: "/work/threadology/live-mobile-home.jpg",
           alt: "Threadology homepage on a phone",
@@ -1621,7 +1582,6 @@ export const caseStudies: CaseStudy[] = [
         type: "phone",
         src: "/work/fandp-agency/live-mobile-home.jpg",
         alt: "F&P Agency homepage on a phone",
-        caption: "The homepage on a phone.",
         width: "md",
       },
       {
@@ -1688,14 +1648,12 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/little-muddy-boots/live-classes.jpg",
         alt: "Little Muddy Boots classes page",
         url: "littlemuddyboots.co.uk/classes",
-        caption: "The classes page.",
       },
       {
         type: "browser",
         src: "/work/little-muddy-boots/live-parties.jpg",
         alt: "Little Muddy Boots birthday parties page",
         url: "littlemuddyboots.co.uk/parties",
-        caption: "The birthday parties page.",
       },
       {
         type: "deliverables",
@@ -1761,7 +1719,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/space-4-u-self-storage/live-home-scroll.jpg",
         alt: "Space 4 U homepage personal and business storage sections",
         url: "space4uselfstorage.co.uk",
-        caption: "Personal and business storage on the homepage.",
         phone: {
           src: "/work/space-4-u-self-storage/live-mobile-home.jpg",
           alt: "Space 4 U homepage on a phone",
@@ -1772,7 +1729,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/space-4-u-self-storage/live-quote.jpg",
         alt: "Space 4 U quote request page",
         url: "space4uselfstorage.co.uk/get-a-quote",
-        caption: "The quote request page.",
       },
       {
         type: "deliverables",
@@ -1824,7 +1780,6 @@ export const caseStudies: CaseStudy[] = [
         phone: {
           src: "/work/paragon-freight/mobile.jpg",
           alt: "Paragon Freight on mobile",
-          caption: "Mobile · homepage",
         },
       },
       {
@@ -1838,7 +1793,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/paragon-freight/live-services.jpg",
         alt: "Paragon Freight services on the homepage",
         url: "paragonfreight.com",
-        caption: "Services on the homepage.",
         phone: {
           src: "/work/paragon-freight/live-mobile-home.jpg",
           alt: "Paragon Freight homepage on a phone",
@@ -1849,7 +1803,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/paragon-freight/live-customs.jpg",
         alt: "Paragon Freight customs clearance page",
         url: "paragonfreight.com/services/customs",
-        caption: "The customs clearance page.",
       },
       {
         type: "section",
@@ -1879,7 +1832,6 @@ export const caseStudies: CaseStudy[] = [
         alt: "Paragon Freight LinkedIn post",
         url: "linkedin.com/company/paragon-freight",
         aspect: "aspect-[4/3]",
-        caption: "Campaign post · LinkedIn",
       },
       {
         type: "deliverables",
@@ -1936,21 +1888,18 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/jbvc-foundation/live-founder.jpg",
         alt: "JBVC Foundation section about its founder, Johnson Beharry VC",
         url: "jbvcfoundation.org.uk",
-        caption: "The section about the foundation's founder.",
       },
       {
         type: "browser",
         src: "/work/jbvc-foundation/live-stats.jpg",
         alt: "JBVC Foundation section on why early prevention matters",
         url: "jbvcfoundation.org.uk",
-        caption: "Why early prevention matters.",
       },
       {
         type: "browser",
         src: "/work/jbvc-foundation/live-programmes.jpg",
         alt: "JBVC Foundation programmes, Project Alpha and The Regiment",
         url: "jbvcfoundation.org.uk",
-        caption: "The foundation's two programmes.",
       },
       {
         type: "deliverables",
@@ -2002,21 +1951,18 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/toughcode/live-capabilities.jpg",
         alt: "Tough Code capabilities: product development, precision production, regulatory support and commercial scale",
         url: "toughcode.com",
-        caption: "The capabilities section.",
       },
       {
         type: "browser",
         src: "/work/toughcode/live-about.jpg",
         alt: "Tough Code section about their UK manufacturing facility",
         url: "toughcode.com",
-        caption: "About the company and its facility.",
       },
       {
         type: "browser",
         src: "/work/toughcode/live-process.jpg",
         alt: "Tough Code six-step process and meeting call to action",
         url: "toughcode.com",
-        caption: "The six-step process.",
       },
       {
         type: "deliverables",

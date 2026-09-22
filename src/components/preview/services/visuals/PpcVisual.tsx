@@ -58,10 +58,6 @@ export function PpcVisual({ still = false }: { still?: boolean }) {
         <p className="pv-svc-ppc-note pv-svc-ppc-note--gap">This gap is what we manage, measured against your margins</p>
         <p className="pv-svc-ppc-note pv-svc-ppc-note--return">What comes back</p>
       </div>
-      <p className="pv-svc-visual-caption">
-        An illustration of spend and return, with no real figures. Realistic returns depend on your category, and
-        we benchmark them before you spend anything.
-      </p>
     </div>
   );
 }

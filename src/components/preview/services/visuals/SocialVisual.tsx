@@ -54,9 +54,6 @@ export function SocialVisual({ still = false }: { still?: boolean }) {
           ))}
         </div>
       </div>
-      <p className="pv-svc-visual-caption">
-        An example month. The posts are planned, designed and approved before the month starts.
-      </p>
     </div>
   );
 }

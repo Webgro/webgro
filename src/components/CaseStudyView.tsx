@@ -125,7 +125,6 @@ function Block({ block, accent, client }: { block: CaseBlock; accent: Accent; cl
                   <PhoneFrame
                     src={block.phone.src}
                     alt={block.phone.alt}
-                    caption={block.phone.caption}
                     width={block.phone.width ?? "xs"}
                   />
                 </div>
@@ -279,11 +278,6 @@ function Block({ block, accent, client }: { block: CaseBlock; accent: Accent; cl
               <Placeholder client={client} accent={accent} />
             )}
           </div>
-          {block.caption && (
-            <figcaption className="mx-auto mt-4 max-w-3xl text-center font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.22em] text-white/40">
-              {block.caption}
-            </figcaption>
-          )}
         </figure>
       );
     }
@@ -299,7 +293,6 @@ function Block({ block, accent, client }: { block: CaseBlock; accent: Accent; cl
               aspect={block.aspect}
               fit={block.fit}
               padded={block.padded}
-              caption={block.caption}
             />
           ) : (
             <div className={`relative ${block.aspect ?? "aspect-[4/3]"} overflow-hidden rounded-3xl border border-white/10`}>
@@ -318,7 +311,6 @@ function Block({ block, accent, client }: { block: CaseBlock; accent: Accent; cl
               alt={block.alt}
               url={block.url}
               aspect={block.aspect}
-              caption={block.caption}
               phone={block.phone}
             />
           ) : (
@@ -338,11 +330,6 @@ function Block({ block, accent, client }: { block: CaseBlock; accent: Accent; cl
                   <Placeholder client={client} accent={accent} />
                 </div>
               </div>
-              {block.caption && (
-                <figcaption className="mt-4 text-center font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.22em] text-white/40">
-                  {block.caption}
-                </figcaption>
-              )}
             </figure>
           )}
         </div>
@@ -352,11 +339,6 @@ function Block({ block, accent, client }: { block: CaseBlock; accent: Accent; cl
       return (
         <figure data-case-reveal className="mx-auto mt-20 max-w-6xl md:mt-28">
           <Mockup name={block.name as MockupName} />
-          {block.caption && (
-            <figcaption className="mt-4 text-center font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.22em] text-white/40">
-              {block.caption}
-            </figcaption>
-          )}
         </figure>
       );
 
@@ -366,7 +348,6 @@ function Block({ block, accent, client }: { block: CaseBlock; accent: Accent; cl
           <PhoneFrame
             src={block.src}
             alt={block.alt}
-            caption={block.caption}
             width={block.width}
           />
         </div>
@@ -379,7 +360,6 @@ function Block({ block, accent, client }: { block: CaseBlock; accent: Accent; cl
             before={block.before}
             after={block.after}
             aspect={block.aspect}
-            caption={block.caption}
           />
         </div>
       );

@@ -20,11 +20,6 @@
   }
 }
 
-.pv-svc-visual-caption {
-  margin-top: clamp(16px, 2vw, 26px); font-family: var(--pv-display); font-weight: 500; font-size: 0.95rem;
-  line-height: 1.4; color: var(--pv-muted); max-width: 62ch;
-}
-
 /* ── Hero (index and service pages) ───────────────────────────────────── */
 .pv-svc-hero { padding: clamp(116px, 17vh, 190px) var(--pv-pad) clamp(70px, 12vh, 150px); }
 .pv-svc-crumbs {
@@ -62,7 +57,6 @@
   .pv-svc-hero--split .pv-svc-hero-row { grid-template-columns: minmax(0, 1fr); justify-content: start; align-items: start; gap: 30px; }
   .pv-svc-hero--split .pv-svc-hero-intro { font-size: clamp(1.02rem, 1.15vw, 1.25rem); }
   .pv-svc-hero--split .pv-svc-hero-visual { min-width: 0; margin-top: 0; animation: none; }
-  .pv-svc-hero--split .pv-svc-visual-caption { font-size: 0.88rem; }
   .pv-svc-hero--split .pv-svc-spec-board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pv-svc-hero--split .pv-svc-spec-cell { min-height: clamp(150px, 14vw, 250px); }
   .pv-svc-hero--split .pv-svc-demo-screen { max-height: min(64vh, 620px); }
@@ -107,7 +101,6 @@
   animation: pvSvcDeckIn 0.7s ease both;
 }
 .pv-svc-deck-stage > * { width: 100%; }
-.pv-svc-deck .pv-svc-visual-caption { display: none; }
 .pv-svc-deck .pv-svc-web-devices { padding-bottom: 6%; }
 .pv-svc-deck .pv-svc-spec-board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .pv-svc-deck .pv-svc-demo-screen { max-height: none; -webkit-mask-image: none; mask-image: none; }

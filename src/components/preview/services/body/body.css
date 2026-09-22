@@ -61,7 +61,6 @@
 .pv-svc-b-pair-row { display: flex; justify-content: center; gap: 6%; padding-bottom: 8%; }
 .pv-svc-b-pair .pv-svc-b-phone { width: clamp(150px, 22vw, 300px); }
 .pv-svc-b-pair .pv-svc-b-phone:nth-child(2) { margin-top: 10%; }
-.pv-svc-b-pair .pv-svc-visual-caption { margin-inline: auto; text-align: center; }
 @media (max-width: 699px) { .pv-svc-b-pair .pv-svc-b-phone { width: 43%; } }
 
 /* ── Drawings: shared card ────────────────────────────────────────────── */
@@ -146,7 +145,6 @@
   .pv-svc-d-hub-chip { padding: 0; text-align: center; }
   .pv-svc-d-hub-drop { left: 50%; top: -30px; width: 3px; height: 30px; margin: 0 0 0 -1.5px; transform-origin: top; }
   .pv-svc-d-hub-chip strong { display: grid; place-items: center; height: 100%; padding: 1em 0.8em; }
-  .pv-svc-d-hub .pv-svc-visual-caption { margin-inline: auto; text-align: center; }
 }
 
 /* Marketing: revenue against margin. */

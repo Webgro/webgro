@@ -282,7 +282,6 @@
 .pv-about-sketch-walk { fill: none; stroke: var(--pv-blue); stroke-width: 5; stroke-linecap: round; }
 .pv-about-sketch-coil { fill: none; stroke: var(--pv-fg); stroke-width: 2; stroke-linejoin: round; }
 .pv-about-sketch-ends { display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--pv-muted); }
-.pv-about-sketch figcaption { max-width: 54ch; color: var(--pv-muted); }
 .pv-about-sketch-ends > span { display: inline-block; }
 /* Until Room.tsx has set the hidden stroke and label states (and added
    is-ready), keep the drawing out of sight so it never shows finished for a
@@ -297,7 +296,6 @@
 @media (min-width: 900px) {
   .pv-about-room-top { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6vw; align-items: end; }
   .pv-about-sketch { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 6vw; }
-  .pv-about-sketch figcaption { grid-column: 1 / -1; }
   .pv-about-address { grid-template-columns: 20vw minmax(0, 1fr) auto; column-gap: 0; align-items: end; }
 }
 

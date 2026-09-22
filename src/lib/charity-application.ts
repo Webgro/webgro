@@ -34,6 +34,8 @@ export type CharityApplicationBody = {
   email: string;
   phone?: string;
   agreed: true;
+  /** Newsletter opt-in. Off unless the person ticked the box. */
+  newsletter: boolean;
   /** Honeypot. Always empty for people. */
   hp?: string;
   turnstileToken?: string;

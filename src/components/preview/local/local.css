@@ -112,7 +112,6 @@
 .pv-local-ctxlabel.pv-local-at--above { transform: translate(-50%, calc(-100% - 6px)); }
 .pv-local-ctxlabel.pv-local-at--below { transform: translate(-50%, 6px); }
 .pv-local-ringlabel { transform: translate(-50%, -50%); padding: 2px 5px; background: var(--pv-bg); }
-.pv-local-mapnote { margin-top: 14px; max-width: 52ch; font-size: 0.86rem; line-height: 1.45; color: var(--pv-muted); }
 @media (min-width: 600px) {
   .pv-local-ctxlabel, .pv-local-ringlabel { display: block; }
 }
@@ -179,6 +178,7 @@
 /* ── Work ─────────────────────────────────────────────────────────────── */
 .pv-local-work { padding: clamp(90px, 16vh, 190px) var(--pv-pad) clamp(80px, 14vh, 160px); }
 .pv-local-work-head { display: grid; gap: 22px; margin-bottom: clamp(48px, 9vh, 100px); }
+.pv-local-work-shots { margin-bottom: clamp(60px, 10vh, 120px); }
 .pv-local-cards { display: grid; gap: clamp(56px, 9vh, 100px) 5vw; }
 .pv-local-card { display: grid; gap: clamp(22px, 2.6vw, 34px); align-content: start; min-width: 0; }
 .pv-local-card-media {

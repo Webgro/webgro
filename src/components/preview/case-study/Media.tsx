@@ -49,7 +49,7 @@ export function useHasImage(src: string) {
   return Boolean(src) && assets[src] !== null;
 }
 
-export function PhoneShot({ src, alt, caption, size = "md" }: { src: string; alt: string; caption?: string; size?: "sm" | "md" | "lg" }) {
+export function PhoneShot({ src, alt, size = "md" }: { src: string; alt: string; size?: "sm" | "md" | "lg" }) {
   return (
     <figure className={`pv-cs-phone pv-cs-phone--${size}`}>
       <div className="pv-cs-phone-body">
@@ -57,7 +57,6 @@ export function PhoneShot({ src, alt, caption, size = "md" }: { src: string; alt
           <Shot src={src} alt={alt} />
         </div>
       </div>
-      {caption && <figcaption className="pv-cs-caption">{caption}</figcaption>}
     </figure>
   );
 }
@@ -82,7 +81,6 @@ function BrowserShot({ block }: { block: Extract<MediaBlock, { type: "browser" }
         </div>
         {phone && <PhoneShot src={phone.src} alt={phone.alt} size="sm" />}
       </div>
-      {block.caption && <figcaption className="pv-cs-caption">{block.caption}</figcaption>}
     </figure>
   );
 }
@@ -105,7 +103,7 @@ export function Media({ block }: { block: MediaBlock }) {
     case "phone":
       return (
         <div className="pv-cs-media pv-cs-media--phone">
-          <PhoneShot src={block.src} alt={block.alt} caption={block.caption} size={block.width ?? "md"} />
+          <PhoneShot src={block.src} alt={block.alt} size={block.width ?? "md"} />
         </div>
       );
 
@@ -115,7 +113,6 @@ export function Media({ block }: { block: MediaBlock }) {
           <div className="pv-cs-mock-panel">
             <Mockup name={block.name as MockupName} />
           </div>
-          {block.caption && <figcaption className="pv-cs-caption">{block.caption}</figcaption>}
         </figure>
       );
 
@@ -123,7 +120,6 @@ export function Media({ block }: { block: MediaBlock }) {
       return (
         <figure className={`pv-cs-media pv-cs-media--image${block.full ? " is-full" : ""}`}>
           <GlImage src={block.src} alt={block.alt} ratio={aspectOf(block.aspect, "16 / 9")} />
-          {block.caption && <figcaption className="pv-cs-caption">{block.caption}</figcaption>}
         </figure>
       );
 
@@ -137,7 +133,6 @@ export function Media({ block }: { block: MediaBlock }) {
           >
             <Shot src={block.src} alt={block.alt} />
           </div>
-          {block.caption && <figcaption className="pv-cs-caption">{block.caption}</figcaption>}
         </figure>
       );
     }

@@ -33,6 +33,16 @@ export type LocalCase = {
 
 export type LocalService = { name: string; price: string; body: string; path: string };
 
+/**
+ * Two real screenshots of one of the clients the page names, shown in a
+ * browser window with the same site on a phone in front of it. Sources and
+ * alt text match the case study in src/content/work.ts.
+ */
+export type LocalShots = {
+  desktop: { src: string; alt: string; url: string; w: number; h: number };
+  phone: { src: string; alt: string; w: number; h: number };
+};
+
 export type Town = {
   slug: TownSlug;
   name: string;
@@ -44,7 +54,7 @@ export type Town = {
   hero: { lines: string[]; brush: string; intro: string; facts: Fact[] };
   travel: { heading: string; body: string[] };
   business: { label: string; heading: string; body: string[]; services: LocalService[] };
-  work: { heading: string; intro: string; cases: LocalCase[] };
+  work: { heading: string; intro: string; cases: LocalCase[]; shots: LocalShots };
   /** Name of a featured Google review in reviewData.ts. Bracknell shows the full reviews section instead. */
   review?: string;
   faqs: Faq[];
@@ -128,6 +138,10 @@ export const towns: Town[] = [
     },
     work: {
       heading: "Work for Bracknell businesses",
+      shots: {
+        desktop: { src: "/work/anyprint/live-categories.jpg", alt: "ANYPRINT homepage product categories", url: "any-print.co.uk", w: 1440, h: 950 },
+        phone: { src: "/work/anyprint/live-mobile-home.jpg", alt: "ANYPRINT homepage on a phone", w: 700, h: 1515 },
+      },
       intro:
         "These clients are based in Bracknell or have sites here. We also work with businesses across the UK, including Gieves & Hawkes on Savile Row and Twisted Tailor in London.",
       cases: [
@@ -224,6 +238,10 @@ export const towns: Town[] = [
     },
     work: {
       heading: "B2B and service work",
+      shots: {
+        desktop: { src: "/work/origin-architectural/live-collection.jpg", alt: "Origin Architectural preassembled posts collection page", url: "originarchitectural.co.uk/collections/preassembled-posts", w: 1440, h: 950 },
+        phone: { src: "/work/origin-architectural/live-mobile-product.jpg", alt: "Origin Architectural Juliet balcony product page on a phone", w: 700, h: 1515 },
+      },
       intro:
         "None of these clients are based in Reading, though Paragon Freight have an office in Bracknell. We've picked them because they sell to other businesses, like many firms in the town.",
       cases: [
@@ -314,6 +332,10 @@ export const towns: Town[] = [
     },
     work: {
       heading: "Work for Wokingham businesses",
+      shots: {
+        desktop: { src: "/work/architectural-fx/live-products.jpg", alt: "Architectural FX products page with search and filters", url: "architecturalfx.co.uk/products", w: 1440, h: 950 },
+        phone: { src: "/work/architectural-fx/live-mobile-product.jpg", alt: "Architectural FX product page on a phone", w: 700, h: 1515 },
+      },
       intro:
         "Architectural FX are based on Molly Millars Lane in Wokingham, and Little Muddy Boots run classes in the town. The other two projects are for businesses with similar needs: clear information and an easy way to book or enquire.",
       cases: [
@@ -409,6 +431,10 @@ export const towns: Town[] = [
     },
     work: {
       heading: "Work in and around Windsor",
+      shots: {
+        desktop: { src: "/work/space-4-u-self-storage/live-quote.jpg", alt: "Space 4 U quote request page", url: "space4uselfstorage.co.uk/get-a-quote", w: 1440, h: 950 },
+        phone: { src: "/work/space-4-u-self-storage/live-mobile-home.jpg", alt: "Space 4 U homepage on a phone", w: 700, h: 1515 },
+      },
       intro:
         "Space 4 U and F&P Agency both work in Windsor. We've included Gieves & Hawkes for the booking work.",
       cases: [
@@ -495,6 +521,10 @@ export const towns: Town[] = [
     },
     work: {
       heading: "Work in Maidenhead and beyond",
+      shots: {
+        desktop: { src: "/work/little-muddy-boots/live-classes.jpg", alt: "Little Muddy Boots classes page", url: "littlemuddyboots.co.uk/classes", w: 1440, h: 950 },
+        phone: { src: "/work/little-muddy-boots/mobile.jpg", alt: "Little Muddy Boots on mobile", w: 1290, h: 2795 },
+      },
       intro:
         "Little Muddy Boots and F&P Agency both work in Maidenhead. We've added Fun Cases because we run their paid ads and email marketing.",
       cases: [
@@ -567,6 +597,10 @@ export const berkshire = {
   },
   work: {
     heading: "Work in Berkshire",
+    shots: {
+      desktop: { src: "/work/paragon-freight/live-services.jpg", alt: "Paragon Freight services on the homepage", url: "paragonfreight.com", w: 1440, h: 950 },
+      phone: { src: "/work/paragon-freight/live-mobile-home.jpg", alt: "Paragon Freight homepage on a phone", w: 700, h: 1515 },
+    },
     intro:
       "These clients are based in Berkshire or have sites here. We also work with clients elsewhere in the UK and abroad, including Gieves & Hawkes, Twisted Tailor and ValuePet in Ireland.",
     cases: [

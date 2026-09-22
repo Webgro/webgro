@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { BrushStroke } from "../Brush";
 import { pv } from "../links";
+import { revealConfirmation } from "./confirmation";
 import { EMAIL, EMAIL_HREF, PHONE_HREF, PHONE_SHORT } from "./content";
 import { EnquiryFlow } from "./EnquiryFlow";
 import { ReceptionistCall } from "./ReceptionistCall";
@@ -17,6 +18,7 @@ export function ContactTop() {
   const [sentName, setSentName] = useState<string | null>(null);
   const [settled, setSettled] = useState(false);
   const doneTitle = useRef<HTMLHeadingElement>(null);
+  const doneSection = useRef<HTMLElement>(null);
   const sent = sentName !== null;
 
   const handleSent = useCallback((firstName: string) => setSentName(firstName), []);
@@ -24,25 +26,19 @@ export function ContactTop() {
   useEffect(() => {
     if (!sent) return;
     // The section has just shrunk from a long form to one screen, so bring the
-    // page back to the top of it, then let the shell re-read the page colour.
-    const toTop = () => window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-    toTop();
-    const raf = requestAnimationFrame(() => {
-      if (window.scrollY > 4) toTop();
-      window.dispatchEvent(new Event("scroll"));
-    });
-    doneTitle.current?.focus({ preventScroll: true });
+    // page back to the top of it and put focus on the confirmation.
+    const cancel = revealConfirmation(doneSection.current, doneTitle.current);
     // Once the dome has risen, the page colour can switch at its usual pace.
     const timer = window.setTimeout(() => setSettled(true), 1600);
     return () => {
-      cancelAnimationFrame(raf);
+      cancel();
       window.clearTimeout(timer);
     };
   }, [sent]);
 
   if (sent) {
     return (
-      <section className={`pv-contact-top is-done${settled ? " is-settled" : ""}`} data-pv-theme="blue">
+      <section className={`pv-contact-top is-done${settled ? " is-settled" : ""}`} data-pv-theme="blue" ref={doneSection}>
         <div className="pv-contact-done">
           <div className="pv-contact-done-fill" aria-hidden="true" />
           <div className="pv-contact-done-inner">
@@ -99,13 +95,6 @@ export function ContactTop() {
         <EnquiryFlow onSent={handleSent} />
 
         <aside className="pv-contact-aside" aria-label="Notes on the form">
-          <div className="pv-contact-note">
-            <p className="pv-label">How the questions work</p>
-            <p>
-              The first two questions are the same for everyone. The rest depend on your answers, and you can skip
-              any of them. We use AI to choose them, and a person at the studio reads every enquiry.
-            </p>
-          </div>
           <div className="pv-contact-note">
             <p className="pv-label">Not sure what you need?</p>
             <p>
