@@ -91,7 +91,8 @@ export default function PrivacyDoc() {
       <LegalP>
         If you sign up for our newsletter, we collect your email address
         and use it to send you our newsletter: news from Webgro, new
-        releases and articles from The Gro. Signups are
+        releases and articles from The Gro. You can also sign up by ticking the
+        box when you send an enquiry or a charity application. Signups are
         managed in Klaviyo. Every email includes a link to unsubscribe, and
         you can also ask us to remove you at any time.
       </LegalP>

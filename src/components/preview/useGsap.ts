@@ -36,18 +36,10 @@ export function useGsap(
       const ctx = gsap.context(() => {
         extra = setup({ gsap, ScrollTrigger: st.ScrollTrigger });
       }, scope.current ?? undefined);
-      // Scroll triggers are measured as each scene sets up, before late images,
-      // fonts and mockups have changed the page height. Stale positions leave a
-      // reveal waiting for a scroll position that never arrives, so its element
-      // stays hidden. Re-measure once everything has settled.
-      const refresh = () => st.ScrollTrigger.refresh();
-      const timers = [400, 1200, 2500].map((ms) => window.setTimeout(refresh, ms));
-      if (document.readyState !== "complete") window.addEventListener("load", refresh, { once: true });
-      void document.fonts?.ready?.then(refresh).catch(() => undefined);
-
+      // ScrollTrigger already re-measures on load and resize. Don't add extra
+      // refreshes here: each one replays entrance animations that have a
+      // trigger, which made the masthead on The Gro animate in three times.
       revert = () => {
-        timers.forEach(window.clearTimeout);
-        window.removeEventListener("load", refresh);
         if (typeof extra === "function") extra();
         ctx.revert();
       };
