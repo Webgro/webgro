@@ -55,7 +55,8 @@ export const LIMITS = {
   question: 300,
   hint: 300,
   option: 80,
-  options: 6,
+  /** Most options a question may carry. The service question has 11 chips. */
+  options: 14,
   /** Follow-up questions after the two fixed ones. */
   followUps: 5,
   /** The two fixed steps plus the follow-ups. */
