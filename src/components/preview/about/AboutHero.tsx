@@ -7,7 +7,8 @@ import { hero, team } from "./content";
 import { Lines } from "./Lines";
 
 /** Only the people with a portrait go in the hero. */
-const faces = team.filter((m) => m.photo);
+/** The fan runs the other way to the team list below, which is how the owner wants it. */
+const faces = team.filter((m) => m.photo).slice().reverse();
 const roleOf = (role: string) => role.split(",")[0];
 
 export function AboutHero() {

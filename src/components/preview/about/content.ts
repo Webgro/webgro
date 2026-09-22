@@ -105,18 +105,11 @@ export const teamIntro = {
 
 export const team: Person[] = [
   {
-    name: "Kira",
-    role: "Senior designer",
-    bio: "Kira works on brand identity, interface design and brand systems.",
-    photo: "/preview/team-kira.jpg",
-    photoSize: 800,
-  },
-  {
-    name: "Matt",
-    role: "Senior developer",
-    bio: "Matt leads our custom Shopify and WordPress builds.",
-    photo: "/preview/team-matt.jpg",
-    photoSize: 800,
+    name: "Michael",
+    role: "Co-founder and CEO, here since 2012",
+    bio: "Michael looks after strategy, platform choices and our AI work.",
+    photo: "/preview/team-michael.jpg",
+    photoSize: 480,
   },
   {
     name: "Lily",
@@ -126,11 +119,18 @@ export const team: Person[] = [
     photoSize: 480,
   },
   {
-    name: "Michael",
-    role: "Co-founder and CEO, here since 2012",
-    bio: "Michael looks after strategy, platform choices and our AI work.",
-    photo: "/preview/team-michael.jpg",
-    photoSize: 480,
+    name: "Matt",
+    role: "Senior developer",
+    bio: "Matt leads our custom Shopify and WordPress builds.",
+    photo: "/preview/team-matt.jpg",
+    photoSize: 800,
+  },
+  {
+    name: "Kira",
+    role: "Senior designer",
+    bio: "Kira works on brand identity, interface design and brand systems.",
+    photo: "/preview/team-kira.jpg",
+    photoSize: 800,
   },
 ];
 

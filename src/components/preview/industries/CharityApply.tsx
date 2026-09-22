@@ -178,9 +178,11 @@ export function ApplyForm({ copy }: { copy: ApplyCopy }) {
             y: 24, autoAlpha: 0, duration: 0.8, ease: "power3.out", stagger: 0.07, clearProps: "transform,opacity,visibility",
           }, 0.2);
       });
+      // The send button must never be left hidden by a trigger that doesn't
+      // fire, so this reveal moves it but never hides it.
       reveals.push(gsap.from(q(".pv-ind-apply-foot > *"), {
-        y: 20, autoAlpha: 0, duration: 0.8, ease: "power3.out", stagger: 0.07,
-        scrollTrigger: { trigger: q(".pv-ind-apply-foot")[0], start: "top 90%" },
+        y: 20, duration: 0.8, ease: "power3.out", stagger: 0.07,
+        scrollTrigger: { trigger: q(".pv-ind-apply-foot")[0], start: "top 95%", once: true },
       }));
       return () => { reveal.current = null; };
     });

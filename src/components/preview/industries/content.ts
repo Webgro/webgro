@@ -387,14 +387,14 @@ export const industries: Industry[] = [
     meta: {
       title: "Charity Websites and Free Website Applications | Webgro",
       description:
-        "We sometimes build a charity's website for free. Apply online, or work with us at normal rates: WordPress sites from £4,000, care plans from £80 a month.",
+        "We build one charity website for free each month, chosen from applications. Or work with us at normal rates: WordPress sites from £4,000, care plans from £80 a month.",
     },
-    short: "A WordPress site for the JBVC Foundation. We sometimes build a charity's website for free, and charities can apply.",
+    short: "A WordPress site for the JBVC Foundation. We build one charity website for free each month, and charities can apply.",
     hero: {
       lines: ["Websites for", "charities"],
       brush: "charities",
       intro:
-        "We designed and built the website for the JBVC Foundation, a charity that protects vulnerable children from criminal exploitation and violence. We sometimes build a charity's website for free, and any charity can apply using the application form.",
+        "We designed and built the website for the JBVC Foundation, a charity that protects vulnerable children from criminal exploitation and violence. We take on one free charity project a month, chosen against our own criteria, and any charity can apply using the application form.",
       primary: { label: "Apply for a free website", href: "#apply" },
       secondary: { label: "How it works", href: "#how" },
     },
@@ -411,7 +411,7 @@ export const industries: Industry[] = [
       how: {
         label: "Free charity websites",
         heading: "How it works",
-        intro: "We sometimes build a charity's website for free. We can't do this for every charity that applies.",
+        intro: "We build one charity website for free each month. We choose it from the applications we hold, against our own criteria, so there is usually a wait.",
         steps: [
           {
             title: "Apply",
@@ -419,11 +419,11 @@ export const industries: Industry[] = [
           },
           {
             title: "We read every application",
-            body: "Applications are reviewed by the Webgro team. It may take us a little while to reply.",
+            body: "The team reviews each application against our criteria. Applications we can help with go on the waiting list, so it may take us a little while to reply.",
           },
           {
-            title: "We get in touch if we can help",
-            body: "If we can help, we'll contact you to talk about what the charity needs.",
+            title: "We get in touch when your turn comes",
+            body: "We take on one charity project a month. When we reach your application, we'll contact you to talk about what the charity needs.",
           },
         ],
       },
@@ -434,7 +434,7 @@ export const industries: Industry[] = [
           "A clear need: what the website has to do, and who it's for.",
           "A clear idea of the difference a website would make to the charity's work.",
         ],
-        note: "Charities we can't build a free website for can still work with us at our normal rates. WordPress websites start from £4,000, and care plans from £80 a month.",
+        note: "Because we only take one charity project a month, most applications wait. Charities that would rather not wait can work with us at our normal rates. WordPress websites start from £4,000, and care plans from £80 a month.",
       },
       form: {
         heading: "Apply for a free charity website",
@@ -446,11 +446,11 @@ export const industries: Industry[] = [
       { name: "Care plans", price: "From £80 a month", body: "Monthly updates, backups, uptime monitoring and time for changes.", path: "/care-plans" },
     ],
     servicesLede:
-      "These are our normal prices, for charities we can't build a free website for. We scope every project before we quote, and the first 30-minute call is free.",
+      "These are our normal prices, for charities that would rather not wait for a free place. We scope every project before we quote, and the first 30-minute call is free.",
     faqs: [
       {
         q: "Do you build charity websites for free?",
-        a: "Sometimes. We build some charities' websites for free, but we can't do it for every charity that applies. If we can help, we'll get in touch to talk about what the charity needs.",
+        a: "Yes, for one charity a month. We choose it from the applications we hold, against our own criteria, so most charities wait a while and we can't take on every application. If we can help, we'll get in touch to talk about what the charity needs.",
       },
       {
         q: "What counts as a charity?",
