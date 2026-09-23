@@ -346,6 +346,11 @@
 
 @media (max-width: 899px) {
   .pv-jrnl-article { --pv-jrnl-cap: 16svh; }
+  /* A phone keeps the full gap under the photograph in the scene, so the paper
+     dome has ink of its own to rise through and stops short of the picture.
+     The wide layout closes the gap instead: there the paper rides over the foot
+     of the picture on purpose. See the handover in JournalArticle.tsx. */
+  .pv-jrnl-article.is-scene .pv-jrnl-hero { padding-bottom: calc(var(--pv-jrnl-cap) + clamp(26px, 4.5svh, 48px)); }
 }
 @media (min-width: 900px) {
   .pv-jrnl-hero-title { font-size: min(5.4vw, 6rem); }

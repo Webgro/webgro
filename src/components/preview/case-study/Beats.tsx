@@ -279,6 +279,7 @@ function WipeBeat({ block }: { block: BlockOf<"beforeAfter"> }) {
           </div>
           <span className="pv-cs-wipe-line" aria-hidden="true" />
         </div>
+        <p className="pv-cs-wipe-hint">Scroll to compare.</p>
       </div>
     </figure>
   );

@@ -97,27 +97,27 @@ export const caseNotes: Record<string, { client: string; img: string; w: number;
   },
   "origin-architectural": {
     client: "Origin Architectural",
-    img: "/preview/tile-origin.jpg", w: 960, h: 633,
+    img: "/preview/work-origin-architectural-lg.jpg", w: 1400, h: 930,
     line: "A move from WordPress to Shopify with no loss of rankings, plus an AI pipeline that retouches customers' installation photos.",
   },
   "its-pouch": {
     client: "it's Pouch",
-    img: "/preview/tile-its-pouch.jpg", w: 960, h: 633,
+    img: "/preview/work-its-pouch-lg.jpg", w: 1280, h: 955,
     line: "Shopify development for a new product line, and a set of order and lifecycle emails designed to match the brand.",
   },
   threadology: {
     client: "Threadology",
-    img: "/preview/tile-threadology.jpg", w: 960, h: 633,
+    img: "/preview/work-threadology-lg.jpg", w: 1400, h: 788,
     line: "A fast, phone-first WordPress site the team can edit themselves, with no custom CMS and no headless setup.",
   },
   "fandp-agency": {
     client: "F&P Agency",
-    img: "/preview/tile-fandp.jpg", w: 960, h: 633,
+    img: "/preview/work-fandp-agency-lg.jpg", w: 1400, h: 932,
     line: "A WordPress redesign that moved an estate agency's site upmarket to match their rebrand.",
   },
   "paragon-freight": {
     client: "Paragon Freight",
-    img: "/preview/tile-paragon.jpg", w: 960, h: 633,
+    img: "/preview/work-paragon-freight-lg.jpg", w: 1400, h: 932,
     line: "A WordPress redesign for a freight business, plus ongoing social media management.",
   },
 };

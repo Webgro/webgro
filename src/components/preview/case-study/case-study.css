@@ -250,6 +250,9 @@
 .pv-cs-wipe-pane--after .pv-cs-wipe-tag { left: auto; right: 12px; background: var(--pv-blue); color: #fff; }
 .pv-cs-wipe-line { position: absolute; inset: 0; visibility: hidden; pointer-events: none; }
 .pv-cs-wipe-line::before { content: ""; position: absolute; top: 0; bottom: 0; left: -1px; width: 2px; background: var(--pv-blue); box-shadow: 0 0 18px var(--pv-blue); }
+/* Not a caption: it tells people the two shots move as they scroll. Only shown
+   once the scene is pinned, which is when scrolling does the comparing. */
+.pv-cs-wipe-hint { display: none; margin: 14px 0 0; font-size: 0.9rem; line-height: 1.4; color: var(--pv-muted); }
 @media (min-width: 700px) { .pv-cs-wipe-frame { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .pv-cs-wipe.is-scene .pv-cs-wipe-stage { min-height: 100svh; box-sizing: border-box; align-content: center; padding: 92px 0 84px; }
 .pv-cs-wipe.is-scene .pv-cs-wipe-frame {
@@ -257,6 +260,7 @@
   width: min(100%, calc((100svh - 270px) * (var(--cs-ar, 16 / 10)))); border-radius: clamp(12px, 1.4vw, 22px);
 }
 .pv-cs-wipe.is-scene .pv-cs-wipe-pane { position: absolute; inset: 0; aspect-ratio: auto; border-radius: 0; }
+.pv-cs-wipe.is-scene .pv-cs-wipe-hint { display: block; width: min(100%, calc((100svh - 270px) * (var(--cs-ar, 16 / 10)))); margin-inline: auto; }
 
 /* ── Before / after, full pages scrolling together ────────────────────── */
 .pv-cs-sbs { margin: 0; }

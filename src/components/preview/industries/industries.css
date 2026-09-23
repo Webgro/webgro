@@ -300,8 +300,9 @@
   transition: clip-path 0.6s var(--pv-ease), visibility 0s linear 0s;
 }
 .pv-ind-apply-check { min-height: 44px; }
-.pv-ind-apply-check label { display: inline-flex; align-items: center; min-height: 44px; }
-.pv-ind-apply .pv-contact-agree label a { display: inline; }
+/* Normal inline flow, so the text and the policy link keep the space between
+   them. A flex label turns them into separate blocks with no space. */
+.pv-ind-apply-check label { display: block; min-height: 44px; padding-block: 0.55rem; }
 .pv-ind-apply-foot { display: grid; gap: 22px; justify-items: start; min-width: 0; }
 .pv-ind-apply-foot > * { max-width: 100%; }
 .pv-ind-apply-done {

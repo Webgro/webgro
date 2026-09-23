@@ -21,30 +21,36 @@ export const sceneCaptions = [
 export const sceneFinalCaption =
   "This is the Gieves & Hawkes collection page. Around it are some of the other sites we've built since 2012.";
 
+/* `icon` picks the line drawing in Routes.tsx. */
 export const routes = [
   {
     problem: "A new Shopify store, or a rebuild of the one you have",
     answer: "Shopify websites",
+    icon: "bag",
     href: "/services/websites",
   },
   {
     problem: "A WordPress website that's quicker and easier to update",
     answer: "WordPress websites",
+    icon: "window",
     href: "/services/websites",
   },
   {
     problem: "More visitors from Google, and more sales from email and paid ads",
     answer: "SEO and marketing",
+    icon: "magnifier",
     href: "/services/seo",
   },
   {
     problem: "Automating the repetitive work your team does by hand",
     answer: "Automation and AI",
+    icon: "cog",
     href: "/services/automation-ai",
   },
   {
     problem: "An audit of your site and setup, and advice on what to fix first",
     answer: "Consultancy",
+    icon: "clipboard",
     href: "/services/consultancy",
   },
 ];

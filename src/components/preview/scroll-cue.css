@@ -1,0 +1,97 @@
+/* The site-wide scroll cue (ScrollCue.tsx): a reading rail at the right edge
+   and the idle hint under the first screen. Two hairlines and a little blue,
+   nothing else. Both are decorative and inert. */
+
+/* ── The rail ─────────────────────────────────────────────────────────── */
+/* Short and centred on purpose: it stays out of the nav at the top and the
+   cookie banner at the bottom, and it sits inside the page gutter, so it never
+   covers anything. Colour comes from the section the shell is showing, so it
+   reads on paper and on ink. */
+.pv-cue-rail {
+  position: fixed;
+  z-index: 55;
+  right: clamp(7px, 1vw, 18px);
+  top: 28vh;
+  bottom: 28vh;
+  width: 1px;
+  background: color-mix(in srgb, var(--pv-fg) 15%, transparent);
+  opacity: 0;
+  transition: opacity 0.7s var(--pv-ease), background-color 0.6s ease;
+  pointer-events: none;
+}
+.pv-cue-rail.is-live { opacity: 1; }
+.pv-cue-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--pv-blue);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: background-color 0.6s ease;
+}
+
+/* The closing panel is blue, where a blue line would disappear. */
+.pv[data-theme="blue"] .pv-cue-rail { background: rgba(255, 255, 255, 0.3); }
+.pv[data-theme="blue"] .pv-cue-fill { background: #fff; }
+
+/* ── The idle hint ────────────────────────────────────────────────────── */
+.pv-cue-hint {
+  position: fixed;
+  z-index: 55;
+  left: 50%;
+  bottom: clamp(18px, 4.5vh, 44px);
+  transform: translate(-50%, 0);
+  pointer-events: none;
+  animation: pvCueIn 0.6s var(--pv-ease) both;
+}
+.pv-cue-hint[data-state="out"] { animation: pvCueOut 0.45s ease both; }
+
+.pv-cue-hint-line {
+  display: block;
+  position: relative;
+  width: 1px;
+  height: clamp(30px, 4.4vh, 42px);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--pv-fg) 22%, transparent);
+}
+/* One short blue run down the line, twice, and then it rests as a plain mark.
+   No loop: two passes is enough to say which way the page goes. */
+.pv-cue-hint-line > span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 46%;
+  background: var(--pv-blue);
+  animation: pvCueDrop 1.7s var(--pv-ease) 0.35s 2 both;
+}
+
+@keyframes pvCueIn {
+  from { opacity: 0; transform: translate(-50%, -7px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+@keyframes pvCueOut {
+  from { opacity: 1; transform: translate(-50%, 0); }
+  to { opacity: 0; transform: translate(-50%, 5px); }
+}
+@keyframes pvCueDrop {
+  0% { transform: translateY(-115%); }
+  72%, 100% { transform: translateY(232%); }
+}
+
+@media (max-width: 899px) {
+  .pv-cue-rail { top: 25svh; bottom: 25svh; }
+  .pv-cue-hint { bottom: clamp(16px, 3.4svh, 34px); }
+}
+
+/* Reduced motion gets the rail and no hint. The rail is written straight from
+   the scroll position, so it has no motion of its own to turn off. */
+@media (prefers-reduced-motion: reduce) {
+  .pv-cue-hint { display: none; }
+  .pv-cue-rail { transition: none; }
+}
+
+/* Printing a page should not print two hairlines. */
+@media print {
+  .pv-cue-rail, .pv-cue-hint { display: none; }
+}

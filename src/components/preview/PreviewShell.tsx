@@ -5,6 +5,7 @@ import { BrushFilter } from "./Brush";
 import { PreviewFooter } from "./PreviewFooter";
 import { PreviewCookieBanner } from "./PreviewCookieBanner";
 import { PreviewNav } from "./PreviewNav";
+import { ScrollCue } from "./ScrollCue";
 import "./preview.css";
 
 /**
@@ -56,6 +57,7 @@ export function PreviewShell({
       <main>{children}</main>
       <PreviewFooter />
       <PreviewCookieBanner />
+      <ScrollCue />
     </div>
   );
 }

@@ -273,6 +273,9 @@
 .pv-svc-reason-rule, .pv-svc-branch-rule, .pv-svc-platform-rule, .pv-svc-figure-rule, .pv-svc-pair-rule, .pv-svc-faq-rule {
   position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--pv-rule); transform-origin: left;
 }
+.pv-svc-reason-head { display: grid; justify-items: start; align-content: start; gap: clamp(12px, 1.1vw, 18px); }
+.pv-svc-reason-icon { display: block; width: clamp(28px, 2.4vw, 36px); color: var(--pv-blue-text); }
+.pv-svc-reason-icon svg { display: block; width: 100%; height: auto; fill: none; stroke: currentColor; stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; }
 .pv-svc-reason h3 { font: 700 clamp(1.4rem, 2.1vw, 2rem) / 1.1 var(--pv-display); letter-spacing: -0.03em; }
 .pv-svc-reason p { color: var(--pv-muted); max-width: 46ch; }
 @media (min-width: 700px) { .pv-svc-reason { grid-template-columns: 1fr 1.15fr; gap: 4vw; } }

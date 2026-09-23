@@ -63,20 +63,8 @@ export function JournalArticle({
     mm.add(SCENE_QUERY, () => {
       el.classList.add("is-scene");
       const hero = q(".pv-jrnl-hero")[0] as HTMLElement;
-      const cap = q(".pv-jrnl-sheet-cap")[0] as HTMLElement;
       const media = q(".pv-jrnl-hero-media")[0] as HTMLElement;
 
-      // The handover. The paper rises over the foot of the photograph as a dome
-      // and flattens into the top edge of the sheet, while the photograph drags
-      // behind so the paper overtakes it.
-      const handover = { trigger: cap, start: "top bottom", end: "top 30%", scrub: 0.4 };
-      gsap.fromTo(cap, { clipPath: "ellipse(58% 0% at 50% 100%)" }, {
-        clipPath: "ellipse(170% 145% at 50% 100%)", ease: "none", scrollTrigger: { ...handover },
-      });
-      gsap.fromTo(media, { y: 0 }, {
-        y: () => cap.offsetHeight * 0.4, ease: "none",
-        scrollTrigger: { ...handover, invalidateOnRefresh: true },
-      });
       gsap.fromTo(q(".pv-jrnl-hero-copy"), { autoAlpha: 1, yPercent: 0 }, {
         autoAlpha: 0.12, yPercent: -7, ease: "power1.in",
         scrollTrigger: { trigger: hero, start: "top top", end: "+=75%", scrub: 0.4 },
@@ -114,6 +102,50 @@ export function JournalArticle({
         planes?.destroy();
         el.classList.remove("is-scene");
       };
+    });
+
+    // The handover, where the sheet of paper takes the page over from the
+    // photograph. Same idea at both sizes, different geometry: a wide screen
+    // has room for the paper to ride up over the foot of the picture, a phone
+    // does not, so there the picture is released instead of cropped.
+    mm.add(`${SCENE_QUERY} and (min-width: 900px)`, () => {
+      const cap = q(".pv-jrnl-sheet-cap")[0] as HTMLElement;
+      const media = q(".pv-jrnl-hero-media")[0] as HTMLElement;
+
+      // The paper rises over the foot of the photograph as a dome and flattens
+      // into the top edge of the sheet, while the photograph drags behind so
+      // the paper overtakes it.
+      const handover = { trigger: cap, start: "top bottom", end: "top 30%", scrub: 0.4 };
+      gsap.fromTo(cap, { clipPath: "ellipse(58% 0% at 50% 100%)" }, {
+        clipPath: "ellipse(170% 145% at 50% 100%)", ease: "none", scrollTrigger: { ...handover },
+      });
+      gsap.fromTo(media, { y: 0 }, {
+        y: () => cap.offsetHeight * 0.4, ease: "none",
+        scrollTrigger: { ...handover, invalidateOnRefresh: true },
+      });
+    });
+
+    mm.add(`${SCENE_QUERY} and (max-width: 899px)`, () => {
+      const cap = q(".pv-jrnl-sheet-cap")[0] as HTMLElement;
+      const media = q(".pv-jrnl-hero-media")[0] as HTMLElement;
+
+      // A phone is too narrow for a 170%-wide arc to read as a curve, and the
+      // picture is only a couple of hundred pixels tall, so paper riding over
+      // it just looked like the photograph had been cut off. Here the dome is
+      // tight enough to see, it rises through the ink below the picture, and
+      // the picture lifts and settles back a little as it comes, so the paper
+      // edge never reaches it. The page keeps enough room under the photograph
+      // for that (see --pv-jrnl-cap in journal.css).
+      //
+      // Both tweens start from the resting state, so nothing moves at load:
+      // the dome sits below the fold and the scrub begins at zero.
+      const handover = { trigger: cap, start: "top bottom", end: "top 34%", scrub: 0.4 };
+      gsap.fromTo(cap, { clipPath: "ellipse(70% 0% at 50% 100%)" }, {
+        clipPath: "ellipse(96% 128% at 50% 100%)", ease: "none", scrollTrigger: { ...handover },
+      });
+      gsap.fromTo(media, { yPercent: 0, scale: 1 }, {
+        yPercent: -11, scale: 0.955, ease: "none", scrollTrigger: { ...handover },
+      });
     });
 
     return () => mm.revert();

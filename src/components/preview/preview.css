@@ -238,6 +238,9 @@
 .pv-route-rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--pv-rule); transform-origin: left; }
 .pv-route-fill { position: absolute; inset: 0 calc(var(--pv-pad) * -1); background: var(--pv-blue); transform: scaleY(0); transform-origin: bottom; transition: transform 0.55s var(--pv-ease); }
 .pv-route-mask { position: relative; display: block; overflow: hidden; padding-bottom: 0.12em; transition: transform 0.6s var(--pv-ease); }
+.pv-route-main { position: relative; display: grid; justify-items: start; gap: clamp(13px, 1.2vw, 20px); }
+.pv-route-icon { display: block; width: clamp(28px, 2.4vw, 36px); color: var(--pv-blue-text); transition: color 0.35s ease, transform 0.6s var(--pv-ease); }
+.pv-route-icon svg { display: block; width: 100%; height: auto; fill: none; stroke: currentColor; stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; }
 .pv-route-problem { display: block; font-family: var(--pv-display); font-weight: 500; font-size: clamp(1.4rem, 2.75vw, 2.7rem); line-height: 1.1; letter-spacing: -0.025em; max-width: 27ch; }
 .pv-route-answer { display: inline-flex; align-items: center; gap: 0.7em; font-family: var(--pv-display); font-weight: 500; color: var(--pv-muted); transition: color 0.35s ease; white-space: nowrap; }
 .pv-route-answer svg { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.6s var(--pv-ease); }
@@ -245,6 +248,7 @@
   .pv-route:hover { color: #fff; }
   .pv-route:hover .pv-route-fill { transform: none; transform-origin: top; }
   .pv-route:hover .pv-route-mask:not(.pv-route-mask--answer) { transform: translateX(1.4vw); }
+  .pv-route:hover .pv-route-icon { color: #fff; transform: translateX(1.4vw); }
   .pv-route:hover .pv-route-answer { color: #fff; }
   .pv-route:hover .pv-route-answer svg { transform: translateX(6px); }
 }
