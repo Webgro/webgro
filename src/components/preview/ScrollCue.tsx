@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { readConsent, subscribeConsent } from "@/lib/consent";
 import "./scroll-cue.css";
@@ -25,7 +26,15 @@ const SEEN_KEY = "webgro:scroll-hint";
  * with a transform from a single rAF-throttled passive scroll listener, and
  * the page height is only re-measured when something actually resizes.
  */
+/**
+ * Articles and case studies carry their own progress bar along the top, so the
+ * rail would be a second indicator saying nearly the same thing.
+ */
+const hasOwnProgress = (path: string) =>
+  /^\/the-gro\/[^/]+$/.test(path) || /^\/work\/[^/]+$/.test(path);
+
 export function ScrollCue() {
+  const hidden = hasOwnProgress(usePathname());
   const fill = useRef<HTMLSpanElement>(null);
   const [live, setLive] = useState(false);
   const [hint, setHint] = useState<"in" | "out" | null>(null);
@@ -34,6 +43,7 @@ export function ScrollCue() {
     // The 404 is a dead end, not something to read down. It is the one page
     // in the shell that should not be inviting anyone further.
     if (document.querySelector(".pv-legal-nf")) return;
+    if (hidden) return;
 
     const el = fill.current;
     if (!el) return;
@@ -155,7 +165,9 @@ export function ScrollCue() {
       ro.disconnect();
       unsubscribe?.();
     };
-  }, []);
+  }, [hidden]);
+
+  if (hidden) return null;
 
   return (
     <>
