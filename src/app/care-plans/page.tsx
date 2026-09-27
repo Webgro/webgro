@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { pageMeta, siteUrl } from "@/components/preview/seo";
 import { JsonLd, breadcrumbsLd, faqLd } from "@/components/JsonLd";
 import { CarePlansView } from "@/components/preview/care/CarePlansView";
-import { CARE_META, CARE_PATH, careFaqs, carePlans } from "@/components/preview/care/content";
+import { CARE_META, CARE_PATH, careFaqs, careOffers } from "@/components/preview/care/content";
 
 export const metadata: Metadata = pageMeta({ ...CARE_META, path: CARE_PATH });
 
-/** A Service with one Offer per plan, each priced per calendar month. */
+/** A Service with one Offer per plan on each platform, priced per calendar month. */
 function carePlansLd() {
   const url = siteUrl(CARE_PATH);
   return {
@@ -22,11 +22,11 @@ function carePlansLd() {
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Care plans",
-      itemListElement: carePlans.map((p) => ({
+      itemListElement: careOffers.map((p) => ({
         "@type": "Offer",
         "@id": `${url}#${p.id}`,
-        name: `${p.name} care plan`,
-        description: p.for,
+        name: p.name,
+        description: p.description,
         url: `${url}#plans`,
         price: p.price.toFixed(2),
         priceCurrency: "GBP",

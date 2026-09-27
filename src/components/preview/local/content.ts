@@ -82,7 +82,7 @@ const S = {
   email: (body: string): LocalService => ({ name: "Email marketing", price: "From £800 a month, plus setup", body, path: "/services/marketing/email-marketing" }),
   ppc: (body: string): LocalService => ({ name: "Google Ads and Meta Ads", price: "From £1,000 a month, plus ad budget", body, path: "/services/marketing/ppc" }),
   social: (body: string): LocalService => ({ name: "Social media", price: "From £400 a month", body, path: "/services/marketing/social-media" }),
-  care: (body: string): LocalService => ({ name: "Care plans", price: "From £80 a month", body, path: "/care-plans" }),
+  care: (body: string): LocalService => ({ name: "Care plans", price: "From £55 a month", body, path: "/care-plans" }),
 };
 
 const RATING: Fact = { label: "Google rating", value: "5.0 from 14 reviews" };
@@ -184,7 +184,7 @@ export const towns: Town[] = [
       },
       {
         q: "Do you look after the website after launch?",
-        a: "Yes. Care plans start from £80 a month and cover updates, backups and monitoring. We can also run your SEO, from £750 a month, or your email marketing, paid ads and social media once the site is live.",
+        a: "Yes. Care plans start from £55 a month and cover updates, backups and monitoring. We can also run your SEO, from £750 a month, or your email marketing, paid ads and social media once the site is live.",
       },
       {
         q: "Have you worked with other businesses in Bracknell?",
@@ -294,7 +294,7 @@ export const towns: Town[] = [
     meta: {
       title: "Web Design in Wokingham | Webgro",
       description:
-        "WordPress and Shopify websites for Wokingham businesses, from a small studio in Bracknell about 15 minutes away. Websites from £4,000, care from £80 a month.",
+        "WordPress and Shopify websites for Wokingham businesses, from a small studio in Bracknell about 15 minutes away. Websites from £4,000, care from £55 a month.",
     },
     areaType: "City",
     drive: "About 15 min",

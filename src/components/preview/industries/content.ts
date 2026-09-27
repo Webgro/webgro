@@ -387,7 +387,7 @@ export const industries: Industry[] = [
     meta: {
       title: "Charity Websites and Free Website Applications | Webgro",
       description:
-        "We build one charity website for free each month, chosen from applications. Or work with us at normal rates: WordPress sites from £4,000, care plans from £80 a month.",
+        "We build one charity website for free each month, chosen from applications. Or work with us at normal rates: WordPress sites from £4,000, care plans from £55 a month.",
     },
     short: "A WordPress site for the JBVC Foundation. We build one charity website for free each month, and charities can apply.",
     hero: {
@@ -434,7 +434,7 @@ export const industries: Industry[] = [
           "A clear need: what the website has to do, and who it's for.",
           "A clear idea of the difference a website would make to the charity's work.",
         ],
-        note: "Because we only take one charity project a month, most applications wait. Charities that would rather not wait can work with us at our normal rates. WordPress websites start from £4,000, and care plans from £80 a month.",
+        note: "Because we only take one charity project a month, most applications wait. Charities that would rather not wait can work with us at our normal rates. WordPress websites start from £4,000, and care plans from £55 a month.",
       },
       form: {
         heading: "Apply for a free charity website",
@@ -443,7 +443,7 @@ export const industries: Industry[] = [
     },
     services: [
       { name: "Websites", price: "From £4,000", body: "WordPress websites usually cost £4k to £15k, depending on how much custom work is involved.", path: "/services/websites" },
-      { name: "Care plans", price: "From £80 a month", body: "Monthly updates, backups, uptime monitoring and time for changes.", path: "/care-plans" },
+      { name: "Care plans", price: "From £55 a month", body: "Monthly updates, backups, uptime monitoring and hosting on WordPress plans.", path: "/care-plans" },
     ],
     servicesLede:
       "These are our normal prices, for charities that would rather not wait for a free place. We scope every project before we quote, and the first 30-minute call is free.",
@@ -466,7 +466,7 @@ export const industries: Industry[] = [
       },
       {
         q: "Can we pay for a website instead?",
-        a: "Yes. Charities can work with us at our normal rates. WordPress websites start from £4,000 and usually cost £4k to £15k, and care plans start from £80 a month. For a paid project, use the contact page.",
+        a: "Yes. Charities can work with us at our normal rates. WordPress websites start from £4,000 and usually cost £4k to £15k, and care plans start from £55 a month. For a paid project, use the contact page.",
       },
     ],
   },

@@ -54,7 +54,7 @@ Contact: hello@webgro.co.uk, 01344 231 119. Address: 12 Longshot Lane, Bracknell
 
 ${pvServices.map(service).join("\n")}
 ${pvSubServices.map(service).join("\n")}
-- [Care plans](${SITE}/care-plans): Monthly website care from £80, £250 or £500 a month.
+- [Care plans](${SITE}/care-plans): Monthly website care from £55 a month. WordPress £55, £120 or £250 a month with hosting included. Shopify £80, £300 or £600 a month with time for changes.
 
 ## Industries
 

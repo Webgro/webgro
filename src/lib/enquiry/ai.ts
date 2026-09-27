@@ -49,7 +49,7 @@ Prices, for setting budget bands and expectations. Never quote a final price and
 - PPC from £1,000 a month plus ad budget.
 - Social media from £400 a month.
 - Design £80 an hour.
-- Website care plans £80, £250 or £500 a month.
+- Website care plans from £55 a month. WordPress £55, £120 or £250 a month. Shopify £80, £300 or £600 a month.
 
 Rules:
 - Ask one question only. Keep it short enough to read at a glance, ideally under 15 words.
@@ -80,7 +80,7 @@ const BRIEF_SYSTEM = `You are writing a short internal brief on a new enquiry fo
 - missingInfo: the questions the project lead should still ask, as a short list. Empty if nothing is missing.
 - spam: true only if the enquiry is plainly spam or abuse.
 
-Webgro prices, for judging fit: websites from £4,000 (WordPress usually £4,000 to £15,000, Shopify rebuilds £5,000 to £25,000), consultancy £400 a day, automation and AI per project, SEO from £750 a month, email marketing from £800 a month plus setup, PPC from £1,000 a month plus ad budget, social media from £400 a month, design £80 an hour, care plans £80, £250 or £500 a month.
+Webgro prices, for judging fit: websites from £4,000 (WordPress usually £4,000 to £15,000, Shopify rebuilds £5,000 to £25,000), consultancy £400 a day, automation and AI per project, SEO from £750 a month, email marketing from £800 a month plus setup, PPC from £1,000 a month plus ad budget, social media from £400 a month, design £80 an hour, care plans from £55 a month (WordPress £55, £120 or £250, Shopify £80, £300 or £600).
 
 ${SAFETY}
 

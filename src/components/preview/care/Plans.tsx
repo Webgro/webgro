@@ -1,10 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { pv } from "../links";
 import { SCENE_QUERY, useGsap } from "../useGsap";
-import { careForYou, carePlans, HOURLY_RATE } from "./content";
+import {
+  carePlansByPlatform,
+  carePlatformNotes,
+  carePlatforms,
+  careForYou,
+  type CarePlatform,
+} from "./content";
 
 export function Tick({ className = "pv-care-tick" }: { className?: string }) {
   return (
@@ -15,19 +21,73 @@ export function Tick({ className = "pv-care-tick" }: { className?: string }) {
 }
 
 /**
+ * The platform switch. A real radio group, so arrow keys move between the two
+ * options and screen readers announce it as one control. WordPress is checked
+ * in the server-rendered markup, and the blue thumb slides under the selected
+ * option with a CSS transition, which is independent of GSAP.
+ */
+export function PlatformSwitch({
+  platform,
+  onChange,
+}: {
+  platform: CarePlatform;
+  onChange: (next: CarePlatform) => void;
+}) {
+  return (
+    <fieldset className="pv-care-switch">
+      <legend className="pv-care-switch-legend">Which platform is your site on?</legend>
+      <div className="pv-care-switch-track" data-platform={platform}>
+        <span className="pv-care-switch-thumb" aria-hidden="true" />
+        {carePlatforms.map((p) => (
+          <label
+            className={`pv-care-switch-opt${p.id === platform ? " is-on" : ""}`}
+            key={p.id}
+            data-cursor
+          >
+            <input
+              className="pv-care-switch-input"
+              type="radio"
+              name="pv-care-platform"
+              value={p.id}
+              checked={p.id === platform}
+              onChange={() => onChange(p.id)}
+            />
+            <span>{p.name}</span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
+/**
  * The signature scene. The three cards rise at different speeds as the section
  * scrolls in (scrubbed), then each one is uncovered from the bottom edge. The
  * name and price climb out of their masks, and the ticks draw down the list. On
  * the Growth card a blue dome rises from the bottom and fills it, the same shape
  * as the closing section. Phones get the same scene, card by card.
+ *
+ * Switching platform crossfades the grid and lifts the card bodies a few pixels.
+ * Both tweens end on the CSS default and clear their props, so a swap can never
+ * leave a card hidden, and with reduced motion the swap is instant.
  */
-export function Plans() {
+export function Plans({
+  platform,
+  onPlatformChange,
+}: {
+  platform: CarePlatform;
+  onPlatformChange: (next: CarePlatform) => void;
+}) {
   const root = useRef<HTMLElement>(null);
+  const gsapRef = useRef<typeof import("gsap").default | null>(null);
+  const first = useRef(true);
+  const plans = carePlansByPlatform[platform];
 
   useGsap(root, ({ gsap }) => {
     const el = root.current!;
     const q = gsap.utils.selector(el);
     const mm = gsap.matchMedia();
+    gsapRef.current = gsap;
 
     mm.add({ scene: SCENE_QUERY, wide: "(min-width: 900px)" }, (ctx) => {
       if (!ctx.conditions?.scene) return;
@@ -94,14 +154,38 @@ export function Plans() {
           .from(items, { autoAlpha: 0, x: -10, duration: 0.6, ease: "power3.out", stagger: 0.07 }, 1);
       });
 
-      gsap.from(q(".pv-care-plans-note > *"), {
+      gsap.from(q(".pv-care-plans-note-fade"), {
         y: 22, autoAlpha: 0, duration: 0.9, ease: "power3.out", stagger: 0.1,
         scrollTrigger: { trigger: q(".pv-care-plans-note")[0], start: "top 90%" },
       });
     });
 
-    return () => mm.revert();
+    return () => {
+      gsapRef.current = null;
+      mm.revert();
+    };
   });
+
+  // The swap. Runs only after a real change, never on first render, and only on
+  // elements the entrance scenes do not touch.
+  useEffect(() => {
+    if (first.current) {
+      first.current = false;
+      return;
+    }
+    const gsap = gsapRef.current;
+    const el = root.current;
+    if (!gsap || !el || !window.matchMedia(SCENE_QUERY).matches) return;
+    const grid = el.querySelector(".pv-care-plans-grid");
+    if (grid) {
+      gsap.fromTo(grid, { autoAlpha: 0.2 }, {
+        autoAlpha: 1, duration: 0.42, ease: "power2.out", overwrite: true, clearProps: "opacity,visibility",
+      });
+    }
+    gsap.fromTo(el.querySelectorAll(".pv-care-card-body"), { y: 12 }, {
+      y: 0, duration: 0.5, ease: "power3.out", stagger: 0.05, overwrite: true, clearProps: "transform",
+    });
+  }, [platform]);
 
   return (
     <section className="pv-care-plans" id="plans" ref={root} data-pv-theme="ink">
@@ -116,8 +200,12 @@ export function Plans() {
         </p>
       </div>
 
+      <div className="pv-care-switch-row pv-care-plans-fade">
+        <PlatformSwitch platform={platform} onChange={onPlatformChange} />
+      </div>
+
       <ul className="pv-care-plans-grid">
-        {carePlans.map((plan) => (
+        {plans.map((plan) => (
           <li className={`pv-care-plan${plan.featured ? " is-featured" : ""}`} key={plan.id}>
             <article className="pv-care-card" aria-labelledby={`pv-care-${plan.id}`}>
               {plan.featured && <span className="pv-care-card-fill" aria-hidden="true" />}
@@ -168,11 +256,12 @@ export function Plans() {
       </ul>
 
       <div className="pv-care-plans-note">
-        <p>
-          Unused time doesn&rsquo;t roll over to the next month. Work beyond your plan&rsquo;s time is charged at
-          £{HOURLY_RATE} an hour, and we&rsquo;ll check with you first.
-        </p>
-        <p>
+        <div className="pv-care-plans-note-fade">
+          {carePlatformNotes[platform].map((line) => (
+            <p key={line}>{line}</p>
+          ))}
+        </div>
+        <p className="pv-care-plans-note-fade">
           {careForYou.larger}{" "}
           <Link href={pv("/contact")} className="pv-textlink pv-care-hit" data-cursor>Get in touch about a larger retainer</Link>
         </p>

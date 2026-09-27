@@ -169,6 +169,48 @@
   .pv-care-plans-head .pv-label { grid-column: 1 / -1; }
 }
 
+/* ── Platform switch ─────────────────────────────────────────────────────
+   A native radio group, so arrow keys work and it is announced as one
+   control. The blue thumb is the only colour: it slides with a CSS
+   transition, independent of GSAP, and the CSS default is the WordPress
+   position, which is what the server renders. */
+.pv-care-switch-row { margin: 0 0 clamp(26px, 4vh, 46px); }
+.pv-care-switch { min-width: 0; margin: 0; padding: 0; border: 0; }
+.pv-care-switch-legend {
+  padding: 0 0 12px; font: 500 0.95rem / 1.4 var(--pv-display); color: var(--pv-muted);
+}
+.pv-care-switch-track {
+  position: relative; display: grid; grid-template-columns: 1fr 1fr;
+  width: min(100%, 420px); padding: 4px; border: 1px solid var(--pv-rule); border-radius: 999px;
+}
+.pv-care-switch-thumb {
+  position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc((100% - 8px) / 2);
+  border-radius: 999px; background: var(--pv-blue);
+  transition: transform 0.5s var(--pv-ease);
+}
+.pv-care-switch-track[data-platform="shopify"] .pv-care-switch-thumb { transform: translateX(100%); }
+.pv-care-switch-opt {
+  position: relative; display: flex; align-items: center; justify-content: center; min-width: 0;
+  min-height: 46px; padding: 0 12px; border-radius: 999px;
+  font: 500 clamp(0.98rem, 1.1vw, 1.05rem) / 1 var(--pv-display); color: var(--pv-muted);
+  cursor: pointer; transition: color 0.35s ease;
+}
+.pv-care-switch-input {
+  position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0;
+  appearance: none; -webkit-appearance: none; opacity: 0; cursor: pointer; border-radius: 999px;
+}
+.pv-care-switch-opt > span { position: relative; white-space: nowrap; }
+.pv-care-switch-opt.is-on { color: var(--pv-ink); }
+.pv-care-switch-input:focus-visible + span {
+  outline: 2px solid var(--pv-blue); outline-offset: 7px; border-radius: 3px;
+}
+@media (hover: hover) {
+  .pv-care-switch-opt:not(.is-on):hover { color: var(--pv-fg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pv-care-switch-thumb, .pv-care-switch-opt { transition-duration: 0.01s; }
+}
+
 .pv-care-plans-grid {
   list-style: none; margin: 0; padding: 0;
   display: grid; gap: clamp(14px, 1.4vw, 22px);
@@ -230,6 +272,7 @@
 .pv-care-plans-note {
   display: grid; gap: 18px; margin-top: clamp(40px, 7vh, 80px); padding-top: 26px; border-top: 1px solid var(--pv-rule);
 }
+.pv-care-plans-note-fade { display: grid; gap: 14px; align-content: start; }
 .pv-care-plans-note p { color: var(--pv-muted); font-size: clamp(1rem, 1.15vw, 1.12rem); line-height: 1.55; max-width: 56ch; }
 .pv-care-plans-note .pv-textlink { color: var(--pv-fg); }
 @media (min-width: 900px) { .pv-care-plans-note { grid-template-columns: 1fr 1fr; column-gap: 6vw; } }
@@ -237,6 +280,10 @@
 /* ── Compare ──────────────────────────────────────────────────────────── */
 .pv-care-cmp { padding: clamp(90px, 16vh, 190px) var(--pv-pad); }
 .pv-care-cmp-head { display: grid; gap: 16px; margin-bottom: clamp(36px, 6vh, 72px); }
+.pv-care-cmp-plat {
+  justify-self: start; padding: 7px 14px; border: 1px solid var(--pv-rule); border-radius: 999px;
+  font: 500 0.92rem / 1 var(--pv-display); color: var(--pv-muted);
+}
 .pv-care-cmp-table { position: relative; }
 .pv-care-cmp-group { display: block; }
 .pv-care-cmp-groupname {

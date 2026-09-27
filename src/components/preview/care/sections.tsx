@@ -44,8 +44,8 @@ export function CareHero() {
         <div className="pv-svc-hero-row">
           <p className="pv-svc-hero-intro">
             We look after Shopify and WordPress sites for a fixed monthly fee. Every plan covers updates, backups and
-            monitoring, plus a set amount of time each month for changes. Plans start at £80 a month and run month to
-            month.
+            monitoring. WordPress plans include your hosting, and Shopify plans include time each month for changes.
+            Plans start at £55 a month and run month to month.
           </p>
           <div className="pv-svc-hero-actions">
             <a href="#plans" className="pv-btn" data-cursor><span>See the plans</span></a>
