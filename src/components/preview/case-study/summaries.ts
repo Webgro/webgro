@@ -14,7 +14,7 @@ export const summaries: Record<string, Summary> = {
   },
   berrymae: {
     ask: "BerryMae was a new phone case brand that needed an identity and a shop, where most of the range won't fit any one customer's phone.",
-    did: "We designed the wordmark, monogram and Berry Noir palette, wrote a Shopify theme from scratch around a shop-by-phone picker, and redesigned 27 customer emails to match.",
+    did: "We designed the wordmark, monogram and Berry Noir palette, wrote a Shopify theme from scratch around a shop-by-phone picker, and redesigned 27 customer emails to match. We also set up Klaviyo and run the brand's Instagram and Facebook.",
     changed: "Shoppers choose their phone once, from 68 models, and see the cases that fit. The shop launched in October 2026 with 344 products across UK, US and EU storefronts.",
   },
   "architectural-fx": {

@@ -669,16 +669,16 @@ export const caseStudies: CaseStudy[] = [
     heroImage: "/work/berrymae.jpg",
     heroImageAlt: "Three BerryMae phone cases on white linen, in strawberry, leopard and polka dot designs, with cherries beside them",
     excerpt:
-      "A brand identity and a custom Shopify theme for BerryMae, a phone case brand that launched in October 2026. Shoppers choose their phone once, from 68 models, and the shop shows the cases that fit.",
-    services: ["Brand identity", "Shopify theme design", "Shopify development", "Email design"],
-    stack: ["Shopify", "Custom theme", "Shopify Markets"],
+      "A brand identity and a custom Shopify theme for BerryMae, a phone case brand that launched in October 2026. Shoppers choose their phone once, from 68 models, and the shop shows the cases that fit. We also run the brand's email and social media.",
+    services: ["Brand identity", "Shopify theme design", "Shopify development", "Email marketing", "Social media"],
+    stack: ["Shopify", "Custom theme", "Shopify Markets", "Klaviyo"],
     timeline: "Launched October 2026",
     url: "https://berrymae.com",
     categories: ["ecommerce"],
     body: [
       {
         type: "intro",
-        text: "BerryMae is a phone case brand that launched in October 2026, with accessories, clothing and travel pieces alongside the cases. We designed the brand identity, then designed and built the Shopify store on a theme we wrote from scratch.",
+        text: "BerryMae is a phone case brand that launched in October 2026, with accessories, clothing and travel pieces alongside the cases. We designed the brand identity, then designed and built the Shopify store on a theme we wrote from scratch. We also run its email marketing and social media.",
       },
       {
         type: "stats",
@@ -874,6 +874,52 @@ export const caseStudies: CaseStudy[] = [
           alt: "The same BerryMae order confirmation email in dark mode",
         },
       },
+      // ── Chapter 04 ─────────────────────────────────────────────
+      {
+        type: "chapter",
+        id: "marketing",
+        num: "04",
+        label: "Marketing",
+        description: "Email in Klaviyo, and the brand's Instagram and Facebook.",
+      },
+      {
+        type: "section",
+        eyebrow: "Email",
+        heading: "Email flows in Klaviyo",
+        body: [
+          "We set up Klaviyo for the shop. New subscribers get a welcome series, shoppers who leave a basket or look at a product get a reminder, and customers hear from the brand again after an order.",
+          "The signup form and popup on the shop feed the same list. We also write and send the campaigns, such as new releases.",
+        ],
+      },
+      {
+        type: "section",
+        eyebrow: "Social",
+        heading: "A feed in three kinds of post",
+        body: [
+          "We run BerryMae's Instagram and Facebook. The feed is designed as three kinds of post: product shots, type-only posts and lifestyle images, so the grid keeps a rhythm and stays in the brand's colours.",
+          "We plan the calendar, write the captions, schedule the posts and reply to comments and messages.",
+        ],
+      },
+      {
+        type: "gallery",
+        images: [
+          {
+            src: "/work/berrymae/social-product.jpg",
+            alt: "A BerryMae social post showing a cherry print phone case on a pink plinth",
+            aspect: "aspect-[4/5]",
+          },
+          {
+            src: "/work/berrymae/social-type.jpg",
+            alt: "A BerryMae social post reading black cherry season, in blush lettering on black cherry",
+            aspect: "aspect-[4/5]",
+          },
+          {
+            src: "/work/berrymae/social-lifestyle.jpg",
+            alt: "A BerryMae social post showing a red gingham phone case on a picnic blanket with strawberries and a glass of wine",
+            aspect: "aspect-[4/5]",
+          },
+        ],
+      },
       {
         type: "deliverables",
         items: [
@@ -884,6 +930,8 @@ export const caseStudies: CaseStudy[] = [
           "UK, US and EU storefronts",
           "Product data for Google's shopping listings",
           "27 customer emails, each in light and dark",
+          "Klaviyo flows, signup forms and campaigns",
+          "Social media management on Instagram and Facebook",
         ],
       },
     ],
