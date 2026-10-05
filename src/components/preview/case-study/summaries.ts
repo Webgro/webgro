@@ -12,6 +12,11 @@ export const summaries: Record<string, Summary> = {
     did: "We redesigned the store in eight weeks, added a Pet Hub that personalises the shop to each customer's pets, built an app that syncs stock between the two stores, and took over their Klaviyo email marketing.",
     changed: "Average order value went from €42.51 in the week before launch to €69.03 in the week after.",
   },
+  berrymae: {
+    ask: "BerryMae was a new phone case brand that needed an identity and a shop, where most of the range won't fit any one customer's phone.",
+    did: "We designed the wordmark, monogram and Berry Noir palette, wrote a Shopify theme from scratch around a shop-by-phone picker, and redesigned 27 customer emails to match.",
+    changed: "Shoppers choose their phone once, from 68 models, and see the cases that fit. The shop launched in October 2026 with 344 products across UK, US and EU storefronts.",
+  },
   "architectural-fx": {
     ask: "Architectural FX had to email their product spreadsheet to us and wait for an import every time a product changed, and their products page took more than six seconds to load.",
     did: "We replaced WooCommerce and two other plugins with one custom WordPress plugin, connected it to their Google Sheet, built new products and product pages with a configurator, and moved 128 DWG drawings off Amazon S3.",
@@ -97,6 +102,7 @@ export const summaries: Record<string, Summary> = {
  */
 export const headlineFigures: Record<string, string[]> = {
   valuepet: ["+62%", "€69.03", "8 weeks"],
+  berrymae: ["68", "344", "3"],
   "architectural-fx": ["3", "128", "9"],
   "fun-cases": ["+300%", "30%", "−70%"],
   "gieves-and-hawkes": ["+21", "£300", "#1"],

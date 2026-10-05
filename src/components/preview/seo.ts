@@ -164,6 +164,11 @@ export const CASE_META: Record<string, Meta> = {
     description:
       "A Shopify redesign for ValuePet.ie with a personalised Pet Hub and stock sync between two stores. Average order value up 62% the week after launch.",
   },
+  berrymae: {
+    title: "BerryMae: Shopify Phone Case Shop and Brand | Webgro",
+    description:
+      "A brand identity and a custom Shopify theme for BerryMae, a phone case brand. Shoppers choose their phone once, from 68 models, to see the cases that fit.",
+  },
   "architectural-fx": {
     title: "Architectural FX: WordPress Catalogue Plugin | Webgro",
     description:

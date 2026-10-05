@@ -661,6 +661,234 @@ export const caseStudies: CaseStudy[] = [
   },
 
   {
+    slug: "berrymae",
+    client: "BerryMae",
+    tag: "Shopify · Phone cases",
+    year: "2026",
+    accent: "blue",
+    heroImage: "/work/berrymae.jpg",
+    heroImageAlt: "Three BerryMae phone cases on white linen, in strawberry, leopard and polka dot designs, with cherries beside them",
+    excerpt:
+      "A brand identity and a custom Shopify theme for BerryMae, a phone case brand that launched in October 2026. Shoppers choose their phone once, from 68 models, and the shop shows the cases that fit.",
+    services: ["Brand identity", "Shopify theme design", "Shopify development", "Email design"],
+    stack: ["Shopify", "Custom theme", "Shopify Markets"],
+    timeline: "Launched October 2026",
+    url: "https://berrymae.com",
+    categories: ["ecommerce"],
+    body: [
+      {
+        type: "intro",
+        text: "BerryMae is a phone case brand that launched in October 2026, with accessories, clothing and travel pieces alongside the cases. We designed the brand identity, then designed and built the Shopify store on a theme we wrote from scratch.",
+      },
+      {
+        type: "stats",
+        items: [
+          { value: "68", label: "Phone models in the shop-by-phone picker" },
+          { value: "3", label: "Case types for every design" },
+          { value: "344", label: "Products in the shop at launch" },
+          { value: "3", label: "Storefronts: UK, US and EU" },
+        ],
+      },
+
+      // ── Chapter 01 ─────────────────────────────────────────────
+      {
+        type: "chapter",
+        id: "brand",
+        num: "01",
+        label: "Brand",
+        description: "A wordmark, a monogram and a palette of black cherry, ivory and blush.",
+      },
+      {
+        type: "section",
+        eyebrow: "Logo",
+        heading: "The name is the logo",
+        body: [
+          "The logo is the name in capitals, set in Krona One. There is no symbol and no tagline. A BM monogram takes over where the full name is too small to read, such as the favicon and social avatars.",
+          "The wordmark sits in the same place on every case: centred, near the bottom edge. Because it never moves, it works as the brand's signature across the whole range.",
+        ],
+      },
+      {
+        type: "split",
+        left: {
+          src: "/work/berrymae/lifestyle-selfie.jpg",
+          alt: "A woman taking a mirror selfie with a phone in a pink and burgundy argyle BerryMae case",
+        },
+        right: {
+          src: "/work/berrymae/lifestyle-cafe.jpg",
+          alt: "A hand holding a phone in a brown cow print BerryMae case at a cafe table, beside a croissant and an iced matcha",
+        },
+      },
+      {
+        type: "section",
+        eyebrow: "Colour",
+        heading: "Berry Noir",
+        body: [
+          "The palette is called Berry Noir. Black cherry and ivory do most of the work, and blush is the softer colour beside them.",
+          "The same three colours run through the shop, the product images and the order emails. We wrote the rules down in a short set of brand guidelines, covering the logo, its minimum sizes, the colours and the type.",
+        ],
+      },
+
+      // ── Chapter 02 ─────────────────────────────────────────────
+      {
+        type: "chapter",
+        id: "shop",
+        num: "02",
+        label: "Shop",
+        description: "A Shopify theme written for BerryMae, built around finding a case for your phone.",
+      },
+      {
+        type: "section",
+        eyebrow: "Theme",
+        heading: "A theme written from scratch",
+        body: [
+          "The store runs on a Shopify theme we wrote for BerryMae. There is no bought theme underneath it and no page builder, so it carries only the code this shop uses.",
+          "The team can still edit the homepage, collections and pages in Shopify's theme editor without a developer.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/berrymae/storefront.jpg",
+        alt: "BerryMae homepage, with a phone cases banner and the navigation in black cherry on ivory",
+        url: "berrymae.com",
+        phone: {
+          src: "/work/berrymae/mobile.jpg",
+          alt: "BerryMae homepage on a phone",
+        },
+      },
+      {
+        type: "section",
+        eyebrow: "Shop by phone",
+        heading: "Choose your phone once",
+        body: [
+          "A phone case shop has a problem a clothes shop doesn't: most of the range won't fit the customer's phone. So the shop asks which phone you have, and remembers the answer for next time.",
+          "The picker covers 68 models: 37 iPhones, 23 Samsung Galaxy phones and 8 Google Pixels. Shoppers can search for a model or browse by series, and each model has its own page of cases.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/berrymae/live-picker.jpg",
+        alt: "BerryMae shop by phone picker, with a search box, Apple, Samsung and Google tabs, and iPhone models grouped by series",
+        url: "berrymae.com",
+        phone: {
+          src: "/work/berrymae/live-mobile-picker.jpg",
+          alt: "BerryMae shop by phone picker on a phone",
+        },
+      },
+      {
+        type: "section",
+        eyebrow: "Case types",
+        heading: "Three kinds of case, compared",
+        body: [
+          "Every design comes in three case types: Tough, MagSafe Tough and Snap. A comparison shows the price, protection, MagSafe support and finish of each, so the difference is clear before anyone adds a case to their basket.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/berrymae/live-types.jpg",
+        alt: "BerryMae case type comparison showing Tough at £30, MagSafe Tough at £36 and Snap at £26",
+        url: "berrymae.com",
+        phone: {
+          src: "/work/berrymae/live-mobile-types.jpg",
+          alt: "BerryMae case type comparison on a phone",
+        },
+      },
+      {
+        type: "section",
+        eyebrow: "Product pages",
+        heading: "Case type, phone and finish",
+        body: [
+          "On a product page the shopper picks the case type, their phone and a gloss or matte finish. If they have already chosen a phone, the page opens on it.",
+          "Below the options, Complete the look suggests other pieces in the same design, such as a tumbler or an AirPods case.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/berrymae/live-product.jpg",
+        alt: "BerryMae Argyle Phone Case product page, with case type, phone model and finish options",
+        url: "berrymae.com/products/argyle-phone-case",
+        phone: {
+          src: "/work/berrymae/live-mobile-product.jpg",
+          alt: "BerryMae Argyle Phone Case product page on a phone",
+        },
+      },
+      {
+        type: "section",
+        eyebrow: "The range",
+        heading: "One set of designs across the range",
+        body: [
+          "The designs carry across from phone cases to AirPods cases, iPad folios, tumblers, passport covers, luggage tags and notebooks, with clothing and headwear alongside. The shop launched with 344 products.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/berrymae/live-collection.jpg",
+        alt: "BerryMae phone cases collection page showing argyle, leopard and Fair Isle designs",
+        url: "berrymae.com/collections/phone-cases",
+        phone: {
+          src: "/work/berrymae/live-mobile-collection.jpg",
+          alt: "BerryMae phone cases collection page on a phone",
+        },
+      },
+
+      // ── Chapter 03 ─────────────────────────────────────────────
+      {
+        type: "chapter",
+        id: "details",
+        num: "03",
+        label: "Details",
+        description: "Three storefronts, product data for Google, and order emails in the brand.",
+      },
+      {
+        type: "section",
+        eyebrow: "Markets",
+        heading: "UK, US and EU storefronts",
+        body: [
+          "The shop sells through three storefronts, for the UK, the US and the EU. Prices and delivery costs change with the market the shopper is in.",
+        ],
+      },
+      {
+        type: "section",
+        eyebrow: "Search",
+        heading: "Product data Google can read",
+        body: [
+          "Each product page gives Google the price, delivery cost, delivery time and returns policy for the shopper's market, which Google uses in its shopping listings.",
+          "On phone case pages the data covers only the selected phone model. That took about 130KB off each case page.",
+        ],
+      },
+      {
+        type: "section",
+        eyebrow: "Email",
+        heading: "Order emails in the brand",
+        body: [
+          "We redesigned Shopify's customer emails to match the shop: 27 templates, from order confirmation and shipping updates to refunds. Each one has a light and a dark version, so it reads properly whichever mode the customer's phone is in.",
+        ],
+      },
+      {
+        type: "split",
+        left: {
+          src: "/work/berrymae/email-light.jpg",
+          alt: "BerryMae order confirmation email in light mode, with the wordmark on black cherry and an order summary",
+        },
+        right: {
+          src: "/work/berrymae/email-dark.jpg",
+          alt: "The same BerryMae order confirmation email in dark mode",
+        },
+      },
+      {
+        type: "deliverables",
+        items: [
+          "Brand identity: wordmark, monogram, palette and guidelines",
+          "A custom Shopify theme, written from scratch",
+          "Shop by phone picker covering 68 models",
+          "Case type comparison for Tough, MagSafe Tough and Snap",
+          "UK, US and EU storefronts",
+          "Product data for Google's shopping listings",
+          "27 customer emails, each in light and dark",
+        ],
+      },
+    ],
+  },
+  {
     slug: "architectural-fx",
     client: "Architectural FX",
     tag: "WordPress · Lighting",

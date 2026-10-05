@@ -96,6 +96,11 @@ export const workExtras: Record<string, WorkExtra> = {
     blurb: "A Shopify redesign for one of Ireland's biggest pet retailers, with a Pet Hub that personalises the shop to each customer's pets and an app that keeps stock in sync with their second store.",
     figure: { value: "+62%", label: "average order value in the week after launch" },
   },
+  berrymae: {
+    w: 1200, h: 800,
+    blurb: "A brand identity and a custom Shopify theme for a new phone case brand. Shoppers choose their phone once and the shop shows the cases that fit.",
+    figure: { value: "68", label: "phone models in the shop-by-phone picker" },
+  },
   "architectural-fx": {
     w: 1200, h: 800,
     blurb: "A custom WordPress plugin for a Wokingham lighting distributor. Products are published from their Google Sheet, and the new products page has live filters and a configurator that produces spec sheets.",

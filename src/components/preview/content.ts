@@ -140,6 +140,7 @@ export const clients = [
   { name: "ValuePet", slug: "valuepet" },
   { name: "Sublishop", slug: "sublishop" },
   { name: "ANYPRINT", slug: "anyprint" },
+  { name: "BerryMae", slug: "berrymae" },
   { name: "Architectural FX", slug: "architectural-fx" },
   { name: "Origin Architectural", slug: "origin-architectural" },
   { name: "it's Pouch", slug: "its-pouch" },
