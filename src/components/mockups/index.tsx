@@ -2,7 +2,6 @@ import { FunCasesAICustomerService } from "./FunCasesAICustomerService";
 import { FunCasesAIProductGenerator } from "./FunCasesAIProductGenerator";
 import { FunCasesAIImageGenerator } from "./FunCasesAIImageGenerator";
 import { FunCasesWMS } from "./FunCasesWMS";
-import { FunCasesOrderRouting } from "./FunCasesOrderRouting";
 import { TwistedTailorAISupport } from "./TwistedTailorAISupport";
 import { SublishopInventoryPlanner } from "./SublishopInventoryPlanner";
 import { SublishopCompetitorTracker } from "./SublishopCompetitorTracker";
@@ -14,7 +13,6 @@ export type MockupName =
   | "fun-cases-ai-product-generator"
   | "fun-cases-ai-image-generator"
   | "fun-cases-wms"
-  | "fun-cases-order-routing"
   | "twisted-tailor-ai-support"
   | "sublishop-inventory-planner"
   | "sublishop-competitor-tracker"
@@ -26,7 +24,6 @@ const registry: Record<MockupName, () => React.ReactElement> = {
   "fun-cases-ai-product-generator": FunCasesAIProductGenerator,
   "fun-cases-ai-image-generator": FunCasesAIImageGenerator,
   "fun-cases-wms": FunCasesWMS,
-  "fun-cases-order-routing": FunCasesOrderRouting,
   "twisted-tailor-ai-support": TwistedTailorAISupport,
   "sublishop-inventory-planner": SublishopInventoryPlanner,
   "sublishop-competitor-tracker": SublishopCompetitorTracker,

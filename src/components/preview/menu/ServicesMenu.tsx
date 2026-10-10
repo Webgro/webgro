@@ -3,12 +3,16 @@
 import Link from "next/link";
 import { useEffect, useId, useRef } from "react";
 import { pv } from "../links";
-import { pvServices, pvSubServices } from "../services/content";
+import { pvBespokeSubs, pvServices, pvSubServices } from "../services/content";
+
+/** The branches listed under a service in the menu. */
+const branchesOf = (slug: string) => (slug === "marketing" ? pvSubServices : slug === "bespoke-software" ? pvBespokeSubs : []);
 import "./menu.css";
 
 /**
  * The Services dropdown: a small panel under the nav link with the seven
- * services, and Marketing's three branches indented beneath it. Nothing else.
+ * services, with the branches of Marketing and Bespoke Software indented
+ * beneath them. Nothing else.
  */
 export function ServicesMenu({
   open,
@@ -68,9 +72,9 @@ export function ServicesMenu({
           {pvServices.map((s, i) => (
             <li key={s.slug} style={{ "--i": i } as React.CSSProperties}>
               <Link href={pv(s.path)} data-cursor tabIndex={open ? 0 : -1} onClick={onClose}>{s.name}</Link>
-              {s.slug === "marketing" && (
+              {branchesOf(s.slug).length > 0 && (
                 <ul className="pv-menu-subs">
-                  {pvSubServices.map((sub) => (
+                  {branchesOf(s.slug).map((sub) => (
                     <li key={sub.slug}>
                       <Link href={pv(sub.path)} data-cursor tabIndex={open ? 0 : -1} onClick={onClose}>{sub.name}</Link>
                     </li>

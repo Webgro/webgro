@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRef } from "react";
+import { Screen } from "./services/bespoke/Screen";
 import { Mockup } from "@/components/mockups";
 import { tools } from "./content";
 import { SCENE_QUERY, useGsap } from "./useGsap";
@@ -36,8 +37,8 @@ export function Tools() {
       <div className="pv-tools-head">
         <h2 className="pv-h2">Custom software and AI tools</h2>
         <p className="pv-lede">
-          We can&rsquo;t talk about most of the software we&rsquo;ve built, but these three tools are used by
-          our clients every day.
+          We can&rsquo;t talk about most of the software we&rsquo;ve built, but these three are
+          in use every day.
         </p>
       </div>
       <div className="pv-tools-stack">
@@ -50,9 +51,16 @@ export function Tools() {
                 <p>{t.body}</p>
                 <Link href={t.href} className="pv-textlink" data-cursor>Read the case study</Link>
               </div>
+              {t.screen ? (
+                // A redrawn app screen is shown whole, in its own frame.
+                <div className="pv-tool-demo pv-tool-demo--screen" aria-hidden="true" inert>
+                  <Screen name={t.screen} decorative />
+                </div>
+              ) : t.mockup ? (
               <div className="pv-tool-demo" aria-hidden="true" inert>
                 <div className="pv-tool-demo-scale"><Mockup name={t.mockup} /></div>
               </div>
+              ) : null}
             </div>
           </article>
         ))}

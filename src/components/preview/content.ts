@@ -132,10 +132,10 @@ export const tools = [
   },
   {
     client: "Fun Cases",
-    title: "Automatic order routing for Fun Cases",
-    body: "Each order is checked and sent to the right printer automatically. On the automatic route, a personalised case is printing about two minutes after it's ordered.",
+    title: "Custom software for Fun Cases",
+    body: "Fun Cases run stock, the warehouse, shipping labels, print runs, returns and customer service from ten tools behind one login. It saves about 20 hours of work a day.",
     href: "/work/fun-cases",
-    mockup: "fun-cases-order-routing" as const,
+    screen: "fc-warehouse" as const,
   },
 ];
 

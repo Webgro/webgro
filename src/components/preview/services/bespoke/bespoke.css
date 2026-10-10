@@ -57,9 +57,26 @@
 @media (min-width: 900px) {
   .pv-bsp-con-head { grid-template-columns: 1.25fr 1fr; align-items: end; gap: 6vw; }
 }
-.pv-bsp-con-head--more { margin-top: clamp(40px, 8vh, 100px); }
-/* Not built yet, so these chips are lighter than the connected ones. */
-.pv-bsp-con-list--more .pv-bsp-chip {
-  border-style: dashed; border-color: color-mix(in srgb, var(--pv-fg) 30%, transparent);
-  font-size: clamp(0.92rem, 1.05vw, 1.05rem); color: color-mix(in srgb, var(--pv-fg) 86%, transparent);
+.pv-bsp-screen-pending { aspect-ratio: 16 / 10; background: #e9e6df; }
+
+/* ── Links to the Shopify apps and WordPress plugins pages ────────────── */
+.pv-bsp-more { display: grid; gap: clamp(36px, 6vh, 70px); padding: 0 var(--pv-pad) clamp(90px, 17vh, 200px); }
+.pv-bsp-more-head { display: grid; gap: 18px; }
+.pv-bsp-more-list { border-bottom: 1px solid var(--pv-rule); }
+.pv-bsp-more-row { position: relative; display: block; padding: clamp(22px, 2.6vw, 40px) 0; }
+.pv-bsp-more-row:focus-visible { outline: 2px solid var(--pv-blue); outline-offset: 2px; }
+.pv-bsp-more-rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--pv-rule); transform-origin: left; }
+.pv-bsp-more-in { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px 24px; }
+.pv-bsp-more-name { font: 700 clamp(1.6rem, 3vw, 3rem) / 1.05 var(--pv-display); letter-spacing: -0.035em; transition: color 0.3s ease; }
+.pv-bsp-more-text { grid-column: 1; color: var(--pv-muted); max-width: 56ch; }
+.pv-bsp-more-row svg {
+  grid-column: 2; grid-row: 1 / span 2; width: clamp(1.6rem, 2.4vw, 2.4rem); height: clamp(1.6rem, 2.4vw, 2.4rem); fill: none; stroke: currentColor;
+  stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.6s var(--pv-ease);
+}
+@media (hover: hover) {
+  .pv-bsp-more-row:hover .pv-bsp-more-name { color: var(--pv-blue-text); }
+  .pv-bsp-more-row:hover svg { transform: translateX(6px); }
+}
+@media (min-width: 900px) {
+  .pv-bsp-more { grid-template-columns: 0.8fr 1.6fr; column-gap: 6vw; align-items: start; }
 }

@@ -529,3 +529,6 @@
   font: 700 0.75rem / 1 var(--pv-display); letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap;
   transform: translateY(-0.12em);
 }
+
+/* A redrawn app screen in the tools section is shown whole: no height cap and no fade. */
+.pv-tool-demo.pv-tool-demo--screen { max-height: none; overflow: visible; border-radius: 0; -webkit-mask-image: none; mask-image: none; }

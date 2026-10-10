@@ -31,6 +31,8 @@ const columns = [
       { label: "Consultancy", href: pv("/services/consultancy") },
       { label: "Automation and AI", href: pv("/services/automation-ai") },
       { label: "Bespoke Software", href: pv("/services/bespoke-software") },
+      { label: "Shopify apps", href: pv("/services/bespoke-software/shopify-apps"), sub: true },
+      { label: "WordPress plugins", href: pv("/services/bespoke-software/wordpress-plugins"), sub: true },
       { label: "SEO", href: pv("/services/seo") },
       { label: "Marketing", href: pv("/services/marketing") },
       { label: "Email marketing", href: pv("/services/marketing/email-marketing"), sub: true },

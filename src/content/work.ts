@@ -393,6 +393,19 @@ export const caseStudies: CaseStudy[] = [
         name: "fc-helpdesk",
       },
       {
+        type: "section",
+        eyebrow: "Loyalty app",
+        heading: "Case Club, a loyalty app",
+        body: [
+          "Case Club is Fun Cases' loyalty scheme, which we built as a custom Shopify app. Shoppers earn coins on every paid order, and for reviews, follows, birthdays and referring a friend. In their account they see their balance and cash coins in for a one-time discount code. Refunds and cancelled orders take the coins back.",
+          "Staff run the scheme from screens inside the Shopify admin: members, prizes, six kinds of campaign, scheduled popups, referrals and analytics. The app connects to Klaviyo and to Judge.me for product reviews. It replaced Smile.io, and balances from the old scheme were imported at launch.",
+        ],
+      },
+      {
+        type: "uiMock",
+        name: "case-club",
+      },
+      {
         type: "deliverables",
         heading: "Deliverables",
         items: [
@@ -407,6 +420,7 @@ export const caseStudies: CaseStudy[] = [
           "Shipping labels, print runs and returns portal",
           "Content and social tools, artwork resizer and product generation",
           "Helpdesk with AI triage (replaced Freshdesk)",
+          "Case Club loyalty app (replaced Smile.io)",
           "SEO programme",
           "Paid media (Google · Meta)",
           "Email marketing (Klaviyo)",
@@ -693,7 +707,13 @@ export const caseStudies: CaseStudy[] = [
         heading: "Stock kept in sync between two stores",
         body: [
           "ValuePet run two Shopify stores. We built a custom app that links them, so stock levels stay in sync between the two automatically, without anyone updating them by hand.",
+          "The same service keeps the products in step. When a product is created or changed on the first store, the second is updated, and the whole catalogue is compared several times a day as a check that nothing was missed. For products already on both stores it sends only the real differences, so each store's own settings are left alone.",
+          "Each product description is rewritten once by Claude in ValuePet's voice. The draft goes to a review screen, and a person approves it before it's published. Nothing is written to either store until a switch is turned on. With it off, the service logs what it would have sent. The review screen below is an example, redrawn with sample data.",
         ],
+      },
+      {
+        type: "uiMock",
+        name: "pw-vp-bridge",
       },
 
       // ── Chapter 02 ─────────────────────────────────────────────
@@ -1619,6 +1639,29 @@ export const caseStudies: CaseStudy[] = [
         type: "uiMock",
         name: "twisted-tailor-ai-support",
       },
+      // ── Chapter 03 ─────────────────────────────────────────────
+      {
+        type: "chapter",
+        id: "try-on",
+        num: "03",
+        label: "AI Try-On (Beta)",
+        description:
+          "A custom Shopify app that shows a shopper wearing the garment. It's in beta testing and isn't yet available to all shoppers.",
+      },
+      {
+        type: "section",
+        eyebrow: "In beta",
+        heading: "Try it on with AI",
+        body: [
+          "We built Twisted Tailor a custom Shopify app that adds a Try it on with AI button to product pages. A shopper uploads a full-length photo and sees themselves wearing the garment, usually in 20 to 40 seconds. The app is in beta testing with the brand and isn't yet available to all shoppers.",
+          "The shopper's photo isn't stored, and the try-on image is kept for 7 days, then deleted. Every image is checked by a second AI model before the shopper sees it, and images that fail are held back. Results are labelled as an AI preview and carry the brand's watermark.",
+          "Staff see the results, the quality checks and a funnel from the button to an order inside the Shopify admin. The screen below is an example, redrawn with sample data.",
+        ],
+      },
+      {
+        type: "uiMock",
+        name: "tt-tryon",
+      },
       {
         type: "deliverables",
         heading: "Deliverables",
@@ -1632,6 +1675,7 @@ export const caseStudies: CaseStudy[] = [
           "Native gallery and back-in-stock alerts (2 apps replaced)",
           "MyFitt cross-device size persistence",
           "AI customer service agent",
+          "Try it on with AI app (in beta)",
           "eCommerce consultancy",
           "SEO programme",
         ],

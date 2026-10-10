@@ -1,4 +1,4 @@
-import type { BespokeMockName } from "@/components/mockups/bespoke";
+import type { ScreenName } from "./Screen";
 
 /**
  * The four pieces of software on the Bespoke Software page. Facts come from
@@ -9,7 +9,7 @@ import type { BespokeMockName } from "@/components/mockups/bespoke";
 
 export type Software = {
   id: string;
-  mock: BespokeMockName;
+  mock: ScreenName;
   label: string;
   title: string;
   body: string[];
@@ -87,48 +87,131 @@ export const software: Software[] = [
   },
 ];
 
-/* ── What the software connects to ──────────────────────────────────────── */
+/* ── Custom Shopify apps ────────────────────────────────────────────────── */
 
 /**
- * Systems we have connected software to, grouped by kind. Every name here
- * appears as a working integration in the research briefs. Names only: no
+ * Facts from the apps and plugins brief. Its "sensitive" notes apply: no
+ * programme numbers, no pricing or limits detail, nothing about how the two
+ * pet shops are related, and the try-on app is in beta.
+ */
+export const shopifyApps: Software[] = [
+  {
+    id: "case-club",
+    mock: "case-club",
+    label: "Fun Cases",
+    title: "Case Club, a loyalty app",
+    body: [
+      "Case Club is Fun Cases' loyalty scheme, built as a custom Shopify app. Shoppers earn coins on every paid order, and for reviews, follows, birthdays and referring a friend. They cash coins in for a one-time discount code from their account. It replaced Smile.io.",
+      "The picture is an example screen, redrawn with sample data.",
+    ],
+    points: [
+      "Refunds and cancelled orders take the coins back.",
+      "Staff run the scheme from screens inside the Shopify admin: members, prizes, campaigns, scheduled popups, referrals and analytics.",
+      "There are six kinds of campaign, including double-coin weekends and bonus coins on a collection.",
+      "It connects to Klaviyo and to Judge.me for product reviews. Balances from the old scheme were imported at launch.",
+    ],
+    link: { label: "Read the Fun Cases case study", path: "/work/fun-cases" },
+  },
+  {
+    id: "stock-sync",
+    mock: "pw-vp-bridge",
+    label: "ValuePet",
+    title: "Two pet shops kept in step",
+    body: [
+      "A sync service that keeps products and stock in step between two pet shops on Shopify. When a product changes on the first shop, the second is updated, and stock levels are kept the same on both.",
+      "The description review is shown as an example screen, redrawn with sample data.",
+    ],
+    points: [
+      "Each product description is rewritten once by Claude in the second shop's voice. A person approves every draft before it's published.",
+      "For products already on both shops, only real differences are sent, so the second shop's own settings are left alone.",
+      "Nothing is written until a switch is turned on. With it off, the service logs what it would have sent. Stock syncing has its own switch.",
+      "The whole catalogue is compared several times a day, as a check that nothing was missed.",
+    ],
+    link: { label: "Read the ValuePet case study", path: "/work/valuepet" },
+  },
+  {
+    id: "try-on",
+    mock: "tt-tryon",
+    label: "Twisted Tailor, in beta",
+    title: "Try it on with AI",
+    body: [
+      "A shopper uploads a full-length photo on a product page and sees themselves wearing the garment, usually in 20 to 40 seconds. The app is in beta testing with Twisted Tailor and isn't yet available to all shoppers.",
+      "The picture is an example screen, redrawn with sample data.",
+    ],
+    points: [
+      "The shopper's photo isn't stored. The try-on image is kept for 7 days, then deleted.",
+      "Every image is checked by a second AI model before the shopper sees it, and images that fail are held back.",
+      "Results are labelled as an AI preview and carry the brand's watermark.",
+      "Staff see the results, the quality checks and a funnel from the button to an order, inside the Shopify admin. Fair-use limits apply to each shopper.",
+    ],
+    link: { label: "Read the Twisted Tailor case study", path: "/work/twisted-tailor" },
+  },
+];
+
+/* ── Custom WordPress plugins ───────────────────────────────────────────── */
+
+export const wordpressPlugins: Software[] = [
+  {
+    id: "catalogue-configurator",
+    mock: "afx-configurator",
+    label: "Architectural FX",
+    title: "A product catalogue and configurator",
+    body: [
+      "Architectural FX keep their lighting catalogue in a Google Sheet and publish to the website from a menu in the sheet. One plugin holds the catalogue and runs the products page, the product pages and a configurator that produces spec sheets. It replaced three plugins.",
+      "The configurator is shown as an example screen, redrawn with sample data.",
+    ],
+    points: [
+      "Each update is signed, so the site only accepts changes that come from the sheet.",
+      "The products page can be filtered nine ways, including colour temperature, wattage and IP rating.",
+      "In the configurator, options that don't go with an earlier choice are greyed out, and the product code builds as options are picked.",
+      "The specifier adds their project details and downloads a PDF spec sheet, or asks for a quote.",
+    ],
+    link: { label: "Read the Architectural FX case study", path: "/work/architectural-fx" },
+  },
+  {
+    id: "identity-checks",
+    mock: "equivo-kyc",
+    label: "Equivo, in testing",
+    title: "Identity checks from an instruction form",
+    body: [
+      "A plugin that connects Equivo's online instruction forms to LexisNexis for identity and anti-money-laundering checks. When a client submits a form, it confirms straight away and the checks run in the background. It replaces a paper-and-email process, and is in testing ahead of launch.",
+      "The picture is an example screen, redrawn with sample data.",
+    ],
+    points: [
+      "Where an ID document and face check is needed, the client gets a secure link and completes it on their phone in a couple of minutes.",
+      "The firm's team get a branded PDF report by email for every submission.",
+      "A failed check never blocks an instruction. It's flagged to the team to review.",
+      "Returning clients don't repeat the ID and face check every time. Risk screening still runs on every instruction.",
+    ],
+  },
+];
+
+/* ── What the software can connect to ───────────────────────────────────── */
+
+/**
+ * Systems bespoke software can connect to, grouped by kind. This is one list:
+ * some of these we have built against and some we have not, and the page does
+ * not say which. So the copy around it must only ever say what the software
+ * CAN connect to, never what we have connected. Every name is a current
+ * product with a public API or a documented import and export. Names only: no
  * third-party logos.
  */
 export const connections: Array<{ group: string; items: string[] }> = [
-  { group: "Shops and sites", items: ["Shopify", "WordPress"] },
-  { group: "Accounts and payments", items: ["Xero", "GoCardless", "Stripe"] },
-  { group: "Shipping and printing", items: ["Royal Mail Click & Drop", "PrintNode", "Label and document printers", "Barcode scanners"] },
-  { group: "Email and marketing", items: ["Klaviyo", "Gmail", "Transactional email"] },
-  { group: "Customer service", items: ["Freshdesk"] },
-  { group: "Social", items: ["Instagram", "Facebook", "LinkedIn"] },
-  { group: "Reviews and loyalty", items: ["Judge.me"] },
-  { group: "Analytics", items: ["Google Analytics", "Google Search Console", "Google PageSpeed"] },
-  { group: "AI models", items: ["Claude", "Gemini"] },
-  { group: "Spreadsheets and files", items: ["Google Sheets", "Google Drive", "CSV files", "PDF documents"] },
-];
-
-/**
- * Widely used systems we have NOT integrated yet. Each has a public API or a
- * documented import and export. The page says plainly that these are not
- * built, so never move a name from here to the list above without a build.
- */
-export const possibleConnections: Array<{ group: string; items: string[] }> = [
-  { group: "Accounting and finance", items: ["Sage", "QuickBooks", "FreeAgent", "Zoho Books", "KashFlow"] },
-  { group: "Payments", items: ["PayPal", "Klarna", "Clearpay", "Square", "SumUp", "Worldpay", "Adyen"] },
-  { group: "Shops and marketplaces", items: ["WooCommerce", "BigCommerce", "Adobe Commerce (Magento)", "Squarespace", "Amazon", "eBay", "Etsy", "TikTok Shop"] },
+  { group: "Shops and marketplaces", items: ["Shopify", "WooCommerce", "WordPress", "BigCommerce", "Adobe Commerce (Magento)", "Squarespace", "Amazon", "eBay", "Etsy", "TikTok Shop"] },
+  { group: "Accounting and payments", items: ["Xero", "Sage", "QuickBooks", "FreeAgent", "Zoho Books", "KashFlow", "Stripe", "PayPal", "GoCardless", "Klarna", "Clearpay", "Square", "SumUp", "Worldpay", "Adyen"] },
   { group: "Stock, orders and ERP", items: ["Linnworks", "Brightpearl", "Veeqo", "Cin7", "Unleashed", "Odoo", "NetSuite", "Microsoft Dynamics 365", "SAP Business One"] },
-  { group: "Couriers and shipping", items: ["DPD", "Evri", "DHL", "UPS", "FedEx", "Parcelforce", "ShipStation", "Sendcloud", "Shippo"] },
+  { group: "Couriers, shipping and printing", items: ["Royal Mail Click & Drop", "DPD", "Evri", "DHL", "UPS", "FedEx", "Parcelforce", "ShipStation", "Sendcloud", "Shippo", "PrintNode", "Label and document printers", "Barcode scanners"] },
   { group: "CRM and sales", items: ["HubSpot", "Salesforce", "Pipedrive", "Zoho CRM"] },
-  { group: "Email and SMS", items: ["Mailchimp", "Brevo", "ActiveCampaign", "SendGrid", "Postmark", "Mailgun", "Twilio", "WhatsApp Business"] },
-  { group: "Customer service", items: ["Zendesk", "Gorgias", "Intercom", "Help Scout"] },
-  { group: "Reviews", items: ["Trustpilot", "Reviews.io", "Yotpo", "Feefo", "Google Business Profile"] },
+  { group: "Email and SMS", items: ["Klaviyo", "Mailchimp", "Gmail", "Brevo", "ActiveCampaign", "SendGrid", "Postmark", "Mailgun", "Twilio", "WhatsApp Business"] },
+  { group: "Customer service", items: ["Zendesk", "Freshdesk", "Gorgias", "Intercom", "Help Scout"] },
+  { group: "Reviews and loyalty", items: ["Trustpilot", "Judge.me", "Reviews.io", "Yotpo", "Feefo", "Google Business Profile"] },
+  { group: "Social and video", items: ["Instagram", "Facebook", "LinkedIn", "TikTok", "YouTube"] },
+  { group: "Analytics and advertising", items: ["Google Analytics", "Google Search Console", "Google Ads", "Meta Ads", "Microsoft Advertising", "Google Merchant Center", "Google PageSpeed"] },
   { group: "Work and communication", items: ["Slack", "Microsoft Teams", "Trello", "Asana", "monday.com", "Notion", "Airtable", "Jira"] },
-  { group: "Office and files", items: ["Microsoft 365", "Excel", "SharePoint", "OneDrive", "Dropbox", "Google Workspace"] },
+  { group: "Office and files", items: ["Microsoft 365", "Google Workspace", "Excel", "Google Sheets", "Google Drive", "SharePoint", "OneDrive", "Dropbox", "CSV files", "PDF documents"] },
   { group: "Bookings and forms", items: ["Calendly", "Typeform", "Jotform", "Gravity Forms"] },
-  { group: "Advertising and product feeds", items: ["Google Ads", "Meta Ads", "Microsoft Advertising", "Google Merchant Center"] },
-  { group: "Social and video", items: ["TikTok", "YouTube"] },
   { group: "Documents and signing", items: ["DocuSign", "Adobe Acrobat Sign", "Dropbox Sign"] },
   { group: "Automation platforms", items: ["Zapier", "Make"] },
-  { group: "AI models", items: ["OpenAI"] },
+  { group: "AI models", items: ["Claude", "OpenAI", "Gemini"] },
   { group: "People", items: ["BambooHR"] },
 ];

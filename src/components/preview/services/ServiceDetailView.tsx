@@ -30,7 +30,7 @@ export function ServiceDetailView({ slug }: { slug: string }) {
       <ForYou service={service} />
       {service.slug === "marketing" && <Branches />}
       <WhatYouGet service={service} />
-      {service.showcase && <Showcase />}
+      {service.showcase && <Showcase kind={service.showcase} />}
       <Process process={service.process} />
       <Proof service={service} />
       {hasFaqs && <Faqs faqs={service.faqs} topic={service.lower} />}

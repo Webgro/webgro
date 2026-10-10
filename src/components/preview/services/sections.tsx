@@ -54,6 +54,7 @@ export function BrushedTitle({ lines, brush, brushClass }: { lines: string[]; br
 
 export function ServiceHero({ service }: { service: PvService }) {
   const root = useRef<HTMLElement>(null);
+  const parent = service.parent ? getAnyPvService(service.parent) : undefined;
 
   useGsap(root, ({ gsap }) => {
     const q = gsap.utils.selector(root.current!);
@@ -67,10 +68,10 @@ export function ServiceHero({ service }: { service: PvService }) {
       <div className="pv-svc-hero-copy">
         <p className="pv-svc-crumbs">
           <Link href={pv("/services")} data-cursor>All services</Link>
-          {service.parent && (
+          {parent && (
             <>
               <span aria-hidden="true">/</span>
-              <Link href={pv("/services/marketing")} data-cursor>Marketing</Link>
+              <Link href={pv(parent.path)} data-cursor>{parent.name}</Link>
             </>
           )}
           <span aria-hidden="true">/</span>
@@ -457,7 +458,7 @@ export function Start({ service, theme }: { service: PvService; theme: "paper" |
 
       <div className="pv-svc-pairs">
         <p className="pv-label">
-          {service.parent ? "Other marketing and related services" : "Related services"}
+          {service.parent === "marketing" ? "Other marketing and related services" : "Related services"}
         </p>
         {pairs.map((p) => (
           <Link href={pv(p.path)} className="pv-svc-pair" key={p.slug} data-cursor>

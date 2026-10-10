@@ -1,11 +1,11 @@
 "use client";
 
 import { useRef } from "react";
-import { Screen } from "../bespoke/Screen";
+import { Screen, type ScreenName } from "../bespoke/Screen";
 import { useSceneOnly } from "./useSceneOnly";
 
 /** A redrawn screen of the Fun Cases software, stood up on the desk as the page loads or scrolls in. */
-export function BespokeVisual({ still = false }: { still?: boolean }) {
+export function BespokeVisual({ still = false, name = "fc-stock-planning" }: { still?: boolean; name?: ScreenName }) {
   const root = useRef<HTMLElement>(null);
 
   useSceneOnly(root, ({ gsap, inHero, timeline }) => {
@@ -26,7 +26,7 @@ export function BespokeVisual({ still = false }: { still?: boolean }) {
     <figure className="pv-bsp-figure" ref={root}>
       <div className="pv-bsp-persp">
         <div className="pv-bsp-tilt">
-          <Screen name="fc-stock-planning" decorative />
+          <Screen name={name} decorative />
         </div>
       </div>
     </figure>

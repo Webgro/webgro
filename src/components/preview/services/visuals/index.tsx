@@ -22,7 +22,7 @@ export function HeroVisual({ service }: { service: PvService }) {
       return m ? <MockupVisual name={m.name} /> : null;
     }
     case "bespoke":
-      return <BespokeVisual />;
+      return <BespokeVisual name={service.heroScreen} />;
     case "seo":
       return <SeoVisual />;
     case "marketing":

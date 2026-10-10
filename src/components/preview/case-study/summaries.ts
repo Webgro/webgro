@@ -9,7 +9,7 @@ export type Summary = { ask: string; did: string; changed: string };
 export const summaries: Record<string, Summary> = {
   valuepet: {
     ask: "ValuePet needed a new Shopify store, and a way to keep stock in step with their second Shopify store without updating it by hand.",
-    did: "We redesigned the store in eight weeks, added a Pet Hub that personalises the shop to each customer's pets, built an app that syncs stock between the two stores, and took over their Klaviyo email marketing.",
+    did: "We redesigned the store in eight weeks, added a Pet Hub that personalises the shop to each customer's pets, built an app that keeps products and stock in step between the two stores, and took over their Klaviyo email marketing.",
     changed: "Average order value went from €42.51 in the week before launch to €69.03 in the week after.",
   },
   berrymae: {

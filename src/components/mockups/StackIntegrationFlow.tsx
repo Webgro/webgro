@@ -25,7 +25,7 @@ const shopify: Node = {
 
 const router: Node = {
   id: "router",
-  app: "Router",
+  app: "Rules",
   action: "If total > £100",
   color: "#0F172A",
   icon: (
