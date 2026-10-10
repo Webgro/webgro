@@ -75,6 +75,11 @@ export const caseNotes: Record<string, { client: string; img: string; w: number;
     img: "/preview/reel-gieves.jpg", w: 1800, h: 1200,
     line: "A ground-up Shopify build for the Savile Row tailor. We replaced eight paid apps with our own code, and the mobile speed score went from 64 to 85.",
   },
+  berrymae: {
+    client: "BerryMae",
+    img: "/preview/reel-berrymae.jpg", w: 1500, h: 1000,
+    line: "A brand identity and a custom Shopify theme for a new phone case brand. Shoppers choose their phone once, from 68 models, and the shop shows the cases that fit.",
+  },
   "fun-cases": {
     client: "Fun Cases",
     img: "/preview/reel-fun-cases.jpg", w: 1280, h: 853,
@@ -209,7 +214,7 @@ const websites: PvService = {
       { value: "99", label: "ANYPRINT's Lighthouse performance score, up from 54.", draw: { kind: "ring", value: 99, from: 54, note: "54 before" } },
       { value: "+240%", label: "Sublishop sales growth in the three months after relaunch.", draw: { kind: "bars", bars: [{ label: "Before", value: 1 }, { label: "After", value: 3.4, accent: true }] } },
     ],
-    cases: ["gieves-and-hawkes", "anyprint", "fun-cases", "origin-architectural", "threadology", "fandp-agency"],
+    cases: ["gieves-and-hawkes", "berrymae", "anyprint", "fun-cases", "origin-architectural", "threadology", "fandp-agency"],
   },
   faqs: [
     {

@@ -65,6 +65,14 @@ export const reel = [
     figureLabel: "Mobile Lighthouse score, up from 64",
   },
   {
+    client: "BerryMae",
+    slug: "berrymae",
+    img: "/preview/reel-berrymae.jpg",
+    body: "A brand identity and a custom Shopify theme for a new phone case brand. Shoppers choose their phone once, and the shop shows the cases that fit.",
+    figure: "68",
+    figureLabel: "Phone models in the shop-by-phone picker",
+  },
+  {
     client: "Sublishop",
     slug: "sublishop",
     img: "/preview/reel-sublishop.jpg",

@@ -13,6 +13,7 @@ import { caseNotes, getAnyPvService, pvSubServices, type PvService } from "./con
 import { HeroVisual } from "./visuals";
 import { forYouVisual, getVisual } from "./body/BodyVisuals";
 import { FigureDraw } from "./body/FigureDraw";
+import { NewTag } from "../NewTag";
 
 function Arrow() {
   return (
@@ -401,7 +402,7 @@ export function Proof({ service }: { service: PvService }) {
                 <img src={c.img} alt={`${c.client} project by Webgro`} width={c.w} height={c.h} loading="lazy" />
               </Link>
               <div className="pv-svc-case-text">
-                <h3>{c.client}</h3>
+                <h3>{c.client}<NewTag slug={slug} /></h3>
                 <p>{c.line}</p>
                 <Link href={pv(`/work/${slug}`)} className="pv-textlink" data-cursor>Read the case study</Link>
               </div>

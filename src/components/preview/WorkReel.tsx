@@ -6,6 +6,7 @@ import { reel } from "./content";
 import { createGlPlanes } from "./glPlanes";
 import { pv } from "./links";
 import { SCENE_QUERY, STATIC_QUERY, useGsap } from "./useGsap";
+import { NewTag } from "./NewTag";
 
 export function WorkReel() {
   const root = useRef<HTMLElement>(null);
@@ -86,7 +87,7 @@ export function WorkReel() {
           <div className="pv-reel-intro">
             <h2 className="pv-h2">Recent work</h2>
             <p className="pv-lede">
-              Five recent projects, with a result we measured for each one.
+              Six recent projects, with a figure from each one.
             </p>
           </div>
 
@@ -97,7 +98,7 @@ export function WorkReel() {
                 <img src={r.img} alt={`${r.client} project by Webgro`} width={1800} height={1200} loading="lazy" />
               </Link>
               <div className="pv-reel-text">
-                <h3 className="pv-reel-client">{r.client}</h3>
+                <h3 className="pv-reel-client">{r.client}<NewTag slug={r.slug} /></h3>
                 <p className="pv-reel-body">{r.body}</p>
                 <p className="pv-reel-figure">
                   <strong>{r.figure}</strong>
