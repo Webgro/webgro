@@ -304,3 +304,66 @@
 @container (max-width: 520px) {
   .bm-wp-side { display: none; }
 }
+
+/* ── Case Club (loyalty app: admin beside the shopper's panel) ────────── */
+.bm-cc { font-family: var(--font-inter), Inter, system-ui, sans-serif; background: #f5f5f4; color: #161616; font-weight: 500; }
+.bm-cc-card { background: #fff; border: 1px solid rgba(22, 22, 22, 0.08); border-radius: 1.1em; min-width: 0; }
+.bm-cc-tab { font-size: 0.88em; font-weight: 600; padding: 0.35em 0.85em; border-radius: 99em; white-space: nowrap; color: rgba(22, 22, 22, 0.6); flex: none; }
+.bm-cc-tab.is-on { background: #161616; color: #fff; }
+.bm-cc-coin { display: inline-block; width: 0.75em; height: 0.75em; border-radius: 50%; background: #ffc933; box-shadow: inset 0 0 0 0.1em #161616; flex: none; }
+.bm-cc-pill { display: inline-flex; align-items: center; justify-content: center; border: 0.15em solid #161616; border-radius: 99em; padding: 0.3em 0.9em; font-weight: 800; white-space: nowrap; background: #fff; flex: none; transition: background-color 0.4s ease, color 0.4s ease, opacity 0.4s ease; }
+
+.bm-thp > * { font-size: 0.85em; font-weight: 600; opacity: 0.6; }
+.bm-phone-s > * { flex: none; }
+
+/* ── Two-shop sync dashboard ──────────────────────────────────────────── */
+.bm-br { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #f6f7f9; color: #1c1f24; font-weight: 400; }
+.bm-br-card { background: #fff; border: 1px solid #e2e5ea; border-radius: 0.7em; min-width: 0; }
+.bm-br-h { font-size: 0.98em; font-weight: 600; padding: 0.7em 1em; border-bottom: 1px solid #e2e5ea; display: flex; align-items: center; gap: 0.6em; white-space: nowrap; }
+.bm-br-btn { display: inline-flex; align-items: center; border: 1px solid #cfd4dc; border-radius: 0.45em; padding: 0.38em 0.8em; font-size: 0.86em; font-weight: 500; white-space: nowrap; background: #fff; flex: none; }
+.bm-br-btn--go { background: #1b7f3b; border-color: #1b7f3b; color: #fff; }
+.bm-br-tag { display: inline-flex; align-items: center; gap: 0.35em; border-radius: 0.4em; padding: 0.12em 0.55em; font-size: 0.8em; font-weight: 600; white-space: nowrap; flex: none; transition: background-color 0.4s ease, color 0.4s ease; }
+
+/* ── Try-on widget (black and white, square corners) ──────────────────── */
+.bm-to { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; background: #55524e; color: #1a1a1a; font-weight: 400; }
+.bm-to-panel { background: #fff; flex: 1 1 0; min-width: 0; padding: 1.2em 1.2em 1.3em; display: flex; flex-direction: column; gap: 0.75em; position: relative; box-shadow: 0 1em 3em rgba(0, 0, 0, 0.35); }
+.bm-to-eyebrow { font-size: 0.68em; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
+.bm-to-btn { display: flex; align-items: center; justify-content: center; height: 3.4em; font-size: 0.74em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; background: #111; color: #fff; border: 1px solid #111; }
+.bm-to-btn--line { background: #fff; color: #111; }
+.bm-to-frame { position: relative; aspect-ratio: 3 / 4; background: #f2f2f2; overflow: hidden; }
+.bm-to-frame svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bm-to-step { position: absolute; top: -0.9em; left: 0; width: 1.8em; height: 1.8em; background: #111; color: #fff; font-size: 0.8em; font-weight: 700; display: grid; place-items: center; }
+
+/* ── Product configurator (charcoal and teal) ─────────────────────────── */
+.bm-af { font-family: var(--font-jakarta), "Poppins", system-ui, sans-serif; background: #1f2424; color: #e9ecec; font-weight: 400; }
+.bm-af-serif { font-family: "Playfair Display", "Bodoni 72", Didot, Georgia, "Times New Roman", serif; font-weight: 600; }
+.bm-af-group { position: relative; border: 1px solid rgba(255, 255, 255, 0.13); padding: 1.5em 1.2em 1.1em; min-width: 0; }
+.bm-af-legend { position: absolute; top: -0.75em; left: 1em; background: #1f2424; padding: 0 0.7em; font-size: 0.66em; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; white-space: nowrap; }
+.bm-af-opt { display: inline-flex; align-items: center; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 99em; padding: 0.5em 1em; font-size: 0.86em; white-space: nowrap; transition: background-color 0.45s ease, border-color 0.45s ease, color 0.45s ease, opacity 0.45s ease; }
+.bm-af-opt.is-on { background: #3cc8e0; border-color: #3cc8e0; color: #10191b; font-weight: 600; }
+.bm-af-opt.is-off { opacity: 0.32; text-decoration: line-through; }
+.bm-af-btn { display: flex; align-items: center; justify-content: center; gap: 0.6em; height: 3.6em; font-size: 0.7em; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; white-space: nowrap; border: 1px solid rgba(255, 255, 255, 0.35); transition: background-color 0.45s ease, color 0.45s ease; }
+
+/* ── WordPress admin settings screen ──────────────────────────────────── */
+.bm-wa { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; background: #f0f0f1; color: #1d2327; font-weight: 400; }
+.bm-wa-side { flex: none; width: 12.5em; background: #1d2327; color: #f0f0f1; display: flex; flex-direction: column; padding-top: 2.6em; }
+.bm-wa-lk { display: flex; align-items: center; gap: 0.6em; padding: 0.55em 0.9em; font-size: 0.92em; white-space: nowrap; }
+.bm-wa-lk svg { width: 1.3em; height: 1.3em; opacity: 0.6; }
+.bm-wa-lk.is-on { background: #2271b1; color: #fff; }
+.bm-wa-lk.is-on svg { opacity: 1; }
+.bm-wa-box { background: #fff; border: 1px solid #c3c4c7; min-width: 0; }
+.bm-wa-row { display: grid; grid-template-columns: 13em minmax(0, 1fr); gap: 0.4em 1em; padding: 0.75em 1.1em; border-top: 1px solid #f0f0f1; align-items: start; font-size: 0.92em; }
+.bm-wa-row > :first-child { font-weight: 600; }
+.bm-wa-sw { flex: none; width: 2.2em; height: 1.2em; border-radius: 99em; background: #2271b1; position: relative; margin-top: 0.08em; }
+.bm-wa-sw::after { content: ""; position: absolute; top: 0.15em; left: 1.15em; width: 0.9em; height: 0.9em; border-radius: 50%; background: #fff; }
+.bm-wa-in { border: 1px solid #8c8f94; border-radius: 0.3em; padding: 0.3em 0.6em; background: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bm-wa-note { background: #fff; border: 1px solid #c3c4c7; border-left: 0.3em solid #2271b1; padding: 0.65em 0.9em; font-size: 0.92em; display: flex; align-items: center; gap: 0.6em; transition: border-color 0.5s ease; }
+.bm-spin { width: 1em; height: 1em; border-radius: 50%; border: 0.16em solid rgba(34, 113, 177, 0.25); border-top-color: #2271b1; flex: none; animation: bm-spin 0.9s linear infinite; }
+@keyframes bm-spin { to { transform: rotate(360deg); } }
+@container (max-width: 520px) {
+  .bm-wa-side { display: none; }
+  .bm-wa-row { grid-template-columns: 9.5em minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bm-spin { animation: none; }
+}

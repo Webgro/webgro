@@ -1,7 +1,11 @@
 import { AnyprintQuotes } from "./AnyprintQuotes";
+import { Bridge } from "./Bridge";
+import { CaseClub } from "./CaseClub";
+import { Configurator } from "./Configurator";
 import { Content } from "./Content";
 import { Forecast } from "./Forecast";
 import { Helpdesk } from "./Helpdesk";
+import { KycSettings } from "./KycSettings";
 import { PrintRun } from "./PrintRun";
 import { ProductGen } from "./ProductGen";
 import { Resizer } from "./Resizer";
@@ -9,6 +13,7 @@ import { Returns } from "./Returns";
 import { Shipping } from "./Shipping";
 import { StockPlanning } from "./StockPlanning";
 import { TTHelpdesk } from "./TTHelpdesk";
+import { TryOn } from "./TryOn";
 import { Warehouse } from "./Warehouse";
 import { WebgroPortal } from "./WebgroPortal";
 
@@ -34,6 +39,11 @@ export const BESPOKE_MOCK_NAMES = [
   "tt-helpdesk",
   "anyprint-quotes",
   "webgro-portal",
+  "case-club",
+  "pw-vp-bridge",
+  "tt-tryon",
+  "afx-configurator",
+  "equivo-kyc",
 ] as const;
 
 export type BespokeMockName = (typeof BESPOKE_MOCK_NAMES)[number];
@@ -52,6 +62,11 @@ const registry: Record<BespokeMockName, () => React.ReactElement> = {
   "tt-helpdesk": TTHelpdesk,
   "anyprint-quotes": AnyprintQuotes,
   "webgro-portal": WebgroPortal,
+  "case-club": CaseClub,
+  "pw-vp-bridge": Bridge,
+  "tt-tryon": TryOn,
+  "afx-configurator": Configurator,
+  "equivo-kyc": KycSettings,
 };
 
 /** One redrawn screen, by name. A 16:10 picture that fills its container's width. */
