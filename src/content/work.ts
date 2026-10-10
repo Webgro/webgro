@@ -1080,10 +1080,7 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/fleaway/storefront.jpg",
         alt: "Fleaway homepage, with the flea and tick treatment heading and the range of packs",
         url: "fleaway.com",
-        phone: {
-          src: "/work/fleaway/mobile.jpg",
-          alt: "Fleaway homepage on a phone",
-        },
+        aspect: "aspect-[1400/844]",
       },
       {
         type: "section",
@@ -1099,10 +1096,7 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/fleaway/live-finder.jpg",
         alt: "Fleaway pack finder, with a choice of dog or cat and a weight slider, showing the matching pack",
         url: "fleaway.com/pages/which-one",
-        phone: {
-          src: "/work/fleaway/live-mobile-finder.jpg",
-          alt: "Fleaway pack finder on a phone",
-        },
+        aspect: "aspect-[1400/844]",
       },
 
       // ── Chapter 02 ─────────────────────────────────────────────
@@ -1127,10 +1121,7 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/fleaway/live-product.jpg",
         alt: "Fleaway Plus product page, with pack sizes and a choice of buying once or subscribing",
         url: "fleaway.com/products",
-        phone: {
-          src: "/work/fleaway/live-mobile-product.jpg",
-          alt: "Fleaway Plus product page on a phone",
-        },
+        aspect: "aspect-[1400/844]",
       },
       {
         type: "section",
