@@ -155,6 +155,7 @@ export const clients = [
   { name: "Sublishop", slug: "sublishop" },
   { name: "ANYPRINT", slug: "anyprint" },
   { name: "BerryMae", slug: "berrymae" },
+  { name: "Fleaway", slug: "fleaway" },
   { name: "Architectural FX", slug: "architectural-fx" },
   { name: "Origin Architectural", slug: "origin-architectural" },
   { name: "it's Pouch", slug: "its-pouch" },

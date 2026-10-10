@@ -1031,6 +1031,174 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
+    slug: "fleaway",
+    client: "Fleaway",
+    tag: "Shopify · Pet health",
+    year: "2026",
+    accent: "teal",
+    heroImage: "/work/fleaway.jpg",
+    heroImageAlt: "Five Fleaway Plus spot-on packs in a row, each in its own colour: green for cats, then orange, blue, pink and red for dogs from small to extra large",
+    excerpt:
+      "A Shopify store for Fleaway Plus, a flea and tick treatment for dogs and cats sold in Ireland. A pack finder matches the treatment to the pet's weight, and the same theme runs the sister site, Wormaway.",
+    services: ["Shopify theme design", "Shopify development", "Subscriptions", "Content"],
+    stack: ["Shopify", "Custom theme", "Shopify Subscriptions"],
+    timeline: "Launching 2026",
+    categories: ["ecommerce"],
+    body: [
+      {
+        type: "intro",
+        text: "Fleaway Plus is a flea and tick spot-on for dogs and cats, sold in Ireland. We designed and built its Shopify store on a theme we wrote from scratch, then used the same theme for its sister site, Wormaway.",
+      },
+      {
+        type: "stats",
+        items: [
+          { value: "8", label: "Products across the two ranges" },
+          { value: "3", label: "Pack sizes: 1, 3 and 12 months" },
+          { value: "2", label: "Sites run from one theme" },
+        ],
+      },
+
+      // ── Chapter 01 ─────────────────────────────────────────────
+      {
+        type: "chapter",
+        id: "finder",
+        num: "01",
+        label: "Finding the pack",
+        description: "Five treatments split by animal and weight, and a finder that picks the right one.",
+      },
+      {
+        type: "section",
+        eyebrow: "The range",
+        heading: "One pack for each size of pet",
+        body: [
+          "The range is split by animal and weight. There is one pack for cats and ferrets, and four for dogs, from 2kg up to 60kg. Choosing the wrong one is the easiest mistake a shopper can make.",
+          "Each pack has its own colour on the box: green for cats, then orange, blue, pink and red as the dogs get bigger. The site uses the same colours, so the pack on screen matches the one on the shelf.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/fleaway/storefront.jpg",
+        alt: "Fleaway homepage, with the flea and tick treatment heading and the range of packs",
+        url: "fleaway.com",
+        phone: {
+          src: "/work/fleaway/mobile.jpg",
+          alt: "Fleaway homepage on a phone",
+        },
+      },
+      {
+        type: "section",
+        eyebrow: "Pack finder",
+        heading: "Choose the animal, set the weight",
+        body: [
+          "The finder asks two things: is it a dog or a cat, and how much does it weigh. The shopper drags a slider to the weight and the page shows the flea treatment for that pet, with the matching wormer beside it.",
+          "They can add either to the basket from the result, without opening the product page.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/fleaway/live-finder.jpg",
+        alt: "Fleaway pack finder, with a choice of dog or cat and a weight slider, showing the matching pack",
+        url: "fleaway.com/pages/which-one",
+        phone: {
+          src: "/work/fleaway/live-mobile-finder.jpg",
+          alt: "Fleaway pack finder on a phone",
+        },
+      },
+
+      // ── Chapter 02 ─────────────────────────────────────────────
+      {
+        type: "chapter",
+        id: "buying",
+        num: "02",
+        label: "Buying",
+        description: "Three pack sizes, a subscription, and a discount for buying flea and worm treatment together.",
+      },
+      {
+        type: "section",
+        eyebrow: "Product pages",
+        heading: "One pack, three or twelve",
+        body: [
+          "Every treatment comes as a pack of one, three or twelve, which is a month, three months or a year of cover. The shopper can buy once or subscribe for 10% off, with deliveries every four weeks or every three months.",
+          "The same buying panel appears on the product page and on every finder result, so it works the same way wherever the shopper meets it.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/fleaway/live-product.jpg",
+        alt: "Fleaway Plus product page, with pack sizes and a choice of buying once or subscribing",
+        url: "fleaway.com/products",
+        phone: {
+          src: "/work/fleaway/live-mobile-product.jpg",
+          alt: "Fleaway Plus product page on a phone",
+        },
+      },
+      {
+        type: "section",
+        eyebrow: "Flea and worm",
+        heading: "A discount for buying both",
+        body: [
+          "Pets that need a flea treatment usually need worming too. Buying any flea pack takes 15% off a wormer, and the discount applies by itself in the basket. An Add both button puts the pair in together.",
+        ],
+      },
+      {
+        type: "section",
+        eyebrow: "Basket",
+        heading: "Suggestions that fit the pet",
+        body: [
+          "The basket slides in from the side and shows how far the order is from free delivery. It suggests up to two products from the other range, matched to the same animal and weight, so a cat owner is never offered a wormer for a large dog.",
+        ],
+      },
+
+      // ── Chapter 03 ─────────────────────────────────────────────
+      {
+        type: "chapter",
+        id: "content",
+        num: "03",
+        label: "Content & search",
+        description: "A how-to guide, advice articles, reviews, and two sites that don't compete with each other.",
+      },
+      {
+        type: "section",
+        eyebrow: "Advice",
+        heading: "Guides written for pet owners",
+        body: [
+          "We wrote a step-by-step guide to applying a spot-on, and a set of advice articles on the questions owners ask, such as why fleas come back a fortnight after treatment and how to weigh a cat at home.",
+          "Reviews are built into the theme instead of a paid app. A customer submits one from the product page, and it shows once the team has approved it.",
+        ],
+      },
+      {
+        type: "section",
+        eyebrow: "Two sites",
+        heading: "One theme for Fleaway and Wormaway",
+        body: [
+          "Wormaway, the worming range, has its own site on the same theme. The wordmark, the accent colour and the lead range are settings, so one theme runs both and a fix made once reaches both sites.",
+          "Each site sells both ranges, which would normally leave two sets of near-identical pages competing in search. So each site tells search engines that the other range's pages belong to its sister site, and the advice articles are split between the two.",
+        ],
+      },
+      {
+        type: "section",
+        eyebrow: "Catalogue",
+        heading: "Products built from one file",
+        body: [
+          "The products, packs, prices and weight bands live in a single data file, and a script creates them in Shopify. A change is made in one place, and the whole catalogue can be rebuilt on another store, which is how the second site was set up.",
+        ],
+      },
+      {
+        type: "deliverables",
+        items: [
+          "A custom Shopify theme, written from scratch",
+          "Pack finder by animal and weight",
+          "One, three and twelve month packs, with subscriptions",
+          "A flea and worm discount that applies itself",
+          "Basket suggestions matched to the pet",
+          "A how-to guide and advice articles",
+          "Reviews built into the theme",
+          "A sister site on the same theme, set up so the two don't compete in search",
+        ],
+      },
+    ],
+  },
+  {
     slug: "architectural-fx",
     client: "Architectural FX",
     tag: "WordPress · Lighting",
