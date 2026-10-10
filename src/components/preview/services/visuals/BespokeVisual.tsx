@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { Screen } from "../bespoke/Screen";
 import { useSceneOnly } from "./useSceneOnly";
 
-/** A redrawn screen of the Fun Cases hub, stood up on the desk as the page loads or scrolls in. */
+/** A redrawn screen of the Fun Cases software, stood up on the desk as the page loads or scrolls in. */
 export function BespokeVisual({ still = false }: { still?: boolean }) {
   const root = useRef<HTMLElement>(null);
 

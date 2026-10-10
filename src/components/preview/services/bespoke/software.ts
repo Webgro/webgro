@@ -3,7 +3,7 @@ import type { BespokeMockName } from "@/components/mockups/bespoke";
 /**
  * The four pieces of software on the Bespoke Software page. Facts come from
  * the research briefs written from each tool's own code. The savings figures
- * were supplied by the owner. The fuller account of the Fun Cases hub and the
+ * were supplied by the owner. The fuller account of the Fun Cases software and the
  * ANYPRINT quote desk is in their case studies (src/content/work.ts).
  */
 
@@ -19,12 +19,12 @@ export type Software = {
 
 export const software: Software[] = [
   {
-    id: "fun-cases-hub",
+    id: "fun-cases-software",
     mock: "fc-stock-planning",
     label: "Fun Cases",
     title: "Ten tools behind one login",
     body: [
-      "Fun Cases sell phone cases online and print them in their own workshop. The hub is the software they run the business on, from stock coming in to customer service after the sale. It saves them about 20 hours of work a day, worth more than £30,000 a year.",
+      "Fun Cases sell phone cases online and print them in their own workshop. We built the software they run the business on, from stock coming in to customer service after the sale. It saves them about 20 hours of work a day, worth more than £30,000 a year.",
       "The stock overview is shown here as an example screen, redrawn with sample data.",
     ],
     points: [
@@ -99,9 +99,36 @@ export const connections: Array<{ group: string; items: string[] }> = [
   { group: "Accounts and payments", items: ["Xero", "GoCardless", "Stripe"] },
   { group: "Shipping and printing", items: ["Royal Mail Click & Drop", "PrintNode", "Label and document printers", "Barcode scanners"] },
   { group: "Email and marketing", items: ["Klaviyo", "Gmail", "Transactional email"] },
+  { group: "Customer service", items: ["Freshdesk"] },
   { group: "Social", items: ["Instagram", "Facebook", "LinkedIn"] },
   { group: "Reviews and loyalty", items: ["Judge.me"] },
   { group: "Analytics", items: ["Google Analytics", "Google Search Console", "Google PageSpeed"] },
   { group: "AI models", items: ["Claude", "Gemini"] },
   { group: "Spreadsheets and files", items: ["Google Sheets", "Google Drive", "CSV files", "PDF documents"] },
+];
+
+/**
+ * Widely used systems we have NOT integrated yet. Each has a public API or a
+ * documented import and export. The page says plainly that these are not
+ * built, so never move a name from here to the list above without a build.
+ */
+export const possibleConnections: Array<{ group: string; items: string[] }> = [
+  { group: "Accounting and finance", items: ["Sage", "QuickBooks", "FreeAgent", "Zoho Books", "KashFlow"] },
+  { group: "Payments", items: ["PayPal", "Klarna", "Clearpay", "Square", "SumUp", "Worldpay", "Adyen"] },
+  { group: "Shops and marketplaces", items: ["WooCommerce", "BigCommerce", "Adobe Commerce (Magento)", "Squarespace", "Amazon", "eBay", "Etsy", "TikTok Shop"] },
+  { group: "Stock, orders and ERP", items: ["Linnworks", "Brightpearl", "Veeqo", "Cin7", "Unleashed", "Odoo", "NetSuite", "Microsoft Dynamics 365", "SAP Business One"] },
+  { group: "Couriers and shipping", items: ["DPD", "Evri", "DHL", "UPS", "FedEx", "Parcelforce", "ShipStation", "Sendcloud", "Shippo"] },
+  { group: "CRM and sales", items: ["HubSpot", "Salesforce", "Pipedrive", "Zoho CRM"] },
+  { group: "Email and SMS", items: ["Mailchimp", "Brevo", "ActiveCampaign", "SendGrid", "Postmark", "Mailgun", "Twilio", "WhatsApp Business"] },
+  { group: "Customer service", items: ["Zendesk", "Gorgias", "Intercom", "Help Scout"] },
+  { group: "Reviews", items: ["Trustpilot", "Reviews.io", "Yotpo", "Feefo", "Google Business Profile"] },
+  { group: "Work and communication", items: ["Slack", "Microsoft Teams", "Trello", "Asana", "monday.com", "Notion", "Airtable", "Jira"] },
+  { group: "Office and files", items: ["Microsoft 365", "Excel", "SharePoint", "OneDrive", "Dropbox", "Google Workspace"] },
+  { group: "Bookings and forms", items: ["Calendly", "Typeform", "Jotform", "Gravity Forms"] },
+  { group: "Advertising and product feeds", items: ["Google Ads", "Meta Ads", "Microsoft Advertising", "Google Merchant Center"] },
+  { group: "Social and video", items: ["TikTok", "YouTube"] },
+  { group: "Documents and signing", items: ["DocuSign", "Adobe Acrobat Sign", "Dropbox Sign"] },
+  { group: "Automation platforms", items: ["Zapier", "Make"] },
+  { group: "AI models", items: ["OpenAI"] },
+  { group: "People", items: ["BambooHR"] },
 ];

@@ -107,7 +107,7 @@ export const SERVICE_META: Record<string, Meta> = {
   "bespoke-software": {
     title: "Bespoke Software Development for Online Businesses | Webgro",
     description:
-      "Bespoke software from £3,000: staff hubs, warehouse and stock systems, helpdesks, quoting tools and client portals, built for one business.",
+      "Bespoke software from £3,000, designed to save time and money, with AI built in where it helps and integrations with the systems you already use.",
   },
   seo: {
     title: "SEO for Shopify & WordPress Websites | Webgro",

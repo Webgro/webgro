@@ -34,8 +34,8 @@ export const summaries: Record<string, Summary> = {
   },
   "fun-cases": {
     ask: "Fun Cases had outgrown its old brand, and the third-party app customers used to design their own cases cost nearly £5,000 a year.",
-    did: "We rebranded the business, starting with the logo, and built a new Shopify theme from scratch with our own personaliser in it. We also run their SEO, paid ads and email marketing, and we built the hub they run stock, shipping, printing, returns and customer service from.",
-    changed: "Revenue is up 300% over the last five years. Email brings in 30% of revenue, AI triage has cut customer service hours by 70%, and the hub saves about 20 hours of work a day.",
+    did: "We rebranded the business, starting with the logo, and built a new Shopify theme from scratch with our own personaliser in it. We also run their SEO, paid ads and email marketing, and we built the custom software they run stock, shipping, printing, returns and customer service from.",
+    changed: "Revenue is up 300% over the last five years. Email brings in 30% of revenue, AI triage has cut customer service hours by 70%, and their custom software saves about 20 hours of work a day.",
   },
   "gieves-and-hawkes": {
     ask: "The first store we built for them, launched in 2024, had come to rely on twelve apps. Each one added a monthly fee and a render-blocking script, and could break when someone else updated it.",

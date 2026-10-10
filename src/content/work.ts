@@ -252,55 +252,25 @@ export const caseStudies: CaseStudy[] = [
       // ── Chapter 03 ─────────────────────────────────────────────
       {
         type: "chapter",
-        id: "apps",
+        id: "custom-software",
         num: "03",
-        label: "Order Routing",
+        label: "Custom Software",
         description:
-          "An order-routing app that checks every order as it comes in and sends it to the right part of the print floor.",
+          "Ten tools behind one login, covering stock, the warehouse, shipping, printing, returns, content and customer service. The software saves about 20 hours of work a day.",
       },
       {
         type: "section",
-        eyebrow: "Order routing",
-        heading: "Automatic order routing",
-        body: [
-          "Fun Cases invested in automatic printing machines, but not every order can go to them. It depends on the phone model and case type the customer chose.",
-          "We built a routing app that checks every order as it comes in. Orders the machines can handle go straight to the automatic printers with no manual step, and the rest are queued for manual printing in-house. On the automatic route, an order can be placed and printed within two minutes.",
-        ],
-      },
-      {
-        type: "uiMock",
-        name: "fun-cases-order-routing",
-      },
-      {
-        type: "statGroup",
-        items: [
-          { eyebrow: "Order to print", value: "2 min", label: "on the automatic route" },
-          { eyebrow: "Routing decisions", value: "Every order", label: "made automatically" },
-        ],
-      },
-
-      // ── Chapter 04 ─────────────────────────────────────────────
-      {
-        type: "chapter",
-        id: "hub",
-        num: "04",
-        label: "The Hub",
-        description:
-          "Ten tools behind one login, covering stock, the warehouse, shipping, printing, returns, content and customer service. The hub saves about 20 hours of work a day.",
-      },
-      {
-        type: "section",
-        eyebrow: "The hub",
+        eyebrow: "Custom software",
         heading: "Ten tools behind one login",
         body: [
-          "Fun Cases run their stock, warehouse, shipping, printing, returns, content and customer service from one piece of software we built for them. Each person has their own login, with a role and access to only the tools they need. Several of the tools started as separate apps and were moved into the hub later, with their data.",
-          "The hub saves Fun Cases about 20 hours of work a day, worth more than £30,000 a year. The screens in this chapter are example screens, redrawn with sample data.",
+          "Fun Cases run their stock, warehouse, shipping, printing, returns, content and customer service from one piece of software we built for them. Each person has their own login, with a role and access to only the tools they need. Several of the tools started as separate apps and were brought under the one login later, with their data.",
+          "The software saves Fun Cases about 20 hours of work a day, worth more than £30,000 a year. The screens in this chapter are example screens, redrawn with sample data.",
         ],
       },
       {
         type: "statGroup",
         items: [
-          { eyebrow: "Saved by the hub", value: "20 hours", label: "of work a day" },
+          { eyebrow: "Saved by the software", value: "20 hours", label: "of work a day" },
           { eyebrow: "Tools", value: "10", label: "behind one login" },
           { eyebrow: "Customer service hours", value: "−70%", label: "with AI triage" },
         ],
@@ -325,7 +295,7 @@ export const caseStudies: CaseStudy[] = [
         body: [
           "Off-the-shelf warehouse software was either too big or too limited for Fun Cases, so we built their own. Warehouse staff use it all day on rugged Android phones with barcode scanners, to book stock in, move it, find it, pick orders and run stock takes. Every scan records a stock movement and updates the stock held at each location. Booking in is three steps: the SKU, the location and the quantity.",
           "Each scan is saved on the device before it's sent, and sent again if the wifi drops. A note is added to the Shopify order when it's picked, pressed and packed. Timekeeping is built in, with a points score for picks, book-ins, moves and stock takes.",
-          "The warehouse system moved into the hub from an earlier custom app. Every record kept its original ID, so the QR codes already on shelves and boxes carried on working.",
+          "The warehouse system was moved across from an earlier custom app. Every record kept its original ID, so the QR codes already on shelves and boxes carried on working.",
         ],
       },
       {
@@ -347,7 +317,7 @@ export const caseStudies: CaseStudy[] = [
         eyebrow: "Shipping labels",
         heading: "A Royal Mail label from one scan",
         body: [
-          "A packer scans an order number at the bench. The hub reads the order from Shopify, and a set of rules decides the size and service from the product type, the shipping method chosen at checkout and the delivery country.",
+          "A packer scans an order number at the bench. The software reads the order from Shopify, and a set of rules decides the size and service from the product type, the shipping method chosen at checkout and the delivery country.",
           "The label is created through Royal Mail Click & Drop and sent straight to the bench label printer. The order is then fulfilled in Shopify with its tracking number. Scanning an order that has already been dispatched never buys a second label.",
         ],
       },
@@ -360,8 +330,8 @@ export const caseStudies: CaseStudy[] = [
         eyebrow: "Print runs",
         heading: "One button for each group of orders",
         body: [
-          "The hub sorts the open orders into groups such as next day, express and standard, oldest first. The print operator presses one button for a group. Nothing prints by itself when an order arrives.",
-          "After that press the hub builds every picking slip and design sheet from the workshop's existing print templates, picks the printer that will be free soonest and sends the job. A batch is joined into one file for each printer, with the slips and the designs in the same order so the two stacks match. Once the printer confirms, the order is tagged as printed in Shopify.",
+          "The software sorts the open orders into groups such as next day, express and standard, oldest first. The print operator presses one button for a group. Nothing prints by itself when an order arrives.",
+          "After that press the software builds every picking slip and design sheet from the workshop's existing print templates, picks the printer that will be free soonest and sends the job. A batch is joined into one file for each printer, with the slips and the designs in the same order so the two stacks match. Once the printer confirms, the order is tagged as printed in Shopify.",
         ],
       },
       {
@@ -386,7 +356,7 @@ export const caseStudies: CaseStudy[] = [
         eyebrow: "Content and social",
         heading: "Social content, checked and scheduled",
         body: [
-          "The team make social content in the hub and schedule it to Instagram. For text graphics, someone writes a brief and Claude returns the copy for a batch of up to 14. A fit checker measures every piece of text, and a claims check makes sure each price, percentage and promise matches a Facts table the team maintains. A graphic that fails waits for a person to review it.",
+          "The team make social content in the same software and schedule it to Instagram. For text graphics, someone writes a brief and Claude returns the copy for a batch of up to 14. A fit checker measures every piece of text, and a claims check makes sure each price, percentage and promise matches a Facts table the team maintains. A graphic that fails waits for a person to review it.",
           "For lifestyle images, staff upload product photos and Google's Gemini model builds a new scene around them, with the product left as it is. Approved content is dragged onto a feed grid or a stories row, and the queue posts at the set times through the Instagram API.",
         ],
       },
@@ -432,8 +402,7 @@ export const caseStudies: CaseStudy[] = [
           "Phone model selector (remembered across the site)",
           "Native wishlist",
           "Social and email templates",
-          "Order routing app (automatic print or in-house)",
-          "The Fun Cases hub (ten tools behind one login)",
+          "Custom software for the whole operation (ten tools behind one login)",
           "Stock management, warehouse system and stock forecasting",
           "Shipping labels, print runs and returns portal",
           "Content and social tools, artwork resizer and product generation",

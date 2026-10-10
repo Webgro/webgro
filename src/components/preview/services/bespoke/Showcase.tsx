@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { pv } from "../../links";
 import { SCENE_QUERY, useGsap } from "../../useGsap";
 import { Screen } from "./Screen";
-import { connections, software } from "./software";
+import { connections, possibleConnections, software } from "./software";
 
 /**
  * The software itself: four blocks in one format. Each has who it was built
@@ -47,7 +47,7 @@ function Software() {
       <div className="pv-bsp-head">
         <h2 className="pv-h2">Software we&rsquo;ve built</h2>
         <p className="pv-lede">
-          A hub that runs an online shop and its workshop, a helpdesk assistant, a quote desk and our own client
+          Software that runs an online shop and its workshop, a helpdesk assistant, a quote desk and our own client
           portal.
         </p>
       </div>
@@ -78,7 +78,10 @@ function Software() {
   );
 }
 
-/** The systems we have connected software to, as plain names grouped by kind. */
+/**
+ * Two lists of plain names grouped by kind: the systems we have connected
+ * software to, and widely used systems we could connect to but have not yet.
+ */
 function Connects() {
   const root = useRef<HTMLElement>(null);
 
@@ -98,29 +101,44 @@ function Connects() {
           .from(row.querySelector("h3"), { y: 22, duration: 0.8, ease: "power3.out" }, 0.05)
           .from(row.querySelectorAll(".pv-bsp-chip"), { y: 22, scale: 0.9, duration: 0.6, ease: "back.out(1.6)", stagger: 0.05 }, 0.12);
       });
-      const foot = q(".pv-bsp-con-foot")[0];
-      gsap.from(foot, { y: 26, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: foot, start: "top 94%", once: true } });
+      q(".pv-bsp-con-head--more, .pv-bsp-con-foot").forEach((el) => {
+        gsap.from(el.children.length ? el.children : el, {
+          y: 30, duration: 0.9, ease: "power3.out", stagger: 0.08,
+          scrollTrigger: { trigger: el, start: "top 92%", once: true },
+        });
+      });
     });
     return () => mm.revert();
   });
 
+  const rows = (list: typeof connections) =>
+    list.map((c) => (
+      <div className="pv-bsp-con-row" key={c.group}>
+        <span className="pv-bsp-con-rule" />
+        <h3>{c.group}</h3>
+        <ul>
+          {c.items.map((item) => <li className="pv-bsp-chip" key={item}>{item}</li>)}
+        </ul>
+      </div>
+    ));
+
   return (
     <section className="pv-bsp-con" id="connects" ref={root} data-pv-theme="ink">
       <div className="pv-bsp-con-head">
-        <h2 className="pv-h2">What it connects to</h2>
-        <p className="pv-lede">Systems we&rsquo;ve connected our software to so far.</p>
+        <h2 className="pv-h2">Systems we&rsquo;ve connected</h2>
+        <p className="pv-lede">Every system in this first list is one we&rsquo;ve already connected software to.</p>
       </div>
-      <div className="pv-bsp-con-list">
-        {connections.map((c) => (
-          <div className="pv-bsp-con-row" key={c.group}>
-            <span className="pv-bsp-con-rule" />
-            <h3>{c.group}</h3>
-            <ul>
-              {c.items.map((item) => <li className="pv-bsp-chip" key={item}>{item}</li>)}
-            </ul>
-          </div>
-        ))}
+      <div className="pv-bsp-con-list">{rows(connections)}</div>
+
+      <div className="pv-bsp-con-head pv-bsp-con-head--more">
+        <h2 className="pv-h2">Systems we can connect to</h2>
+        <p className="pv-lede">
+          We haven&rsquo;t built these integrations yet. Each one has a public API or a documented import and
+          export that we can work with.
+        </p>
       </div>
+      <div className="pv-bsp-con-list pv-bsp-con-list--more">{rows(possibleConnections)}</div>
+
       <p className="pv-bsp-con-foot">
         If a system has an API, or can export a file, we can usually connect to it. We check that during scoping,
         before we quote.

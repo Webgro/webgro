@@ -57,3 +57,9 @@
 @media (min-width: 900px) {
   .pv-bsp-con-head { grid-template-columns: 1.25fr 1fr; align-items: end; gap: 6vw; }
 }
+.pv-bsp-con-head--more { margin-top: clamp(40px, 8vh, 100px); }
+/* Not built yet, so these chips are lighter than the connected ones. */
+.pv-bsp-con-list--more .pv-bsp-chip {
+  border-style: dashed; border-color: color-mix(in srgb, var(--pv-fg) 30%, transparent);
+  font-size: clamp(0.92rem, 1.05vw, 1.05rem); color: color-mix(in srgb, var(--pv-fg) 86%, transparent);
+}

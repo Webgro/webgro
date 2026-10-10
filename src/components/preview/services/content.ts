@@ -381,7 +381,7 @@ const automation: PvService = {
       "Teams that move figures between the shop, spreadsheets and the accounts by hand.",
       "Businesses with an existing AI tool that needs fixing or extending.",
     ],
-    no: "We only recommend building a tool if it should pay for itself within weeks of going live. Software your team logs into and works in, such as a hub, a portal or a warehouse system, is a separate service.",
+    no: "We only recommend building a tool if it should pay for itself within weeks of going live. Software your team logs into and works in, such as a portal, a helpdesk or a warehouse system, is a separate service.",
     noLink: { label: "See the Bespoke Software service", path: "/services/bespoke-software" },
   },
   get: {
@@ -470,18 +470,18 @@ const bespoke: PvService = {
   name: "Bespoke Software",
   lower: "bespoke software",
   say: "Software built for one business, for its own team to log into and use.",
-  short: "Hubs, portals, quoting tools, helpdesks and warehouse systems, built for one business and used by its team every day.",
+  short: "Portals, quoting tools, helpdesks, and stock and warehouse systems, built for one business to save its team time and money, with AI built in where it helps.",
   facts: [
     { label: "Usually costs", value: "From £3,000 to build, plus a monthly charge for servers, storage and maintenance that depends on the build." },
     { label: "Connects to", value: "Shopify, WordPress, Xero, Royal Mail, Klaviyo, Instagram and most systems with an API." },
   ],
-  recent: "Fun Cases: a hub of ten tools behind one login that saves about 20 hours of work a day.",
+  recent: "Fun Cases: ten tools behind one login, saving about 20 hours of work a day.",
   visual: "bespoke",
   showcase: true,
   hero: {
     title: ["Bespoke software", "built around", "your business"],
     brush: "your business",
-    intro: "We design and build software for one business at a time: hubs, portals, quoting tools, helpdesks and warehouse systems that your team logs into and uses every day.",
+    intro: "We design and build software for one business at a time: portals, quoting tools, helpdesks, and stock and warehouse systems that your team logs into and uses every day. Each one is designed to save the business time and money. AI is built in where it helps, such as sorting support tickets, reading emailed enquiries into quotes and drafting replies for a person to approve.",
   },
   forYou: {
     heading: "Businesses that have outgrown spreadsheets and separate apps",
@@ -499,11 +499,11 @@ const bespoke: PvService = {
     body: [
       "Each build starts with how your team does the job now: who does it, where, and on what device. A warehouse scanner, a packing bench and an office desk each need a different kind of screen, and one login can cover all of them.",
       "The software connects to the systems you already use, from your shop and your accounts to your couriers, printers, email and social channels, so nobody retypes figures between them. Where AI is useful it's given one defined job, and a person approves what goes to a customer.",
-      "We host and maintain what we build. The monthly charge covers the servers, storage and maintenance, and depends on the build.",
+      "We host and maintain what we build, and keep developing it after launch as your team asks for new features. The monthly charge covers the servers, storage and maintenance, and depends on the build.",
     ],
     items: [
-      "Staff hubs", "Client portals", "Warehouse and stock systems", "Quoting and job boards", "Helpdesks",
-      "Returns portals", "Shipping and print tools", "Content tools", "Integrations with your existing systems",
+      "Internal staff systems", "Client portals", "Warehouse and stock systems", "Quoting and job boards", "Helpdesks",
+      "Returns portals", "Shipping and print tools", "Content tools", "Integrations with your existing systems", "Ongoing development",
     ],
   },
   process: {
@@ -514,14 +514,15 @@ const bespoke: PvService = {
       { name: "Design", body: "We design each screen for the device and the place it's used, such as a handheld scanner, a packing bench or a desk." },
       { name: "Build", time: "From £3,000", body: "We build the first version and connect it to the systems you already use." },
       { name: "Testing", time: "In test mode first", body: "Tools that print, send or refund start in a test mode, so nothing reaches a printer or a customer until your team has checked it." },
-      { name: "Hosting and maintenance", time: "Monthly charge", body: "We host and maintain the software, and add to it as the business needs more. The Fun Cases hub now holds ten tools under one login." },
+      { name: "Hosting and maintenance", time: "Monthly charge", body: "We host and maintain the software. The monthly charge covers the servers, storage and maintenance, and depends on the build." },
+      { name: "Ongoing development", time: "Quoted per request", body: "After launch the software keeps changing with the business. Your team sends feature requests, we scope and quote each one, then build it. The Fun Cases software grew to ten tools this way." },
     ],
   },
   proof: {
     heading: "Bespoke software results",
     intro: "Figures from three of the builds shown above. The case studies cover each one in more detail, alongside the websites we built for the same businesses.",
     figures: [
-      { value: "20", label: "hours of work saved each day by the Fun Cases hub." },
+      { value: "20", label: "hours of work saved each day by the Fun Cases software." },
       { value: "8", label: "hours a week saved at ANYPRINT by the quote desk." },
       { value: "50%", label: "fewer support hours at Twisted Tailor with AI support." },
     ],
@@ -538,15 +539,15 @@ const bespoke: PvService = {
     },
     {
       q: "What's the difference between Bespoke Software and Automation and AI?",
-      a: "Bespoke Software is software people log into and use, such as hubs, portals, quoting tools, helpdesks and warehouse systems. Automation and AI is work that runs in the background, such as syncing data, routing, AI drafting and scheduled jobs. Many projects include both.",
+      a: "Bespoke Software is software people log into and use, such as portals, quoting tools, helpdesks and warehouse systems. Automation and AI is work that runs in the background, such as syncing data, routing, AI drafting and scheduled jobs. Many projects include both.",
     },
     {
       q: "Can it connect to the systems we already use?",
-      a: "Usually, yes. We've connected software to shops and sites, accounts and payment systems, couriers and printers, email, social channels, analytics and AI models, and the full list is further up this page. If a system has an API, or can export a file, we can usually connect to it, and we check that during scoping. The Fun Cases shipping tool, for example, reads the order from Shopify, creates the Royal Mail label, prints it and writes the tracking number back to Shopify.",
+      a: "Usually, yes. The integrations section on this page has two lists. The first is the systems we've already connected software to, including Shopify, WordPress, Xero, Royal Mail Click & Drop, Klaviyo and Gmail. The second is widely used systems we haven't integrated yet but can, such as Sage, QuickBooks, WooCommerce, HubSpot and DPD, because each has an API we can work with. If your system has an API, or can export a file, we can usually connect to it, and we check that during scoping, before we quote.",
     },
     {
       q: "Does bespoke software have to use AI?",
-      a: "No. We use it where it does one defined job. In the Fun Cases helpdesk an AI assistant sorts new tickets and writes a summary for the person handling them. The stock forecast in the same hub is a statistical calculation with every number shown.",
+      a: "No. We use it where it does one defined job. In the Fun Cases helpdesk an AI assistant sorts new tickets and writes a summary for the person handling them. The stock forecast in the same software is a statistical calculation with every number shown.",
     },
     {
       q: "Can staff use it on phones and scanners?",
@@ -554,11 +555,11 @@ const bespoke: PvService = {
     },
     {
       q: "Who can see what?",
-      a: "Each person has their own login with a role, and access to only the tools they need. In the Fun Cases hub, stock planning is open to admins only, and the warehouse scanner screens are a separate permission.",
+      a: "Each person has their own login with a role, and access to only the tools they need. In the Fun Cases software, stock planning is open to admins only, and the warehouse scanner screens are a separate permission.",
     },
     {
-      q: "Can you add to it later?",
-      a: "Yes. The Fun Cases hub holds ten tools under one login. Several of them started as separate apps and were moved in later, with their data.",
+      q: "What happens after it's built?",
+      a: "We host and maintain it, and it keeps changing with the business. Your team sends feature requests, we scope and quote each one, then build it. Fun Cases now have ten tools under one login. Several of them started as separate apps and were moved in later, with their data.",
     },
   ],
   start: {
