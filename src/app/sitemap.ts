@@ -5,7 +5,6 @@ import { CARE_PATH } from "@/components/preview/care/content";
 import { industries } from "@/components/preview/industries/content";
 import { towns } from "@/components/preview/local/content";
 import { pvServices, pvSubServices } from "@/components/preview/services/content";
-import { BESPOKE_PATH, bespokeTools } from "@/components/preview/services/bespoke/tools";
 
 /**
  * Auto-generated sitemap, served at /sitemap.xml.
@@ -51,14 +50,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  // The ten Fun Cases tool pages sit under /services/bespoke-software.
-  const bespokeToolRoutes: MetadataRoute.Sitemap = bespokeTools.map((t) => ({
-    url: `${BASE}${BESPOKE_PATH}/${t.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.5,
-  }));
-
   const industryRoutes: MetadataRoute.Sitemap = industries.map((i) => ({
     url: `${BASE}/industries/${i.slug}`,
     lastModified: now,
@@ -100,7 +91,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticRoutes,
     ...serviceRoutes,
     ...subServiceRoutes,
-    ...bespokeToolRoutes,
     ...industryRoutes,
     ...townRoutes,
     ...caseRoutes,

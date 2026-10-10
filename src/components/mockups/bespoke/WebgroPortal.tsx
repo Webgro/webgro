@@ -24,19 +24,22 @@ const NAV: { label: string; icon: IconName; n?: number }[] = [
   { label: "Security", icon: "shield" },
 ];
 
-// Every figure and client name here is invented.
-const STATS = [
-  { l: "Active customers", v: "24" },
-  { l: "Prospects", v: "6" },
-  { l: "Paused", v: "2" },
-  { l: "Sites maintained", v: "18", note: "All fine" },
+// Every count and client name here is invented. No revenue or other money
+// figure is shown on this screen.
+const STATS: { l: string; v: string; note: string; ok?: boolean }[] = [
+  { l: "Active customers", v: "24", note: "6 prospects · 2 paused" },
+  { l: "Open proposals", v: "3", note: "2 opened this week" },
+  { l: "Active projects", v: "5", note: "1 waiting on the client" },
+  { l: "Sites maintained", v: "18", note: "All fine", ok: true },
 ];
 
 const ACTIVITY = [
   ["09:42", "Proposal opened", "Northfield Dental"],
-  ["09:15", "Invoice approved and sent", "Client A"],
+  ["09:15", "Weekly report sent", "Client A"],
   ["08:50", "Weekly updates finished, no changes found", "Harbour Coffee Co"],
-  ["08:02", "Direct Debit set up", "Client B"],
+  ["08:02", "Project stage signed off", "Client B"],
+  ["Fri", "Design feedback received, 4 comments", "Elm Street Yoga"],
+  ["Fri", "Welcome email sent", "Client C"],
 ];
 
 export function WebgroPortal() {
@@ -51,7 +54,7 @@ export function WebgroPortal() {
   ];
 
   return (
-    <Frame loopRef={ref} className="bm-wp" label="Webgro portal admin overview: annual recurring revenue, customer and site counts, open proposals, projects, maintenance and recent activity, with invented figures and placeholder client names.">
+    <Frame loopRef={ref} className="bm-wp" label="Webgro portal admin overview: counts of active customers, open proposals, active projects and sites maintained, then open proposals, projects, maintenance, welcome emails and recent activity, with invented counts and placeholder client names.">
       <div className="bm-wp-side">
         <div className="bm-wp-d" style={{ color: "#fff", fontSize: "1.5em", padding: "0 0.45em 0.8em", lineHeight: 1 }}>
           webgro<span style={{ color: "#2d8dff" }}>.</span>
@@ -71,24 +74,12 @@ export function WebgroPortal() {
           <div style={{ fontSize: "0.9em", color: "rgba(13,13,15,.55)" }}>Saturday 10 October</div>
         </div>
 
-        {/* Recurring revenue */}
-        <div className="bm-wp-card" style={{ boxShadow: "inset 0.3em 0 0 #2d8dff", padding: "1em 1.3em 1.05em 1.6em" }}>
-          <div style={{ fontSize: "0.85em", color: "rgba(13,13,15,.55)" }}>Annual recurring revenue</div>
-          <div className="bm-row" style={{ alignItems: "baseline", gap: "1em" }}>
-            <span className="bm-wp-d" style={{ fontSize: "3.4em", lineHeight: 1.1, letterSpacing: "-0.045em" }}>£240,000</span>
-            <span className="bm-trunc bm-s-hide" style={{ fontSize: "0.85em", color: "rgba(13,13,15,.55)" }}>a year ex VAT, from live monthly, quarterly, six-monthly and annual services</span>
-          </div>
-          <div style={{ fontSize: "0.88em", color: "rgba(13,13,15,.55)" }}>About £20,000 a month.</div>
-        </div>
-
         <div className="bm-grid" style={{ "--n": 4, gap: "0.8em" } as React.CSSProperties}>
           {STATS.map((x) => (
-            <div key={x.l} className="bm-wp-card" style={{ padding: "0.75em 1em" }}>
-              <div className="bm-trunc" style={{ fontSize: "0.8em", color: "rgba(13,13,15,.55)" }}>{x.l}</div>
-              <div className="bm-row" style={{ alignItems: "baseline" }}>
-                <span className="bm-wp-d" style={{ fontSize: "1.8em", lineHeight: 1.2 }}>{x.v}</span>
-                {x.note && <span className="bm-nw bm-s-hide" style={{ fontSize: "0.78em", color: "#0a8f5f" }}>{x.note}</span>}
-              </div>
+            <div key={x.l} className="bm-wp-card" style={{ padding: "1em 1.15em 1.05em" }}>
+              <div className="bm-trunc" style={{ fontSize: "0.82em", color: "rgba(13,13,15,.55)" }}>{x.l}</div>
+              <div className="bm-wp-d" style={{ fontSize: "2.6em", lineHeight: 1.2, letterSpacing: "-0.04em" }}>{x.v}</div>
+              <div className="bm-trunc" style={{ fontSize: "0.8em", color: x.ok ? "#0a8f5f" : "rgba(13,13,15,.55)" }}>{x.note}</div>
             </div>
           ))}
         </div>
@@ -146,7 +137,7 @@ export function WebgroPortal() {
         <div className="bm-wp-card">
           <div className="bm-wp-d" style={{ fontSize: "1.05em", marginBottom: "0.4em" }}>Recent activity</div>
           {ACTIVITY.map((a) => (
-            <div key={a[0]} className="bm-wp-li">
+            <div key={a[1]} className="bm-wp-li">
               <span style={{ color: "rgba(13,13,15,.5)", width: "3.4em", flex: "none" }}>{a[0]}</span>
               <span className="bm-grow bm-trunc">{a[1]}</span>
               <span className="bm-nw" style={{ color: "rgba(13,13,15,.6)" }}>{a[2]}</span>

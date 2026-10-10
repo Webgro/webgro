@@ -91,7 +91,7 @@ export const caseNotes: Record<string, { client: string; img: string; w: number;
   anyprint: {
     client: "ANYPRINT",
     img: "/preview/reel-anyprint.jpg", w: 1399, h: 933,
-    line: "A WordPress rebuild designed around page speed from the start. Lighthouse performance went from 54 to 99.",
+    line: "A WordPress rebuild designed around page speed, and a quote desk that saves the team 8 hours a week. Lighthouse performance went from 54 to 99.",
   },
   sublishop: {
     client: "Sublishop",
@@ -413,9 +413,8 @@ const automation: PvService = {
   },
   proof: {
     heading: "AI tools in daily use",
-    intro: "The AI tools we've built save more than £30,000 a year. Most of them we can't talk about, but the ones below we can.",
+    intro: "Most of the AI tools we've built we can't talk about, but the ones below we can.",
     figures: [
-      { value: "£30k+", label: "saved each year by the AI tools we've built" },
       { value: "50–70%", label: "of customer service hours saved at Fun Cases and Twisted Tailor with AI customer service.", draw: { kind: "range", min: 50, max: 70, before: "Hours before", after: "Hours after" } },
     ],
     cases: ["fun-cases", "sublishop", "twisted-tailor", "origin-architectural"],
@@ -476,13 +475,13 @@ const bespoke: PvService = {
     { label: "Usually costs", value: "From £3,000 to build, plus a monthly charge for servers, storage and maintenance that depends on the build." },
     { label: "Connects to", value: "Shopify, Xero, Royal Mail, Gmail, Instagram and printers." },
   ],
-  recent: "Fun Cases: ten tools behind one login, from stock and shipping to customer service.",
+  recent: "Fun Cases: a hub of ten tools behind one login that saves more than £30,000 a year.",
   visual: "bespoke",
   showcase: true,
   hero: {
     title: ["Bespoke software", "built around", "your business"],
     brush: "your business",
-    intro: "We design and build software for one business at a time: hubs, portals, quoting tools, helpdesks and warehouse systems that your team logs into and uses every day. Prices start from £3,000, plus a monthly charge for servers, storage and maintenance that depends on the build.",
+    intro: "We design and build software for one business at a time: hubs, portals, quoting tools, helpdesks and warehouse systems that your team logs into and uses every day.",
   },
   forYou: {
     heading: "Businesses that have outgrown spreadsheets and separate apps",
@@ -519,10 +518,14 @@ const bespoke: PvService = {
     ],
   },
   proof: {
-    heading: "Case studies",
-    intro: "The Fun Cases and Twisted Tailor case studies cover the websites and marketing behind two of the businesses whose software is shown above.",
-    figures: [],
-    cases: ["fun-cases", "twisted-tailor"],
+    heading: "Bespoke software results",
+    intro: "Figures from three of the builds shown above. The case studies cover each one in more detail, alongside the websites we built for the same businesses.",
+    figures: [
+      { value: "£30k+", label: "saved each year by the Fun Cases hub." },
+      { value: "8", label: "hours a week saved at ANYPRINT by the quote desk." },
+      { value: "50%", label: "fewer support hours at Twisted Tailor with AI support." },
+    ],
+    cases: ["fun-cases", "anyprint", "twisted-tailor"],
   },
   faqs: [
     {

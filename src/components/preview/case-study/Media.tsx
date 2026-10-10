@@ -2,6 +2,8 @@
 
 import { createContext, useContext, useState } from "react";
 import { Mockup, type MockupName } from "@/components/mockups";
+import { BESPOKE_MOCK_NAMES, type BespokeMockName } from "@/components/mockups/bespoke";
+import { Screen } from "../services/bespoke/Screen";
 import type { AssetMap } from "./assets";
 import { aspectOf, type MediaBlock } from "./structure";
 
@@ -108,6 +110,14 @@ export function Media({ block }: { block: MediaBlock }) {
       );
 
     case "uiMock":
+      // A name from the bespoke set is a redrawn app screen in its own frame.
+      if ((BESPOKE_MOCK_NAMES as readonly string[]).includes(block.name)) {
+        return (
+          <figure className="pv-cs-mock">
+            <Screen name={block.name as BespokeMockName} />
+          </figure>
+        );
+      }
       return (
         <figure className="pv-cs-mock">
           <div className="pv-cs-mock-panel">

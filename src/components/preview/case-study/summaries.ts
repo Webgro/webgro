@@ -34,8 +34,8 @@ export const summaries: Record<string, Summary> = {
   },
   "fun-cases": {
     ask: "Fun Cases had outgrown its old brand, and the third-party app customers used to design their own cases cost nearly £5,000 a year.",
-    did: "We rebranded the business, starting with the logo, and built a new Shopify theme from scratch with our own personaliser in it. We also run their SEO, paid ads and email marketing, and we built the AI tools and warehouse system they use.",
-    changed: "Revenue is up 300% over the last five years. Email brings in 30% of revenue, and AI triage has cut customer service hours by 70%.",
+    did: "We rebranded the business, starting with the logo, and built a new Shopify theme from scratch with our own personaliser in it. We also run their SEO, paid ads and email marketing, and we built the hub they run stock, shipping, printing, returns and customer service from.",
+    changed: "Revenue is up 300% over the last five years. Email brings in 30% of revenue, AI triage has cut customer service hours by 70%, and the hub saves more than £30,000 a year.",
   },
   "gieves-and-hawkes": {
     ask: "The first store we built for them, launched in 2024, had come to rely on twelve apps. Each one added a monthly fee and a render-blocking script, and could break when someone else updated it.",
@@ -44,8 +44,8 @@ export const summaries: Record<string, Summary> = {
   },
   anyprint: {
     ask: "ANYPRINT's WordPress site was slow. It had a heavy theme, too many plugins and an admin panel nobody enjoyed using.",
-    did: "We redesigned the site and rebuilt it on a custom theme, checking every decision against its effect on page speed.",
-    changed: "Lighthouse Performance went from 54 to 99, and Accessibility, Best Practices and SEO all reached 100.",
+    did: "We redesigned the site and rebuilt it on a custom theme, checking every decision against its effect on page speed. We also built a quote desk that turns emailed enquiries into quotes, invoices and jobs.",
+    changed: "Lighthouse Performance went from 54 to 99, and Accessibility, Best Practices and SEO all reached 100. The quote desk saves the team 8 hours a week.",
   },
   sublishop: {
     ask: "Sublishop supply the print trade, where customers buy on availability and price. They needed a faster store that converted better, and better information on stock and pricing.",
