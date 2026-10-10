@@ -24,7 +24,7 @@ export const software: Software[] = [
     label: "Fun Cases",
     title: "Ten tools behind one login",
     body: [
-      "Fun Cases sell phone cases online and print them in their own workshop. The hub is the software they run the business on, from stock coming in to customer service after the sale. It saves them more than £30,000 a year.",
+      "Fun Cases sell phone cases online and print them in their own workshop. The hub is the software they run the business on, from stock coming in to customer service after the sale. It saves them about 20 hours of work a day, worth more than £30,000 a year.",
       "The stock overview is shown here as an example screen, redrawn with sample data.",
     ],
     points: [
@@ -85,4 +85,23 @@ export const software: Software[] = [
       "WordPress maintenance: weekly updates with before and after screenshots compared, uptime checks every 15 minutes, and SSL and plugin vulnerability checks.",
     ],
   },
+];
+
+/* ── What the software connects to ──────────────────────────────────────── */
+
+/**
+ * Systems we have connected software to, grouped by kind. Every name here
+ * appears as a working integration in the research briefs. Names only: no
+ * third-party logos.
+ */
+export const connections: Array<{ group: string; items: string[] }> = [
+  { group: "Shops and sites", items: ["Shopify", "WordPress"] },
+  { group: "Accounts and payments", items: ["Xero", "GoCardless", "Stripe"] },
+  { group: "Shipping and printing", items: ["Royal Mail Click & Drop", "PrintNode", "Label and document printers", "Barcode scanners"] },
+  { group: "Email and marketing", items: ["Klaviyo", "Gmail", "Transactional email"] },
+  { group: "Social", items: ["Instagram", "Facebook", "LinkedIn"] },
+  { group: "Reviews and loyalty", items: ["Judge.me"] },
+  { group: "Analytics", items: ["Google Analytics", "Google Search Console", "Google PageSpeed"] },
+  { group: "AI models", items: ["Claude", "Gemini"] },
+  { group: "Spreadsheets and files", items: ["Google Sheets", "Google Drive", "CSV files", "PDF documents"] },
 ];

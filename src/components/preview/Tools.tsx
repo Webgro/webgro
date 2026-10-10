@@ -36,8 +36,8 @@ export function Tools() {
       <div className="pv-tools-head">
         <h2 className="pv-h2">Custom software and AI tools</h2>
         <p className="pv-lede">
-          The AI tools we&rsquo;ve built save more than £30,000 a year. We can&rsquo;t talk about most of them,
-          but these three are used by our clients every day.
+          We can&rsquo;t talk about most of the software we&rsquo;ve built, but these three tools are used by
+          our clients every day.
         </p>
       </div>
       <div className="pv-tools-stack">

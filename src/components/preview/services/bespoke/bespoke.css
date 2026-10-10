@@ -37,3 +37,23 @@
   .pv-bsp-item.is-flip { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); }
   .pv-bsp-item.is-flip .pv-bsp-item-text { order: 2; }
 }
+
+/* ── What it connects to ──────────────────────────────────────────────── */
+.pv-bsp-con { display: grid; gap: clamp(40px, 7vh, 80px); padding: clamp(90px, 17vh, 200px) var(--pv-pad); }
+.pv-bsp-con-head { display: grid; gap: 28px; }
+.pv-bsp-con-list { border-bottom: 1px solid var(--pv-rule); }
+.pv-bsp-con-row { position: relative; display: grid; gap: 14px; padding: clamp(18px, 2vw, 28px) 0; }
+.pv-bsp-con-rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--pv-rule); transform-origin: left; }
+.pv-bsp-con-row h3 { margin: 0; font: 500 clamp(1.05rem, 1.3vw, 1.25rem) / 1.2 var(--pv-display); color: var(--pv-muted); }
+.pv-bsp-con-row ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 10px; }
+.pv-bsp-chip {
+  padding: 0.5em 0.95em; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--pv-fg) 34%, transparent);
+  font: 500 clamp(0.98rem, 1.15vw, 1.15rem) / 1.2 var(--pv-display);
+}
+.pv-bsp-con-foot { max-width: 52ch; font-size: clamp(1.08rem, 1.4vw, 1.36rem); line-height: 1.5; color: color-mix(in srgb, var(--pv-fg) 82%, transparent); }
+@media (min-width: 800px) {
+  .pv-bsp-con-row { grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr); column-gap: 4vw; align-items: center; }
+}
+@media (min-width: 900px) {
+  .pv-bsp-con-head { grid-template-columns: 1.25fr 1fr; align-items: end; gap: 6vw; }
+}

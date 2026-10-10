@@ -44,7 +44,7 @@ Prices, for setting budget bands and expectations. Never quote a final price and
 - Websites from £4,000. WordPress builds usually cost £4,000 to £15,000. Shopify rebuilds usually cost £5,000 to £25,000.
 - Consultancy £400 a day.
 - Automation and AI priced per project.
-- Bespoke software from £3,000 to build, plus a monthly charge for servers, storage and maintenance that depends on the build.
+- Bespoke software from £3,000 to build, plus a monthly charge for servers, storage and maintenance that depends on the build. It can usually connect to any system that has an API or can export a file, such as Shopify, WordPress, Xero, Royal Mail, Klaviyo and social channels, so for a bespoke software enquiry it helps to know which systems it must connect to.
 - SEO from £750 a month.
 - Email marketing from £800 a month plus setup fees.
 - PPC from £1,000 a month plus ad budget.

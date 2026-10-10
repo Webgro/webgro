@@ -286,7 +286,7 @@ export const caseStudies: CaseStudy[] = [
         num: "04",
         label: "The Hub",
         description:
-          "Ten tools behind one login, covering stock, the warehouse, shipping, printing, returns, content and customer service. The hub saves more than £30,000 a year.",
+          "Ten tools behind one login, covering stock, the warehouse, shipping, printing, returns, content and customer service. The hub saves about 20 hours of work a day.",
       },
       {
         type: "section",
@@ -294,13 +294,13 @@ export const caseStudies: CaseStudy[] = [
         heading: "Ten tools behind one login",
         body: [
           "Fun Cases run their stock, warehouse, shipping, printing, returns, content and customer service from one piece of software we built for them. Each person has their own login, with a role and access to only the tools they need. Several of the tools started as separate apps and were moved into the hub later, with their data.",
-          "The hub saves Fun Cases more than £30,000 a year. The screens in this chapter are example screens, redrawn with sample data.",
+          "The hub saves Fun Cases about 20 hours of work a day, worth more than £30,000 a year. The screens in this chapter are example screens, redrawn with sample data.",
         ],
       },
       {
         type: "statGroup",
         items: [
-          { eyebrow: "Saved by the hub", value: "£30k+", label: "a year" },
+          { eyebrow: "Saved by the hub", value: "20 hours", label: "of work a day" },
           { eyebrow: "Tools", value: "10", label: "behind one login" },
           { eyebrow: "Customer service hours", value: "−70%", label: "with AI triage" },
         ],

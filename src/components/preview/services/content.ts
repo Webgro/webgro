@@ -473,9 +473,9 @@ const bespoke: PvService = {
   short: "Hubs, portals, quoting tools, helpdesks and warehouse systems, built for one business and used by its team every day.",
   facts: [
     { label: "Usually costs", value: "From £3,000 to build, plus a monthly charge for servers, storage and maintenance that depends on the build." },
-    { label: "Connects to", value: "Shopify, Xero, Royal Mail, Gmail, Instagram and printers." },
+    { label: "Connects to", value: "Shopify, WordPress, Xero, Royal Mail, Klaviyo, Instagram and most systems with an API." },
   ],
-  recent: "Fun Cases: a hub of ten tools behind one login that saves more than £30,000 a year.",
+  recent: "Fun Cases: a hub of ten tools behind one login that saves about 20 hours of work a day.",
   visual: "bespoke",
   showcase: true,
   hero: {
@@ -498,12 +498,12 @@ const bespoke: PvService = {
     heading: "Software built for one business",
     body: [
       "Each build starts with how your team does the job now: who does it, where, and on what device. A warehouse scanner, a packing bench and an office desk each need a different kind of screen, and one login can cover all of them.",
-      "The software connects to the systems you already use, such as Shopify, Xero, Royal Mail Click & Drop and your printers, so nobody retypes figures between them. Where AI is useful it's given one defined job, and a person approves what goes to a customer.",
+      "The software connects to the systems you already use, from your shop and your accounts to your couriers, printers, email and social channels, so nobody retypes figures between them. Where AI is useful it's given one defined job, and a person approves what goes to a customer.",
       "We host and maintain what we build. The monthly charge covers the servers, storage and maintenance, and depends on the build.",
     ],
     items: [
       "Staff hubs", "Client portals", "Warehouse and stock systems", "Quoting and job boards", "Helpdesks",
-      "Returns portals", "Shipping and print tools", "Content tools", "Shopify integration", "Xero integration",
+      "Returns portals", "Shipping and print tools", "Content tools", "Integrations with your existing systems",
     ],
   },
   process: {
@@ -521,7 +521,7 @@ const bespoke: PvService = {
     heading: "Bespoke software results",
     intro: "Figures from three of the builds shown above. The case studies cover each one in more detail, alongside the websites we built for the same businesses.",
     figures: [
-      { value: "£30k+", label: "saved each year by the Fun Cases hub." },
+      { value: "20", label: "hours of work saved each day by the Fun Cases hub." },
       { value: "8", label: "hours a week saved at ANYPRINT by the quote desk." },
       { value: "50%", label: "fewer support hours at Twisted Tailor with AI support." },
     ],
@@ -542,7 +542,7 @@ const bespoke: PvService = {
     },
     {
       q: "Can it connect to the systems we already use?",
-      a: "Yes. The tools on this page connect to Shopify, Xero, Royal Mail Click & Drop, Gmail, Instagram and the printers in a workshop. The Fun Cases shipping tool, for example, reads the order from Shopify, creates the Royal Mail label, prints it and writes the tracking number back to Shopify.",
+      a: "Usually, yes. We've connected software to shops and sites, accounts and payment systems, couriers and printers, email, social channels, analytics and AI models, and the full list is further up this page. If a system has an API, or can export a file, we can usually connect to it, and we check that during scoping. The Fun Cases shipping tool, for example, reads the order from Shopify, creates the Royal Mail label, prints it and writes the tracking number back to Shopify.",
     },
     {
       q: "Does bespoke software have to use AI?",
