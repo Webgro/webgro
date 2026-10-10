@@ -700,7 +700,7 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
                   <span className="pv-work-rule" aria-hidden="true" />
                   <h2 className="pv-work-name">
                     <span className="pv-work-name-mask"><span className="pv-work-name-in">{it.client}</span></span>
-                    <NewTag slug={it.slug} />
+                    <span className="pv-work-new"><NewTag slug={it.slug} /></span>
                   </h2>
                   {it.figure ? (
                     <p className="pv-work-figure pv-work-side">

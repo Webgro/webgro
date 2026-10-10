@@ -82,6 +82,15 @@
 }
 .pv-work-name-mask { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; transition: transform 0.6s var(--pv-ease); }
 .pv-work-name-in { display: block; }
+/* The "New" tag sits beside the name, level with the top of its capitals, and
+   moves with it when the row is active. Its wrapper inherits the name's font
+   size, so the offset scales with the name in both the list and the grid. */
+.pv-work-name { display: flex; align-items: flex-start; column-gap: 0.16em; }
+.pv-work-name-mask { min-width: 0; }
+.pv-work-new { display: inline-flex; flex: none; padding-top: 0.17em; line-height: 1; transition: transform 0.6s var(--pv-ease); }
+.pv-work-new:empty { display: none; }
+.pv-work-new .pv-new { margin-left: 0; transform: none; vertical-align: top; }
+.pv-work-list.is-index .pv-work-item.is-active .pv-work-new { transform: translateX(clamp(8px, 1.3vw, 22px)); }
 
 .pv-work-figure { display: flex; align-items: baseline; gap: 0.55em; }
 .pv-work-figure strong { font: 700 1.3rem / 1 var(--pv-display); letter-spacing: -0.03em; white-space: nowrap; }
@@ -231,5 +240,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .pv-work-kicker, .pv-work-hero .pv-line > span, .pv-work-hero .pv-work-intro, .pv-work-card-deal, .pv-work-bar { animation: none; }
-  .pv-work-card, .pv-work-thumb, .pv-work-name-mask { transition: none; }
+  .pv-work-card, .pv-work-thumb, .pv-work-name-mask, .pv-work-new { transition: none; }
 }
