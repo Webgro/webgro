@@ -48,6 +48,12 @@ export const routes = [
     href: "/services/automation-ai",
   },
   {
+    problem: "A staff hub, portal or warehouse system built for your business",
+    answer: "Bespoke software",
+    icon: "screens",
+    href: "/services/bespoke-software",
+  },
+  {
     problem: "An audit of your site and setup, and advice on what to fix first",
     answer: "Consultancy",
     icon: "clipboard",

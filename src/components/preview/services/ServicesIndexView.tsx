@@ -34,8 +34,9 @@ function IndexHero() {
         </h1>
         <div className="pv-svc-hero-row">
           <p className="pv-svc-hero-intro">
-            Webgro is a small studio in Bracknell offering six services: websites, consultancy, automation and
-            AI, SEO, marketing and design. Clients can take one on its own or combine several.
+            Webgro is a small studio in Bracknell offering seven services: websites, consultancy, automation
+            and AI, bespoke software, SEO, marketing and design. Clients can take one on its own or combine
+            several.
           </p>
         </div>
       </div>

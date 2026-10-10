@@ -154,6 +154,7 @@ const SET_FOR: Record<Service, FallbackSet> = {
   "Website care plan": "web",
   Consultancy: "consult",
   "Automation and AI": "consult",
+  "Bespoke software": "consult",
   SEO: "seo",
   "Email marketing": "marketing",
   PPC: "marketing",

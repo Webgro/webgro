@@ -54,7 +54,7 @@ export const PAGE_META = {
   services: {
     title: "Web Design, SEO & Marketing Services | Webgro",
     description:
-      "Shopify and WordPress websites, consultancy, AI and automation, SEO, marketing and design from Webgro, a small studio in Bracknell, Berkshire.",
+      "Shopify and WordPress websites, consultancy, automation and AI, bespoke software, SEO, marketing and design from Webgro, a small studio in Bracknell.",
   },
   about: {
     title: "About Webgro | Web Design Studio in Bracknell Since 2012",
@@ -104,6 +104,11 @@ export const SERVICE_META: Record<string, Meta> = {
     description:
       "Custom AI tools and automations built into your Shopify stack, for customer service, product content, stock planning and order routing.",
   },
+  "bespoke-software": {
+    title: "Bespoke Software Development for Online Businesses | Webgro",
+    description:
+      "Bespoke software from £3,000: staff hubs, warehouse and stock systems, helpdesks, quoting tools and client portals, built for one business.",
+  },
   seo: {
     title: "SEO for Shopify & WordPress Websites | Webgro",
     description:
@@ -140,6 +145,7 @@ export const SERVICE_META: Record<string, Meta> = {
 export const SERVICE_PRICE: Record<string, StartingPrice> = {
   websites: { from: 4000 },
   consultancy: { from: 400, unit: "DAY" },
+  "bespoke-software": { from: 3000 },
   seo: { from: 750, unit: "MON" },
   marketing: { from: 400, unit: "MON" },
   design: { from: 80, unit: "HUR" },

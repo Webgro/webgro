@@ -57,7 +57,7 @@ export const LIMITS = {
   question: 300,
   hint: 300,
   option: 80,
-  /** Most options a question may carry. The service question has 11 chips. */
+  /** Most options a question may carry. The service question has 12 chips. */
   options: 14,
   /** Follow-up questions after the two fixed ones. */
   followUps: 5,
@@ -76,6 +76,7 @@ export const SERVICE_OPTIONS = [
   "Website care plan",
   "Consultancy",
   "Automation and AI",
+  "Bespoke software",
   "SEO",
   "Email marketing",
   "PPC",

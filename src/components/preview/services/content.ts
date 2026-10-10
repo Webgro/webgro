@@ -12,6 +12,7 @@ export type VisualName =
   | "websites"
   | "consultancy"
   | "automation"
+  | "bespoke"
   | "seo"
   | "marketing"
   | "design"
@@ -60,6 +61,8 @@ export type PvService = {
   platforms?: Array<{ name: string; body: string }>;
   devices?: string;
   mockups?: Array<{ name: MockupName }>;
+  /** Adds the software showcase after "What's included" (bespoke/Showcase.tsx). */
+  showcase?: boolean;
   process: { heading: string; total: string; stages: Stage[] };
   proof: { heading: string; intro: string; figures: Figure[]; cases: string[] };
   faqs: Faq[];
@@ -368,7 +371,7 @@ const automation: PvService = {
   hero: {
     title: ["AI tools and", "automations built into", "your systems"],
     brush: "your systems",
-    intro: "We build AI tools and automations that your team uses day to day: customer service agents, product generators, image pipelines, internal search and workflow automation. Each tool is set up so you can measure the time it saves from its first week.",
+    intro: "We build automations and AI that run in the background of the systems you already use: syncing data between your shop, stock and accounts, routing work to the right place, drafting replies and content for a person to approve, and running jobs on a schedule. Each one is set up so you can measure the time it saves from its first week.",
   },
   forYou: {
     heading: "Teams spending hours on repetitive work",
@@ -378,7 +381,8 @@ const automation: PvService = {
       "Teams that move figures between the shop, spreadsheets and the accounts by hand.",
       "Businesses with an existing AI tool that needs fixing or extending.",
     ],
-    no: "We only recommend building a tool if it should pay for itself within weeks of going live.",
+    no: "We only recommend building a tool if it should pay for itself within weeks of going live. Software your team logs into and works in, such as a hub, a portal or a warehouse system, is a separate service.",
+    noLink: { label: "See the Bespoke Software service", path: "/services/bespoke-software" },
   },
   get: {
     heading: "Measured tools that you own",
@@ -389,13 +393,12 @@ const automation: PvService = {
     items: [
       "Custom AI apps", "AI customer service agents", "Product generators", "Image retouching pipelines",
       "Content operations", "Internal search and RAG", "Workflow automation", "Claude API integrations",
-      "Custom WMS and internal tools",
+      "System syncing", "Scheduled jobs",
     ],
   },
   mockups: [
-    { name: "fun-cases-ai-customer-service" },
-    { name: "fun-cases-ai-product-generator" },
-    { name: "sublishop-inventory-planner" },
+    { name: "sublishop-competitor-tracker" },
+    { name: "fun-cases-ai-image-generator" },
   ],
   process: {
     heading: "How an automation project works",
@@ -459,7 +462,107 @@ const automation: PvService = {
     heading: "Tell us about the idea",
     body: "We'll work out with you whether it's likely to pay back before you commit to building anything.",
   },
-  pairs: ["websites", "consultancy", "marketing"],
+  pairs: ["bespoke-software", "websites", "consultancy"],
+};
+
+const bespoke: PvService = {
+  slug: "bespoke-software",
+  path: "/services/bespoke-software",
+  name: "Bespoke Software",
+  lower: "bespoke software",
+  say: "Software built for one business, for its own team to log into and use.",
+  short: "Hubs, portals, quoting tools, helpdesks and warehouse systems, built for one business and used by its team every day.",
+  facts: [
+    { label: "Usually costs", value: "From £3,000 to build, plus a monthly charge for servers, storage and maintenance that depends on the build." },
+    { label: "Connects to", value: "Shopify, Xero, Royal Mail, Gmail, Instagram and printers." },
+  ],
+  recent: "Fun Cases: ten tools behind one login, from stock and shipping to customer service.",
+  visual: "bespoke",
+  showcase: true,
+  hero: {
+    title: ["Bespoke software", "built around", "your business"],
+    brush: "your business",
+    intro: "We design and build software for one business at a time: hubs, portals, quoting tools, helpdesks and warehouse systems that your team logs into and uses every day. Prices start from £3,000, plus a monthly charge for servers, storage and maintenance that depends on the build.",
+  },
+  forYou: {
+    heading: "Businesses that have outgrown spreadsheets and separate apps",
+    yes: [
+      "Teams running stock, purchase orders or quotes from spreadsheets.",
+      "Businesses paying for several apps that each do part of a job and don't share data.",
+      "Warehouses and workshops that need screens built for a scanner, a packing bench or a print room.",
+      "Businesses with a process that off-the-shelf software doesn't fit.",
+    ],
+    no: "Bespoke Software is for tools your team logs into and works in. Work that runs in the background with no screens of its own, such as syncing data between systems, routing, AI drafting and scheduled jobs, is our Automation and AI service.",
+    noLink: { label: "See the Automation and AI service", path: "/services/automation-ai" },
+  },
+  get: {
+    heading: "Software built for one business",
+    body: [
+      "Each build starts with how your team does the job now: who does it, where, and on what device. A warehouse scanner, a packing bench and an office desk each need a different kind of screen, and one login can cover all of them.",
+      "The software connects to the systems you already use, such as Shopify, Xero, Royal Mail Click & Drop and your printers, so nobody retypes figures between them. Where AI is useful it's given one defined job, and a person approves what goes to a customer.",
+      "We host and maintain what we build. The monthly charge covers the servers, storage and maintenance, and depends on the build.",
+    ],
+    items: [
+      "Staff hubs", "Client portals", "Warehouse and stock systems", "Quoting and job boards", "Helpdesks",
+      "Returns portals", "Shipping and print tools", "Content tools", "Shopify integration", "Xero integration",
+    ],
+  },
+  process: {
+    heading: "How a bespoke software project works",
+    total: "We scope the work and quote before anything is built. Builds start from £3,000, and the monthly charge depends on the servers, storage and maintenance the software needs.",
+    stages: [
+      { name: "Scoping", body: "We go through the job with the people who do it now, and agree what the first version needs to do." },
+      { name: "Design", body: "We design each screen for the device and the place it's used, such as a handheld scanner, a packing bench or a desk." },
+      { name: "Build", time: "From £3,000", body: "We build the first version and connect it to the systems you already use." },
+      { name: "Testing", time: "In test mode first", body: "Tools that print, send or refund start in a test mode, so nothing reaches a printer or a customer until your team has checked it." },
+      { name: "Hosting and maintenance", time: "Monthly charge", body: "We host and maintain the software, and add to it as the business needs more. The Fun Cases hub now holds ten tools under one login." },
+    ],
+  },
+  proof: {
+    heading: "Case studies",
+    intro: "The Fun Cases and Twisted Tailor case studies cover the websites and marketing behind two of the businesses whose software is shown above.",
+    figures: [],
+    cases: ["fun-cases", "twisted-tailor"],
+  },
+  faqs: [
+    {
+      q: "How much does bespoke software cost?",
+      a: "Builds start from £3,000. There's also a monthly charge for servers, storage and maintenance, which depends on the build. We scope the work and quote before anything is built.",
+    },
+    {
+      q: "What does the monthly charge cover?",
+      a: "The servers the software runs on, its database and file storage, and maintenance. The amount depends on the build.",
+    },
+    {
+      q: "What's the difference between Bespoke Software and Automation and AI?",
+      a: "Bespoke Software is software people log into and use, such as hubs, portals, quoting tools, helpdesks and warehouse systems. Automation and AI is work that runs in the background, such as syncing data, routing, AI drafting and scheduled jobs. Many projects include both.",
+    },
+    {
+      q: "Can it connect to the systems we already use?",
+      a: "Yes. The tools on this page connect to Shopify, Xero, Royal Mail Click & Drop, Gmail, Instagram and the printers in a workshop. The Fun Cases shipping tool, for example, reads the order from Shopify, creates the Royal Mail label, prints it and writes the tracking number back to Shopify.",
+    },
+    {
+      q: "Does bespoke software have to use AI?",
+      a: "No. We use it where it does one defined job. In the Fun Cases helpdesk an AI assistant sorts new tickets and writes a summary for the person handling them. The stock forecast in the same hub is a statistical calculation with every number shown.",
+    },
+    {
+      q: "Can staff use it on phones and scanners?",
+      a: "Yes. The Fun Cases warehouse screens are built for rugged Android phones with barcode scanners, on screens 360 to 400 pixels wide with large buttons. Each scan is saved on the device before it's sent, so a dropped wifi connection doesn't lose it.",
+    },
+    {
+      q: "Who can see what?",
+      a: "Each person has their own login with a role, and access to only the tools they need. In the Fun Cases hub, stock planning is open to admins only, and the warehouse scanner screens are a separate permission.",
+    },
+    {
+      q: "Can you add to it later?",
+      a: "Yes. The Fun Cases hub holds ten tools under one login. Several of them started as separate apps and were moved in later, with their data.",
+    },
+  ],
+  start: {
+    heading: "Tell us about the job",
+    body: "Tell us what your team does by hand or in spreadsheets today. We'll scope what the software would need to do, then quote.",
+  },
+  pairs: ["automation-ai", "websites", "consultancy"],
 };
 
 const seo: PvService = {
@@ -1026,8 +1129,8 @@ const social: PvService = {
 
 /* ── Lookups ────────────────────────────────────────────────────────────── */
 
-/** The six top-level services, in the order they appear on the index. */
-export const pvServices: PvService[] = [websites, consultancy, automation, seo, marketing, design];
+/** The seven top-level services, in the order they appear on the index. */
+export const pvServices: PvService[] = [websites, consultancy, automation, bespoke, seo, marketing, design];
 
 /** Marketing's three branches. */
 export const pvSubServices: PvService[] = [email, ppc, social];

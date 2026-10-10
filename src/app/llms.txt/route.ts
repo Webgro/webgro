@@ -1,6 +1,7 @@
 import { caseStudies } from "@/content/work";
 import { articles } from "@/content/the-gro";
 import { pvServices, pvSubServices } from "@/components/preview/services/content";
+import { BESPOKE_PATH, bespokeTools } from "@/components/preview/services/bespoke/tools";
 import { towns } from "@/components/preview/local/content";
 import { industries } from "@/components/preview/industries/content";
 import { ARTICLE_META, CASE_META, PREVIEW_ROBOTS, SERVICE_META } from "@/components/preview/seo";
@@ -21,6 +22,7 @@ const PRICES: Record<string, string> = {
   websites: "from £4,000. WordPress builds usually £4k to £15k, Shopify rebuilds £5k to £25k",
   consultancy: "£400 a day",
   "automation-ai": "per project, usually £1k to £15k to build",
+  "bespoke-software": "from £3,000 to build, plus a monthly charge for servers, storage and maintenance that depends on the build",
   seo: "from £750 a month",
   design: "£80 an hour",
   "email-marketing": "from £800 a month plus setup fees",
@@ -46,7 +48,7 @@ export function GET(request: Request) {
 
   const body = `# Webgro
 
-> Webgro is a four-person web design studio in Bracknell, Berkshire, UK. We design, build and look after Shopify and WordPress websites, and also offer eCommerce consultancy, AI and automation, SEO, email marketing, PPC, social media management and brand design. In business since 2012 (as 4ogo, then Broadbridge Design, and Webgro since 2022). Shopify Partner. Rated 5.0 on Google from 14 reviews.
+> Webgro is a four-person web design studio in Bracknell, Berkshire, UK. We design, build and look after Shopify and WordPress websites, and also offer eCommerce consultancy, AI and automation, bespoke software, SEO, email marketing, PPC, social media management and brand design. In business since 2012 (as 4ogo, then Broadbridge Design, and Webgro since 2022). Shopify Partner. Rated 5.0 on Google from 14 reviews.
 
 Contact: hello@webgro.co.uk, 01344 231 119. Address: 12 Longshot Lane, Bracknell, Berkshire RG12 1RL. Webgro Ltd, company number 10889889.
 
@@ -55,6 +57,12 @@ Contact: hello@webgro.co.uk, 01344 231 119. Address: 12 Longshot Lane, Bracknell
 ${pvServices.map(service).join("\n")}
 ${pvSubServices.map(service).join("\n")}
 - [Care plans](${SITE}/care-plans): Monthly website care from £55 a month. WordPress £55, £120 or £250 a month with hosting included. Shopify £80, £300 or £600 a month with time for changes.
+
+## Bespoke software examples
+
+Tools built for Fun Cases, each with its own page.
+
+${bespokeTools.map((t) => `- [${t.name}](${SITE}${BESPOKE_PATH}/${t.slug}): ${t.meta.description}`).join("\n")}
 
 ## Industries
 

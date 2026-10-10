@@ -121,7 +121,8 @@ export function Desk() {
           const cx = sheets[0].offsetLeft;
           const cy = sheets[0].offsetTop;
 
-          const cols = narrow ? 2 : 3;
+          // Seven sheets sit four across on a wide screen and three across on a phone.
+          const cols = narrow ? (n > 6 ? 3 : 2) : (n > 6 ? 4 : 3);
           const rows = Math.ceil(n / cols);
           const gap = narrow ? 10 : Math.max(14, vw * 0.012);
           const rl = narrow ? pad : vw * 0.4;
@@ -189,7 +190,7 @@ export function Desk() {
           scrollTrigger: {
             trigger: stage,
             start: "top top",
-            end: "+=640%",
+            end: `+=${Math.round(n * 107)}%`,
             pin: true,
             scrub: 0.5,
             anticipatePin: 1,

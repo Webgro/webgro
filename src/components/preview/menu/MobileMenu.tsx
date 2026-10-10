@@ -57,7 +57,7 @@ function Label({ text, current }: { text: string; current: boolean }): ReactNode
 /**
  * The phone menu (below 900px): a toggle whose two lines fold into a cross,
  * and an ink sheet that opens as a circle growing out of the toggle. The main
- * links rise out of masks, Services expands in place to show the six services
+ * links rise out of masks, Services expands in place to show the seven services
  * and Marketing's three branches, and the foot holds the enquiry button, the
  * email address and the phone number.
  */

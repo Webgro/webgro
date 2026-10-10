@@ -30,6 +30,7 @@ const columns = [
       { label: "Websites", href: pv("/services/websites") },
       { label: "Consultancy", href: pv("/services/consultancy") },
       { label: "Automation and AI", href: pv("/services/automation-ai") },
+      { label: "Bespoke Software", href: pv("/services/bespoke-software") },
       { label: "SEO", href: pv("/services/seo") },
       { label: "Marketing", href: pv("/services/marketing") },
       { label: "Email marketing", href: pv("/services/marketing/email-marketing"), sub: true },

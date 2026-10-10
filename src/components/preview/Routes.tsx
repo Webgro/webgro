@@ -55,6 +55,18 @@ const ICONS: Record<string, React.ReactNode> = {
       <path pathLength={1} d="M14.8 12a2.8 2.8 0 1 1-5.6 0 2.8 2.8 0 0 1 5.6 0" />
     </>
   ),
+  // An app screen with a sidebar and rows for the bespoke software row.
+  screens: (
+    <>
+      <path pathLength={1} d="M3.2 4.6h17.6v14.8H3.2z" />
+      <path pathLength={1} d="M8.6 4.6v14.8" />
+      <path pathLength={1} d="M5.3 8.4h1.2" />
+      <path pathLength={1} d="M5.3 11.2h1.2" />
+      <path pathLength={1} d="M11.5 9h6.4" />
+      <path pathLength={1} d="M11.5 12.2h6.4" />
+      <path pathLength={1} d="M11.5 15.4h3.8" />
+    </>
+  ),
   // A clipboard with a checked list for the audit row.
   clipboard: (
     <>

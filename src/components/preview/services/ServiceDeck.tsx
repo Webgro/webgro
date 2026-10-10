@@ -15,13 +15,16 @@ const DECK_QUERY = "(min-width: 1100px)";
  * in degrees, and how far it drifts with the mouse (d).
  */
 const FAN = [
-  { x: 18, y: 27, r: -5, d: 1.2 },
-  { x: 50, y: 22, r: 2, d: 0.8 },
-  { x: 82, y: 30, r: 6, d: 1 },
-  { x: 21, y: 73, r: 3.5, d: 0.9 },
-  { x: 52, y: 77, r: -3, d: 1.3 },
-  { x: 82, y: 71, r: -6.5, d: 0.7 },
+  { x: 14, y: 27, r: -5, d: 1.2 },
+  { x: 38, y: 22, r: 2, d: 0.8 },
+  { x: 62, y: 29, r: -2.5, d: 1.1 },
+  { x: 86, y: 24, r: 5.5, d: 1 },
+  { x: 26, y: 74, r: 3.5, d: 0.9 },
+  { x: 51, y: 78, r: -3, d: 1.3 },
+  { x: 75, y: 72, r: -6, d: 0.7 },
 ];
+/** Cards in the top row, which sit under the bottom row where the two overlap. */
+const TOP_ROW = 4;
 /** How the cards lie once they are gathered up: turn, and a nudge as a share of the card width. */
 const PILE = [
   { r: -6, x: -0.03 },
@@ -30,6 +33,7 @@ const PILE = [
   { r: 5.5, x: 0.02 },
   { r: -4, x: -0.03 },
   { r: 2.5, x: 0.015 },
+  { r: -5, x: 0.02 },
 ];
 
 function Arrow() {
@@ -41,7 +45,7 @@ function Arrow() {
 }
 
 /**
- * Six small cards beside the services headline, one per service, each showing
+ * Seven small cards beside the services headline, one per service, each showing
  * that service page's own picture in its finished state. They are dealt out on
  * load, lean towards the mouse, and are gathered up into a pile that sinks
  * towards the desk below as the page scrolls.
@@ -96,7 +100,7 @@ export function ServiceDeck() {
       };
       measure();
 
-      gsap.set(cards, { xPercent: -50, yPercent: -50, x: 0, y: 0, rotation: (i: number) => FAN[i].r });
+      gsap.set(cards, { xPercent: -50, yPercent: -50, x: 0, y: 0, rotation: (i: number) => FAN[i % FAN.length].r });
       gsap.set(floats, { transformPerspective: 900 });
 
       // Dealt out from a pile at the bottom of the deck.
@@ -104,7 +108,7 @@ export function ServiceDeck() {
       gsap.from(deals, {
         x: (i: number) => geo.w * 0.5 - geo.cx[i],
         y: (i: number) => geo.h * 0.85 - geo.cy[i],
-        rotation: (i: number) => PILE[i].r - FAN[i].r,
+        rotation: (i: number) => PILE[i % PILE.length].r - FAN[i % FAN.length].r,
         scale: 0.86, autoAlpha: 0, duration: 1.15, ease: "power3.out",
         stagger: 0.07, delay: 0.35,
       });
@@ -119,9 +123,9 @@ export function ServiceDeck() {
       });
       cards.forEach((card, i) => {
         tl.to(card, {
-          x: () => geo.w * 0.5 - geo.cx[i] + PILE[i].x * geo.cw,
+          x: () => geo.w * 0.5 - geo.cx[i] + PILE[i % PILE.length].x * geo.cw,
           y: () => geo.h * 0.5 - geo.cy[i],
-          rotation: PILE[i].r, duration: 0.45, ease: "power2.inOut",
+          rotation: PILE[i % PILE.length].r, duration: 0.45, ease: "power2.inOut",
         }, i * 0.025);
       });
       tl.fromTo(el, { y: 0 }, { y: () => hero.offsetHeight * 1.35, duration: 1, ease: "power1.in" }, 0)
@@ -138,7 +142,7 @@ export function ServiceDeck() {
       }));
       const lean = (mx: number, my: number) => {
         to.forEach((t, i) => {
-          const d = FAN[i].d;
+          const d = FAN[i % FAN.length].d;
           t.x(mx * 16 * d);
           t.y(my * 12 * d);
           t.ry(mx * 7);
@@ -173,7 +177,7 @@ export function ServiceDeck() {
             <li
               className="pv-svc-deck-card"
               key={s.slug}
-              style={{ left: `${f.x}%`, top: `${f.y}%`, zIndex: i < 3 ? 1 + i : 5 + i, ["--pv-svc-r" as string]: `${f.r}deg` }}
+              style={{ left: `${f.x}%`, top: `${f.y}%`, zIndex: i < TOP_ROW ? 1 + i : 5 + i, ["--pv-svc-r" as string]: `${f.r}deg` }}
             >
               <div className="pv-svc-deck-deal">
                 <div className="pv-svc-deck-float">

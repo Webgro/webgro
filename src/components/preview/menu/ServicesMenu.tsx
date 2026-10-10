@@ -7,7 +7,7 @@ import { pvServices, pvSubServices } from "../services/content";
 import "./menu.css";
 
 /**
- * The Services dropdown: a small panel under the nav link with the six
+ * The Services dropdown: a small panel under the nav link with the seven
  * services, and Marketing's three branches indented beneath it. Nothing else.
  */
 export function ServicesMenu({
