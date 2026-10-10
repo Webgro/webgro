@@ -11,6 +11,7 @@ import { BeatView } from "./Beats";
 import { Placeholder } from "./Media";
 import type { Journey } from "./structure";
 import { summaries } from "./summaries";
+import { NewTag } from "../NewTag";
 
 const domainOf = (url: string) => url.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
@@ -179,7 +180,7 @@ export function NextProject({ next, onLeave }: { next: NextCase; onLeave: () => 
       >
         <div className="pv-cs-next-copy">
           <div>
-            <p className="pv-label pv-cs-next-kicker">Next project</p>
+            <p className="pv-label pv-cs-next-kicker">Next project <NewTag slug={next.slug} /></p>
             <h2 className={`pv-cs-next-name${next.client.length > 14 ? " is-long" : ""}`}>
               <span className="pv-line"><span>{next.client}</span></span>
             </h2>

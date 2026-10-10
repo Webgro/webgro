@@ -9,6 +9,7 @@ import { pv } from "../links";
 import { SCENE_QUERY, STATIC_QUERY, useGsap } from "../useGsap";
 import { NARROW_QUERY, filterPhrase, type FilterKey, type ViewKey, type WorkItem } from "./data";
 import "./work.css";
+import { NewTag } from "../NewTag";
 
 type Engine = { filter: (f: FilterKey) => void; view: (v: ViewKey) => void };
 
@@ -699,6 +700,7 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
                   <span className="pv-work-rule" aria-hidden="true" />
                   <h2 className="pv-work-name">
                     <span className="pv-work-name-mask"><span className="pv-work-name-in">{it.client}</span></span>
+                    <NewTag slug={it.slug} />
                   </h2>
                   {it.figure ? (
                     <p className="pv-work-figure pv-work-side">

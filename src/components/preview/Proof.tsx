@@ -6,6 +6,7 @@ import { awards, clients } from "./content";
 import { pv } from "./links";
 import { ShopifyPartner } from "./ShopifyPartner";
 import { useGsap } from "./useGsap";
+import { NewTag } from "./NewTag";
 
 export function Proof() {
   const root = useRef<HTMLElement>(null);
@@ -33,7 +34,7 @@ export function Proof() {
             <Fragment key={c.slug}>
               <span className="pv-client-mask">
                 <Link href={pv(`/work/${c.slug}`)} className="pv-client" data-cursor>
-                  {c.name}{i < clients.length - 1 ? "," : "."}
+                  {c.name}<NewTag slug={c.slug} />{i < clients.length - 1 ? "," : "."}
                 </Link>
               </span>{" "}
             </Fragment>

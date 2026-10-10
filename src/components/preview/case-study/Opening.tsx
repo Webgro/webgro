@@ -11,6 +11,7 @@ import { Placeholder } from "./Media";
 import { counter } from "./motion";
 import type { Figure, Segment } from "./structure";
 import { summaries } from "./summaries";
+import { NewTag } from "../NewTag";
 
 const domainOf = (url: string) => url.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
@@ -67,6 +68,7 @@ export function Opening({ cs, hero, headline, segments }: { cs: CaseStudy; hero:
           <Link href={pv("/work")} className="pv-textlink" data-cursor>All work</Link>
           <span>{cs.tag}</span>
           <span>{cs.year}</span>
+          <NewTag slug={cs.slug} />
         </p>
 
         <h1 className={`pv-h1 pv-cs-title${cs.client.length > 14 ? " is-long" : ""}`}>

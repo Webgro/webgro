@@ -520,3 +520,12 @@
 }
 .pv-foot-social a:hover { background: var(--pv-paper); color: var(--pv-ink); }
 .pv-foot-social svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* "New" beside a recently added case study (see src/content/new-work.ts).
+   Sized in rem, so it stays small next to a display-size client name. */
+.pv-new {
+  display: inline-block; vertical-align: middle; margin-left: 0.75em; padding: 0.36em 0.72em 0.32em;
+  border-radius: 999px; background: var(--pv-blue); color: var(--pv-ink);
+  font: 700 0.75rem / 1 var(--pv-display); letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap;
+  transform: translateY(-0.12em);
+}
