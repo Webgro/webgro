@@ -101,6 +101,11 @@ export const workExtras: Record<string, WorkExtra> = {
     blurb: "A brand identity and a custom Shopify theme for a new phone case brand. Shoppers choose their phone once and the shop shows the cases that fit.",
     figure: { value: "68", label: "phone models in the shop-by-phone picker" },
   },
+  fleaway: {
+    w: 1200, h: 800,
+    blurb: "A Shopify store for a flea and tick treatment sold in Ireland. A pack finder matches the treatment to the pet's weight, and the same theme runs the sister site.",
+    figure: { value: "2", label: "sites run from one Shopify theme" },
+  },
   "architectural-fx": {
     w: 1200, h: 800,
     blurb: "A custom WordPress plugin for a Wokingham lighting distributor. Products are published from their Google Sheet, and the new products page has live filters and a configurator that produces spec sheets.",

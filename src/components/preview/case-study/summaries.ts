@@ -17,6 +17,11 @@ export const summaries: Record<string, Summary> = {
     did: "We designed the wordmark, monogram and Berry Noir palette, wrote a Shopify theme from scratch around a shop-by-phone picker, and redesigned 27 customer emails to match. We also set up Klaviyo and run the brand's Instagram and Facebook.",
     changed: "Shoppers choose their phone once, from 68 models, and see the cases that fit. The shop launched in October 2026 with 344 products across UK, US and EU storefronts.",
   },
+  fleaway: {
+    ask: "Fleaway Plus comes in five packs split by animal and weight, and a shopper who picks the wrong one has bought something they can't use.",
+    did: "We wrote a Shopify theme from scratch around a pack finder, added one, three and twelve month packs with subscriptions and a flea and worm discount, and wrote the how-to guide and advice articles.",
+    changed: "Shoppers choose dog or cat, set the weight and see the right pack. The same theme runs the sister site, Wormaway, set up so the two don't compete in search.",
+  },
   "architectural-fx": {
     ask: "Architectural FX had to email their product spreadsheet to us and wait for an import every time a product changed, and their products page took more than six seconds to load.",
     did: "We replaced WooCommerce and two other plugins with one custom WordPress plugin, connected it to their Google Sheet, built new products and product pages with a configurator, and moved 128 DWG drawings off Amazon S3.",
@@ -103,6 +108,7 @@ export const summaries: Record<string, Summary> = {
 export const headlineFigures: Record<string, string[]> = {
   valuepet: ["+62%", "€69.03", "8 weeks"],
   berrymae: ["68", "344", "3"],
+  fleaway: ["8", "3", "2"],
   "architectural-fx": ["3", "128", "9"],
   "fun-cases": ["+300%", "30%", "−70%"],
   "gieves-and-hawkes": ["+21", "£300", "#1"],
