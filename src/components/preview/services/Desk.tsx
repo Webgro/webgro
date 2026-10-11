@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { pv } from "../links";
 import { SCENE_QUERY, useGsap } from "../useGsap";
 import { BrushBand } from "./BrushBand";
-import { pvServices, pvSubServices, type PvService } from "./content";
+import { pvBespokeSubs, pvServices, pvSubServices, type PvService } from "./content";
 
 /** How each sheet lies in the pile: degrees of turn, and a nudge as a fraction of its size. */
 const PILE = [
@@ -31,7 +31,8 @@ function Arrow() {
 }
 
 function Sheet({ s, i, total }: { s: PvService; i: number; total: number }) {
-  const subs = s.slug === "marketing" ? pvSubServices : [];
+  // Marketing and Bespoke Software each have branches with pages of their own.
+  const subs = s.slug === "marketing" ? pvSubServices : s.slug === "bespoke-software" ? pvBespokeSubs : [];
   return (
     <article className="pv-svc-sheet">
       <div className="pv-svc-sheet-inner">
@@ -272,6 +273,7 @@ export function Desk() {
               <span className="pv-svc-say-a">
                 {s.name}
                 {s.slug === "marketing" && <em> (email, PPC and social media)</em>}
+                {s.slug === "bespoke-software" && <em> (software, Shopify apps and WordPress plugins)</em>}
                 <Arrow />
               </span>
             </Link>

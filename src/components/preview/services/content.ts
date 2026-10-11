@@ -485,7 +485,7 @@ const bespoke: PvService = {
   say: "Software built for one business, for its own team to log into and use.",
   short: "Portals, quoting tools, helpdesks, and stock and warehouse systems, built for one business to save its team time and money, with AI built in where it helps.",
   facts: [
-    { label: "Usually costs", value: "From £3,000 to build, plus a monthly charge for servers, storage and maintenance that depends on the build." },
+    { label: "Usually costs", value: "From £3,000, plus a monthly charge that depends on the build." },
     { label: "Usually takes", value: "8 to 10 weeks, including testing." },
   ],
   recent: "Fun Cases: ten tools behind one login, saving about 20 hours of work a day.",
