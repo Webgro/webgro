@@ -1,12 +1,9 @@
 /* Work index at /work. Every class is prefixed pv-work-.
-   The CSS default is the finished, readable page. On desktop that is an index
-   of names with no imagery in the list, and scripts add the travelling viewer,
-   WebGL and motion. On phones every row carries its own photo in the markup. */
+   The CSS default is the finished, readable page: every project as a heading,
+   a line of copy and a link, with the first project's photo on the stage.
+   Scripts make the stage follow the scroll and add WebGL and motion. */
 
-.pv-work {
-  position: relative;
-  --pv-work-cols: minmax(0, 1fr) clamp(170px, 17vw, 250px) clamp(140px, 13vw, 190px);
-}
+.pv-work { position: relative; }
 
 .pv-work-canvas { display: none; }
 .pv-work.is-glon .pv-work-canvas {
@@ -63,7 +60,6 @@
 
 /* ── Index section ────────────────────────────────────────────────────── */
 .pv-work-index { position: relative; padding: clamp(70px, 12vh, 150px) var(--pv-pad) clamp(170px, 24vh, 260px); }
-.pv-work-cols { display: none; }
 .pv-work-empty { padding-top: 40px; }
 
 .pv-work-list { position: relative; }
@@ -80,7 +76,7 @@
   margin: 0; font-family: var(--pv-display); font-weight: 700; letter-spacing: -0.04em; line-height: 0.98;
   font-size: clamp(2.1rem, 10vw, 3.4rem); text-wrap: balance;
 }
-.pv-work-name-mask { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; transition: transform 0.6s var(--pv-ease); }
+.pv-work-name-mask { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; }
 .pv-work-name-in { display: block; }
 /* The "New" tag sits beside the name, level with the top of its capitals, and
    moves with it when the row is active. Its wrapper inherits the name's font
@@ -90,7 +86,6 @@
 .pv-work-new { display: inline-flex; flex: none; padding-top: 0.17em; line-height: 1; transition: transform 0.6s var(--pv-ease); }
 .pv-work-new:empty { display: none; }
 .pv-work-new .pv-new { margin-left: 0; transform: none; vertical-align: top; }
-.pv-work-list.is-index .pv-work-item.is-active .pv-work-new { transform: translateX(clamp(8px, 1.3vw, 22px)); }
 
 .pv-work-figure { display: flex; align-items: baseline; gap: 0.55em; }
 .pv-work-figure strong { font: 700 1.3rem / 1 var(--pv-display); letter-spacing: -0.03em; white-space: nowrap; }
@@ -98,67 +93,143 @@
 .pv-work-meta { display: flex; flex-wrap: wrap; gap: 0.1em 1em; font-family: var(--pv-display); font-weight: 500; font-size: 0.9rem; }
 .pv-work-media img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
 
-/* Index view. The travelling image keeps to its own column on the right, so it
-   never crosses the names. (An earlier version let it roam and inverted the text
-   over it with mix-blend-mode: that cost a full-screen blend every frame.) */
-.pv-work-list.is-index { border-bottom: 1px solid var(--pv-rule); }
-.pv-work-list.is-index .pv-work-text {
-  display: grid; gap: 8px; padding: clamp(18px, 2.3vw, 34px) 0; transition: opacity 0.45s ease;
+/* ── List view: a photo stage that sticks while the names scroll past ────
+   Scripts mark the row on the reading line .is-active and put its photo on
+   the stage. Nothing here depends on hover. Without scripts the list has no
+   .has-active class, so every row is at full strength and the stage shows the
+   first project. Rows never change height when they become active, so the
+   page does not move under the reader. */
+.pv-work-index.is-grid .pv-work-stage { display: none; }
+.pv-work-frame {
+  position: relative; width: 100%; aspect-ratio: 16 / 10; max-height: 30svh;
+  --pv-work-r: 12px; border-radius: var(--pv-work-r) 0 var(--pv-work-r) 0; overflow: hidden;
 }
-.pv-work-list.is-index.has-active .pv-work-item:not(.is-active) .pv-work-text { opacity: 0.3; }
-.pv-work-list.is-index .pv-work-item.is-active .pv-work-name-mask { transform: translateX(clamp(8px, 1.3vw, 22px)); }
-.pv-work-list.is-index .pv-work-figure span,
-.pv-work-list.is-index .pv-work-meta { color: var(--pv-muted); }
+/* The two corners that can hold a plate are left square on the frame, so no
+   photo shows through the edge of the curve. A photo with no figure rounds
+   its own bottom-left corner. */
+.pv-work-shot {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden; visibility: hidden;
+  border-bottom-left-radius: var(--pv-work-r); background: color-mix(in srgb, var(--pv-fg) 9%, var(--pv-bg));
+}
+.pv-work-shot:has(.pv-work-plate) { border-bottom-left-radius: 0; }
+.pv-work-shot.is-on { visibility: visible; }
+.pv-work-shot img { width: 100%; height: 100%; object-fit: cover; }
+
+/* The figure and the count sit in notches cut out of the photo: plates in the
+   page colour with a small fillet either side. A project with no figure has
+   no plate, so its photo is simply whole. */
+.pv-work-plate, .pv-work-count { position: absolute; margin: 0; background: var(--pv-bg); }
+.pv-work-plate::before, .pv-work-plate::after, .pv-work-count::before, .pv-work-count::after {
+  content: ""; position: absolute; width: var(--pv-work-r); height: var(--pv-work-r);
+}
+.pv-work-plate {
+  left: 0; bottom: 0; max-width: 86%; display: flex; align-items: flex-end; gap: 10px;
+  padding: 9px 14px 7px 2px; border-top-right-radius: var(--pv-work-r);
+}
+.pv-work-plate::before, .pv-work-plate::after {
+  background: radial-gradient(circle at 100% 0, transparent calc(var(--pv-work-r) - 0.5px), var(--pv-bg) var(--pv-work-r));
+}
+.pv-work-plate::before { left: 0; bottom: 100%; }
+.pv-work-plate::after { left: 100%; bottom: 0; }
+.pv-work-plate strong {
+  display: block; flex: none; overflow: hidden; padding-bottom: 0.06em;
+  font: 700 1.7rem / 0.9 var(--pv-display); letter-spacing: -0.045em; color: var(--pv-blue-text); white-space: nowrap;
+}
+.pv-work-plate-in { display: block; }
+.pv-work-plate-label { font-size: 0.74rem; line-height: 1.3; max-width: 25ch; padding-bottom: 0.1em; }
+.pv-work-count {
+  right: 0; top: 0; z-index: 90; display: flex; padding: 5px 6px 8px 12px; border-bottom-left-radius: var(--pv-work-r);
+  font: 500 0.8rem / 1 var(--pv-display); font-variant-numeric: tabular-nums; white-space: pre;
+}
+.pv-work-count::before, .pv-work-count::after {
+  background: radial-gradient(circle at 0 100%, transparent calc(var(--pv-work-r) - 0.5px), var(--pv-bg) var(--pv-work-r));
+}
+.pv-work-count::before { right: 100%; top: 0; }
+.pv-work-count::after { right: 0; top: 100%; }
+.pv-work-count-mask { display: block; overflow: hidden; }
+.pv-work-count-n { display: block; }
+.pv-work-count-of, .pv-work-count-t { color: var(--pv-muted); }
+
+.pv-work-list.is-index { border-bottom: 1px solid var(--pv-rule); }
+.pv-work-list.is-index .pv-work-media,
 .pv-work-list.is-index .pv-work-blurb,
 .pv-work-list.is-index .pv-work-go { display: none; }
-.pv-work-list.is-index .pv-work-media {
-  position: fixed; left: 0; top: 0; z-index: 4; display: block;
-  width: min(38vw, 30svh); aspect-ratio: 4 / 5; border-radius: 12px; overflow: hidden;
-  background: #1a1b20; pointer-events: none;
-  transform: scaleY(0); transform-origin: 0 0;
-}
+.pv-work-list.is-index .pv-work-link { -webkit-tap-highlight-color: transparent; scroll-margin: calc(96px + min(57vw, 30svh)) 0 140px; }
+.pv-work-list.is-index .pv-work-text { display: grid; gap: 7px; padding: 17px 0 19px; }
+.pv-work-list.is-index .pv-work-name { position: relative; font-size: clamp(1.7rem, 8.2vw, 2.7rem); max-width: calc(100% - 0.8em); transition: color 0.45s ease; }
+.pv-work-list.is-index .pv-work-meta { color: var(--pv-muted); transition: color 0.45s ease; }
+/* The figure is on the stage, which assistive tech skips, so the row keeps it for screen readers. */
+.pv-work-list.is-index .pv-work-figure { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
-@media (min-width: 900px) {
-  .pv-work-index.is-index .pv-work-cols {
-    display: grid; grid-template-columns: var(--pv-work-cols); column-gap: 3vw; padding-bottom: 16px;
-  }
-  .pv-work-cols p:last-child { text-align: right; }
-  .pv-work-index.is-index { --pv-work-viewer: clamp(280px, 26vw, 440px); }
-  .pv-work-index.is-index .pv-work-cols,
-  .pv-work-list.is-index .pv-work-text { padding-right: calc(var(--pv-work-viewer) + 3vw); }
-  .pv-work-list.is-index .pv-work-name { font-size: clamp(2.6rem, 4.5vw, 5.4rem); }
-  .pv-work-list.is-index .pv-work-text { grid-template-columns: var(--pv-work-cols); column-gap: 3vw; align-items: end; }
-  .pv-work-list.is-index .pv-work-name { grid-column: 1; }
-  .pv-work-list.is-index .pv-work-figure { grid-column: 2; display: grid; gap: 6px; padding-bottom: 0.35em; }
-  .pv-work-list.is-index .pv-work-figure strong { font-size: clamp(1.8rem, 2.5vw, 2.7rem); }
-  .pv-work-list.is-index .pv-work-figure span { max-width: 24ch; }
-  .pv-work-list.is-index .pv-work-meta { grid-column: 3; flex-direction: column; align-items: flex-end; text-align: right; padding-bottom: 0.45em; }
-  .pv-work-list.is-index .pv-work-media { width: var(--pv-work-viewer); aspect-ratio: 4 / 3; }
-}
+/* Quieter, not ghosted: 4.6:1 against the paper, which passes AA at any size. */
+.pv-work-list.is-index.has-active .pv-work-item:not(.is-active) .pv-work-name { color: color-mix(in srgb, var(--pv-fg) 60%, var(--pv-bg)); }
+.pv-work-list.is-index .pv-work-item.is-active .pv-work-meta,
+.pv-work-list.is-index .pv-work-item.is-active .pv-work-blurb { color: var(--pv-fg); }
 
-/* Phones: no travelling viewer (there's no hover, and a floating picture would
-   sit over the list). Each row shows its own photo at 3:2 between the meta and
-   the figure. The text box steps aside (display: contents) so the name, meta,
-   photo and figure can be ordered as one column, and the rule then measures
-   against the link. Scripts only add the reveal: the photo wipes up through a
-   clip-path mask and the name rises out of its own mask. */
+/* The active row: an arrow slides into the space the name makes for it, and
+   the brush is wiped in under the name. Transforms and clip-path only. */
+.pv-work-name-wrap { position: relative; display: block; min-width: 0; isolation: isolate; transition: transform 0.6s var(--pv-ease); }
+.pv-work-arrow, .pv-work-name-brush { display: none; }
+.pv-work-list.is-index .pv-work-arrow {
+  display: block; position: absolute; left: 0; top: 0.24em; width: 0.5em; height: 0.5em;
+  fill: none; stroke: var(--pv-blue-text); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+  opacity: 0; transform: translateX(-0.5em); transition: opacity 0.3s ease, transform 0.6s var(--pv-ease);
+}
+.pv-work-list.is-index .pv-work-name-brush {
+  display: block; left: -2%; width: 104%; bottom: -0.1em; height: 0.22em;
+  clip-path: inset(-60% 100% -60% -4%); transition: clip-path 0.7s var(--pv-ease);
+}
+.pv-work-list.is-index .pv-work-item.is-active .pv-work-arrow { opacity: 1; transform: none; transition-delay: 0.08s; }
+.pv-work-list.is-index .pv-work-item.is-active .pv-work-name-wrap,
+.pv-work-list.is-index .pv-work-item.is-active .pv-work-new { transform: translateX(0.7em); }
+.pv-work-list.is-index .pv-work-item.is-active .pv-work-name-brush { clip-path: inset(-60% -4% -60% -4%); transition-delay: 0.1s; }
+
+/* Phones and tablets: the stage is a band that sticks under the nav. Its box
+   reaches the top of the screen in the page colour so the names pass behind
+   it, and it rides up into the nav's space while the nav is hidden. */
 @media (max-width: 899px) {
-  .pv-work-list.is-index .pv-work-link {
-    position: relative; display: grid; row-gap: 10px; padding: 24px 0 34px;
-    -webkit-tap-highlight-color: transparent; transition: opacity 0.25s ease;
+  .pv-work-index.is-index { padding-top: clamp(24px, 6vh, 56px); }
+  .pv-work-index.is-index .pv-work-stage {
+    --pv-work-lift: 54px;
+    position: sticky; top: 0; z-index: 3;
+    margin: 0 calc(var(--pv-pad) * -1); padding: 74px var(--pv-pad) 10px;
+    background: var(--pv-bg); transition: transform 0.6s var(--pv-ease);
   }
-  .pv-work-list.is-index .pv-work-link:active { opacity: 0.72; }
-  .pv-work-list.is-index .pv-work-text { display: contents; }
-  .pv-work-list.is-index .pv-work-name { order: 1; }
-  .pv-work-list.is-index .pv-work-meta { order: 2; }
-  .pv-work-list.is-index .pv-work-media {
-    order: 3; position: relative; left: auto; top: auto; z-index: auto;
-    width: 100%; aspect-ratio: 3 / 2; margin-top: 8px; border-radius: 10px;
-    background: color-mix(in srgb, var(--pv-fg) 9%, transparent);
-    transform: none; transform-origin: 50% 50%;
+  .pv:has(.pv-nav.is-hidden) .pv-work-index.is-index .pv-work-stage { transform: translateY(calc(var(--pv-work-lift) * -1)); }
+}
+@media (min-width: 600px) and (max-width: 899px) {
+  .pv-work-frame { max-height: 36svh; }
+  .pv-work-plate strong { font-size: 2.6rem; }
+  .pv-work-plate-label { font-size: 0.86rem; }
+  .pv-work-list.is-index .pv-work-link { scroll-margin-top: calc(110px + 36svh); }
+}
+
+/* Wide screens: the stage has its own column and holds the middle of the
+   screen for as long as the list runs. */
+@media (min-width: 900px) {
+  .pv-work-index.is-index {
+    --pv-work-sw: clamp(380px, 45vw, 900px);
+    --pv-work-sh: min(calc(var(--pv-work-sw) * 0.8), calc(100svh - 200px));
+    display: grid; grid-template-columns: minmax(0, 1fr) var(--pv-work-sw); column-gap: clamp(36px, 5vw, 100px); align-items: start;
   }
-  .pv-work-list.is-index .pv-work-figure { order: 4; margin-top: 4px; }
-  .pv-work-list.is-index .pv-work-figure strong { font-size: 1.5rem; }
+  .pv-work-index.is-index .pv-work-stage { grid-column: 2; grid-row: 1; position: sticky; top: calc((100svh - var(--pv-work-sh)) / 2); }
+  .pv-work-index.is-index .pv-work-list { grid-column: 1; grid-row: 1; }
+  .pv-work-index.is-index .pv-work-empty { grid-column: 1 / -1; }
+  .pv-work-index.is-index .pv-work-frame { --pv-work-r: 14px; aspect-ratio: auto; height: var(--pv-work-sh); max-height: none; }
+  .pv-work-plate { display: grid; gap: 10px; max-width: 64%; padding: 18px 26px 10px 2px; }
+  .pv-work-plate strong { font-size: clamp(3.2rem, 5.6vw, 6.8rem); line-height: 0.86; letter-spacing: -0.055em; }
+  .pv-work-plate-label { font-size: clamp(0.9rem, 1.05vw, 1.05rem); line-height: 1.35; max-width: 24ch; }
+  .pv-work-count { padding: 6px 8px 14px 18px; font-size: 0.95rem; }
+
+  .pv-work-list.is-index .pv-work-link { scroll-margin: 32vh 0; }
+  .pv-work-list.is-index .pv-work-text { gap: 16px; padding: clamp(24px, 2.6vw, 40px) 0 clamp(28px, 3vw, 46px); }
+  .pv-work-list.is-index .pv-work-name { font-size: clamp(2.3rem, 3.9vw, 4.7rem); }
+  .pv-work-list.is-index .pv-work-blurb { display: block; max-width: 50ch; color: var(--pv-muted); transition: color 0.45s ease; }
+}
+@media (min-width: 1200px) {
+  .pv-work-list.is-index .pv-work-text { grid-template-columns: 11.5em minmax(0, 1fr); column-gap: 24px; }
+  .pv-work-list.is-index .pv-work-name { grid-column: 1 / -1; }
+  .pv-work-list.is-index .pv-work-meta { flex-direction: column; gap: 0.2em; padding-top: 0.15em; }
 }
 
 /* Grid view. */
@@ -240,5 +311,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .pv-work-kicker, .pv-work-hero .pv-line > span, .pv-work-hero .pv-work-intro, .pv-work-card-deal, .pv-work-bar { animation: none; }
-  .pv-work-card, .pv-work-thumb, .pv-work-name-mask, .pv-work-new { transition: none; }
+  .pv-work-card, .pv-work-thumb, .pv-work-name-wrap, .pv-work-new, .pv-work-stage,
+  .pv-work-list.is-index .pv-work-arrow, .pv-work-list.is-index .pv-work-name-brush { transition: none; }
 }

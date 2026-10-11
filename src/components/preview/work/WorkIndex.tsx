@@ -13,6 +13,9 @@ import { NewTag } from "../NewTag";
 
 type Engine = { filter: (f: FilterKey) => void; view: (v: ViewKey) => void };
 
+/** The stage and the grid cards ask for the same file, so a photo fetched for one is cached for the other. */
+const STAGE_SIZES = "(max-width: 899px) 92vw, 46vw";
+
 const matches = (cats: string, f: FilterKey) => f === "all" || cats.split(" ").includes(f);
 
 /** Re-deal the hero deck so the cards that match the filter close ranks. */
@@ -119,16 +122,24 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
       clipPath: "inset(0% 0% 0% 0%)", duration: 0.9, delay: 0.95, ease: "power3.out",
     });
 
-    // Phones (below 900px) get no travelling viewer: every row carries its own
-    // plain <img>, and WebGL is kept for the hero deck only. Crossing 900px
-    // reverts this block and runs it again for the new width.
+    // The list view is a photo stage that sticks while the names scroll past it.
+    // Whichever row sits on the reading line is the active one and the stage
+    // shows its photo. Wide screens put the stage beside the list and read
+    // the line at mid-screen. Below 900px the stage is a band under the nav
+    // and the line is the foot of that band. Crossing 900px reverts this block
+    // and runs it again for the new width.
     mm.add({ motion: SCENE_QUERY, reduced: STATIC_QUERY, narrow: NARROW_QUERY }, (ctx) => {
       const reduced = !!ctx.conditions?.reduced;
       const narrow = !!ctx.conditions?.narrow;
       const hero = q(".pv-work-hero")[0] as HTMLElement;
       const section = q(".pv-work-index")[0] as HTMLElement;
       const list = q(".pv-work-list")[0] as HTMLElement;
+      const stage = q(".pv-work-stage")[0] as HTMLElement;
+      const frame = q(".pv-work-frame")[0] as HTMLElement;
+      const countN = q(".pv-work-count-n")[0] as HTMLElement;
+      const countT = q(".pv-work-count-t")[0] as HTMLElement;
       const titleIn = q(".pv-work-count-in")[0] as HTMLElement;
+      const nav = document.querySelector<HTMLElement>(".pv-nav");
 
       // Front card first, which is the reverse of DOM (and WebGL draw) order.
       const cards = (q(".pv-work-card") as HTMLElement[])
@@ -149,131 +160,210 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
         out: item.classList.contains("is-out"),
         top: 0,
         h: 0,
-        s: 0, // how far this row's image is open in the travelling viewer, 0 to 1
-        bottom: false, // which edge of the viewer it is anchored to while it opens or closes
-        fx: null as null | { dx: number; dy: number; sx: number; sy: number },
       }));
       type Row = (typeof rows)[number];
+
+      // One layer per project in the stage, in the same order as the rows.
+      const shots = (q(".pv-work-shot") as HTMLElement[]).map((shot) => ({
+        el: shot,
+        img: shot.querySelector("img") as HTMLImageElement,
+        value: shot.querySelector<HTMLElement>(".pv-work-plate-in"),
+        label: shot.querySelector<HTMLElement>(".pv-work-plate-label"),
+        // Everything in the layer that a transition touches.
+        bits: [shot, ...Array.from(shot.querySelectorAll<HTMLElement>("img, .pv-work-plate-in, .pv-work-plate-label"))],
+        ready: null as Promise<void> | null,
+      }));
 
       let mode: ViewKey = live.current.view;
       let busy: gsap.core.Timeline | null = null;
       let switching = false;
+      let alive = true;
       let active = -1;
-      let pending = -1;
-      let pendingSince = 0;
+      let shown = Math.max(0, shots.findIndex((s) => s.el.classList.contains("is-on")));
+      let want = shown;
+      let z = 1;
+      let hold: gsap.core.Tween | null = null;
+      let awake = false; // no stage photo is fetched until the page has loaded or the list is near
       let focusIdx = -1;
-      let vw = window.innerWidth;
       let vh = window.innerHeight;
-      let W = 0;
-      let H = 0;
-      let glOn = false;
-      const cur = { x: vw, y: vh * 0.3, set: false };
+      let listTop = 0;
+      let listLeft = 0;
+      let listRight = 0;
+      let line = vh * 0.5;
+      let navLift = 0;
       const ptr = { x: 0, y: 0, live: false, bar: false };
-      const hoverable = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-      const pad = () => Math.max(20, Math.min(72, vw * 0.042));
+      const hoverable = !narrow && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      const pad2 = (n: number) => String(n).padStart(2, "0");
 
+      // Everything pick() needs is read here, so scrolling itself does no layout work.
       const measure = () => {
-        vw = window.innerWidth;
         vh = window.innerHeight;
         for (const r of rows) {
           r.top = r.item.offsetTop;
           r.h = r.item.offsetHeight;
         }
-        const sample = rows.find((r) => !r.out);
-        if (!narrow && mode === "index" && sample) {
-          W = sample.media.offsetWidth;
-          H = sample.media.offsetHeight;
+        if (mode !== "index") return;
+        const lr = list.getBoundingClientRect();
+        listTop = lr.top + window.scrollY;
+        listLeft = lr.left;
+        listRight = lr.right;
+        if (narrow) {
+          const cs = getComputedStyle(stage);
+          navLift = parseFloat(cs.getPropertyValue("--pv-work-lift")) || 0;
+          // The foot of the band while it is stuck.
+          line = (parseFloat(cs.top) || 0) + stage.offsetHeight;
+        } else {
+          navLift = 0;
+          line = vh * 0.5;
         }
       };
 
-      // ── WebGL: deck cards and project images share one canvas ────────────
-      let planes: ReturnType<typeof createGlPlanes> = null;
-      let io: IntersectionObserver | undefined;
-      if (!reduced && canvas.current) {
-        el.classList.add("is-glon");
-        const deckEls = cards.map((c) => c.inner).reverse();
-        planes = createGlPlanes(canvas.current, narrow ? deckEls : [...deckEls, ...rows.map((r) => r.media)]);
-        if (planes) {
-          glOn = true;
-          io = new IntersectionObserver(([e]) => planes?.setRunning(e.isIntersecting), { rootMargin: "20% 0px" });
-          io.observe(el);
-        } else {
-          el.classList.remove("is-glon");
-        }
-      }
+      // ── The stage ────────────────────────────────────────────────────────
+      const visible = () => rows.filter((r) => !r.out);
 
-      // ── The travelling viewer (index view) ───────────────────────────────
-      const setActive = (next: number) => {
-        const prev = active;
+      /** Fetch and decode a project's photo. Resolves when it can be shown without a blank frame. */
+      const load = (i: number) => {
+        const s = shots[i];
+        if (!s) return Promise.resolve();
+        if (!s.ready) {
+          const { img } = s;
+          img.loading = "eager";
+          if (img.dataset.src) {
+            if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+            img.src = img.dataset.src;
+          }
+          s.ready = (typeof img.decode === "function" ? img.decode() : Promise.resolve()).catch(() => {});
+        }
+        return s.ready;
+      };
+
+      /** Warm the photos either side of a project, further ahead in the direction of travel. */
+      const warm = (i: number, dir: number) => {
+        const vis = visible();
+        const k = vis.findIndex((r) => r.i === i);
+        if (k < 0) return;
+        for (const step of [dir, dir * 2, -dir, dir * 3]) {
+          const r = vis[k + step];
+          if (r) load(r.i);
+        }
+      };
+
+      const setCount = () => {
+        const vis = visible();
+        const k = vis.findIndex((r) => r.i === shown);
+        countN.textContent = pad2(Math.max(k, 0) + 1);
+        countT.textContent = pad2(Math.max(vis.length, 1));
+      };
+
+      const stageBits = () => shots.flatMap((s) => s.bits);
+
+      /** Put a project's photo on the stage. `dir` is 1 when moving down the list, -1 when moving up. */
+      const show = (i: number, instant: boolean) => {
+        if (i === shown || !shots[i]) return;
+        const dir = i > shown ? 1 : -1;
+        const prev = shots[shown];
+        const s = shots[i];
+        shown = i;
+        setCount();
+
+        if (reduced || instant) {
+          gsap.killTweensOf([...stageBits(), countN]);
+          gsap.set([...stageBits(), countN], { clearProps: "all" });
+          z = 1;
+          shots.forEach((o) => {
+            o.el.style.zIndex = "";
+            o.el.classList.toggle("is-on", o === s);
+          });
+          return;
+        }
+
+        // The new photo is wiped in over the old one from the edge it is
+        // arriving from, and settles back from a slight zoom as it lands. The
+        // old photo is nudged the other way so the two read as one movement.
+        gsap.killTweensOf(s.bits);
+        s.el.style.zIndex = String(++z);
+        s.el.classList.add("is-on");
+        gsap.fromTo(s.el, { clipPath: dir > 0 ? "inset(100% 0% 0% 0%)" : "inset(0% 0% 100% 0%)" }, {
+          clipPath: "inset(0% 0% 0% 0%)", duration: 0.9, ease: "power3.inOut",
+          onComplete: () => {
+            if (shown !== i) return;
+            shots.forEach((o) => {
+              if (o === s) return;
+              gsap.killTweensOf(o.bits);
+              gsap.set(o.bits, { clearProps: "all" });
+              o.el.style.zIndex = "";
+              o.el.classList.remove("is-on");
+            });
+            gsap.set(s.el, { clearProps: "clipPath" });
+            s.el.style.zIndex = "1";
+            z = 1;
+          },
+        });
+        gsap.fromTo(s.img, { scale: 1.16, yPercent: dir * 6 }, { scale: 1, yPercent: 0, duration: 1.3, ease: "power3.out" });
+        if (prev && prev !== s) gsap.to(prev.img, { yPercent: -dir * 7, duration: 0.9, ease: "power3.inOut", overwrite: "auto" });
+        if (s.value) gsap.fromTo(s.value, { yPercent: dir * 110 }, { yPercent: 0, duration: 0.85, delay: 0.3, ease: "power3.out" });
+        if (s.label) gsap.fromTo(s.label, { opacity: 0 }, { opacity: 1, duration: 0.5, delay: 0.5, ease: "none" });
+        gsap.fromTo(countN, { yPercent: dir * 105 }, { yPercent: 0, duration: 0.6, ease: "power3.out", overwrite: true });
+      };
+
+      const setActive = (next: number, instant = false) => {
+        if (next === active && !instant) return;
+        const dir = next >= active ? 1 : -1;
         active = next;
         list.classList.toggle("has-active", next >= 0);
-        const down = prev < 0 || next < 0 ? true : next > prev;
-        for (const r of rows) {
-          r.item.classList.toggle("is-active", r.i === next);
-          if (r.i === next) {
-            if (r.s < 0.02) r.bottom = down;
-            gsap.to(r, { s: 1, duration: reduced ? 0 : 0.5, ease: "power2.inOut", overwrite: true });
-          } else if (r.s > 0) {
-            if (r.i === prev && r.s > 0.98) r.bottom = !down;
-            gsap.to(r, { s: 0, duration: reduced ? 0 : 0.5, ease: "power2.inOut", overwrite: true });
-          }
-        }
+        for (const r of rows) r.item.classList.toggle("is-active", r.i === next);
+        if (next < 0) return;
+        want = next;
+        hold?.kill();
+        const go = () => {
+          hold = null;
+          if (!awake) return;
+          warm(next, dir);
+          load(next).then(() => {
+            if (alive && want === next && mode === "index") show(next, instant);
+          });
+        };
+        // A short pause before the photo follows, so a fast scroll through
+        // several rows does not stack a wipe for every one of them.
+        if (instant || reduced) go();
+        else hold = gsap.delayedCall(0.09, go);
       };
 
-      const tick = () => {
-        if (narrow || mode !== "index" || !W) return;
-        const lr = list.getBoundingClientRect();
-        const usePtr = hoverable && ptr.live && !ptr.bar
-          && ptr.y >= lr.top && ptr.y <= lr.bottom && ptr.x >= lr.left && ptr.x <= lr.right;
+      /** Start fetching photos: the active project's, then its neighbours. */
+      const wake = () => {
+        if (awake || !alive) return;
+        awake = true;
+        if (mode !== "index" || want < 0) return;
+        const i = want;
+        warm(i, 1);
+        load(i).then(() => {
+          if (alive && want === i && mode === "index") show(i, true);
+        });
+      };
 
-        if (!switching) {
-          let next = -1;
-          if (focusIdx >= 0 && !rows[focusIdx].out) next = focusIdx;
-          else {
-            const ly = (usePtr ? ptr.y : vh * 0.5) - lr.top;
-            for (const r of rows) {
-              if (!r.out && ly >= r.top && ly < r.top + r.h) { next = r.i; break; }
-            }
+      /** Work out which row is on the reading line. Arithmetic on cached numbers only. */
+      const pick = (instant = false) => {
+        if (mode !== "index" || switching) return;
+        let next = -1;
+        if (focusIdx >= 0 && !rows[focusIdx].out) next = focusIdx;
+        else {
+          const scroll = window.scrollY;
+          let y = line - (navLift && nav?.classList.contains("is-hidden") ? navLift : 0);
+          if (hoverable && ptr.live && !ptr.bar && ptr.x >= listLeft && ptr.x <= listRight) {
+            const top = listTop - scroll;
+            const last = rows[rows.length - 1];
+            if (ptr.y >= top && ptr.y <= top + last.top + last.h) y = ptr.y;
           }
-          if (next !== pending) { pending = next; pendingSince = performance.now(); }
-          const settle = focusIdx >= 0 || active < 0 ? 0 : 110;
-          if (next !== active && performance.now() - pendingSince >= settle) setActive(next);
-        }
-
-        if (active >= 0) {
-          const row = rows[active];
-          const narrow = vw < 900;
-          const tx = vw - W - pad();
-          let ty = narrow
-            ? vh - H - 132
-            : (usePtr ? ptr.y : lr.top + row.top + row.h / 2) - H / 2;
-          ty = Math.max(84, Math.min(vh - H - (narrow ? 132 : 96), ty));
-          if (!cur.set) { cur.x = tx; cur.y = ty; cur.set = true; }
-          const k = reduced ? 1 : 1 - Math.pow(1 - 0.1, gsap.ticker.deltaRatio());
-          cur.x += (tx - cur.x) * k;
-          cur.y += (ty - cur.y) * k;
-        } else if (!switching && rows.every((r) => r.s === 0)) {
-          cur.set = false; // closed: the next project opens in place rather than flying in
-        }
-
-        for (const r of rows) {
-          if (r.out) continue;
-          let x = cur.x;
-          let y = cur.y;
-          let sx = 1;
-          let sy = r.s;
-          if (r.fx) {
-            x += r.fx.dx; y += r.fx.dy; sx = r.fx.sx; sy = r.fx.sy;
-          } else if (r.bottom) {
-            y += H * (1 - r.s);
-          }
-          r.media.style.transform = `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0) scale(${sx.toFixed(4)},${sy.toFixed(4)})`;
-          if (!glOn) {
-            // Without WebGL the photo is counter-scaled so it wipes instead of squashing.
-            r.img.style.transformOrigin = r.bottom ? "50% 100%" : "50% 0%";
-            r.img.style.transform = !r.fx && sy > 0.001 && sy < 1 ? `scaleY(${(1 / sy).toFixed(4)})` : "";
+          const ly = y + scroll - listTop;
+          for (const r of rows) {
+            if (r.out) continue;
+            next = r.i;
+            // Phones: the first row whose name is clear of the band. Wide
+            // screens: the row the line runs through.
+            if (narrow ? r.top >= ly - 18 : ly < r.top + r.h) break;
           }
         }
+        if (next !== active || instant) setActive(next, instant);
       };
 
       const onMove = (e: PointerEvent) => {
@@ -282,27 +372,49 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
         ptr.y = e.clientY;
         ptr.live = true;
         ptr.bar = e.target instanceof Element && !!e.target.closest(".pv-work-bar");
+        pick();
       };
-      const onLeave = () => { ptr.live = false; };
+      const onLeave = () => { ptr.live = false; pick(); };
       const onFocusIn = (e: FocusEvent) => {
         const item = e.target instanceof Element ? e.target.closest(".pv-work-item") : null;
         focusIdx = item ? rows.findIndex((r) => r.item === item) : -1;
+        pick();
       };
-      const onFocusOut = () => { focusIdx = -1; };
-      if (!narrow) {
+      const onFocusOut = () => { focusIdx = -1; pick(); };
+      const onRefresh = () => { measure(); pick(); };
+      if (hoverable) {
         window.addEventListener("pointermove", onMove, { passive: true });
         document.documentElement.addEventListener("mouseleave", onLeave);
-        list.addEventListener("focusin", onFocusIn);
-        list.addEventListener("focusout", onFocusOut);
-        gsap.ticker.add(tick);
       }
-      ScrollTrigger.addEventListener("refresh", measure);
+      list.addEventListener("focusin", onFocusIn);
+      list.addEventListener("focusout", onFocusOut);
+      ScrollTrigger.addEventListener("refresh", onRefresh);
+      ScrollTrigger.create({ trigger: section, start: "top bottom", end: "bottom top", onUpdate: () => pick() });
+      ScrollTrigger.create({ trigger: section, start: "top 250%", onEnter: wake });
+      // On phones the band rides up when the nav hides, and the line goes with it.
+      const navWatch = narrow && nav ? new MutationObserver(() => pick()) : null;
+      if (navWatch && nav) navWatch.observe(nav, { attributes: true, attributeFilter: ["class"] });
 
-      // ── Row images that sit in the page (grid view, and every view on phones) ─
+      // ── WebGL: deck cards and the grid's project images share one canvas ──
+      let planes: ReturnType<typeof createGlPlanes> = null;
+      let io: IntersectionObserver | undefined;
+      if (!reduced && canvas.current) {
+        el.classList.add("is-glon");
+        const deckEls = cards.map((c) => c.inner).reverse();
+        planes = createGlPlanes(canvas.current, narrow ? deckEls : [...deckEls, ...rows.map((r) => r.media)]);
+        if (planes) {
+          io = new IntersectionObserver(([e]) => planes?.setRunning(e.isIntersecting), { rootMargin: "20% 0px" });
+          io.observe(el);
+        } else {
+          el.classList.remove("is-glon");
+        }
+      }
+
+      // ── Row images that sit in the page (grid view) ──────────────────────
       // Desktop grid keeps its scaleY wipe (the WebGL plane follows the box).
       // Phones draw plain photos, so they wipe up through a clip-path mask
       // instead, which never squashes the picture.
-      const inlineMedia = () => narrow || mode === "grid";
+      const inlineMedia = () => mode === "grid";
       const mediaHidden = (): gsap.TweenVars => (narrow
         ? { clipPath: "inset(100% 0% 0% 0%)" }
         : { scaleY: 0, transformOrigin: "50% 100%" });
@@ -317,11 +429,9 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
       const resetRow = (r: Row) => {
         gsap.killTweensOf([...rowBits(r), r.name, r.text, r.item]);
         gsap.set([...rowBits(r), r.name, r.text, r.item], { clearProps: "all" });
-        if (inlineMedia()) {
-          gsap.killTweensOf([r.media, r.img]);
-          gsap.set(r.media, { clearProps: "all" });
-          if (narrow) gsap.set(r.img, { clearProps: "all" });
-        }
+        gsap.killTweensOf([r.media, r.img]);
+        gsap.set(r.media, { clearProps: "all" });
+        if (narrow) gsap.set(r.img, { clearProps: "all" });
       };
       const disarm = () => {
         reveals.forEach((st) => st.kill());
@@ -336,7 +446,7 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
           gsap.set(r.rule, { scaleX: 0 });
           gsap.set(r.sides, { autoAlpha: 0, y: 14 });
           if (inlineMedia()) gsap.set(r.media, mediaHidden());
-          if (narrow) gsap.set(r.img, { scale: 1.14 });
+          if (inlineMedia() && narrow) gsap.set(r.img, { scale: 1.14 });
           reveals.push(ScrollTrigger.create({
             trigger: r.item,
             // Phones start a touch later so the reveal isn't spent behind the docked bar.
@@ -347,7 +457,7 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
               gsap.to(r.nameIn, { yPercent: 0, duration: 1, ease: "power3.out", delay: 0.08 });
               gsap.to(r.sides, { autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out", delay: 0.25, stagger: 0.06 });
               if (inlineMedia()) gsap.to(r.media, { ...mediaShown(), duration: 1.1, ease: "power3.inOut" });
-              if (narrow) gsap.to(r.img, { scale: 1, duration: 1.4, ease: "power3.out" });
+              if (inlineMedia() && narrow) gsap.to(r.img, { scale: 1, duration: 1.4, ease: "power3.out" });
             },
           }));
         }
@@ -365,7 +475,8 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
       const settle = () => {
         busy = null;
         switching = false;
-        rows.forEach((r) => { resetRow(r); r.fx = null; });
+        rows.forEach(resetRow);
+        gsap.set(frame, { clearProps: "all" });
         measure();
         ScrollTrigger.refresh();
         arm();
@@ -404,21 +515,21 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
         const leaving = rows.filter((r) => !r.out && !matches(r.cats, f));
         const entering = rows.filter((r) => r.out && matches(r.cats, f));
         const staying = rows.filter((r) => !r.out && matches(r.cats, f));
-        // On phones the index row's text box is display: contents, so the whole row moves.
-        const flipEl = (r: Row) => (mode === "index" && !narrow ? r.text : r.item);
 
         const swap = () => {
-          const first = staying.map((r) => flipEl(r).getBoundingClientRect());
+          const first = staying.map((r) => r.item.getBoundingClientRect());
           leaving.forEach((r) => {
-            gsap.killTweensOf(r);
             resetRow(r);
             r.out = true;
-            r.s = 0;
             r.item.classList.add("is-out");
           });
           entering.forEach((r) => { r.out = false; r.item.classList.remove("is-out"); });
           markColumns(el);
           measure();
+          // The stage follows the new list: a fresh count, and a new active
+          // project if the old one has just been filtered out.
+          setCount();
+          pick();
           return first;
         };
 
@@ -436,11 +547,11 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
           const tl = gsap.timeline({ onComplete: settle });
           busy = tl;
           staying.forEach((r, k) => {
-            const last = flipEl(r).getBoundingClientRect();
+            const last = r.item.getBoundingClientRect();
             const dx = first[k].left - last.left;
             const dy = first[k].top - last.top;
             if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5) return;
-            tl.fromTo(flipEl(r), { x: dx, y: dy }, { x: 0, y: 0, duration: 0.95, ease: "power3.inOut" }, Math.min(k, 8) * 0.025);
+            tl.fromTo(r.item, { x: dx, y: dy }, { x: 0, y: 0, duration: 0.95, ease: "power3.inOut" }, Math.min(k, 8) * 0.025);
           });
           if (entering.length) {
             tl.fromTo(entering.map((r) => r.rule), { scaleX: 0 }, { scaleX: 1, duration: 1, ease: "power3.inOut", stagger: 0.05 }, 0.2)
@@ -471,7 +582,8 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
         }
       };
 
-      // ── View toggle: names and images travel to their new places (FLIP) ──
+      // ── View toggle: names travel to their new places, and the active ────
+      // photo flies between the stage and its card in the grid (FLIP).
       const runView = (v: ViewKey) => {
         if (v === mode) return;
         finish();
@@ -480,7 +592,9 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
 
         const vis = rows.filter((r) => !r.out);
         const inList = section.getBoundingClientRect().top < vh * 0.5;
+        const wasActive = active;
         const anchor = vis.find((r) => r.i === active) ?? vis.find((r) => r.item.getBoundingClientRect().bottom > vh * 0.3);
+        const stageBox = mode === "index" ? frame.getBoundingClientRect() : null;
         const first = vis.map((r) => ({
           n: r.name.getBoundingClientRect(),
           fs: parseFloat(getComputedStyle(r.name).fontSize) || 1,
@@ -489,24 +603,24 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
 
         mode = v;
         markView(el, v);
+        hold?.kill();
+        hold = null;
         active = -1;
         list.classList.remove("has-active");
-        for (const r of rows) {
-          gsap.killTweensOf(r);
-          r.s = 0;
-          r.bottom = false;
-          r.item.classList.remove("is-active");
-          r.media.style.transform = "";
-          r.img.style.transform = "";
-        }
+        for (const r of rows) r.item.classList.remove("is-active");
         markColumns(el);
+        measure();
 
         // Keep the project the visitor was looking at in roughly the same place.
         if (inList && anchor) {
-          const want = v === "grid" ? vh * 0.16 : vh * 0.42;
-          window.scrollTo(0, Math.max(0, window.scrollY + anchor.item.getBoundingClientRect().top - want));
+          const wantY = v === "grid" ? vh * 0.16 : line - Math.min(anchor.item.offsetHeight / 2, 60);
+          window.scrollTo(0, Math.max(0, window.scrollY + anchor.item.getBoundingClientRect().top - wantY));
         }
         measure();
+        if (v === "index") {
+          setCount();
+          pick(true);
+        }
 
         if (reduced) {
           settle();
@@ -518,24 +632,6 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
         busy = tl;
         switching = true;
 
-        if (v === "index" && !narrow) {
-          // Decide where the viewer will be before anything moves, then fly every image into it.
-          const lr = list.getBoundingClientRect();
-          const hit = vis.find((r) => vh * 0.5 - lr.top >= r.top && vh * 0.5 - lr.top < r.top + r.h);
-          if (hit) {
-            active = hit.i;
-            hit.s = 1;
-            hit.item.classList.add("is-active");
-            list.classList.add("has-active");
-            cur.x = vw - W - pad();
-            cur.y = Math.max(70, Math.min(vh - H - 14, lr.top + hit.top + hit.h / 2 - H / 2));
-            cur.set = true;
-          } else {
-            cur.x = vw - W - pad();
-            cur.y = vh * 0.5 - H / 2;
-          }
-        }
-
         vis.forEach((r, k) => {
           const f = first[k];
           const at = Math.min(k, 10) * 0.028;
@@ -546,22 +642,38 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
               x: 0, y: 0, scale: 1, duration: 1.15, ease: "power3.inOut",
             }, at);
           }
-          if (v === "grid" || narrow) {
-            // Phones: the photo is in the row in both views, so it moves like a grid card.
-            const m = r.media.getBoundingClientRect();
-            if (!(near(f.m) || near(m)) || !m.width || !m.height) return;
+          if (v !== "grid") return;
+          const m = r.media.getBoundingClientRect();
+          if (!near(m) || !m.width || !m.height) return;
+          if (r.i === wasActive && stageBox && stageBox.width && near(stageBox)) {
+            // The photo on the stage becomes this project's card.
             tl.fromTo(r.media, {
-              x: f.m.left - m.left, y: f.m.top - m.top,
-              scaleX: Math.max(f.m.width, 1) / m.width, scaleY: Math.max(f.m.height, 0.5) / m.height,
+              x: stageBox.left - m.left, y: stageBox.top - m.top,
+              scaleX: stageBox.width / m.width, scaleY: stageBox.height / m.height,
               transformOrigin: "0 0",
-            }, { x: 0, y: 0, scaleX: 1, scaleY: 1, duration: 1.15, ease: "power3.inOut" }, at);
-          } else if (W && H && near(f.m)) {
-            r.fx = { dx: f.m.left - cur.x, dy: f.m.top - cur.y, sx: f.m.width / W, sy: f.m.height / H };
-            tl.to(r.fx, { dx: 0, dy: 0, sx: 1, sy: r.s, duration: 1.15, ease: "power3.inOut" }, at);
+            }, { x: 0, y: 0, scaleX: 1, scaleY: 1, duration: 1.15, ease: "power3.inOut" }, 0);
+          } else {
+            tl.fromTo(r.media, mediaHidden(), { ...mediaShown(), duration: 1, ease: "power3.inOut" }, 0.15 + at);
           }
         });
+
+        if (v === "index") {
+          // The other way round: the card of the project on the reading line
+          // grows into the stage. If it was off screen, the stage wipes in.
+          const k = vis.findIndex((r) => r.i === active);
+          const from = k >= 0 ? first[k].m : null;
+          const to = frame.getBoundingClientRect();
+          if (from && from.width && near(from) && to.width) {
+            tl.fromTo(frame, {
+              x: from.left - to.left, y: from.top - to.top, scale: from.width / to.width, transformOrigin: "0 0",
+            }, { x: 0, y: 0, scale: 1, duration: 1.15, ease: "power3.inOut" }, 0);
+          } else {
+            tl.fromTo(frame, { clipPath: "inset(100% 0% 0% 0%)" }, {
+              clipPath: "inset(0% 0% 0% 0%)", duration: 1, ease: "power3.inOut",
+            }, 0.1);
+          }
+        }
         tl.fromTo(vis.flatMap((r) => [r.rule, ...r.sides]), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.7, stagger: 0.008 }, 0.6);
-        tick();
       };
 
       // ── Scroll-linked extras ─────────────────────────────────────────────
@@ -571,10 +683,6 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
           ease: "none",
           scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: 0.5, invalidateOnRefresh: true },
         });
-        gsap.from(q(".pv-work-cols > *"), {
-          autoAlpha: 0, y: 16, duration: 0.8, ease: "power3.out", stagger: 0.08,
-          scrollTrigger: { trigger: section, start: "top 85%" },
-        });
       }
 
       // Pick up anything chosen before the scripts arrived.
@@ -582,18 +690,26 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
       dealDeck(live.current.filter, true);
       markColumns(el);
       measure();
+      setCount();
+      pick(true);
       arm();
       engine.current = { filter: runFilter, view: runView };
 
+      // Fetch the first few stage photos once the page itself has finished
+      // loading, so they never compete with the hero.
+      if (document.readyState === "complete") gsap.delayedCall(0.4, wake);
+      else window.addEventListener("load", wake, { once: true });
+
       return () => {
+        alive = false;
         engine.current = null;
         busy?.kill();
         busy = null;
+        hold?.kill();
         disarm();
-        gsap.ticker.remove(tick);
-        ScrollTrigger.removeEventListener("refresh", measure);
-        gsap.killTweensOf(rows.map((r) => r.img));
-        if (narrow) gsap.set(rows.map((r) => [r.media, r.img]).flat(), { clearProps: "all" });
+        navWatch?.disconnect();
+        window.removeEventListener("load", wake);
+        ScrollTrigger.removeEventListener("refresh", onRefresh);
         window.removeEventListener("pointermove", onMove);
         document.documentElement.removeEventListener("mouseleave", onLeave);
         list.removeEventListener("focusin", onFocusIn);
@@ -602,8 +718,12 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
         planes?.destroy();
         el.classList.remove("is-glon");
         list.classList.remove("has-active");
-        gsap.killTweensOf(titleIn);
-        gsap.set(titleIn, { clearProps: "all" });
+        gsap.killTweensOf([titleIn, frame, countN, ...stageBits()]);
+        gsap.set([titleIn, frame, countN, ...stageBits()], { clearProps: "all" });
+        shots.forEach((s, i) => {
+          s.el.style.zIndex = "";
+          s.el.classList.toggle("is-on", i === shown);
+        });
         cards.forEach((c) => {
           gsap.killTweensOf(c.inner);
           gsap.set(c.inner, { clearProps: "all" });
@@ -612,11 +732,9 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
         });
         layoutDeck(el, live.current.filter, true);
         for (const r of rows) {
-          gsap.killTweensOf(r);
           resetRow(r);
+          gsap.set(r.img, { clearProps: "all" });
           r.item.classList.remove("is-active");
-          r.media.style.transform = "";
-          r.img.style.transform = "";
         }
       };
     });
@@ -672,10 +790,45 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
       </section>
 
       <section className="pv-work-index is-index" data-pv-theme="paper" aria-label="Case studies">
-        <div className="pv-work-cols" aria-hidden="true">
-          <p className="pv-label">Client</p>
-          <p className="pv-label">Result</p>
-          <p className="pv-label">Type and year</p>
+        {/* The photo stage. It repeats what the list says (the names, links and
+            figures all live in the list), so it is hidden from assistive tech.
+            Only the first photo has a src in the markup. Scripts fetch and
+            decode the rest shortly before each one is needed. */}
+        <div className="pv-work-stage" aria-hidden="true">
+          <div className="pv-work-frame">
+            {items.map((it, i) => {
+              const xs = it.imgSm.replace("-sm.jpg", "-xs.jpg");
+              const srcSet = it.imgLg !== it.imgSm ? `${xs} 480w, ${it.imgSm} 800w, ${it.imgLg} ${it.w}w` : undefined;
+              return (
+                <div className={`pv-work-shot${i === 0 ? " is-on" : ""}`} key={it.slug}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={i === 0 ? it.imgSm : undefined}
+                    srcSet={i === 0 ? srcSet : undefined}
+                    data-src={i === 0 ? undefined : it.imgSm}
+                    data-srcset={i === 0 ? undefined : srcSet}
+                    sizes={STAGE_SIZES}
+                    alt=""
+                    width={it.w}
+                    height={it.h}
+                    loading={i === 0 ? "lazy" : undefined}
+                    decoding="async"
+                  />
+                  {it.figure ? (
+                    <p className="pv-work-plate">
+                      <strong><span className="pv-work-plate-in">{it.figure.value}</span></strong>
+                      <span className="pv-work-plate-label">{it.figure.label}</span>
+                    </p>
+                  ) : null}
+                </div>
+              );
+            })}
+            <p className="pv-work-count">
+              <span className="pv-work-count-mask"><span className="pv-work-count-n">01</span></span>
+              <span className="pv-work-count-of"> / </span>
+              <span className="pv-work-count-t">{String(items.length).padStart(2, "0")}</span>
+            </p>
+          </div>
         </div>
 
         <div className="pv-work-list is-index">
@@ -687,7 +840,7 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
                   <img
                     src={it.imgSm}
                     srcSet={it.imgLg !== it.imgSm ? `${it.imgSm.replace("-sm.jpg", "-xs.jpg")} 480w, ${it.imgSm} 800w, ${it.imgLg} ${it.w}w` : undefined}
-                    sizes="(max-width: 899px) 92vw, 46vw"
+                    sizes={STAGE_SIZES}
                     alt={`${it.client} project by Webgro`}
                     width={it.w}
                     height={it.h}
@@ -699,7 +852,11 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
                 <div className="pv-work-text">
                   <span className="pv-work-rule" aria-hidden="true" />
                   <h2 className="pv-work-name">
-                    <span className="pv-work-name-mask"><span className="pv-work-name-in">{it.client}</span></span>
+                    <svg className="pv-work-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" /></svg>
+                    <span className="pv-work-name-wrap">
+                      <span className="pv-work-name-mask"><span className="pv-work-name-in">{it.client}</span></span>
+                      <BrushStroke className="pv-work-name-brush" />
+                    </span>
                     <span className="pv-work-new"><NewTag slug={it.slug} /></span>
                   </h2>
                   {it.figure ? (
@@ -747,7 +904,7 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
           <span className="pv-work-thumb" aria-hidden="true" />
           {(["index", "grid"] as ViewKey[]).map((v) => (
             <button key={v} type="button" aria-pressed={view === v} onClick={() => chooseView(v)} data-cursor>
-              <span>{v === "index" ? "Index" : "Grid"}</span>
+              <span>{v === "index" ? "List" : "Grid"}</span>
             </button>
           ))}
         </div>

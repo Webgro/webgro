@@ -17,7 +17,7 @@ import type { Category } from "@/content/work";
 export type FilterKey = "all" | Category;
 export type ViewKey = "index" | "grid";
 
-/** Below this width the index drops the travelling viewer and shows an image in every row. Matches work.css. */
+/** Below this width the list view turns its photo stage into a band that sticks under the nav. Matches work.css. */
 export const NARROW_QUERY = "(max-width: 899px)";
 
 export type WorkExtra = {
