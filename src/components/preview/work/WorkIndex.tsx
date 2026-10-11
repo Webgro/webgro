@@ -376,7 +376,7 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
 
   return (
     <div className="pv-work" ref={root}>
-      <section className="pv-work-hero" data-pv-theme="paper">
+      <section className="pv-work-hero" data-pv-theme="ink">
         <div className="pv-work-hero-copy">
           <p className="pv-work-kicker">Shopify, WordPress and AI projects, 2012 to now</p>
           <h1 className="pv-h1 pv-work-title">
@@ -398,7 +398,7 @@ export function WorkIndex({ items, labels }: { items: WorkItem[]; labels: Record
         </p>
       </section>
 
-      <section className={`pv-work-index is-${laidView}`} data-pv-theme="paper" aria-label="Case studies">
+      <section className={`pv-work-index is-${laidView}`} data-pv-theme="ink" aria-label="Case studies">
         <div className={`pv-work-list is-${laidView}`}>
           {items.map((it) => {
             const at = placed.get(it.slug);
