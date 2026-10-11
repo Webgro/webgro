@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { BrushStroke } from "../Brush";
 import { pv } from "../links";
-import { pvServices, pvSubServices } from "../services/content";
+import { pvBespokeMenu, pvServices, pvSubServices } from "../services/content";
 import "./mobile.css";
 
 type Item = { href: string; label: string; services?: boolean };
@@ -22,7 +22,7 @@ let order = 1;
 const serviceRows = pvServices.map((s) => ({
   s,
   i: order++,
-  branches: s.slug === "marketing" ? pvSubServices.map((b) => ({ b, i: order++ })) : [],
+  branches: (s.slug === "marketing" ? pvSubServices : s.slug === "bespoke-software" ? pvBespokeMenu : []).map((b) => ({ b, i: order++ })),
 }));
 const careIndex = order++;
 
@@ -57,7 +57,7 @@ function Label({ text, current }: { text: string; current: boolean }): ReactNode
 /**
  * The phone menu (below 900px): a toggle whose two lines fold into a cross,
  * and an ink sheet that opens as a circle growing out of the toggle. The main
- * links rise out of masks, Services expands in place to show the six services
+ * links rise out of masks, Services expands in place to show the seven services
  * and Marketing's three branches, and the foot holds the enquiry button, the
  * email address and the phone number.
  */

@@ -2,6 +2,7 @@
 
 import { Closing } from "../Closing";
 import { PreviewShell } from "../PreviewShell";
+import { Showcase } from "./bespoke/Showcase";
 import { BrushBandDefs } from "./BrushBand";
 import { getAnyPvService } from "./content";
 import { Faqs } from "./Faqs";
@@ -14,7 +15,8 @@ import "./body/body.css";
  * One template for every service and sub-service. The order answers the
  * questions a visitor has, in the order they have them: is this for me, what
  * do I get, how does it work and how long does it take, what has it done for
- * someone like me, what do people usually ask, and how do I start.
+ * someone like me, what do people usually ask, and how do I start. Bespoke
+ * Software adds a showcase of the software itself after "what do I get".
  */
 export function ServiceDetailView({ slug }: { slug: string }) {
   const service = getAnyPvService(slug);
@@ -28,6 +30,7 @@ export function ServiceDetailView({ slug }: { slug: string }) {
       <ForYou service={service} />
       {service.slug === "marketing" && <Branches />}
       <WhatYouGet service={service} />
+      {service.showcase && <Showcase kind={service.showcase} />}
       <Process process={service.process} />
       <Proof service={service} />
       {hasFaqs && <Faqs faqs={service.faqs} topic={service.lower} />}

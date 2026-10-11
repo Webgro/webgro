@@ -171,14 +171,14 @@ export const industries: Industry[] = [
     meta: {
       title: "Websites for Print and Personalised Products | Webgro",
       description:
-        "Websites for printers and personalised product brands, with product options, design tools, trade pricing and order routing. ANYPRINT, Sublishop and Fun Cases.",
+        "Websites for printers and personalised product brands, with product options, design tools, trade pricing and software for the print room. ANYPRINT, Sublishop and Fun Cases.",
     },
     short: "A print room, a supplier to the print trade and a brand that prints thousands of phone cases a week.",
     hero: {
       lines: ["Websites for", "print and", "personalised", "products"],
       brush: "personalised",
       intro:
-        "We've built websites for ANYPRINT, a commercial print room, Sublishop, a supplier to the print trade, and Fun Cases, who ship thousands of phone cases a week. Between them they cover product options, customer design tools, trade pricing and getting orders to the printer.",
+        "We've built websites for ANYPRINT, a commercial print room, Sublishop, a supplier to the print trade, and Fun Cases, who ship thousands of phone cases a week. Between them they cover product options, customer design tools, trade pricing and the software that gets orders printed and shipped.",
     },
     needs: {
       heading: "What a print website needs",
@@ -195,9 +195,9 @@ export const industries: Industry[] = [
           body: "Fun Cases' personaliser is a full-screen editor built into the theme. Customers add photos, text and stickers to a live mockup, and a print-ready file is added to the order.",
         },
         {
-          title: "Orders sent to the right printer",
+          title: "A print run from one button",
           case: "fun-cases",
-          body: "A routing app checks each Fun Cases order as it arrives. Orders the automatic printers can handle go straight to them, and the rest are queued for printing in-house. On the automatic route, an order can be printed within two minutes.",
+          body: "Fun Cases' custom software sorts open orders into groups. The print operator presses one button for a group, and every picking slip and design sheet is built and sent to the workshop printers. The same software fits one-off artwork to the right print shape and prints a Royal Mail label from one scan.",
         },
         {
           title: "Trade pricing on a B2B catalogue",
@@ -236,17 +236,18 @@ export const industries: Industry[] = [
       },
       {
         slug: "fun-cases",
-        summary: "A rebrand and a Shopify theme built from scratch, with our own personaliser, an order-routing app and a custom warehouse system.",
+        summary: "A rebrand and a Shopify theme built from scratch, with our own personaliser, and custom software for stock, printing, shipping and returns.",
         results: [
           { value: "+300%", label: "revenue over five years" },
           { value: "£5k", label: "a year saved by replacing the personaliser app" },
-          { value: "2 min", label: "from order to print on the automatic route" },
+          { value: "20 hours", label: "of work saved each day by their custom software" },
         ],
       },
     ],
     services: [
       { name: "Websites", price: "From £4,000", body: "Shopify or WordPress, with product options and design tools built in.", path: "/services/websites" },
-      { name: "Automation and AI", price: "Priced per project", body: "Order routing, stock planning and competitor tracking, built around how your production works.", path: "/services/automation-ai" },
+      { name: "Automation and AI", price: "Priced per project", body: "Stock planning and competitor tracking, running in the background.", path: "/services/automation-ai" },
+      { name: "Bespoke Software", price: "From £3,000", body: "Print runs, artwork tools, stock and warehouse scanning and shipping labels, built around how your production works.", path: "/services/bespoke-software" },
       { name: "SEO", price: "From £750 a month", body: "Category and product page SEO. ANYPRINT's rebuild was paired with an ongoing SEO retainer.", path: "/services/seo" },
       { name: "Email marketing", price: "From £800 a month, plus setup", body: "Klaviyo campaigns and flows. One Sublishop email brought in £15k.", path: "/services/marketing/email-marketing" },
       { name: "Google Ads and Meta Ads", price: "From £1,000 a month, plus ad budget", body: "Search, Shopping and paid social. Fun Cases run at a blended return of more than 8.", path: "/services/marketing/ppc" },
@@ -266,7 +267,7 @@ export const industries: Industry[] = [
       },
       {
         q: "Can orders go straight to production?",
-        a: "Yes. At Fun Cases a routing app checks every order. Orders the automatic printing machines can handle go straight to them with no manual step, and the rest are queued for printing in-house.",
+        a: "They can be sent to print with one press. At Fun Cases the software sorts open orders into groups, and the print operator presses one button for a group. Every picking slip and design sheet is then built and sent to the workshop printers, and the order is tagged as printed in Shopify.",
       },
     ],
   },

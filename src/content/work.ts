@@ -27,6 +27,7 @@ export type CaseBlock =
       phone?: { src: string; alt: string };
     }
   | { type: "phone"; src: string; alt: string; width?: "sm" | "md" | "lg" }
+  /** A name from the mockup registry, or a BespokeMockName for a redrawn app screen. */
   | { type: "uiMock"; name: string }
   | { type: "split"; left: { src: string; alt: string }; right: { src: string; alt: string } }
   | {
@@ -98,7 +99,7 @@ export const caseStudies: CaseStudy[] = [
       "Rebrand",
       "Shopify",
       "AI integrations",
-      "Custom WMS",
+      "Bespoke software",
       "SEO",
       "PPC",
       "Email",
@@ -251,72 +252,158 @@ export const caseStudies: CaseStudy[] = [
       // ── Chapter 03 ─────────────────────────────────────────────
       {
         type: "chapter",
-        id: "apps",
+        id: "custom-software",
         num: "03",
-        label: "Custom Apps",
+        label: "Custom Software",
         description:
-          "Three AI tools in daily use, a custom Stock System, and an order-routing app that sends orders to the print floor, all built around how Fun Cases work.",
+          "Ten tools behind one login, covering stock, the warehouse, shipping, printing, returns, content and customer service. The software saves about 20 hours of work a day.",
       },
       {
         type: "section",
-        eyebrow: "Order routing",
-        heading: "Automatic order routing",
+        eyebrow: "Custom software",
+        heading: "Ten tools behind one login",
         body: [
-          "Fun Cases invested in automatic printing machines, but not every order can go to them. It depends on the phone model and case type the customer chose.",
-          "We built a routing app that checks every order as it comes in. Orders the machines can handle go straight to the automatic printers with no manual step, and the rest are queued for manual printing in-house. On the automatic route, an order can be placed and printed within two minutes.",
+          "Fun Cases run their stock, warehouse, shipping, printing, returns, content and customer service from one piece of software we built for them. Each person has their own login, with a role and access to only the tools they need. Several of the tools started as separate apps and were brought under the one login later, with their data.",
+          "The software saves Fun Cases about 20 hours of work a day, worth more than £30,000 a year. The screens in this chapter are example screens, redrawn with sample data.",
         ],
-      },
-      {
-        type: "uiMock",
-        name: "fun-cases-order-routing",
       },
       {
         type: "statGroup",
         items: [
-          { eyebrow: "Order to print", value: "2 min", label: "on the automatic route" },
-          { eyebrow: "Routing decisions", value: "Every order", label: "made automatically" },
+          { eyebrow: "Saved by the software", value: "20 hours", label: "of work a day" },
+          { eyebrow: "Tools", value: "10", label: "behind one login" },
           { eyebrow: "Customer service hours", value: "−70%", label: "with AI triage" },
         ],
       },
       {
         type: "section",
-        heading: "AI customer service",
-        body: "AI triages and summarises every incoming ticket and drafts a reply. A member of the team then reviews, edits and sends it. Customer service hours are down 70% and customer satisfaction has improved. Replies stay in the brand's tone because a person signs off each one.",
-      },
-      {
-        type: "uiMock",
-        name: "fun-cases-ai-customer-service",
-      },
-      {
-        type: "section",
-        heading: "AI product generator",
-        body: "Staff enter a design and a collection title, and the tool generates and publishes a full range (Phone Cases, Laptop Sleeves, Lunchboxes, Keyrings, Posters) in under ten minutes, including mockups, SKUs, variants, imagery and copy. Creating a range used to take the merchandising team a day.",
-      },
-      {
-        type: "uiMock",
-        name: "fun-cases-ai-product-generator",
-      },
-      {
-        type: "section",
-        heading: "AI image generator",
-        body: "Staff upload a product mockup and get back lifestyle images for Instagram in two clicks, with models, settings and different angles. The images can go straight to social without booking a photographer.",
-      },
-      {
-        type: "uiMock",
-        name: "fun-cases-ai-image-generator",
-      },
-      {
-        type: "section",
-        eyebrow: "Stock System",
-        heading: "A custom warehouse management system",
+        eyebrow: "Stock management",
+        heading: "Stock levels and purchase orders",
         body: [
-          "Off-the-shelf warehouse management software was either too big or too limited for Fun Cases, so we built a custom WMS for their operation. It connects directly to Shopify, shows live stock without any middleware, and the client owns it outright.",
-          "The system also includes a productivity tracker for the pick-and-pack team, AI restock and fulfilment recommendations, and a set of smaller tools we build as the ops team ask for them. We keep adding to it.",
+          "The planning screens show what's in stock, what's on order and what has run out, and hold every purchase order. They read the warehouse records directly, so there's no copy of the data and no sync to wait for. The buyer and the owner use them.",
+          "The overview shows units in stock, stock value at cost, low and out-of-stock lines and the top movers of the last 7 days. A purchase order can be written by hand, imported from a CSV file or generated from the forecast, and an order that hasn't arrived shows as stock on order everywhere else.",
         ],
       },
       {
         type: "uiMock",
-        name: "fun-cases-wms",
+        name: "fc-stock-planning",
+      },
+      {
+        type: "section",
+        eyebrow: "Warehouse management",
+        heading: "A warehouse system on handheld scanners",
+        body: [
+          "Off-the-shelf warehouse software was either too big or too limited for Fun Cases, so we built their own. Warehouse staff use it all day on rugged Android phones with barcode scanners, to book stock in, move it, find it, pick orders and run stock takes. Every scan records a stock movement and updates the stock held at each location. Booking in is three steps: the SKU, the location and the quantity.",
+          "Each scan is saved on the device before it's sent, and sent again if the wifi drops. A note is added to the Shopify order when it's picked, pressed and packed. Timekeeping is built in, with a points score for picks, book-ins, moves and stock takes.",
+          "The warehouse system was moved across from an earlier custom app. Every record kept its original ID, so the QR codes already on shelves and boxes carried on working.",
+        ],
+      },
+      {
+        type: "uiMock",
+        name: "fc-warehouse",
+      },
+      {
+        type: "section",
+        eyebrow: "Stock forecasting",
+        heading: "A forecast that shows its working",
+        body: [
+          "The forecast works out what to order from each supplier and how much. It's a statistical calculation based on the units that left stock in the last 30 days, read from the warehouse movement log. The buyer picks a supplier, a delivery date and how many days of cover they want.",
+          "One-off adjustments of 50 units or more are left out. If a SKU was out of stock for part of the period, its daily rate is worked out over the days it was in stock. Seasonality is twelve monthly figures the buyer enters by hand, and quantities are rounded up to whole packs. Every number is shown, and any line can be changed before the order is created.",
+          "A stock cover page runs the same calculation forward for 12 months to show when each SKU will run out. An accuracy page compares each forecast with what was used afterwards.",
+        ],
+      },
+      {
+        type: "section",
+        eyebrow: "Shipping labels",
+        heading: "A Royal Mail label from one scan",
+        body: [
+          "A packer scans an order number at the bench. The software reads the order from Shopify, and a set of rules decides the size and service from the product type, the shipping method chosen at checkout and the delivery country.",
+          "The label is created through Royal Mail Click & Drop and sent straight to the bench label printer. The order is then fulfilled in Shopify with its tracking number. Scanning an order that has already been dispatched never buys a second label.",
+        ],
+      },
+      {
+        type: "uiMock",
+        name: "fc-shipping",
+      },
+      {
+        type: "section",
+        eyebrow: "Print runs",
+        heading: "One button for each group of orders",
+        body: [
+          "The software sorts the open orders into groups such as next day, express and standard, oldest first. The print operator presses one button for a group. Nothing prints by itself when an order arrives.",
+          "After that press the software builds every picking slip and design sheet from the workshop's existing print templates, picks the printer that will be free soonest and sends the job. A batch is joined into one file for each printer, with the slips and the designs in the same order so the two stacks match. Once the printer confirms, the order is tagged as printed in Shopify.",
+        ],
+      },
+      {
+        type: "uiMock",
+        name: "fc-print-run",
+      },
+      {
+        type: "section",
+        eyebrow: "Returns",
+        heading: "A returns portal and a returns desk",
+        body: [
+          "Customers book a return on a portal. They enter their order number and postcode, pick the items and a reason, and choose how to settle it: keep the item for a partial refund, send it back with a Royal Mail label, or post it back themselves. The portal replaced an older returns page.",
+          "The warehouse scans the parcel when it arrives, sees what should be inside and confirms or rejects it. Confirming refunds the customer in Shopify and puts the stock back. Customer service work from a list of every return, with its status and history.",
+        ],
+      },
+      {
+        type: "uiMock",
+        name: "fc-returns",
+      },
+      {
+        type: "section",
+        eyebrow: "Content and social",
+        heading: "Social content, checked and scheduled",
+        body: [
+          "The team make social content in the same software and schedule it to Instagram. For text graphics, someone writes a brief and Claude returns the copy for a batch of up to 14. A fit checker measures every piece of text, and a claims check makes sure each price, percentage and promise matches a Facts table the team maintains. A graphic that fails waits for a person to review it.",
+          "For lifestyle images, staff upload product photos and Google's Gemini model builds a new scene around them, with the product left as it is. Approved content is dragged onto a feed grid or a stories row, and the queue posts at the set times through the Instagram API.",
+        ],
+      },
+      {
+        type: "section",
+        eyebrow: "Resizer",
+        heading: "Artwork fitted to the right print shape",
+        body: [
+          "The resizer takes the artwork from an order, fits it to the print shape for that phone model and case type, and sends a 300dpi print file to the workshop printers. Whoever is preparing personalised, one-off or reprint artwork for the press uses it.",
+          "Each phone model has a mask with its real size in millimetres. The match has to be exact: if the resizer isn't sure which mask applies, it picks none and offers suggestions. The print file carries the order number, the SKU, the mask name and whether the print is mirrored.",
+        ],
+      },
+      {
+        type: "section",
+        eyebrow: "Product generation",
+        heading: "New designs, from a brief to Shopify",
+        body: [
+          "A run starts from reference photos, a written brief or researched trending ideas. Claude writes a brief for each design and Google's Gemini model renders it.",
+          "A person picks the designs worth keeping and approves each one's name, SKU, category and tags. A queue then creates the products in Shopify with their titles, descriptions, variants and mockup images.",
+        ],
+      },
+      {
+        type: "section",
+        eyebrow: "Helpdesk",
+        heading: "A helpdesk that replaced Freshdesk",
+        body: [
+          "Emails, contact form messages and Instagram messages arrive as tickets, with the customer's Shopify order beside each one. An AI assistant sorts every new ticket. It reads the live order and the knowledge base, then writes a summary, a suggested next step and a priority score for the person handling it.",
+          "A member of the team reads the ticket and replies. From the same screen they can refund items, send a free replacement, put the order on hold or create a single-use goodwill code. The assistant never carries out refunds, replacements or order changes, and automatic replies are off unless the team switches them on.",
+          "Customer service hours are down 70% and customer satisfaction has improved.",
+        ],
+      },
+      {
+        type: "uiMock",
+        name: "fc-helpdesk",
+      },
+      {
+        type: "section",
+        eyebrow: "Loyalty app",
+        heading: "Case Club, a loyalty app",
+        body: [
+          "Case Club is Fun Cases' loyalty scheme, which we built as a custom Shopify app. Shoppers earn coins on every paid order, and for reviews, follows, birthdays and referring a friend. In their account they see their balance and cash coins in for a one-time discount code. Refunds and cancelled orders take the coins back.",
+          "Staff run the scheme from screens inside the Shopify admin: members, prizes, six kinds of campaign, scheduled popups, referrals and analytics. The app connects to Klaviyo and to Judge.me for product reviews. It replaced Smile.io, and balances from the old scheme were imported at launch.",
+        ],
+      },
+      {
+        type: "uiMock",
+        name: "case-club",
       },
       {
         type: "deliverables",
@@ -328,11 +415,12 @@ export const caseStudies: CaseStudy[] = [
           "Phone model selector (remembered across the site)",
           "Native wishlist",
           "Social and email templates",
-          "Order routing app (automatic print or in-house)",
-          "Custom WMS with Shopify integration",
-          "AI customer service agent",
-          "AI product generator",
-          "AI lifestyle image generator",
+          "Custom software for the whole operation (ten tools behind one login)",
+          "Stock management, warehouse system and stock forecasting",
+          "Shipping labels, print runs and returns portal",
+          "Content and social tools, artwork resizer and product generation",
+          "Helpdesk with AI triage (replaced Freshdesk)",
+          "Case Club loyalty app (replaced Smile.io)",
           "SEO programme",
           "Paid media (Google · Meta)",
           "Email marketing (Klaviyo)",
@@ -619,7 +707,13 @@ export const caseStudies: CaseStudy[] = [
         heading: "Stock kept in sync between two stores",
         body: [
           "ValuePet run two Shopify stores. We built a custom app that links them, so stock levels stay in sync between the two automatically, without anyone updating them by hand.",
+          "The same service keeps the products in step. When a product is created or changed on the first store, the second is updated, and the whole catalogue is compared several times a day as a check that nothing was missed. For products already on both stores it sends only the real differences, so each store's own settings are left alone.",
+          "Each product description is rewritten once by Claude in ValuePet's voice. The draft goes to a review screen, and a person approves it before it's published. Nothing is written to either store until a switch is turned on. With it off, the service logs what it would have sent. The review screen below is an example, redrawn with sample data.",
         ],
+      },
+      {
+        type: "uiMock",
+        name: "pw-vp-bridge",
       },
 
       // ── Chapter 02 ─────────────────────────────────────────────
@@ -1119,9 +1213,10 @@ export const caseStudies: CaseStudy[] = [
       "WordPress",
       "Performance",
       "Accessibility",
+      "Bespoke software",
       "SEO programme",
     ],
-    stack: ["WordPress", "Custom theme"],
+    stack: ["WordPress", "Custom theme", "Xero"],
     timeline: "Rebuild, then ongoing",
     url: "https://any-print.co.uk",
     featured: true,
@@ -1205,8 +1300,56 @@ export const caseStudies: CaseStudy[] = [
       // ── Chapter 02 ─────────────────────────────────────────────
       {
         type: "chapter",
-        id: "next",
+        id: "quote-desk",
         num: "02",
+        label: "Quote Desk",
+        description:
+          "Bespoke software that takes a print enquiry from an email to a paid job. It saves the team 8 hours a week.",
+      },
+      {
+        type: "section",
+        eyebrow: "Enquiries",
+        heading: "From an email to a draft quote",
+        body: [
+          "ANYPRINT used to write each quote up as a document by hand. We built them a quote desk to do that work. A customer's email is forwarded to a dedicated inbox, or pasted in, and becomes a draft quote with its attachments.",
+          "Claude reads the email and pulls out the customer, the reference and the line items. Staff then price each item in a split window, with the quote on one side and the matching product, already set to the right options, on the other. If something is missing, the quote desk emails the customer and moves the quote to a waiting column.",
+          "The board below is an example screen, redrawn with sample data.",
+        ],
+      },
+      {
+        type: "uiMock",
+        name: "anyprint-quotes",
+      },
+      {
+        type: "statGroup",
+        items: [
+          { eyebrow: "Time saved", value: "8 hours", label: "a week" },
+        ],
+      },
+      {
+        type: "section",
+        eyebrow: "Quotes",
+        heading: "A PDF quote with an online accept link",
+        body: [
+          "The quote goes out as a branded PDF in ANYPRINT's existing quote layout, with a link to accept it online. Opens, deliveries and bounces show on the quote's card.",
+          "Quotes that were opened but not answered are followed up automatically on day 3 and day 7, on weekdays between 9am and 5pm, and closed after 10 days. To accept, the customer chooses a quantity and turnaround, enters their details, uploads artwork and agrees the terms.",
+        ],
+      },
+      {
+        type: "section",
+        eyebrow: "Jobs",
+        heading: "Invoices, the jobs board and proofs",
+        body: [
+          "When a customer accepts, the quote desk raises an invoice in Xero and emails it. Payment status is checked every hour.",
+          "The accepted quote becomes a job on a second board, where staff drag it through the production stages. Artwork proofs are sent from the job, and the customer approves them or asks for changes on a page of their own. An unanswered proof gets one reminder after two days.",
+        ],
+      },
+
+      // ── Chapter 03 ─────────────────────────────────────────────
+      {
+        type: "chapter",
+        id: "next",
+        num: "03",
         label: "What's next",
         description:
           "An ongoing SEO programme to turn the faster site into better rankings.",
@@ -1225,6 +1368,7 @@ export const caseStudies: CaseStudy[] = [
           "Custom theme build",
           "Performance optimisation, mobile and desktop",
           "Accessibility audit and fixes",
+          "Quote desk (quotes, follow-ups, Xero invoices, jobs and proofs)",
           "SEO programme (ongoing)",
         ],
       },
@@ -1495,6 +1639,29 @@ export const caseStudies: CaseStudy[] = [
         type: "uiMock",
         name: "twisted-tailor-ai-support",
       },
+      // ── Chapter 03 ─────────────────────────────────────────────
+      {
+        type: "chapter",
+        id: "try-on",
+        num: "03",
+        label: "AI Try-On (Beta)",
+        description:
+          "A custom Shopify app that shows a shopper wearing the garment. It's in beta testing and isn't yet available to all shoppers.",
+      },
+      {
+        type: "section",
+        eyebrow: "In beta",
+        heading: "Try it on with AI",
+        body: [
+          "We built Twisted Tailor a custom Shopify app that adds a Try it on with AI button to product pages. A shopper uploads a full-length photo and sees themselves wearing the garment, usually in 20 to 40 seconds. The app is in beta testing with the brand and isn't yet available to all shoppers.",
+          "The shopper's photo isn't stored, and the try-on image is kept for 7 days, then deleted. Every image is checked by a second AI model before the shopper sees it, and images that fail are held back. Results are labelled as an AI preview and carry the brand's watermark.",
+          "Staff see the results, the quality checks and a funnel from the button to an order inside the Shopify admin. The screen below is an example, redrawn with sample data.",
+        ],
+      },
+      {
+        type: "uiMock",
+        name: "tt-tryon",
+      },
       {
         type: "deliverables",
         heading: "Deliverables",
@@ -1508,6 +1675,7 @@ export const caseStudies: CaseStudy[] = [
           "Native gallery and back-in-stock alerts (2 apps replaced)",
           "MyFitt cross-device size persistence",
           "AI customer service agent",
+          "Try it on with AI app (in beta)",
           "eCommerce consultancy",
           "SEO programme",
         ],

@@ -1,4 +1,5 @@
 import type { MockupName } from "@/components/mockups";
+import type { ScreenName } from "./bespoke/Screen";
 
 /**
  * Copy for the services pages in the redesign concept. The facts all come from
@@ -12,6 +13,7 @@ export type VisualName =
   | "websites"
   | "consultancy"
   | "automation"
+  | "bespoke"
   | "seo"
   | "marketing"
   | "design"
@@ -42,7 +44,7 @@ export type PvService = {
   slug: string;
   /** Path on the live site. Always pass it through pv(). */
   path: string;
-  parent?: "marketing";
+  parent?: "marketing" | "bespoke-software";
   name: string;
   /** Used inside sentences, e.g. "Questions about ...". */
   lower: string;
@@ -60,6 +62,10 @@ export type PvService = {
   platforms?: Array<{ name: string; body: string }>;
   devices?: string;
   mockups?: Array<{ name: MockupName }>;
+  /** Adds a showcase of builds after "What's included" (bespoke/Showcase.tsx). */
+  showcase?: "software" | "shopify-apps" | "wordpress-plugins";
+  /** The redrawn screen in the hero, for services whose visual is "bespoke". */
+  heroScreen?: ScreenName;
   process: { heading: string; total: string; stages: Stage[] };
   proof: { heading: string; intro: string; figures: Figure[]; cases: string[] };
   faqs: Faq[];
@@ -88,7 +94,7 @@ export const caseNotes: Record<string, { client: string; img: string; w: number;
   anyprint: {
     client: "ANYPRINT",
     img: "/preview/reel-anyprint.jpg", w: 1399, h: 933,
-    line: "A WordPress rebuild designed around page speed from the start. Lighthouse performance went from 54 to 99.",
+    line: "A WordPress rebuild designed around page speed, and a quote desk that saves the team 8 hours a week. Lighthouse performance went from 54 to 99.",
   },
   sublishop: {
     client: "Sublishop",
@@ -99,6 +105,16 @@ export const caseNotes: Record<string, { client: string; img: string; w: number;
     client: "Twisted Tailor",
     img: "/preview/reel-twisted-tailor.jpg", w: 1620, h: 1080,
     line: "A Shopify rebuild for the London menswear label. We replaced eight apps with native code and built an AI support agent that passes complex tickets to a person.",
+  },
+  valuepet: {
+    client: "ValuePet",
+    img: "/preview/work-valuepet-lg.jpg", w: 1400, h: 924,
+    line: "A Shopify redesign for one of Ireland's biggest pet retailers, with a Pet Hub that personalises the shop and an app that keeps their two stores in step.",
+  },
+  "architectural-fx": {
+    client: "Architectural FX",
+    img: "/preview/work-architectural-fx-lg.jpg", w: 1200, h: 800,
+    line: "A custom WordPress plugin for a Wokingham lighting distributor. Products are published from their Google Sheet, and one plugin replaced three.",
   },
   "origin-architectural": {
     client: "Origin Architectural",
@@ -182,7 +198,7 @@ const websites: PvService = {
     heading: "A fast site your team can edit",
     body: [
       "Every site we build loads quickly, is designed for phones first and can be edited by your own team. It launches with SEO foundations in place and a clear structure, so AI tools or automations can be added later if you need them.",
-      "Shopify and WordPress cover about 95% of what a growing business needs from a website, so we rarely recommend a headless build. Where a site needs something the platform can't do, we build that part ourselves.",
+      "Shopify and WordPress cover about 95% of what a growing business needs from a website, so we rarely recommend a headless build. Where a site needs something the platform can't do, we build that part ourselves, as a custom Shopify app or a custom WordPress plugin.",
     ],
     items: [
       "Shopify", "Shopify Plus", "WordPress", "Block themes", "Custom theme development",
@@ -368,7 +384,7 @@ const automation: PvService = {
   hero: {
     title: ["AI tools and", "automations built into", "your systems"],
     brush: "your systems",
-    intro: "We build AI tools and automations that your team uses day to day: customer service agents, product generators, image pipelines, internal search and workflow automation. Each tool is set up so you can measure the time it saves from its first week.",
+    intro: "We build automations and AI that run in the background of the systems you already use: syncing data between your shop, stock and accounts, passing work to the right person or system, drafting replies and content for a person to approve, and running jobs on a schedule. Each one is set up so you can measure the time it saves from its first week.",
   },
   forYou: {
     heading: "Teams spending hours on repetitive work",
@@ -378,7 +394,8 @@ const automation: PvService = {
       "Teams that move figures between the shop, spreadsheets and the accounts by hand.",
       "Businesses with an existing AI tool that needs fixing or extending.",
     ],
-    no: "We only recommend building a tool if it should pay for itself within weeks of going live.",
+    no: "We only recommend building a tool if it should pay for itself within weeks of going live. Software your team logs into and works in, such as a portal, a helpdesk or a warehouse system, is a separate service.",
+    noLink: { label: "See the Bespoke Software service", path: "/services/bespoke-software" },
   },
   get: {
     heading: "Measured tools that you own",
@@ -389,13 +406,12 @@ const automation: PvService = {
     items: [
       "Custom AI apps", "AI customer service agents", "Product generators", "Image retouching pipelines",
       "Content operations", "Internal search and RAG", "Workflow automation", "Claude API integrations",
-      "Custom WMS and internal tools",
+      "System syncing", "Scheduled jobs",
     ],
   },
   mockups: [
-    { name: "fun-cases-ai-customer-service" },
-    { name: "fun-cases-ai-product-generator" },
-    { name: "sublishop-inventory-planner" },
+    { name: "sublishop-competitor-tracker" },
+    { name: "fun-cases-ai-image-generator" },
   ],
   process: {
     heading: "How an automation project works",
@@ -410,9 +426,8 @@ const automation: PvService = {
   },
   proof: {
     heading: "AI tools in daily use",
-    intro: "The AI tools we've built save more than £30,000 a year. Most of them we can't talk about, but the ones below we can.",
+    intro: "Most of the AI tools we've built we can't talk about, but the ones below we can.",
     figures: [
-      { value: "£30k+", label: "saved each year by the AI tools we've built" },
       { value: "50–70%", label: "of customer service hours saved at Fun Cases and Twisted Tailor with AI customer service.", draw: { kind: "range", min: 50, max: 70, before: "Hours before", after: "Hours after" } },
     ],
     cases: ["fun-cases", "sublishop", "twisted-tailor", "origin-architectural"],
@@ -459,7 +474,120 @@ const automation: PvService = {
     heading: "Tell us about the idea",
     body: "We'll work out with you whether it's likely to pay back before you commit to building anything.",
   },
-  pairs: ["websites", "consultancy", "marketing"],
+  pairs: ["bespoke-software", "websites", "consultancy"],
+};
+
+const bespoke: PvService = {
+  slug: "bespoke-software",
+  path: "/services/bespoke-software",
+  name: "Bespoke Software",
+  lower: "bespoke software",
+  say: "Software built for one business, for its own team to log into and use.",
+  short: "Portals, quoting tools, helpdesks, and stock and warehouse systems, built for one business to save its team time and money, with AI built in where it helps.",
+  facts: [
+    { label: "Usually costs", value: "From £3,000 to build, plus a monthly charge for servers, storage and maintenance that depends on the build." },
+    { label: "Usually takes", value: "8 to 10 weeks, including testing." },
+  ],
+  recent: "Fun Cases: ten tools behind one login, saving about 20 hours of work a day.",
+  visual: "bespoke",
+  showcase: "software",
+  hero: {
+    title: ["Bespoke software", "built around", "your business"],
+    brush: "your business",
+    intro: "We design and build software for one business at a time: portals, quoting tools, helpdesks, and stock and warehouse systems that your team logs into and uses every day. Each one is designed to save the business time and money. AI is built in where it helps, such as sorting support tickets, reading emailed enquiries into quotes and drafting replies for a person to approve.",
+  },
+  forYou: {
+    heading: "Businesses that have outgrown spreadsheets and separate apps",
+    yes: [
+      "Teams running stock, purchase orders or quotes from spreadsheets.",
+      "Businesses paying for several apps that each do part of a job and don't share data.",
+      "Warehouses and workshops that need screens built for a scanner, a packing bench or a print room.",
+      "Businesses with a process that off-the-shelf software doesn't fit.",
+    ],
+    no: "Bespoke Software is for tools your team logs into and works in. Work that runs in the background with no screens of its own, such as syncing data between systems, AI drafting and scheduled jobs, is our Automation and AI service.",
+    noLink: { label: "See the Automation and AI service", path: "/services/automation-ai" },
+  },
+  get: {
+    heading: "Software built for one business",
+    body: [
+      "Each build starts with how your team does the job now: who does it, where, and on what device. A warehouse scanner, a packing bench and an office desk each need a different kind of screen, and one login can cover all of them.",
+      "The software connects to the systems you already use, from your shop and your accounts to your couriers, printers, email and social channels, so nobody retypes figures between them. Where AI is useful it's given one defined job, and a person approves what goes to a customer.",
+      "We host and maintain what we build, and keep developing it after launch as your team asks for new features. The monthly charge covers the servers, storage and maintenance, and depends on the build.",
+    ],
+    items: [
+      "Internal staff systems", "Client portals", "Warehouse and stock systems", "Quoting and job boards", "Helpdesks",
+      "Returns portals", "Shipping and print tools", "Content tools", "Integrations with your existing systems", "Ongoing development",
+    ],
+  },
+  process: {
+    heading: "How a bespoke software project works",
+    total: "We scope the work and quote before anything is built. Builds start from £3,000, and the monthly charge depends on the servers, storage and maintenance the software needs.",
+    stages: [
+      { name: "Scoping", body: "We go through the job with the people who do it now, and agree what the first version needs to do." },
+      { name: "Design", body: "We design each screen for the device and the place it's used, such as a handheld scanner, a packing bench or a desk." },
+      { name: "Build", time: "From £3,000", body: "We build the first version and connect it to the systems you already use." },
+      { name: "Testing", time: "In test mode first", body: "Tools that print, send or refund start in a test mode, so nothing reaches a printer or a customer until your team has checked it." },
+      { name: "Hosting and maintenance", time: "Monthly charge", body: "We host and maintain the software. The monthly charge covers the servers, storage and maintenance, and depends on the build." },
+      { name: "Ongoing development", time: "Quoted per request", body: "After launch the software keeps changing with the business. Your team sends feature requests, we scope and quote each one, then build it. The Fun Cases software grew to ten tools this way." },
+    ],
+  },
+  proof: {
+    heading: "Bespoke software results",
+    intro: "Figures from three of the builds shown above. The case studies cover each one in more detail, alongside the websites we built for the same businesses.",
+    figures: [
+      { value: "20", label: "hours of work saved each day by the Fun Cases software." },
+      { value: "8", label: "hours a week saved at ANYPRINT by the quote desk." },
+      { value: "50%", label: "fewer support hours at Twisted Tailor with AI support." },
+    ],
+    cases: ["fun-cases", "anyprint", "twisted-tailor"],
+  },
+  faqs: [
+    {
+      q: "How much does bespoke software cost?",
+      a: "Builds start from £3,000. There's also a monthly charge for servers, storage and maintenance, which depends on the build. We scope the work and quote before anything is built.",
+    },
+    {
+      q: "What does the monthly charge cover?",
+      a: "The servers the software runs on, its database and file storage, and maintenance. The amount depends on the build.",
+    },
+    {
+      q: "What's the difference between Bespoke Software and Automation and AI?",
+      a: "Bespoke Software is software people log into and use, such as portals, quoting tools, helpdesks and warehouse systems. Automation and AI is work that runs in the background, such as syncing data, AI drafting and scheduled jobs. Many projects include both.",
+    },
+    {
+      q: "Can it connect to the systems we already use?",
+      a: "Usually, yes. Bespoke software can connect to most systems that have an API or can export a file. The list further up this page shows some of them, from shops, accounting and stock systems to couriers, email, social channels and AI models. We confirm each connection during scoping, before we quote.",
+    },
+    {
+      q: "Does bespoke software have to use AI?",
+      a: "No. We use it where it does one defined job. In the Fun Cases helpdesk an AI assistant sorts new tickets and writes a summary for the person handling them. The stock forecast in the same software is a statistical calculation with every number shown.",
+    },
+    {
+      q: "Can staff use it on phones and scanners?",
+      a: "Yes. The Fun Cases warehouse screens are built for rugged Android phones with barcode scanners, on screens 360 to 400 pixels wide with large buttons. Each scan is saved on the device before it's sent, so a dropped wifi connection doesn't lose it.",
+    },
+    {
+      q: "Who can see what?",
+      a: "Each person has their own login with a role, and access to only the tools they need. In the Fun Cases software, stock planning is open to admins only, and the warehouse scanner screens are a separate permission.",
+    },
+    {
+      q: "How long does a build take?",
+      a: "Most builds take 8 to 10 weeks, including testing. We confirm the timeline when we scope the work, before you commit to anything.",
+    },
+    {
+      q: "Who owns the code?",
+      a: "You do. The software is built for your business, and the code is yours.",
+    },
+    {
+      q: "What happens after it's built?",
+      a: "We host and maintain it, and it keeps changing with the business. Your team sends feature requests, we scope and quote each one, then build it. Fun Cases now have ten tools under one login. Several of them started as separate apps and were moved in later, with their data.",
+    },
+  ],
+  start: {
+    heading: "Tell us about the job",
+    body: "Tell us what your team does by hand or in spreadsheets today. We'll scope what the software would need to do, then quote.",
+  },
+  pairs: ["automation-ai", "websites", "consultancy"],
 };
 
 const seo: PvService = {
@@ -1024,15 +1152,224 @@ const social: PvService = {
   pairs: ["ppc", "email-marketing", "design"],
 };
 
+/* ── Bespoke Software's two branches ────────────────────────────────────── */
+
+const shopifyApps: PvService = {
+  slug: "shopify-apps",
+  path: "/services/bespoke-software/shopify-apps",
+  parent: "bespoke-software",
+  name: "Custom Shopify apps",
+  lower: "custom Shopify apps",
+  say: "Apps built for one Shopify store, for jobs Shopify and its App Store can't do.",
+  short: "Custom Shopify app development for one store: loyalty schemes, syncing between stores and features on the product page.",
+  facts: [
+    { label: "Usually costs", value: "Quoted per build." },
+    { label: "Runs on", value: "Your Shopify store, with its own hosting where it needs a server." },
+  ],
+  recent: "Fun Cases: Case Club, a loyalty app that replaced Smile.io.",
+  visual: "bespoke",
+  heroScreen: "case-club",
+  showcase: "shopify-apps",
+  hero: {
+    title: ["Custom Shopify", "apps, built for", "one store"],
+    brush: "one store",
+    intro: "A custom Shopify app is software built for one store, to do something Shopify and the apps in its App Store can't. We offer custom Shopify app development for loyalty schemes, syncing products and stock between stores, tools on the product page and other jobs that are specific to one business.",
+  },
+  forYou: {
+    heading: "When a store needs its own app",
+    yes: [
+      "Stores that need something Shopify can't do, and that no app in the App Store does well.",
+      "Stores paying for several apps that one app built to fit could replace.",
+      "Businesses with more than one store that need products or stock kept in step.",
+      "Stores that want a feature on the product page, in the cart or in customer accounts that works their own way.",
+    ],
+    no: "Where an existing app already does the job well, we recommend using it. Software your team works in outside Shopify is covered by our Bespoke Software service.",
+    noLink: { label: "See the Bespoke Software service", path: "/services/bespoke-software" },
+  },
+  get: {
+    heading: "An app built for one store",
+    body: [
+      "A custom app is installed on your store only. It can add screens inside the Shopify admin for your staff, add features to the storefront for shoppers, or run in the background with no screens at all.",
+      "Each of the three apps on this page has a switch that keeps it from going live until someone turns it on: a preview mode, a programme switch, or a dry run that logs what it would have done.",
+      "Custom Shopify apps are quoted per build, once we've scoped the work.",
+    ],
+    items: [
+      "Embedded admin apps", "Theme app extensions", "App proxies", "Shopify Functions", "Webhooks",
+      "Loyalty schemes", "Store-to-store sync", "Customer account extensions", "Klaviyo and Judge.me integration",
+    ],
+  },
+  process: {
+    heading: "How a custom Shopify app project works",
+    total: "We scope the work and quote before anything is built. Each custom Shopify app is quoted per build.",
+    stages: [
+      { name: "Scoping", body: "We go through the job with the people who do it now, and agree what the first version needs to do." },
+      { name: "Design", body: "We design the screens your staff and your customers will use, and agree how it connects to the systems you already have." },
+      { name: "Build", time: "Quoted per build", body: "We build the first version and connect it to your store or site." },
+      { name: "Testing", time: "Switched off until you're ready", body: "It's installed behind a switch, a preview mode or on a staging site, so your team can check it before customers see it." },
+      { name: "Hosting and maintenance", body: "We host the app's server and keep it working as Shopify updates its API." },
+      { name: "Ongoing development", time: "Quoted per request", body: "After launch it keeps changing with the business. Your team sends feature requests, we scope and quote each one, then build it." },
+    ],
+  },
+  proof: {
+    heading: "Case studies",
+    intro: "The case studies cover each app alongside the Shopify store it runs on.",
+    figures: [],
+    cases: ["fun-cases", "valuepet", "twisted-tailor"],
+  },
+  faqs: [
+    {
+      q: "What is a custom Shopify app?",
+      a: "An app built for one store. It's installed on your store only, and it does the one job your business needs, where an App Store app is built to suit thousands of shops. It can have screens in the Shopify admin, features on the storefront, or neither.",
+    },
+    {
+      q: "Is it listed on the Shopify App Store?",
+      a: "No. The apps on this page are custom apps, each private to the store it was built for. A public App Store app is a different kind of project, with Shopify's review process, and we'd scope it separately.",
+    },
+    {
+      q: "Will it survive a theme update?",
+      a: "Yes. An app runs separately from the theme, so changing or updating the theme doesn't remove it. Features an app adds to the storefront through a theme app extension are switched on in the theme editor, with no edits to the theme's code.",
+    },
+    {
+      q: "Can it replace apps we already pay for?",
+      a: "Sometimes. Case Club replaced Smile.io at Fun Cases, and balances from the old scheme were imported at launch. Whether it makes sense for you depends on what the existing apps do, which we look at during scoping.",
+    },
+    {
+      q: "Who owns the code?",
+      a: "You do. The app is built for your store, and the code is yours.",
+    },
+    {
+      q: "How much does a custom Shopify app cost?",
+      a: "It's quoted per build. We scope the work first, then quote.",
+    },
+  ],
+  start: {
+    heading: "Tell us what the store needs",
+    body: "Tell us what you'd like the store to do that it can't do now. We'll scope the app, then quote.",
+  },
+  pairs: ["bespoke-software", "wordpress-plugins", "websites"],
+};
+
+const wordpressPlugins: PvService = {
+  slug: "wordpress-plugins",
+  path: "/services/bespoke-software/wordpress-plugins",
+  parent: "bespoke-software",
+  name: "Custom WordPress plugins",
+  lower: "custom WordPress plugins",
+  say: "Plugins built for one WordPress site, for features off-the-shelf plugins can't provide.",
+  short: "Custom WordPress plugin development for one site: product catalogues, configurators and forms that connect to other systems.",
+  facts: [
+    { label: "Usually costs", value: "Quoted per build." },
+    { label: "Runs on", value: "Your WordPress site." },
+  ],
+  recent: "Architectural FX: one custom plugin in place of three.",
+  visual: "bespoke",
+  heroScreen: "afx-configurator",
+  showcase: "wordpress-plugins",
+  hero: {
+    title: ["Custom WordPress", "plugins, built for", "one site"],
+    brush: "one site",
+    intro: "A custom WordPress plugin adds a feature to one site that WordPress and off-the-shelf plugins can't provide. We offer custom WordPress plugin development for product catalogues, configurators, forms that connect to other systems and other jobs that are specific to one business.",
+  },
+  forYou: {
+    heading: "When a site needs its own plugin",
+    yes: [
+      "Sites running several plugins to do one job, where one plugin built to fit would be simpler.",
+      "Businesses that need a catalogue, a configurator or a calculator built around their own products.",
+      "Businesses that want a form to pass what it collects to another system and act on the answer.",
+      "Teams that want to manage website content from a spreadsheet they already keep.",
+    ],
+    no: "Where an existing plugin already does the job well, we recommend using it. Software your team works in outside WordPress is covered by our Bespoke Software service.",
+    noLink: { label: "See the Bespoke Software service", path: "/services/bespoke-software" },
+  },
+  get: {
+    heading: "A plugin built for one site",
+    body: [
+      "A custom plugin is installed and switched on like any other WordPress plugin. It can add its own kinds of content, pages, admin screens and connections to other systems.",
+      "The feature lives in the plugin and not in the theme, so it carries on working when the theme is changed or updated.",
+      "Custom WordPress plugins are quoted per build, once we've scoped the work.",
+    ],
+    items: [
+      "Custom post types", "Shortcodes", "REST endpoints", "Admin screens", "Product configurators",
+      "PDF spec sheets and reports", "Google Sheets publishing", "Form integrations",
+    ],
+  },
+  process: {
+    heading: "How a custom WordPress plugin project works",
+    total: "We scope the work and quote before anything is built. Each custom WordPress plugin is quoted per build.",
+    stages: [
+      { name: "Scoping", body: "We go through the job with the people who do it now, and agree what the first version needs to do." },
+      { name: "Design", body: "We design the screens your staff and your customers will use, and agree how it connects to the systems you already have." },
+      { name: "Build", time: "Quoted per build", body: "We build the first version and connect it to your store or site." },
+      { name: "Testing", time: "Switched off until you're ready", body: "It's installed behind a switch, a preview mode or on a staging site, so your team can check it before customers see it." },
+      { name: "Maintenance", body: "We keep the plugin working with new versions of WordPress." },
+      { name: "Ongoing development", time: "Quoted per request", body: "After launch it keeps changing with the business. Your team sends feature requests, we scope and quote each one, then build it." },
+    ],
+  },
+  proof: {
+    heading: "Case study",
+    intro: "The Architectural FX case study covers the plugin in full, from the old setup to the new products page and configurator.",
+    figures: [
+      { value: "3", label: "plugins replaced by one custom plugin at Architectural FX." },
+      { value: "9", label: "ways to filter the Architectural FX catalogue." },
+      { value: "128", label: "DWG files moved from Amazon S3 into WordPress." },
+    ],
+    cases: ["architectural-fx"],
+  },
+  faqs: [
+    {
+      q: "What is a custom WordPress plugin?",
+      a: "A plugin written for one site. It's installed and switched on like any other plugin, and it adds the one feature your business needs, where an off-the-shelf plugin is built to suit thousands of sites.",
+    },
+    {
+      q: "Will it survive WordPress and theme updates?",
+      a: "A plugin is separate from the theme, so changing or updating the theme doesn't remove the feature. WordPress itself changes over time, and keeping the plugin working with new versions is part of maintenance.",
+    },
+    {
+      q: "Does it work alongside a page builder and our other plugins?",
+      a: "Yes. At Architectural FX the plugin runs the product catalogue and configurator, and the rest of the site is built with a page builder.",
+    },
+    {
+      q: "Is the plugin listed publicly?",
+      a: "No. The plugins on this page are private to the site they were built for, and aren't in the WordPress plugin directory.",
+    },
+    {
+      q: "Who owns the code?",
+      a: "You do. The plugin is built for your site, and the code is yours.",
+    },
+    {
+      q: "How much does a custom WordPress plugin cost?",
+      a: "It's quoted per build. We scope the work first, then quote.",
+    },
+  ],
+  start: {
+    heading: "Tell us what the site needs",
+    body: "Tell us what you'd like the site to do that it can't do now. We'll scope the plugin, then quote.",
+  },
+  pairs: ["bespoke-software", "shopify-apps", "websites"],
+};
+
 /* ── Lookups ────────────────────────────────────────────────────────────── */
 
-/** The six top-level services, in the order they appear on the index. */
-export const pvServices: PvService[] = [websites, consultancy, automation, seo, marketing, design];
+/** The seven top-level services, in the order they appear on the index. */
+export const pvServices: PvService[] = [websites, consultancy, automation, bespoke, seo, marketing, design];
 
 /** Marketing's three branches. */
 export const pvSubServices: PvService[] = [email, ppc, social];
 
-const all = [...pvServices, ...pvSubServices];
+/** Bespoke Software's two branches. */
+export const pvBespokeSubs: PvService[] = [shopifyApps, wordpressPlugins];
+
+/**
+ * What the menus list under Bespoke Software. The first entry points at the
+ * main page: without it the two branches read as the whole service, as if we
+ * only built Shopify apps and WordPress plugins.
+ */
+export const pvBespokeMenu: Pick<PvService, "slug" | "path" | "name">[] = [
+  { slug: "custom-built-software", path: "/services/bespoke-software", name: "Custom-built software" },
+  ...pvBespokeSubs,
+];
+
+const all = [...pvServices, ...pvSubServices, ...pvBespokeSubs];
 
 export function getPvService(slug: string): PvService | undefined {
   return pvServices.find((s) => s.slug === slug);
@@ -1040,6 +1377,10 @@ export function getPvService(slug: string): PvService | undefined {
 
 export function getPvSubService(slug: string): PvService | undefined {
   return pvSubServices.find((s) => s.slug === slug);
+}
+
+export function getBespokeSub(slug: string): PvService | undefined {
+  return pvBespokeSubs.find((s) => s.slug === slug);
 }
 
 export function getAnyPvService(slug: string): PvService | undefined {

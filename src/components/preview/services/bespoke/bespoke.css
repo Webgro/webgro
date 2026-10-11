@@ -1,0 +1,82 @@
+/* Bespoke Software: the software showcase on the service page, and the frame
+   for a redrawn app screen (also used in case studies). Every class is
+   prefixed pv-bsp-. The defaults are the finished layout, so the page reads
+   correctly before scripts run and with reduced motion. */
+
+/* ── The frame for a redrawn app screen ───────────────────────────────── */
+/* The drawings are 16:10. The frame takes its height from the drawing and only
+   rounds the corners, so no part of a screen is cropped. */
+.pv-bsp-screen {
+  position: relative; overflow: hidden; border-radius: clamp(8px, 1.1vw, 16px); background: #fbfaf7;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--pv-fg) 16%, transparent), 0 1.6vw 4vw rgba(13, 13, 15, 0.16);
+}
+.pv-bsp-persp { perspective: 1800px; }
+.pv-bsp-tilt { transform-origin: 50% 100%; }
+.pv-bsp-figure { margin: 0 auto; max-width: 1180px; }
+
+/* A larger hit area for small text links. */
+.pv-bsp-hit { position: relative; }
+.pv-bsp-hit::after { content: ""; position: absolute; inset: -10px -6px; }
+
+/* ── The showcase ─────────────────────────────────────────────────────── */
+.pv-bsp { display: grid; gap: clamp(72px, 13vh, 160px); padding: clamp(90px, 17vh, 200px) var(--pv-pad); }
+.pv-bsp-head { display: grid; gap: 28px; }
+.pv-bsp-item { display: grid; gap: clamp(30px, 5vh, 52px); scroll-margin-top: 100px; }
+.pv-bsp-item-text { display: grid; gap: 16px; align-content: start; justify-items: start; }
+.pv-bsp-item-text h3 { margin: 0; max-width: 20ch; }
+.pv-bsp-item-body { font-size: clamp(1.05rem, 1.25vw, 1.22rem); line-height: 1.5; max-width: 50ch; color: color-mix(in srgb, var(--pv-fg) 82%, transparent); }
+.pv-bsp-item-screen { min-width: 0; }
+.pv-bsp-points { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 12px; max-width: 56ch; }
+.pv-bsp-points li { position: relative; padding-left: 1.5em; line-height: 1.45; color: var(--pv-muted); }
+.pv-bsp-points li::before { content: ""; position: absolute; left: 0; top: 0.66em; width: 0.7em; height: 2px; background: var(--pv-blue); }
+@media (min-width: 900px) {
+  .pv-bsp-head { grid-template-columns: 1.25fr 1fr; align-items: end; gap: 6vw; }
+}
+@media (min-width: 1000px) {
+  .pv-bsp-item { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); column-gap: 5vw; align-items: center; }
+  .pv-bsp-item.is-flip { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); }
+  .pv-bsp-item.is-flip .pv-bsp-item-text { order: 2; }
+}
+
+/* ── What it connects to ──────────────────────────────────────────────── */
+.pv-bsp-con { display: grid; gap: clamp(40px, 7vh, 80px); padding: clamp(90px, 17vh, 200px) var(--pv-pad); }
+.pv-bsp-con-head { display: grid; gap: 28px; }
+.pv-bsp-con-list { border-bottom: 1px solid var(--pv-rule); }
+.pv-bsp-con-row { position: relative; display: grid; gap: 14px; padding: clamp(18px, 2vw, 28px) 0; }
+.pv-bsp-con-rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--pv-rule); transform-origin: left; }
+.pv-bsp-con-row h3 { margin: 0; font: 500 clamp(1.05rem, 1.3vw, 1.25rem) / 1.2 var(--pv-display); color: var(--pv-muted); }
+.pv-bsp-con-row ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 10px; }
+.pv-bsp-chip {
+  padding: 0.5em 0.95em; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--pv-fg) 34%, transparent);
+  font: 500 clamp(0.98rem, 1.15vw, 1.15rem) / 1.2 var(--pv-display);
+}
+.pv-bsp-con-foot { max-width: 52ch; font-size: clamp(1.08rem, 1.4vw, 1.36rem); line-height: 1.5; color: color-mix(in srgb, var(--pv-fg) 82%, transparent); }
+@media (min-width: 800px) {
+  .pv-bsp-con-row { grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr); column-gap: 4vw; align-items: center; }
+}
+@media (min-width: 900px) {
+  .pv-bsp-con-head { grid-template-columns: 1.25fr 1fr; align-items: end; gap: 6vw; }
+}
+.pv-bsp-screen-pending { aspect-ratio: 16 / 10; background: #e9e6df; }
+
+/* ── Links to the Shopify apps and WordPress plugins pages ────────────── */
+.pv-bsp-more { display: grid; gap: clamp(36px, 6vh, 70px); padding: 0 var(--pv-pad) clamp(90px, 17vh, 200px); }
+.pv-bsp-more-head { display: grid; gap: 18px; }
+.pv-bsp-more-list { border-bottom: 1px solid var(--pv-rule); }
+.pv-bsp-more-row { position: relative; display: block; padding: clamp(22px, 2.6vw, 40px) 0; }
+.pv-bsp-more-row:focus-visible { outline: 2px solid var(--pv-blue); outline-offset: 2px; }
+.pv-bsp-more-rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--pv-rule); transform-origin: left; }
+.pv-bsp-more-in { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px 24px; }
+.pv-bsp-more-name { font: 700 clamp(1.6rem, 3vw, 3rem) / 1.05 var(--pv-display); letter-spacing: -0.035em; transition: color 0.3s ease; }
+.pv-bsp-more-text { grid-column: 1; color: var(--pv-muted); max-width: 56ch; }
+.pv-bsp-more-row svg {
+  grid-column: 2; grid-row: 1 / span 2; width: clamp(1.6rem, 2.4vw, 2.4rem); height: clamp(1.6rem, 2.4vw, 2.4rem); fill: none; stroke: currentColor;
+  stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.6s var(--pv-ease);
+}
+@media (hover: hover) {
+  .pv-bsp-more-row:hover .pv-bsp-more-name { color: var(--pv-blue-text); }
+  .pv-bsp-more-row:hover svg { transform: translateX(6px); }
+}
+@media (min-width: 900px) {
+  .pv-bsp-more { grid-template-columns: 0.8fr 1.6fr; column-gap: 6vw; align-items: start; }
+}

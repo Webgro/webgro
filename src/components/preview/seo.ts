@@ -54,7 +54,7 @@ export const PAGE_META = {
   services: {
     title: "Web Design, SEO & Marketing Services | Webgro",
     description:
-      "Shopify and WordPress websites, consultancy, AI and automation, SEO, marketing and design from Webgro, a small studio in Bracknell, Berkshire.",
+      "Shopify and WordPress websites, consultancy, automation and AI, bespoke software, SEO, marketing and design from Webgro, a small studio in Bracknell.",
   },
   about: {
     title: "About Webgro | Web Design Studio in Bracknell Since 2012",
@@ -102,7 +102,22 @@ export const SERVICE_META: Record<string, Meta> = {
   "automation-ai": {
     title: "AI & Automation for Online Businesses | Webgro",
     description:
-      "Custom AI tools and automations built into your Shopify stack, for customer service, product content, stock planning and order routing.",
+      "Custom AI tools and automations built into your Shopify stack, for customer service, product content, stock planning and scheduled jobs.",
+  },
+  "bespoke-software": {
+    title: "Bespoke Software Development for Online Businesses | Webgro",
+    description:
+      "Bespoke software from £3,000, designed to save time and money, with AI built in where it helps and integrations with the systems you already use.",
+  },
+  "shopify-apps": {
+    title: "Custom Shopify App Development, Built for One Store | Webgro",
+    description:
+      "Custom Shopify app development: loyalty schemes, syncing between stores and product page tools, built for one store and quoted per build.",
+  },
+  "wordpress-plugins": {
+    title: "Custom WordPress Plugin Development for One Site | Webgro",
+    description:
+      "Custom WordPress plugin development: product catalogues, configurators and forms that connect to other systems, built for one site.",
   },
   seo: {
     title: "SEO for Shopify & WordPress Websites | Webgro",
@@ -140,6 +155,7 @@ export const SERVICE_META: Record<string, Meta> = {
 export const SERVICE_PRICE: Record<string, StartingPrice> = {
   websites: { from: 4000 },
   consultancy: { from: 400, unit: "DAY" },
+  "bespoke-software": { from: 3000 },
   seo: { from: 750, unit: "MON" },
   marketing: { from: 400, unit: "MON" },
   design: { from: 80, unit: "HUR" },

@@ -1,6 +1,7 @@
 "use client";
 
 import type { PvService } from "../content";
+import { BespokeVisual } from "./BespokeVisual";
 import { EmailVisual } from "./EmailVisual";
 import { LoopVisual } from "./LoopVisual";
 import { MockupVisual } from "./MockupVisual";
@@ -20,6 +21,8 @@ export function HeroVisual({ service }: { service: PvService }) {
       const m = service.mockups?.[0];
       return m ? <MockupVisual name={m.name} /> : null;
     }
+    case "bespoke":
+      return <BespokeVisual name={service.heroScreen} />;
     case "seo":
       return <SeoVisual />;
     case "marketing":
@@ -50,6 +53,8 @@ export function MiniVisual({ service }: { service: PvService }) {
       const m = service.mockups?.[0];
       return m ? <MockupVisual name={m.name} still /> : null;
     }
+    case "bespoke":
+      return <BespokeVisual still />;
     case "seo":
       return <SeoVisual still />;
     case "marketing":
