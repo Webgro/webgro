@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useEffect, useId, useRef } from "react";
 import { pv } from "../links";
-import { pvBespokeSubs, pvServices, pvSubServices } from "../services/content";
+import { pvBespokeMenu, pvServices, pvSubServices } from "../services/content";
 
 /** The branches listed under a service in the menu. */
-const branchesOf = (slug: string) => (slug === "marketing" ? pvSubServices : slug === "bespoke-software" ? pvBespokeSubs : []);
+const branchesOf = (slug: string) => (slug === "marketing" ? pvSubServices : slug === "bespoke-software" ? pvBespokeMenu : []);
 import "./menu.css";
 
 /**

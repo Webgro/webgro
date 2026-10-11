@@ -21,7 +21,7 @@ const PRICES: Record<string, string> = {
   websites: "from £4,000. WordPress builds usually £4k to £15k, Shopify rebuilds £5k to £25k",
   consultancy: "£400 a day",
   "automation-ai": "per project, usually £1k to £15k to build",
-  "bespoke-software": "from £3,000 to build, plus a monthly charge for servers, storage and maintenance that depends on the build. Designed to save time and money, with AI built in where it helps. It can connect to most systems with an API or a file export, such as Shopify, WooCommerce, Xero, Sage, QuickBooks, Royal Mail, DPD, Klaviyo, Mailchimp, HubSpot, Zendesk, Slack and Microsoft 365, confirmed during scoping. After launch, feature requests are scoped, quoted and built",
+  "bespoke-software": "from £3,000 to build, plus a monthly charge for servers, storage and maintenance that depends on the build. Most builds take 8 to 10 weeks, including testing. Designed to save time and money, with AI built in where it helps. It can connect to most systems with an API or a file export, such as Shopify, WooCommerce, Xero, Sage, QuickBooks, Royal Mail, DPD, Klaviyo, Mailchimp, HubSpot, Zendesk, Slack and Microsoft 365, confirmed during scoping. After launch, feature requests are scoped, quoted and built",
   seo: "from £750 a month",
   design: "£80 an hour",
   "email-marketing": "from £800 a month plus setup fees",

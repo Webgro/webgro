@@ -486,7 +486,7 @@ const bespoke: PvService = {
   short: "Portals, quoting tools, helpdesks, and stock and warehouse systems, built for one business to save its team time and money, with AI built in where it helps.",
   facts: [
     { label: "Usually costs", value: "From £3,000 to build, plus a monthly charge for servers, storage and maintenance that depends on the build." },
-    { label: "Connects to", value: "Shopify, WordPress, Xero, Royal Mail, Klaviyo, Instagram and most systems with an API." },
+    { label: "Usually takes", value: "8 to 10 weeks, including testing." },
   ],
   recent: "Fun Cases: ten tools behind one login, saving about 20 hours of work a day.",
   visual: "bespoke",
@@ -569,6 +569,14 @@ const bespoke: PvService = {
     {
       q: "Who can see what?",
       a: "Each person has their own login with a role, and access to only the tools they need. In the Fun Cases software, stock planning is open to admins only, and the warehouse scanner screens are a separate permission.",
+    },
+    {
+      q: "How long does a build take?",
+      a: "Most builds take 8 to 10 weeks, including testing. We confirm the timeline when we scope the work, before you commit to anything.",
+    },
+    {
+      q: "Who owns the code?",
+      a: "You do. The software is built for your business, and the code is yours.",
     },
     {
       q: "What happens after it's built?",
@@ -1227,7 +1235,7 @@ const shopifyApps: PvService = {
     },
     {
       q: "Who owns the code?",
-      a: "Ownership is set out in the proposal for each build, and agreed before any work starts.",
+      a: "You do. The app is built for your store, and the code is yours.",
     },
     {
       q: "How much does a custom Shopify app cost?",
@@ -1326,7 +1334,7 @@ const wordpressPlugins: PvService = {
     },
     {
       q: "Who owns the code?",
-      a: "Ownership is set out in the proposal for each build, and agreed before any work starts.",
+      a: "You do. The plugin is built for your site, and the code is yours.",
     },
     {
       q: "How much does a custom WordPress plugin cost?",
@@ -1350,6 +1358,16 @@ export const pvSubServices: PvService[] = [email, ppc, social];
 
 /** Bespoke Software's two branches. */
 export const pvBespokeSubs: PvService[] = [shopifyApps, wordpressPlugins];
+
+/**
+ * What the menus list under Bespoke Software. The first entry points at the
+ * main page: without it the two branches read as the whole service, as if we
+ * only built Shopify apps and WordPress plugins.
+ */
+export const pvBespokeMenu: Pick<PvService, "slug" | "path" | "name">[] = [
+  { slug: "custom-built-software", path: "/services/bespoke-software", name: "Custom-built software" },
+  ...pvBespokeSubs,
+];
 
 const all = [...pvServices, ...pvSubServices, ...pvBespokeSubs];
 
