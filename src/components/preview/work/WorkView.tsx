@@ -7,7 +7,7 @@ import { WorkOutro } from "./WorkOutro";
 
 export function WorkView({ items, labels }: { items: WorkItem[]; labels: Record<Category, string> }) {
   return (
-    <PreviewShell initialTheme="ink">
+    <PreviewShell initialTheme="paper">
       <WorkIndex items={items} labels={labels} />
       <WorkOutro />
       <Closing />

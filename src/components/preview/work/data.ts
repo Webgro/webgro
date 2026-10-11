@@ -15,9 +15,10 @@ import type { Category } from "@/content/work";
  */
 
 export type FilterKey = "all" | Category;
+/** "index" is the wall of photos, "grid" is the details view with the descriptions. */
 export type ViewKey = "index" | "grid";
 
-/** Below this width the index drops the travelling viewer and shows an image in every row. Matches work.css. */
+/** Below this width the details view is one column. Matches work.css. */
 export const NARROW_QUERY = "(max-width: 899px)";
 
 export type WorkExtra = {
@@ -128,3 +129,84 @@ const PHRASES: Record<FilterKey, string> = {
   ai: "AI and custom software",
 };
 export const filterPhrase = (key: FilterKey) => PHRASES[key];
+
+/**
+ * Where the subject sits in each photo, as a CSS object-position, so a tile
+ * of any shape keeps the face or the product in frame. Anything not listed
+ * is cropped from the centre.
+ */
+export const workFocus: Record<string, string> = {
+  "fun-cases": "40% 30%",
+  "gieves-and-hawkes": "50% 35%",
+  valuepet: "50% 55%",
+  berrymae: "45% 50%",
+  "twisted-tailor": "50% 30%",
+  "its-pouch": "50% 60%",
+  threadology: "45% 30%",
+  "little-muddy-boots": "50% 45%",
+  "jbvc-foundation": "55% 30%",
+  toughcode: "40% 40%",
+};
+
+/* ── The wall's composition ───────────────────────────────────────────────
+   The wall is built from bands. A band is a full-width rectangle holding one
+   to five tiles with no gaps, so any run of bands is a wall with no holes and
+   no orphan on the last row. The layout is derived from the number of
+   projects showing, which is how the filtered walls stay composed. */
+
+/** A tile's place on the grid: row, column, rows spanned, columns spanned (1-based). */
+export type Area = { r: number; c: number; rs: number; cs: number };
+
+type Band = { rows: number; tiles: [r: number, c: number, rs: number, cs: number][] };
+
+/** Wide screens: twelve columns, rows counted in half-height units. "m" is the mirrored form. */
+const BANDS: Record<string, Band> = {
+  "1": { rows: 5, tiles: [[1, 1, 5, 12]] },
+  "2": { rows: 4, tiles: [[1, 1, 4, 7], [1, 8, 4, 5]] },
+  "2m": { rows: 4, tiles: [[1, 1, 4, 5], [1, 6, 4, 7]] },
+  "3": { rows: 3, tiles: [[1, 1, 3, 4], [1, 5, 3, 5], [1, 10, 3, 3]] },
+  "3m": { rows: 3, tiles: [[1, 1, 3, 3], [1, 4, 3, 5], [1, 9, 3, 4]] },
+  // Two large tiles and a stacked pair.
+  "4": { rows: 4, tiles: [[1, 1, 4, 5], [1, 6, 4, 4], [1, 10, 2, 3], [3, 10, 2, 3]] },
+  "4m": { rows: 4, tiles: [[1, 1, 2, 3], [1, 4, 4, 4], [3, 1, 2, 3], [1, 8, 4, 5]] },
+  // One large tile beside a block of four.
+  "5": { rows: 4, tiles: [[1, 1, 4, 6], [1, 7, 2, 3], [1, 10, 2, 3], [3, 7, 2, 3], [3, 10, 2, 3]] },
+  "5m": { rows: 4, tiles: [[1, 1, 2, 3], [1, 4, 2, 3], [3, 1, 2, 3], [1, 7, 4, 6], [3, 4, 2, 3]] },
+};
+const CYCLE = [4, 5, 3, 5];
+const MIRRORED = [false, true, false, false];
+
+export function composeWide(n: number): Area[] {
+  const out: Area[] = [];
+  let left = n;
+  let row = 1;
+  for (let i = 0; left > 0; i++) {
+    let take = CYCLE[i % CYCLE.length];
+    if (left <= 5) take = left;
+    else if (left - take === 1) take -= 1; // never leave one tile for a band of its own
+    const mirror = MIRRORED[i % CYCLE.length] !== (Math.floor(i / CYCLE.length) % 2 === 1);
+    const band = BANDS[`${take}${mirror ? "m" : ""}`] ?? BANDS[String(take)];
+    for (const [r, c, rs, cs] of band.tiles) out.push({ r: row + r - 1, c, rs, cs });
+    row += band.rows;
+    left -= take;
+  }
+  return out;
+}
+
+/** Phones: two columns. A full-width tile, then pairs, in a repeating rhythm. */
+const RHYTHM = ["full", "pair", "full", "pair", "pair"] as const;
+
+export function composeNarrow(n: number): Area[] {
+  const out: Area[] = [];
+  let row = 1;
+  for (let i = 0; out.length < n; i++) {
+    if (RHYTHM[i % RHYTHM.length] === "pair" && n - out.length >= 2) {
+      out.push({ r: row, c: 1, rs: 1, cs: 1 }, { r: row, c: 2, rs: 1, cs: 1 });
+      row += 1;
+    } else {
+      out.push({ r: row, c: 1, rs: 2, cs: 2 });
+      row += 2;
+    }
+  }
+  return out;
+}
