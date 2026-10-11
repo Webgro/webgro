@@ -1,69 +1,40 @@
-/* Work index at /work. Every class is prefixed pv-work-.
-   The CSS default is the finished, readable page. On desktop that is an index
-   of names with no imagery in the list, and scripts add the travelling viewer,
-   WebGL and motion. On phones every row carries its own photo in the markup. */
+/* Work page at /work. Every class is prefixed pv-work-.
+   The CSS default is the finished, readable page: a short heading and then a
+   wall of every project, each tile a photo with the client's name on it and
+   one link. Scripts add the filters' re-flow, the switch to the details view
+   and the reveals further down the page. */
 
-.pv-work {
-  position: relative;
-  --pv-work-cols: minmax(0, 1fr) clamp(170px, 17vw, 250px) clamp(140px, 13vw, 190px);
-}
-
-.pv-work-canvas { display: none; }
-.pv-work.is-glon .pv-work-canvas {
-  display: block; position: fixed; inset: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none;
-}
+.pv-work { position: relative; }
 .pv-work-sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
-/* ── Hero ─────────────────────────────────────────────────────────────── */
+/* ── Heading: short, so the wall starts on the first screen ───────────── */
 .pv-work-hero {
-  display: grid; align-content: center; gap: clamp(40px, 7vh, 72px);
-  min-height: 100svh;
-  padding: clamp(104px, 15vh, 190px) var(--pv-pad) clamp(140px, 18vh, 200px);
+  display: grid; gap: clamp(18px, 3vh, 28px);
+  padding: clamp(104px, 15vh, 150px) var(--pv-pad) clamp(26px, 4vh, 44px);
 }
 .pv-work-kicker {
   font-family: var(--pv-display); font-weight: 500; font-size: clamp(1rem, 1.25vw, 1.2rem);
-  margin-bottom: 1.4em; animation: pvFadeUp 0.9s var(--pv-ease) 0.05s both;
+  margin-bottom: 1.1em; animation: pvFadeUp 0.9s var(--pv-ease) 0.05s both;
 }
-.pv-work-hero .pv-work-title { font-size: clamp(2.5rem, 10.6vw, 4rem); }
+.pv-work-hero .pv-work-title { font-size: clamp(1.9rem, 9.6vw, 4rem); }
 .pv-work-hero .pv-line > span { animation: pvLineUp 1.15s var(--pv-ease) both; }
 .pv-work-hero .pv-line:nth-child(2) > span { animation-delay: 0.09s; }
-.pv-work-hero .pv-line:nth-child(3) > span { animation-delay: 0.18s; }
 .pv-work-count-in { display: block; }
-.pv-work-hero .pv-work-intro { margin-top: clamp(24px, 4vh, 44px); max-width: 47ch; animation: pvFadeUp 1s var(--pv-ease) 0.5s both; }
-
-/* A cascade of every project. Steps widen as the filter thins the deck out. */
-.pv-work-deck { position: relative; width: 100%; aspect-ratio: 1 / 0.72; --n: 12; }
-.pv-work-card {
-  --i: 0;
-  --sx: min(calc(21.9% / max(1, var(--n) - 1)), 4.4%);
-  --sy: min(calc(31.6% / max(1, var(--n) - 1)), 6.4%);
-  position: absolute; left: 0; bottom: 0; width: 82%; aspect-ratio: 3 / 2;
-  transform: translate3d(calc(var(--i) * var(--sx)), calc(var(--i) * var(--sy) * -1), 0);
-  translate: 0 0;
-  transition: transform 1s var(--pv-ease), translate 0.9s var(--pv-ease);
+.pv-work-hero .pv-work-intro { max-width: 47ch; animation: pvFadeUp 1s var(--pv-ease) 0.35s both; }
+@media (max-width: 699px) {
+  .pv-work-hero { padding-top: 92px; gap: 14px; }
+  .pv-work-kicker { font-size: 0.95rem; margin-bottom: 0.9em; }
+  .pv-work-hero .pv-work-intro { font-size: 0.98rem; line-height: 1.45; }
 }
-.pv-work-card.is-off { translate: 110vw 0; transition: transform 1s var(--pv-ease), translate 0.8s cubic-bezier(0.55, 0, 0.8, 0.3); }
-.pv-work-card.is-out { display: none; }
-.pv-work-card-deal {
-  width: 100%; height: 100%;
-  animation: pvWorkDeal 1.25s var(--pv-ease) both; animation-delay: calc(0.2s + var(--d, 0) * 0.05s);
-}
-.pv-work-card-in {
-  width: 100%; height: 100%; border-radius: 10px; overflow: hidden;
-  background: #1a1b20; box-shadow: 0 0 0 1px rgba(242, 239, 233, 0.14);
-}
-.pv-work-card-in img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
-@keyframes pvWorkDeal { from { transform: translate3d(0, 100vh, 0); } to { transform: none; } }
-
 @media (min-width: 900px) {
-  .pv-work-hero { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); align-items: center; column-gap: 5vw; }
+  .pv-work-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 30rem); align-items: end; column-gap: 6vw; }
   .pv-work-hero .pv-work-title { font-size: min(4.6vw, 9.2vh); }
-  .pv-work-deck { width: min(100%, 80vh); justify-self: end; }
+  .pv-work-hero .pv-work-intro { justify-self: end; padding-bottom: 0.5em; font-size: clamp(1rem, 1.15vw, 1.15rem); }
 }
 
-/* ── Index section ────────────────────────────────────────────────────── */
-.pv-work-index { position: relative; padding: clamp(70px, 12vh, 150px) var(--pv-pad) clamp(170px, 24vh, 260px); }
-.pv-work-cols { display: none; }
+/* ── The section that holds the wall or the details ───────────────────── */
+.pv-work-index { position: relative; padding: 0 var(--pv-pad) clamp(170px, 24vh, 260px); }
+.pv-work-index.is-grid { padding-top: clamp(30px, 6vh, 70px); }
 .pv-work-empty { padding-top: 40px; }
 
 .pv-work-list { position: relative; }
@@ -71,104 +42,147 @@
 .pv-work-link { display: block; }
 .pv-work-link:focus-visible { outline: 2px solid var(--pv-blue); outline-offset: 6px; border-radius: 4px; }
 .pv-work-text { position: relative; }
-.pv-work-rule {
-  position: absolute; left: 0; right: 0; top: 0; height: 1px; transform-origin: left;
-  background: color-mix(in srgb, currentColor 18%, transparent);
-}
+.pv-work-rule { display: none; }
+.pv-work-ph { display: block; width: 100%; height: 100%; }
+.pv-work-media img { width: 100%; height: 100%; object-fit: cover; }
 
 .pv-work-name {
   margin: 0; font-family: var(--pv-display); font-weight: 700; letter-spacing: -0.04em; line-height: 0.98;
   font-size: clamp(2.1rem, 10vw, 3.4rem); text-wrap: balance;
 }
-.pv-work-name-mask { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; transition: transform 0.6s var(--pv-ease); }
+.pv-work-name-mask { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; }
 .pv-work-name-in { display: block; }
-/* The "New" tag sits beside the name, level with the top of its capitals, and
-   moves with it when the row is active. Its wrapper inherits the name's font
-   size, so the offset scales with the name in both the list and the grid. */
+/* The "New" tag sits beside the name, level with the top of its capitals. Its
+   wrapper inherits the name's font size, so the offset scales with the name
+   on the wall and in the details view. */
 .pv-work-name { display: flex; align-items: flex-start; column-gap: 0.16em; }
 .pv-work-name-mask { min-width: 0; }
-.pv-work-new { display: inline-flex; flex: none; padding-top: 0.17em; line-height: 1; transition: transform 0.6s var(--pv-ease); }
+.pv-work-new { display: inline-flex; flex: none; padding-top: 0.17em; line-height: 1; }
 .pv-work-new:empty { display: none; }
 .pv-work-new .pv-new { margin-left: 0; transform: none; vertical-align: top; }
-.pv-work-list.is-index .pv-work-item.is-active .pv-work-new { transform: translateX(clamp(8px, 1.3vw, 22px)); }
 
 .pv-work-figure { display: flex; align-items: baseline; gap: 0.55em; }
 .pv-work-figure strong { font: 700 1.3rem / 1 var(--pv-display); letter-spacing: -0.03em; white-space: nowrap; }
 .pv-work-figure span { font-size: 0.9rem; line-height: 1.3; }
 .pv-work-meta { display: flex; flex-wrap: wrap; gap: 0.1em 1em; font-family: var(--pv-display); font-weight: 500; font-size: 0.9rem; }
-.pv-work-media img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
 
-/* Index view. The travelling image keeps to its own column on the right, so it
-   never crosses the names. (An earlier version let it roam and inverted the text
-   over it with mix-blend-mode: that cost a full-screen blend every frame.) */
-.pv-work-list.is-index { border-bottom: 1px solid var(--pv-rule); }
-.pv-work-list.is-index .pv-work-text {
-  display: grid; gap: 8px; padding: clamp(18px, 2.3vw, 34px) 0; transition: opacity 0.45s ease;
+/* ── The wall ─────────────────────────────────────────────────────────────
+   Each tile's place comes from the composition in data.ts as a grid-area:
+   --am for the two-column phone wall, --a for the twelve-column wall. Rows
+   are a fixed fraction of the wall's width (capped by the screen's height),
+   so the whole wall is about two screens tall on a laptop and tiles keep
+   their shapes at every width. Nothing shifts as photos load. */
+.pv-work-list.is-index {
+  --pv-work-gap: 8px; --pv-work-r: 10px;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--pv-work-gap);
+  grid-auto-rows: calc((100vw - var(--pv-pad) * 2 - var(--pv-work-gap)) * 0.37);
 }
-.pv-work-list.is-index.has-active .pv-work-item:not(.is-active) .pv-work-text { opacity: 0.3; }
-.pv-work-list.is-index .pv-work-item.is-active .pv-work-name-mask { transform: translateX(clamp(8px, 1.3vw, 22px)); }
-.pv-work-list.is-index .pv-work-figure span,
-.pv-work-list.is-index .pv-work-meta { color: var(--pv-muted); }
-.pv-work-list.is-index .pv-work-blurb,
-.pv-work-list.is-index .pv-work-go { display: none; }
+.pv-work-list.is-index .pv-work-item {
+  position: relative; min-width: 0; grid-area: var(--am); container-type: size;
+  animation: pvWorkTile 0.9s var(--pv-ease) both; animation-delay: calc(0.3s + var(--k, 0) * 0.05s);
+}
+.pv-work.is-settled .pv-work-item { animation: none; }
+@keyframes pvWorkTile { from { opacity: 0; transform: translate3d(0, 30px, 0); } to { opacity: 1; transform: none; } }
+@media (min-width: 700px) {
+  .pv-work-list.is-index {
+    --pv-work-gap: clamp(8px, 0.8vw, 12px); --pv-work-r: 12px;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-rows: min(calc((100vw - var(--pv-pad) * 2) * 0.0815), max(12svh, 76px));
+  }
+  .pv-work-list.is-index .pv-work-item { grid-area: var(--a); }
+}
+
+.pv-work-list.is-index .pv-work-link {
+  position: absolute; inset: 0; border-radius: var(--pv-work-r); color: #fff; -webkit-tap-highlight-color: transparent;
+}
+.pv-work-list.is-index .pv-work-link:focus-visible { outline: 3px solid var(--pv-blue); outline-offset: 3px; border-radius: var(--pv-work-r); }
 .pv-work-list.is-index .pv-work-media {
-  position: fixed; left: 0; top: 0; z-index: 4; display: block;
-  width: min(38vw, 30svh); aspect-ratio: 4 / 5; border-radius: 12px; overflow: hidden;
-  background: #1a1b20; pointer-events: none;
-  transform: scaleY(0); transform-origin: 0 0;
+  position: absolute; inset: 0; border-radius: var(--pv-work-r); overflow: hidden;
+  background: color-mix(in srgb, var(--pv-fg) 12%, var(--pv-bg));
+}
+.pv-work-list.is-index .pv-work-ph { position: relative; z-index: 0; transition: transform 1.2s var(--pv-ease); }
+.pv-work-list.is-index .pv-work-media img { object-position: var(--pos, 50% 50%); }
+/* Two layers of ink over the photo. The foot is always there, deep enough
+   that white type passes 4.5:1 on the palest picture. The full sheet comes in
+   on hover or focus, behind the extra copy. */
+.pv-work-list.is-index .pv-work-media::before,
+.pv-work-list.is-index .pv-work-media::after { content: ""; position: absolute; z-index: 1; inset: 0; pointer-events: none; }
+.pv-work-list.is-index .pv-work-media::after {
+  top: auto; height: clamp(4.6rem, 46cqh, 9rem);
+  background: linear-gradient(to top, rgba(13, 13, 15, 0.9), rgba(13, 13, 15, 0.76) 55%, rgba(13, 13, 15, 0));
+}
+.pv-work-list.is-index .pv-work-media::before { background: rgba(13, 13, 15, 0.64); opacity: 0; transition: opacity 0.45s ease; }
+
+.pv-work-list.is-index .pv-work-text {
+  position: absolute; inset: 0; z-index: 2; display: grid;
+  grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto auto;
+  padding: clamp(9px, 4.4cqw, 22px);
+}
+.pv-work-list.is-index .pv-work-name {
+  grid-row: 3; align-self: end; font-size: clamp(0.95rem, 7.4cqw, 2.3rem); line-height: 1.02; letter-spacing: -0.03em;
+  text-shadow: 0 1px 14px rgba(13, 13, 15, 0.5);
+}
+.pv-work-list.is-index .pv-work-meta {
+  grid-row: 4; margin-top: 0.4em; gap: 0 0.9em; font-size: clamp(0.74rem, 3.3cqw, 0.9rem); line-height: 1.25;
+  color: rgba(255, 255, 255, 0.9);
+}
+/* The figure: a small paper plate in the top corner. It stays off the tile at
+   rest, because a bare number means nothing, and arrives together with its
+   label on hover or keyboard focus. */
+.pv-work-list.is-index .pv-work-figure {
+  grid-row: 1; display: grid; justify-items: start; gap: 8px;
+  opacity: 0; transform: translateY(6px); transition: opacity 0.4s ease, transform 0.6s var(--pv-ease);
+}
+.pv-work-list.is-index .pv-work-figure strong {
+  padding: 0.3em 0.5em 0.28em; border-radius: 6px; background: var(--pv-paper, #f2efe9); color: var(--pv-ink, #0d0d0f);
+  font-size: clamp(0.86rem, 4.6cqw, 1.25rem); letter-spacing: -0.03em;
+}
+.pv-work-list.is-index .pv-work-figure span {
+  max-width: 24ch; font-size: clamp(0.76rem, 3.4cqw, 0.95rem); line-height: 1.3;
+}
+.pv-work-list.is-index .pv-work-blurb { display: none; }
+.pv-work-list.is-index .pv-work-go {
+  position: absolute; top: clamp(9px, 4.4cqw, 22px); right: clamp(9px, 4.4cqw, 22px); margin: 0;
+  opacity: 0; transform: translateX(-10px); transition: opacity 0.35s ease, transform 0.6s var(--pv-ease);
+}
+.pv-work-list.is-index .pv-work-go > span { display: none; }
+.pv-work-list.is-index .pv-work-go svg { width: clamp(18px, 6cqw, 26px); height: clamp(18px, 6cqw, 26px); transition: none; }
+
+/* What a tile can hold depends on its own size, not the screen's. */
+@container (max-width: 229px) {
+  .pv-work-list.is-index .pv-work-meta { display: none; }
+}
+@container (max-width: 199px) or (max-height: 150px) {
+  .pv-work-list.is-index .pv-work-figure { display: none; }
+}
+@container (min-width: 400px) and (min-height: 300px) {
+  .pv-work-list.is-index .pv-work-blurb {
+    grid-row: 2; align-self: start; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden;
+    max-width: 46ch; margin-top: 12px; font-size: 0.98rem; line-height: 1.45; color: rgba(255, 255, 255, 0.94);
+    opacity: 0; transform: translateY(8px); transition: opacity 0.4s ease, transform 0.6s var(--pv-ease);
+  }
 }
 
-@media (min-width: 900px) {
-  .pv-work-index.is-index .pv-work-cols {
-    display: grid; grid-template-columns: var(--pv-work-cols); column-gap: 3vw; padding-bottom: 16px;
-  }
-  .pv-work-cols p:last-child { text-align: right; }
-  .pv-work-index.is-index { --pv-work-viewer: clamp(280px, 26vw, 440px); }
-  .pv-work-index.is-index .pv-work-cols,
-  .pv-work-list.is-index .pv-work-text { padding-right: calc(var(--pv-work-viewer) + 3vw); }
-  .pv-work-list.is-index .pv-work-name { font-size: clamp(2.6rem, 4.5vw, 5.4rem); }
-  .pv-work-list.is-index .pv-work-text { grid-template-columns: var(--pv-work-cols); column-gap: 3vw; align-items: end; }
-  .pv-work-list.is-index .pv-work-name { grid-column: 1; }
-  .pv-work-list.is-index .pv-work-figure { grid-column: 2; display: grid; gap: 6px; padding-bottom: 0.35em; }
-  .pv-work-list.is-index .pv-work-figure strong { font-size: clamp(1.8rem, 2.5vw, 2.7rem); }
-  .pv-work-list.is-index .pv-work-figure span { max-width: 24ch; }
-  .pv-work-list.is-index .pv-work-meta { grid-column: 3; flex-direction: column; align-items: flex-end; text-align: right; padding-bottom: 0.45em; }
-  .pv-work-list.is-index .pv-work-media { width: var(--pv-work-viewer); aspect-ratio: 4 / 3; }
+.pv-work-list.is-index .pv-work-link:focus-visible .pv-work-ph { transform: scale(1.06); }
+.pv-work-list.is-index .pv-work-link:focus-visible .pv-work-media::before { opacity: 1; }
+.pv-work-list.is-index .pv-work-link:focus-visible .pv-work-figure,
+.pv-work-list.is-index .pv-work-link:focus-visible .pv-work-blurb,
+.pv-work-list.is-index .pv-work-link:focus-visible .pv-work-go { opacity: 1; transform: none; }
+@media (hover: hover) {
+  .pv-work-list.is-index .pv-work-link:hover .pv-work-ph { transform: scale(1.06); }
+  .pv-work-list.is-index .pv-work-link:hover .pv-work-media::before { opacity: 1; }
+  .pv-work-list.is-index .pv-work-link:hover .pv-work-figure,
+  .pv-work-list.is-index .pv-work-link:hover .pv-work-blurb,
+  .pv-work-list.is-index .pv-work-link:hover .pv-work-go { opacity: 1; transform: none; }
 }
 
-/* Phones: no travelling viewer (there's no hover, and a floating picture would
-   sit over the list). Each row shows its own photo at 3:2 between the meta and
-   the figure. The text box steps aside (display: contents) so the name, meta,
-   photo and figure can be ordered as one column, and the rule then measures
-   against the link. Scripts only add the reveal: the photo wipes up through a
-   clip-path mask and the name rises out of its own mask. */
-@media (max-width: 899px) {
-  .pv-work-list.is-index .pv-work-link {
-    position: relative; display: grid; row-gap: 10px; padding: 24px 0 34px;
-    -webkit-tap-highlight-color: transparent; transition: opacity 0.25s ease;
-  }
-  .pv-work-list.is-index .pv-work-link:active { opacity: 0.72; }
-  .pv-work-list.is-index .pv-work-text { display: contents; }
-  .pv-work-list.is-index .pv-work-name { order: 1; }
-  .pv-work-list.is-index .pv-work-meta { order: 2; }
-  .pv-work-list.is-index .pv-work-media {
-    order: 3; position: relative; left: auto; top: auto; z-index: auto;
-    width: 100%; aspect-ratio: 3 / 2; margin-top: 8px; border-radius: 10px;
-    background: color-mix(in srgb, var(--pv-fg) 9%, transparent);
-    transform: none; transform-origin: 50% 50%;
-  }
-  .pv-work-list.is-index .pv-work-figure { order: 4; margin-top: 4px; }
-  .pv-work-list.is-index .pv-work-figure strong { font-size: 1.5rem; }
-}
-
-/* Grid view. */
+/* ── The details view: two columns of cards with the descriptions ─────── */
 .pv-work-list.is-grid { display: grid; gap: clamp(56px, 9vh, 110px) clamp(24px, 4.5vw, 80px); }
 .pv-work-list.is-grid .pv-work-media {
   position: relative; display: block; aspect-ratio: 3 / 2; border-radius: 12px; overflow: hidden;
   background: color-mix(in srgb, var(--pv-fg) 9%, transparent);
 }
 .pv-work-list.is-grid .pv-work-text { display: grid; gap: 12px; justify-items: start; padding-top: 22px; }
-.pv-work-list.is-grid .pv-work-rule { display: none; }
 .pv-work-list.is-grid .pv-work-name { order: 1; font-size: clamp(1.75rem, 2.7vw, 2.8rem); line-height: 1.02; letter-spacing: -0.035em; }
 .pv-work-list.is-grid .pv-work-meta { order: 2; color: var(--pv-muted); }
 .pv-work-list.is-grid .pv-work-blurb { order: 3; max-width: 46ch; color: var(--pv-muted); }
@@ -234,11 +248,11 @@
   .pv-work-outro-foot { grid-template-columns: minmax(0, 44ch) auto; justify-content: space-between; align-items: end; gap: 6vw; }
 }
 
-/* Once a photograph is drawn in WebGL its DOM twin steps aside. */
-.pv-work .pv-work-card-in.is-gl, .pv-work .pv-work-list .pv-work-media.is-gl { background: transparent; box-shadow: none; }
-.pv-work .pv-work-card-in.is-gl img, .pv-work .pv-work-list .pv-work-media.is-gl img { opacity: 0; }
+.pv-work-list.is-index .pv-work-link:hover .pv-work-go svg { transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .pv-work-kicker, .pv-work-hero .pv-line > span, .pv-work-hero .pv-work-intro, .pv-work-card-deal, .pv-work-bar { animation: none; }
-  .pv-work-card, .pv-work-thumb, .pv-work-name-mask, .pv-work-new { transition: none; }
+  .pv-work-kicker, .pv-work-hero .pv-line > span, .pv-work-hero .pv-work-intro, .pv-work-bar,
+  .pv-work-list.is-index .pv-work-item { animation: none; }
+  .pv-work-thumb, .pv-work-list.is-index .pv-work-ph, .pv-work-list.is-index .pv-work-go,
+  .pv-work-list.is-index .pv-work-figure, .pv-work-list.is-index .pv-work-blurb { transition: none; }
 }
