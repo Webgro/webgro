@@ -79,10 +79,7 @@ export function PreviewNav() {
           )
         ))}
         {promoLive && (
-          <Link href={HEADER_PROMO.href} className="pv-nav-promo" data-cursor>
-            <span className="pv-nav-promo-dot" aria-hidden="true" />
-            {HEADER_PROMO.label}
-          </Link>
+          <Link href={HEADER_PROMO.href} data-cursor>{HEADER_PROMO.label}</Link>
         )}
       </nav>
       <Link href={pv("/contact")} className="pv-nav-cta" data-cursor>Start a project</Link>
