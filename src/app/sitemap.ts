@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { caseStudies } from "@/content/work";
 import { articles } from "@/content/the-gro";
 import { CARE_PATH } from "@/components/preview/care/content";
+import { PHP2SHELL_PATH } from "@/components/preview/php2shell/content";
 import { industries } from "@/components/preview/industries/content";
 import { towns } from "@/components/preview/local/content";
 import { pvBespokeSubs, pvServices, pvSubServices } from "@/components/preview/services/content";
@@ -27,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/work`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/services`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}${CARE_PATH}`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE}${PHP2SHELL_PATH}`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE}/industries`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/web-design/berkshire`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/the-gro`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
