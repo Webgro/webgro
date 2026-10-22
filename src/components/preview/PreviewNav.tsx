@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { pv } from "./links";
 import { MobileMenu } from "./menu/MobileMenu";
 import { ServicesMenu } from "./menu/ServicesMenu";
+import { HEADER_PROMO, usePromoLive } from "./promo";
 
 /** How long the phone sheet takes to close back into its toggle (see menu/mobile.css). */
 const SHEET_CLOSE_MS = 640;
@@ -22,6 +23,7 @@ export function PreviewNav() {
   const [closing, setClosing] = useState(false);
   const closingTimer = useRef<number | undefined>(undefined);
   const [menu, setMenu] = useState(false);
+  const promoLive = usePromoLive();
   const openMenu = useCallback(() => setMenu(true), []);
   const closeMenu = useCallback(() => setMenu(false), []);
 
@@ -76,6 +78,12 @@ export function PreviewNav() {
             <Link key={l.href} href={l.href} data-cursor>{l.label}</Link>
           )
         ))}
+        {promoLive && (
+          <Link href={HEADER_PROMO.href} className="pv-nav-promo" data-cursor>
+            <span className="pv-nav-promo-dot" aria-hidden="true" />
+            {HEADER_PROMO.label}
+          </Link>
+        )}
       </nav>
       <Link href={pv("/contact")} className="pv-nav-cta" data-cursor>Start a project</Link>
       <MobileMenu open={open} onOpen={openSheet} onClose={closeSheet} />

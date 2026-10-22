@@ -112,6 +112,23 @@
   transform: scaleX(0); transform-origin: right; transition: transform 0.45s var(--pv-ease);
 }
 .pv-nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+/* A temporary header link (see promo.ts): a pill with a live dot. */
+.pv-nav-links .pv-nav-promo {
+  display: inline-flex; align-items: center; gap: 0.5em; padding: 5px 13px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent); white-space: nowrap;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.pv-nav-links .pv-nav-promo::after { content: none; }
+.pv-nav-links .pv-nav-promo:hover { border-color: currentColor; }
+.pv-nav-promo-dot {
+  position: relative; width: 7px; height: 7px; border-radius: 50%; background: #f03e2e; flex: none;
+}
+.pv-nav-promo-dot::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; background: inherit;
+  animation: pv-promo-pulse 1.8s ease-out infinite;
+}
+@keyframes pv-promo-pulse { from { transform: scale(1); opacity: 0.7; } to { transform: scale(3); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .pv-nav-promo-dot::after { animation: none; } }
 .pv-nav-cta {
   display: none; font-family: var(--pv-display); font-weight: 500;
   padding: 0.7em 1.25em; border-radius: 999px; border: 1px solid var(--pv-fg);
