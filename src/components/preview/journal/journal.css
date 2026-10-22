@@ -314,6 +314,16 @@
 .pv .pv-jrnl-prose h2, .pv .pv-jrnl-prose h3 { font-family: var(--pv-display); font-weight: 700; color: var(--pv-ink); text-wrap: balance; }
 .pv .pv-jrnl-prose h2 { margin: 2.5em 0 0; font-size: clamp(1.65rem, 1.2rem + 1.3vw, 2.35rem); line-height: 1.08; letter-spacing: -0.03em; scroll-margin-top: 104px; }
 .pv .pv-jrnl-prose h3 { margin: 2em 0 0; font-size: 1.3em; line-height: 1.2; letter-spacing: -0.02em; }
+/* Inline links and code in paragraphs and lists. */
+.pv .pv-jrnl-prose p a, .pv .pv-jrnl-prose li a {
+  color: var(--pv-blue-text); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em;
+}
+.pv .pv-jrnl-prose p a:hover, .pv .pv-jrnl-prose li a:hover { text-decoration-thickness: 2px; }
+.pv .pv-jrnl-prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.88em;
+  padding: 0.12em 0.38em; border-radius: 5px; background: color-mix(in srgb, var(--pv-ink) 7%, transparent);
+  overflow-wrap: anywhere;
+}
 .pv .pv-jrnl-prose h2 + p { margin-top: 1em; }
 .pv .pv-jrnl-prose h3 + p { margin-top: 0.7em; }
 .pv .pv-jrnl-prose ul, .pv .pv-jrnl-prose ol { list-style: none; margin: 1.3em 0 0; padding: 0; }

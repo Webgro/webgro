@@ -1,3 +1,5 @@
+import Link from "next/link";
+import type { ReactNode } from "react";
 import type { ArticleBlock } from "@/content/the-gro";
 import { headingId, tidy } from "./lines";
 
@@ -10,6 +12,32 @@ export function tocFor(blocks: ArticleBlock[]): TocItem[] {
     if (b.type === "h2") items.push({ id: headingId(b.text, items.length), text: tidy(b.text) });
   }
   return items;
+}
+
+/**
+ * Paragraphs and list items may carry two bits of inline markup:
+ * [label](/path) for a link and `code` for a setting or a command.
+ * Internal paths use Next's Link; anything else opens in a new tab.
+ */
+const INLINE = /\[([^\]]+)\]\(([^)\s]+)\)|`([^`]+)`/g;
+
+function Inline({ text }: { text: string }) {
+  const out: ReactNode[] = [];
+  let last = 0;
+  for (const m of text.matchAll(INLINE)) {
+    const at = m.index ?? 0;
+    if (at > last) out.push(text.slice(last, at));
+    if (m[3] !== undefined) {
+      out.push(<code key={at}>{m[3]}</code>);
+    } else if (m[2].startsWith("/")) {
+      out.push(<Link key={at} href={m[2]}>{m[1]}</Link>);
+    } else {
+      out.push(<a key={at} href={m[2]} target="_blank" rel="noopener noreferrer">{m[1]}</a>);
+    }
+    last = at + m[0].length;
+  }
+  if (last < text.length) out.push(text.slice(last));
+  return <>{out}</>;
 }
 
 /** Each word in its own span, so a pull quote can light up as it is read. */
@@ -46,7 +74,7 @@ export function Blocks({ blocks }: { blocks: ArticleBlock[] }) {
       {blocks.map((block, i) => {
         switch (block.type) {
           case "p":
-            return <p key={i}>{tidy(block.text)}</p>;
+            return <p key={i}><Inline text={tidy(block.text)} /></p>;
           case "h2":
             return <h2 key={i} id={ids.get(i)}>{tidy(block.text)}</h2>;
           case "h3":
@@ -54,13 +82,13 @@ export function Blocks({ blocks }: { blocks: ArticleBlock[] }) {
           case "ul":
             return (
               <ul key={i}>
-                {block.items.map((item, n) => <li key={n}>{tidy(item)}</li>)}
+                {block.items.map((item, n) => <li key={n}><Inline text={tidy(item)} /></li>)}
               </ul>
             );
           case "ol":
             return (
               <ol key={i}>
-                {block.items.map((item, n) => <li key={n}>{tidy(item)}</li>)}
+                {block.items.map((item, n) => <li key={n}><Inline text={tidy(item)} /></li>)}
               </ol>
             );
           case "quote":

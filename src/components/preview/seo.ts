@@ -253,6 +253,11 @@ export const CASE_META: Record<string, Meta> = {
 };
 
 export const ARTICLE_META: Record<string, Meta> = {
+  "how-to-check-website-php-vulnerabilities": {
+    title: "How to Check Your Website for PHP Vulnerabilities (PHP2Shell)",
+    description:
+      "PHP2Shell (CVE-2026-109618 and CVE-2026-109619) lets attackers run code on PHP servers. How to check your website, which versions are fixed, and what to do.",
+  },
   "what-is-vibe-coding": {
     title: "What Vibe Coding Is, and Where It Breaks | Webgro",
     description:

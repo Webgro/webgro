@@ -112,15 +112,15 @@ function renderBodyToHtml(body: Article["body"]): string {
 function blockToHtml(block: ArticleBlock): string {
   switch (block.type) {
     case "p":
-      return `<p>${inlineEscape(block.text)}</p>`;
+      return `<p>${inlineMarkup(block.text)}</p>`;
     case "h2":
       return `<h2>${inlineEscape(block.text)}</h2>`;
     case "h3":
       return `<h3>${inlineEscape(block.text)}</h3>`;
     case "ul":
-      return `<ul>${block.items.map((i) => `<li>${inlineEscape(i)}</li>`).join("")}</ul>`;
+      return `<ul>${block.items.map((i) => `<li>${inlineMarkup(i)}</li>`).join("")}</ul>`;
     case "ol":
-      return `<ol>${block.items.map((i) => `<li>${inlineEscape(i)}</li>`).join("")}</ol>`;
+      return `<ol>${block.items.map((i) => `<li>${inlineMarkup(i)}</li>`).join("")}</ol>`;
     case "quote":
       return `<blockquote><p>${inlineEscape(block.text)}</p></blockquote>`;
     case "callout":
@@ -129,6 +129,15 @@ function blockToHtml(block: ArticleBlock): string {
       // through.
       return `<aside style="border-left:3px solid #2D8DFF;padding:0 0 0 1em;font-style:italic;"><p>${inlineEscape(block.text)}</p></aside>`;
   }
+}
+
+/** The article blocks' inline markup ([label](/path) and `code`) as HTML,
+ *  with internal paths made absolute so feed readers can follow them. */
+function inlineMarkup(s: string): string {
+  return inlineEscape(s)
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_m, label: string, href: string) =>
+      `<a href="${href.startsWith("/") ? `https://webgro.co.uk${href}` : href}">${label}</a>`)
+    .replace(/`([^`]+)`/g, "<code>$1</code>");
 }
 
 /** Escape characters that have special meaning in HTML when emitted
