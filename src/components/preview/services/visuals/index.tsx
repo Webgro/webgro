@@ -15,7 +15,7 @@ import { WebsitesVisual } from "./WebsitesVisual";
 export function HeroVisual({ service }: { service: PvService }) {
   switch (service.visual) {
     case "websites":
-      return <WebsitesVisual />;
+      return <WebsitesVisual shot={service.webShot} />;
     case "consultancy":
     case "automation": {
       const m = service.mockups?.[0];

@@ -64,6 +64,8 @@ export type PvService = {
   mockups?: Array<{ name: MockupName }>;
   /** Adds a showcase of builds after "What's included" (bespoke/Showcase.tsx). */
   showcase?: "software" | "shopify-apps" | "wordpress-plugins";
+  /** Another build's screenshot in the browser, for services whose visual is "websites". */
+  webShot?: { src: string; alt: string };
   /** The redrawn screen in the hero, for services whose visual is "bespoke". */
   heroScreen?: ScreenName;
   process: { heading: string; total: string; stages: Stage[] };
@@ -1364,6 +1366,7 @@ const shopifySites: PvService = {
   ],
   recent: "Gieves & Hawkes: eight apps replaced with theme code, and mobile speed up from 64 to 85.",
   visual: "websites",
+  webShot: { src: "/work/berrymae/live-collection.jpg", alt: "BerryMae phone cases collection page, a Shopify shop built by Webgro" },
   hero: {
     title: ["Shopify design", "and development", "for UK brands"],
     brush: "UK brands",

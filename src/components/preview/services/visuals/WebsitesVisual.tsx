@@ -52,7 +52,13 @@ function Wire() {
   );
 }
 
-export function WebsitesVisual({ still = false }: { still?: boolean }) {
+/**
+ * `shot` swaps the browser screenshot for another build. The wireframe is
+ * traced over ANYPRINT only, so it is left out when the screenshot changes.
+ */
+export type WebShot = { src: string; alt: string };
+
+export function WebsitesVisual({ still = false, shot }: { still?: boolean; shot?: WebShot }) {
   const root = useRef<HTMLDivElement>(null);
 
   useSceneOnly(root, ({ gsap, inHero, timeline }) => {
@@ -85,9 +91,9 @@ export function WebsitesVisual({ still = false }: { still?: boolean }) {
         <div className="pv-svc-web-browser">
           <span className="pv-svc-web-chrome" aria-hidden="true"><i /><i /><i /></span>
           <div className="pv-svc-web-frame">
-            <Wire />
+            {!shot && <Wire />}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="pv-svc-web-shot" src="/preview/svc-web-browser.jpg" alt="The ANYPRINT homepage, a WordPress site built by Webgro" width={1582} height={1055} loading={still ? "lazy" : undefined} decoding="async" />
+            <img className="pv-svc-web-shot" src={shot?.src ?? "/preview/svc-web-browser.jpg"} alt={shot?.alt ?? "The ANYPRINT homepage, a WordPress site built by Webgro"} width={shot ? 1440 : 1582} height={shot ? 950 : 1055} loading={still ? "lazy" : undefined} decoding="async" />
             <span className="pv-svc-web-scan" aria-hidden="true" />
           </div>
         </div>
