@@ -41,7 +41,7 @@ export const articles: Article[] = [
     readTime: "6 min read",
     accent: "teal",
     author: "Michael Broadbridge",
-    heroImage: "/articles/website-cost.jpg",
+    heroImage: "/articles/how-much-does-a-website-cost-uk.jpg",
     relatedService: "websites",
     body: [
       {
