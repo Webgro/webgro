@@ -594,92 +594,116 @@ def main() -> None:
     padp.paragraph_format.space_after = Pt(8)
 
     # ---------- RIGHT: totals ----------
-    tr = footer.rows[0].cells[1]
-    set_cell_shading(tr, WHITE)
-    set_cell_vertical_align(tr, "top")
-
-    # Xero's real field names for invoice totals. `AmountPaid` isn't
-    # exposed as a template field, so we omit a Paid row; InvoiceAmountDue
-    # is the outstanding balance after any part-payments.
-    #
-    # Important: TaxTotal is a *repeater* field in Xero (an invoice can
-    # carry multiple tax rates, each with its own line). It MUST live
-    # inside a row wrapped by TableStart:TaxSubTotal / TableEnd:TaxSubTotal
-    # markers — the same pattern as line items. Without the markers,
-    # TaxTotal won't merge and renders as «TaxTotal». We build that
-    # wrapper by nesting a single-row table inside the totals cell.
+    # Built as an inner 2-column table with one row per total line. This
+    # mirrors the old BD_Invoice4-1.docx layout exactly — importantly, it
+    # means the TaxSubTotal repeater markers can sit in real table cells
+    # of the same ROW, which is what Xero's parser requires. Earlier
+    # attempts with paragraph-level nesting dropped the TaxTotal field
+    # entirely on serialisation.
     MONEY_FMT = r'\# "#,##0.00;(#,##0.00)"'
 
-    # Subtotal line (static — not a repeater)
-    sub_p = tr.paragraphs[0]
-    sub_p.paragraph_format.left_indent = Cm(0.35)
-    sub_p.paragraph_format.right_indent = Cm(0.35)
-    sub_p.paragraph_format.space_before = Pt(8)
-    sub_p.paragraph_format.space_after = Pt(3)
-    tab_stops = sub_p.paragraph_format.tab_stops
-    tab_stops.add_tab_stop(Cm(6.7), WD_ALIGN_PARAGRAPH.RIGHT)
-    add_run(sub_p, "Subtotal", font=BODY_FONT, size=9, color=INK_SOFT)
-    add_run(sub_p, "\t", font=BODY_FONT, size=9)
-    add_merge(sub_p, "InvoiceSubTotal", font=MONO_FONT, size=10, color=INK,
-              format_switch=MONEY_FMT)
+    tr_cell = footer.rows[0].cells[1]
+    set_cell_shading(tr_cell, WHITE)
+    set_cell_vertical_align(tr_cell, "top")
 
-    # VAT line — nested one-row table so we can put both TaxSubTotal
-    # markers in the same row as TaxTotal (mirroring how LineItem works).
-    vat_tbl = tr.add_table(rows=1, cols=1)
-    vat_tbl.autofit = False
-    remove_all_table_borders(vat_tbl)
-    vat_cell = vat_tbl.rows[0].cells[0]
-    vat_cell.width = Cm(7.5)
-    set_cell_shading(vat_cell, WHITE)
-    vat_p = vat_cell.paragraphs[0]
-    vat_p.paragraph_format.left_indent = Cm(0.35)
-    vat_p.paragraph_format.right_indent = Cm(0.35)
-    vat_p.paragraph_format.space_before = Pt(0)
-    vat_p.paragraph_format.space_after = Pt(3)
-    vat_tabs = vat_p.paragraph_format.tab_stops
-    vat_tabs.add_tab_stop(Cm(6.7), WD_ALIGN_PARAGRAPH.RIGHT)
-    # Start marker (invisible), visible label, tab, TaxTotal, end marker
-    add_merge(vat_p, "TableStart:TaxSubTotal", font=MONO_FONT, size=1,
-              color=WHITE_RGB)
-    add_run(vat_p, "VAT", font=BODY_FONT, size=9, color=INK_SOFT)
-    add_run(vat_p, "\t", font=BODY_FONT, size=9)
-    add_merge(vat_p, "TaxTotal", font=MONO_FONT, size=10, color=INK,
-              format_switch=MONEY_FMT)
-    add_merge(vat_p, "TableEnd:TaxSubTotal", font=MONO_FONT, size=1,
-              color=WHITE_RGB)
+    # Clear the default empty paragraph so the inner table sits at top
+    # without a leading blank line.
+    default_p = tr_cell.paragraphs[0]
+    default_p.paragraph_format.space_before = Pt(6)
+    default_p.paragraph_format.space_after = Pt(0)
 
-    # Divider
-    dv = tr.add_paragraph()
-    dv.paragraph_format.left_indent = Cm(0.35)
-    dv.paragraph_format.right_indent = Cm(0.35)
-    dv.paragraph_format.space_before = Pt(4)
-    dv.paragraph_format.space_after = Pt(4)
-    pPr = dv._p.get_or_add_pPr()
-    pBdr = OxmlElement("w:pBdr")
-    bottom = OxmlElement("w:bottom")
-    bottom.set(qn("w:val"), "single")
-    bottom.set(qn("w:sz"), "6")
-    bottom.set(qn("w:space"), "1")
-    bottom.set(qn("w:color"), "07080C")
-    pBdr.append(bottom)
-    pPr.append(pBdr)
+    totals = tr_cell.add_table(rows=4, cols=2)
+    totals.autofit = False
+    remove_all_table_borders(totals)
+    for row in totals.rows:
+        row.cells[0].width = Cm(3.5)
+        row.cells[1].width = Cm(4.0)
 
-    # AMOUNT DUE row
-    pd = tr.add_paragraph()
-    pd.paragraph_format.left_indent = Cm(0.35)
-    pd.paragraph_format.right_indent = Cm(0.35)
-    pd.paragraph_format.space_before = Pt(2)
-    pd.paragraph_format.space_after = Pt(2)
-    add_run(pd, "AMOUNT DUE", font=MONO_FONT, size=8, color=TEAL, bold=True,
-            tracking_pts=1.6)
+    def _fill_totals_row(row, label, field, *,
+                         label_font=BODY_FONT, label_size=9,
+                         label_color=INK_SOFT,
+                         value_font=MONO_FONT, value_size=10,
+                         value_color=INK, value_bold=False,
+                         before_marker=None, after_marker=None,
+                         bottom_border_hex=None, space_before=0,
+                         space_after=3):
+        """Writes one label/value pair across the two cells.
+        `before_marker` / `after_marker` are field names to emit around
+        the visible value — used to wrap TableStart/TableEnd markers in
+        the same row as TaxTotal."""
+        lcell, vcell = row.cells
+        set_cell_shading(lcell, WHITE)
+        set_cell_shading(vcell, WHITE)
+        set_cell_vertical_align(lcell, "center")
+        set_cell_vertical_align(vcell, "center")
+        if bottom_border_hex:
+            set_cell_border(lcell, "bottom", bottom_border_hex, size=6)
+            set_cell_border(vcell, "bottom", bottom_border_hex, size=6)
 
-    pda = tr.add_paragraph()
-    pda.paragraph_format.left_indent = Cm(0.35)
-    pda.paragraph_format.right_indent = Cm(0.35)
-    pda.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-    pda.paragraph_format.space_before = Pt(0)
-    pda.paragraph_format.space_after = Pt(8)
-    add_merge(pda, "InvoiceAmountDue", font=DISPLAY_FONT, size=20,
+        lp = lcell.paragraphs[0]
+        lp.paragraph_format.left_indent = Cm(0.35)
+        lp.paragraph_format.space_before = Pt(space_before)
+        lp.paragraph_format.space_after = Pt(space_after)
+        # If a marker needs to precede the label, drop it here (invisible)
+        if before_marker:
+            add_merge(lp, before_marker, font=MONO_FONT, size=1,
+                      color=WHITE_RGB)
+        add_run(lp, label, font=label_font, size=label_size,
+                color=label_color, bold=value_bold)
+
+        vp = vcell.paragraphs[0]
+        vp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        vp.paragraph_format.right_indent = Cm(0.35)
+        vp.paragraph_format.space_before = Pt(space_before)
+        vp.paragraph_format.space_after = Pt(space_after)
+        add_merge(vp, field, font=value_font, size=value_size,
+                  color=value_color, bold=value_bold,
+                  format_switch=MONEY_FMT)
+        # Marker after the value field (same cell, same row)
+        if after_marker:
+            add_merge(vp, after_marker, font=MONO_FONT, size=1,
+                      color=WHITE_RGB)
+
+    # Row 0: Subtotal (static)
+    _fill_totals_row(totals.rows[0], "Subtotal", "InvoiceSubTotal",
+                     space_before=0, space_after=3)
+
+    # Row 1: VAT — BOTH TaxSubTotal markers live in this row's cells so
+    # Xero repeats the row once per tax rate on the invoice.
+    _fill_totals_row(totals.rows[1], "VAT", "TaxTotal",
+                     before_marker="TableStart:TaxSubTotal",
+                     after_marker="TableEnd:TaxSubTotal",
+                     space_before=0, space_after=6,
+                     bottom_border_hex="07080C")
+
+    # Row 2: visual spacer above AMOUNT DUE (empty, just adds gap)
+    sp_cells = totals.rows[2].cells
+    for c in sp_cells:
+        set_cell_shading(c, WHITE)
+        c.paragraphs[0].paragraph_format.space_before = Pt(0)
+        c.paragraphs[0].paragraph_format.space_after = Pt(0)
+        add_run(c.paragraphs[0], "", font=BODY_FONT, size=4, color=INK)
+
+    # Row 3: AMOUNT DUE — big teal eyebrow label, huge number on the right
+    amt_l, amt_v = totals.rows[3].cells
+    set_cell_shading(amt_l, WHITE)
+    set_cell_shading(amt_v, WHITE)
+    set_cell_vertical_align(amt_l, "center")
+    set_cell_vertical_align(amt_v, "center")
+
+    amt_lp = amt_l.paragraphs[0]
+    amt_lp.paragraph_format.left_indent = Cm(0.35)
+    amt_lp.paragraph_format.space_before = Pt(2)
+    amt_lp.paragraph_format.space_after = Pt(6)
+    add_run(amt_lp, "AMOUNT DUE", font=MONO_FONT, size=8, color=TEAL,
+            bold=True, tracking_pts=1.6)
+
+    amt_vp = amt_v.paragraphs[0]
+    amt_vp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+    amt_vp.paragraph_format.right_indent = Cm(0.35)
+    amt_vp.paragraph_format.space_before = Pt(0)
+    amt_vp.paragraph_format.space_after = Pt(6)
+    add_merge(amt_vp, "InvoiceAmountDue", font=DISPLAY_FONT, size=20,
               bold=True, color=INK, format_switch=MONEY_FMT)
 
     # ------ FULL-WIDTH THANKS BLOCK -----------------------------------

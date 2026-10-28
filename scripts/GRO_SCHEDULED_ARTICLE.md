@@ -84,7 +84,7 @@ times). If it still fails, use the best one and say so in the email.
 ## 5. Check
 
 ```bash
-cd ~/Desktop/Claude/webgro-site && grep -c "—" src/content/the-gro.ts next.config.ts
+cd ~/Desktop/Claude/webgro-site && grep -c $'\xe2\x80\x94' src/content/the-gro.ts next.config.ts
 ```
 
 Both must be 0.
