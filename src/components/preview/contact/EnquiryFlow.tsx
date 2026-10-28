@@ -19,6 +19,7 @@ import { BrushStroke } from "../Brush";
 import { pv } from "../links";
 import { SCENE_QUERY, STATIC_QUERY, useGsap } from "../useGsap";
 import "./enquiry.css";
+import { track } from "@/lib/analytics";
 
 /**
  * The guided enquiry: one question at a time. Two fixed questions, then up
@@ -311,7 +312,10 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
         website: honeypot,
         turnstileToken: turnstileToken ?? undefined,
       });
-      if (result.ok) onSent(contact.name.trim().split(/\s+/)[0] ?? "");
+      if (result.ok) {
+        track("generate_lead", { form: "enquiry" });
+        onSent(contact.name.trim().split(/\s+/)[0] ?? "");
+      }
       else setError(result.error ?? GENERIC);
     } catch (e) {
       setError(e instanceof Error ? e.message : GENERIC);

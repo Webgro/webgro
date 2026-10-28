@@ -5,7 +5,7 @@ import { CARE_PATH } from "@/components/preview/care/content";
 import { PHP2SHELL_PATH } from "@/components/preview/php2shell/content";
 import { industries } from "@/components/preview/industries/content";
 import { towns } from "@/components/preview/local/content";
-import { pvBespokeSubs, pvServices, pvSubServices } from "@/components/preview/services/content";
+import { pvBespokeSubs, pvServices, pvSubServices, pvWebsiteSubs } from "@/components/preview/services/content";
 
 /**
  * Auto-generated sitemap, served at /sitemap.xml.
@@ -52,8 +52,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  // Custom Shopify apps and WordPress plugins sit under /services/bespoke-software.
-  const bespokeSubRoutes: MetadataRoute.Sitemap = pvBespokeSubs.map((s) => ({
+  // Shopify and WordPress websites sit under /services/websites, custom
+  // Shopify apps and WordPress plugins under /services/bespoke-software.
+  const bespokeSubRoutes: MetadataRoute.Sitemap = [...pvWebsiteSubs, ...pvBespokeSubs].map((s) => ({
     url: `${BASE}${s.path}`,
     lastModified: now,
     changeFrequency: "monthly",

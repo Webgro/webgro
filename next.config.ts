@@ -39,10 +39,11 @@ const legacyRedirects = async () => {
   const serviceLocation: R[] = [
     r("/services/web-design-development", "/services/websites"),
     r("/services/web-design-development/:city*", "/services/websites"),
-    r("/services/shopify-web-design", "/services/websites"),
-    r("/services/shopify-web-design/:city*", "/services/websites"),
-    r("/services/wordpress-web-design", "/services/websites"),
-    r("/services/wordpress-web-design/:city*", "/services/websites"),
+    // The old platform hubs and their distant-town pages go to the platform's own page.
+    r("/services/shopify-web-design", "/services/websites/shopify"),
+    r("/services/shopify-web-design/:city*", "/services/websites/shopify"),
+    r("/services/wordpress-web-design", "/services/websites/wordpress"),
+    r("/services/wordpress-web-design/:city*", "/services/websites/wordpress"),
   ];
 
   // --- Specific services ---------------------------------------------------
@@ -52,6 +53,7 @@ const legacyRedirects = async () => {
     // from /services/seo to /services/seo caused infinite ERR_TOO_MANY_REDIRECTS.
     r("/services/ecommerce", "/services/consultancy"),
     r("/services/maintenance", "/services/websites"),
+    r("/services/web-design", "/services/websites"),
   ];
 
   // --- Top-level pages -----------------------------------------------------
@@ -71,6 +73,15 @@ const legacyRedirects = async () => {
     r("/category/tips-tricks", "/the-gro"),
     r("/category/news", "/the-gro"),
     r("/category/uncategorised", "/the-gro"),
+    r("/category/web-design", "/services/websites"),
+    // Any other old category, and the old author, tag and paging archives.
+    r("/category/:slug*", "/the-gro"),
+    r("/author/:slug*", "/about"),
+    r("/tag/:slug*", "/the-gro"),
+    r("/page/:n*", "/the-gro"),
+    // The old portfolio post type.
+    r("/portfolio", "/work"),
+    r("/portfolio/:slug*", "/work"),
   ];
 
   // --- Portfolio with a direct equivalent ---------------------------------

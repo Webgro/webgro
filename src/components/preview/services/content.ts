@@ -44,7 +44,7 @@ export type PvService = {
   slug: string;
   /** Path on the live site. Always pass it through pv(). */
   path: string;
-  parent?: "marketing" | "bespoke-software";
+  parent?: "marketing" | "bespoke-software" | "websites";
   name: string;
   /** Used inside sentences, e.g. "Questions about ...". */
   lower: string;
@@ -59,7 +59,7 @@ export type PvService = {
   hero: { title: [string, string, string]; brush: string; intro: string };
   forYou: { heading: string; yes: string[]; no?: string; noLink?: { label: string; path: string } };
   get: { heading: string; body: string[]; items: string[] };
-  platforms?: Array<{ name: string; body: string }>;
+  platforms?: Array<{ name: string; body: string; /** Links the card to the platform's own page. */ path?: string }>;
   devices?: string;
   mockups?: Array<{ name: MockupName }>;
   /** Adds a showcase of builds after "What's included" (bespoke/Showcase.tsx). */
@@ -206,9 +206,9 @@ const websites: PvService = {
     ],
   },
   platforms: [
-    { name: "Shopify", body: "Suits most online shops. It's quick to launch, easy to run and handles high order volumes." },
+    { name: "Shopify", body: "Suits most online shops. It's quick to launch, easy to run and handles high order volumes.", path: "/services/websites/shopify" },
     { name: "Shopify Plus", body: "For businesses that need B2B and wholesale, several regions, a custom checkout or Launchpad." },
-    { name: "WordPress", body: "For content-led sites, such as service businesses, portfolios and company blogs." },
+    { name: "WordPress", body: "For content-led sites, such as service businesses, portfolios and company blogs.", path: "/services/websites/wordpress" },
   ],
   devices: "Every build is responsive, with the checkout designed for phones, the catalogue for tablets and the homepage for large screens.",
   process: {
@@ -1348,6 +1348,202 @@ const wordpressPlugins: PvService = {
   pairs: ["bespoke-software", "shopify-apps", "websites"],
 };
 
+/* ── Websites' two branches ─────────────────────────────────────────────── */
+
+const shopifySites: PvService = {
+  slug: "shopify",
+  path: "/services/websites/shopify",
+  parent: "websites",
+  name: "Shopify websites",
+  lower: "Shopify websites",
+  say: "New Shopify shops, Shopify rebuilds and moves to Shopify from other platforms.",
+  short: "Shopify design and development for UK brands: custom themes, rebuilds, Shopify Plus and migrations from WooCommerce, Magento and WordPress.",
+  facts: [
+    { label: "Usually costs", value: "£5k to £25k for a Shopify rebuild." },
+    { label: "Usually takes", value: "6 to 10 weeks" },
+  ],
+  recent: "Gieves & Hawkes: eight apps replaced with theme code, and mobile speed up from 64 to 85.",
+  visual: "websites",
+  hero: {
+    title: ["Shopify design", "and development", "for UK brands"],
+    brush: "UK brands",
+    intro: "We design and build Shopify shops, from a first store to a full rebuild on Shopify Plus. Every theme is built for the shop it runs, so it's fast on a phone, easy for your team to run and doesn't lean on a pile of monthly apps.",
+  },
+  forYou: {
+    heading: "Shops that have outgrown their theme",
+    yes: [
+      "Shopify shops that are slow on mobile, or paying for apps that theme code could replace.",
+      "Brands moving to Shopify from WooCommerce, Magento or WordPress, where rankings and order history have to come across intact.",
+      "Shops selling to trade as well as the public, or in more than one country.",
+      "Brands launching a new shop that need the design and the build from one team.",
+    ],
+    no: "Businesses turning over less than £2m rarely need Shopify Plus. Standard Shopify is quicker to build, cheaper to run and covers nearly everything a shop of that size needs.",
+  },
+  get: {
+    heading: "A Shopify theme built for your shop",
+    body: [
+      "We build custom Shopify themes rather than reskinning a bought one. That keeps the code lean, which is why our rebuilds get faster: at Gieves & Hawkes the mobile speed score went from 64 to 85, and eight apps were replaced with theme code, saving £300 a month.",
+      "Where Shopify can't do something, we build it as a custom Shopify app. Shops we look after include Fun Cases, Sublishop, ValuePet and Twisted Tailor.",
+    ],
+    items: [
+      "Custom Shopify themes", "Shopify Plus", "Shopify Markets", "B2B and wholesale", "Migrations to Shopify",
+      "Theme speed work", "App audits", "Custom Shopify apps", "Klaviyo", "SEO foundations",
+    ],
+  },
+  platforms: [
+    { name: "Shopify", body: "Suits most online shops. It's quick to launch, easy to run and handles high order volumes." },
+    { name: "Shopify Plus", body: "For businesses that need B2B and wholesale, several regions, a custom checkout or Launchpad." },
+  ],
+  devices: "Every build is responsive, with the checkout designed for phones, the catalogue for tablets and the homepage for large screens.",
+  process: {
+    heading: "How a Shopify project works",
+    total: "Most Shopify rebuilds take 6 to 10 weeks from kick-off to launch, and heavier custom work 10 to 12. We fix the timeline at the end of discovery.",
+    stages: [
+      { name: "Discovery", time: "One week", body: "We agree the scope, the goals and whether standard Shopify or Shopify Plus is the right fit." },
+      { name: "Design", body: "We design the page templates and the product and checkout journeys. You sign off the designs before we start building." },
+      { name: "Build", body: "We build the theme, move the products, customers and orders, and connect the apps you keep." },
+      { name: "Launch", body: "Redirects from every old URL, analytics, payments and shipping, all tested before the shop goes live." },
+      { name: "Care", time: "Optional", body: "A Shopify care plan for updates, speed and new features, with no lock-in." },
+    ],
+  },
+  proof: {
+    heading: "Shopify results",
+    intro: "Measured results from Shopify builds and rebuilds.",
+    figures: [
+      { value: "85", label: "Gieves & Hawkes mobile speed score out of 100, up from 64 before the rebuild.", draw: { kind: "ring", value: 85, from: 64, note: "64 before" } },
+      { value: "+240%", label: "Sublishop sales growth in the three months after relaunch.", draw: { kind: "bars", bars: [{ label: "Before", value: 1 }, { label: "After", value: 3.4, accent: true }] } },
+      { value: "+62%", label: "ValuePet average order value the week after launch.", draw: { kind: "bars", bars: [{ label: "Before", value: 1 }, { label: "After", value: 1.62, accent: true }] } },
+    ],
+    cases: ["gieves-and-hawkes", "berrymae", "sublishop", "valuepet", "fun-cases", "twisted-tailor", "origin-architectural", "its-pouch"],
+  },
+  faqs: [
+    {
+      q: "How much does a Shopify website cost?",
+      a: "A Shopify rebuild usually costs between £5k and £25k, depending on the number of templates, the custom features and whether you're on Shopify Plus. We scope the work before we quote, and the discovery call is free.",
+    },
+    {
+      q: "How long does a Shopify build take?",
+      a: "Most rebuilds take 6 to 10 weeks. Heavier custom work takes 10 to 12. We fix the timeline after discovery and work to it.",
+    },
+    {
+      q: "Can you move us to Shopify from WooCommerce or Magento?",
+      a: "Yes. We've moved shops from WooCommerce, Magento and WordPress to Shopify, as we did for Origin Architectural. A migration covers products, customers, order history where you need it, and a redirect for every old URL so you keep your rankings.",
+    },
+    {
+      q: "Do we need Shopify Plus?",
+      a: "For most brands turning over less than £2m, no. Plus is worth it once you need B2B, several regions, Launchpad or significant checkout customisation.",
+    },
+    {
+      q: "Do you use a bought theme?",
+      a: "No. We build the theme for your shop. Bought themes carry code for features you'll never use, which slows the shop down and makes changes harder.",
+    },
+    {
+      q: "Can you work on a shop someone else built?",
+      a: "Yes. We start with an audit of the theme and the apps, then fix what's slowing the shop down before adding anything new.",
+    },
+  ],
+  start: {
+    heading: "Start with a 30-minute call",
+    body: "Tell us about the shop and what's holding it back. We'll scope the work, then quote.",
+  },
+  pairs: ["shopify-apps", "seo", "email-marketing"],
+};
+
+const wordpressSites: PvService = {
+  slug: "wordpress",
+  path: "/services/websites/wordpress",
+  parent: "websites",
+  name: "WordPress websites",
+  lower: "WordPress websites",
+  say: "New WordPress websites and rebuilds of older ones, for service businesses, charities and content-led brands.",
+  short: "WordPress design and development for UK businesses: custom block themes, fast pages and a site your own team can edit.",
+  facts: [
+    { label: "Usually costs", value: "£4k to £15k" },
+    { label: "Usually takes", value: "4 to 6 weeks" },
+  ],
+  recent: "ANYPRINT: rebuilt on WordPress, with a Lighthouse performance score up from 54 to 99.",
+  visual: "websites",
+  hero: {
+    title: ["WordPress design", "and development", "for UK businesses"],
+    brush: "UK businesses",
+    intro: "We design and build WordPress websites for service businesses, charities, manufacturers and anyone whose site is mostly content. Each one is built on a custom block theme, so pages load fast and your team can edit them without a developer.",
+  },
+  forYou: {
+    heading: "Sites that are hard to edit or slow to load",
+    yes: [
+      "WordPress sites built on a page builder that has become slow and hard to change.",
+      "Businesses that need staff to add pages, case studies and news without breaking the layout.",
+      "Charities and organisations that need forms which connect to their other systems.",
+      "Manufacturers with product catalogues that need filters, spec sheets and downloads.",
+    ],
+    no: "If you mainly sell products online, Shopify is usually the better platform, and we'll tell you so.",
+    noLink: { label: "See Shopify websites", path: "/services/websites/shopify" },
+  },
+  get: {
+    heading: "A WordPress site your team can run",
+    body: [
+      "We build WordPress sites on custom block themes rather than heavy page builders. The editor shows your own blocks in your own styles, so the site looks the same after a year of edits as on launch day.",
+      "Where a site needs something no plugin does well, we build it as a custom WordPress plugin. At Architectural FX one custom plugin replaced three, and products now publish from a Google Sheet.",
+    ],
+    items: [
+      "Custom block themes", "Gutenberg blocks", "WooCommerce", "Custom WordPress plugins", "Forms and integrations",
+      "Speed work", "Accessibility", "Migrations from page builders", "Hosting", "SEO foundations",
+    ],
+  },
+  devices: "Every build is responsive and tested on phones, tablets and large screens before launch.",
+  process: {
+    heading: "How a WordPress project works",
+    total: "Most WordPress builds take 4 to 6 weeks from kick-off to launch. Sites with custom plugins or integrations take longer. We fix the timeline at the end of discovery.",
+    stages: [
+      { name: "Discovery", time: "One week", body: "We agree the pages, the goals, the audience and what your team needs to edit." },
+      { name: "Design", body: "We design the page templates and the blocks your team will build pages with. You sign off the designs before we start building." },
+      { name: "Build", body: "We build the block theme, move your content across and connect forms and integrations." },
+      { name: "Launch", body: "Redirects, analytics, hosting and DNS, all checked before the site goes live." },
+      { name: "Care", time: "Optional", body: "A WordPress care plan with hosting, updates, backups and monitoring, from £55 a month." },
+    ],
+  },
+  proof: {
+    heading: "WordPress results",
+    intro: "Measured results from WordPress builds.",
+    figures: [
+      { value: "99", label: "ANYPRINT's Lighthouse performance score after the rebuild, up from 54.", draw: { kind: "ring", value: 99, from: 54, note: "54 before" } },
+      { value: "3 to 1", label: "Plugins replaced by one custom plugin at Architectural FX.", draw: { kind: "bars", bars: [{ label: "Before", value: 3 }, { label: "After", value: 1, accent: true }] } },
+    ],
+    cases: ["anyprint", "architectural-fx", "threadology", "fandp-agency", "little-muddy-boots", "space-4-u-self-storage", "jbvc-foundation"],
+  },
+  faqs: [
+    {
+      q: "How much does a WordPress website cost?",
+      a: "Most WordPress builds cost between £4k and £15k, depending on the number of templates and any custom features. We scope the work before we quote, and the discovery call is free.",
+    },
+    {
+      q: "How long does a WordPress build take?",
+      a: "Usually 4 to 6 weeks. Sites with custom plugins or integrations take longer, and we fix the timeline after discovery.",
+    },
+    {
+      q: "Do you use page builders like Elementor or Divi?",
+      a: "We don't build new sites on them. We build custom block themes for the WordPress editor, which load faster and are harder to break than page builder layouts.",
+    },
+    {
+      q: "Can you rebuild our existing WordPress site?",
+      a: "Yes. We move your content across, keep your URLs or redirect them, and make sure the new site keeps the rankings the old one had.",
+    },
+    {
+      q: "Do you host WordPress sites?",
+      a: "Yes. Our WordPress care plans include hosting, updates, backups and monitoring, from £55 a month.",
+    },
+    {
+      q: "Can you build WooCommerce shops?",
+      a: "Yes, where WooCommerce suits the business. For most shops selling online as their main business, we recommend Shopify.",
+    },
+  ],
+  start: {
+    heading: "Start with a 30-minute call",
+    body: "Tell us about the site and what your team needs from it. We'll scope the work, then quote.",
+  },
+  pairs: ["wordpress-plugins", "seo", "design"],
+};
+
 /* ── Lookups ────────────────────────────────────────────────────────────── */
 
 /** The seven top-level services, in the order they appear on the index. */
@@ -1359,6 +1555,15 @@ export const pvSubServices: PvService[] = [email, ppc, social];
 /** Bespoke Software's two branches. */
 export const pvBespokeSubs: PvService[] = [shopifyApps, wordpressPlugins];
 
+/** Websites' two branches, one per platform. */
+export const pvWebsiteSubs: PvService[] = [shopifySites, wordpressSites];
+
+/** What the menus list under Websites: the main page first, as with Bespoke Software. */
+export const pvWebsitesMenu: Pick<PvService, "slug" | "path" | "name">[] = [
+  { slug: "all-websites", path: "/services/websites", name: "Shopify and WordPress" },
+  ...pvWebsiteSubs,
+];
+
 /**
  * What the menus list under Bespoke Software. The first entry points at the
  * main page: without it the two branches read as the whole service, as if we
@@ -1369,7 +1574,7 @@ export const pvBespokeMenu: Pick<PvService, "slug" | "path" | "name">[] = [
   ...pvBespokeSubs,
 ];
 
-const all = [...pvServices, ...pvSubServices, ...pvBespokeSubs];
+const all = [...pvServices, ...pvSubServices, ...pvBespokeSubs, ...pvWebsiteSubs];
 
 export function getPvService(slug: string): PvService | undefined {
   return pvServices.find((s) => s.slug === slug);
@@ -1381,6 +1586,10 @@ export function getPvSubService(slug: string): PvService | undefined {
 
 export function getBespokeSub(slug: string): PvService | undefined {
   return pvBespokeSubs.find((s) => s.slug === slug);
+}
+
+export function getWebsiteSub(slug: string): PvService | undefined {
+  return pvWebsiteSubs.find((s) => s.slug === slug);
 }
 
 export function getAnyPvService(slug: string): PvService | undefined {

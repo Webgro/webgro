@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { BrushStroke } from "../Brush";
 import { pv } from "../links";
-import { pvBespokeMenu, pvServices, pvSubServices } from "../services/content";
+import { pvBespokeMenu, pvServices, pvSubServices, pvWebsitesMenu } from "../services/content";
 import "./mobile.css";
 import { HEADER_PROMO, usePromoLive } from "../promo";
 
@@ -23,7 +23,7 @@ let order = 1;
 const serviceRows = pvServices.map((s) => ({
   s,
   i: order++,
-  branches: (s.slug === "marketing" ? pvSubServices : s.slug === "bespoke-software" ? pvBespokeMenu : []).map((b) => ({ b, i: order++ })),
+  branches: (s.slug === "marketing" ? pvSubServices : s.slug === "bespoke-software" ? pvBespokeMenu : s.slug === "websites" ? pvWebsitesMenu : []).map((b) => ({ b, i: order++ })),
 }));
 const careIndex = order++;
 

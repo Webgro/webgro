@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useId, useState } from "react";
 import { subscribeToNewsletter } from "@/app/actions/newsletter";
 import { pv } from "../links";
+import { track } from "@/lib/analytics";
 
 /**
  * Newsletter signup: Webgro news, releases and articles from The Gro. Sends to Klaviyo once the keys are set
@@ -21,7 +22,10 @@ export function NewsletterForm({ className = "" }: { className?: string }) {
     setState("sending");
     setError("");
     const r = await subscribeToNewsletter({ email, website: trap });
-    if (r.ok) setState("done");
+    if (r.ok) {
+      track("sign_up", { method: "newsletter" });
+      setState("done");
+    }
     else { setState("error"); setError(r.error); }
   };
 

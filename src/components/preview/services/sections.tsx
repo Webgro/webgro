@@ -278,6 +278,7 @@ export function WhatYouGet({ service }: { service: PvService }) {
                 <span className="pv-line"><span>{p.name}</span></span>
               </h3>
               <p>{p.body}</p>
+              {p.path && <Link href={pv(p.path)} className="pv-textlink" data-cursor>{p.name} websites</Link>}
             </div>
           ))}
           {devices && <p className="pv-svc-platforms-note">{devices}</p>}

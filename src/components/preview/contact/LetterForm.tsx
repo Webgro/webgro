@@ -7,6 +7,7 @@ import { TurnstileWidget } from "@/components/TurnstileWidget";
 import { BrushStroke } from "../Brush";
 import { pv } from "../links";
 import { budgetOptions, serviceOptions } from "./content";
+import { track } from "@/lib/analytics";
 
 /**
  * The enquiry form, written as a letter. It is wired exactly like the live
@@ -166,6 +167,7 @@ export function LetterForm({ onSent }: { onSent: (firstName: string) => void }) 
         turnstileToken: turnstileToken ?? undefined,
       });
       if (result.ok) {
+        track("generate_lead", { form: "letter" });
         onSent(form.firstName.trim());
       } else {
         setError(result.error);

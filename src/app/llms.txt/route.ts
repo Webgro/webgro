@@ -1,6 +1,6 @@
 import { caseStudies } from "@/content/work";
 import { articles } from "@/content/the-gro";
-import { pvBespokeSubs, pvServices, pvSubServices } from "@/components/preview/services/content";
+import { pvBespokeSubs, pvServices, pvSubServices, pvWebsiteSubs } from "@/components/preview/services/content";
 import { towns } from "@/components/preview/local/content";
 import { industries } from "@/components/preview/industries/content";
 import { ARTICLE_META, CASE_META, PREVIEW_ROBOTS, SERVICE_META } from "@/components/preview/seo";
@@ -57,6 +57,7 @@ Contact: hello@webgro.co.uk, 01344 231 119. Address: 12 Longshot Lane, Bracknell
 
 ${pvServices.map(service).join("\n")}
 ${pvSubServices.map(service).join("\n")}
+${pvWebsiteSubs.map(service).join("\n")}
 ${pvBespokeSubs.map(service).join("\n")}
 - [Care plans](${SITE}/care-plans): Monthly website care from £55 a month. WordPress £55, £120 or £250 a month with hosting included. Shopify £80, £300 or £600 a month with time for changes.
 

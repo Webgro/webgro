@@ -12,6 +12,12 @@ import type { StartingPrice } from "@/components/JsonLd";
 export const PREVIEW_ROBOTS: Metadata["robots"] = { index: true, follow: true };
 
 const SITE = "https://webgro.co.uk";
+/**
+ * The site-wide card from app/opengraph-image.tsx. A page that sets its own
+ * openGraph object replaces the inherited one, image included, so pages
+ * without a picture of their own fall back to this.
+ */
+const DEFAULT_OG = { url: `${SITE}/opengraph-image`, width: 1200, height: 630, alt: "Webgro · Shopify, WordPress, and AI tools. One studio." };
 
 type Meta = { title: string; description: string };
 
@@ -33,9 +39,9 @@ export function pageMeta({
       siteName: "Webgro",
       locale: "en_GB",
       type,
-      ...(image ? { images: [{ url: image }] } : {}),
+      images: [image ? { url: image } : DEFAULT_OG],
     },
-    twitter: { card: "summary_large_image", title, description, ...(image ? { images: [image] } : {}) },
+    twitter: { card: "summary_large_image", title, description, images: [image ?? DEFAULT_OG.url] },
     robots: PREVIEW_ROBOTS,
   };
 }
@@ -57,7 +63,7 @@ export const PAGE_META = {
       "Shopify and WordPress websites, consultancy, automation and AI, bespoke software, SEO, marketing and design from Webgro, a small studio in Bracknell.",
   },
   about: {
-    title: "About Webgro | Web Design Studio in Bracknell Since 2012",
+    title: "About Webgro | The Team Behind the Studio, Since 2012",
     description:
       "Webgro has built websites since 2012, first as 4ogo and then Broadbridge Design. Meet the four-person team in Bracknell and see the awards we've won.",
   },
@@ -109,6 +115,16 @@ export const SERVICE_META: Record<string, Meta> = {
     description:
       "Bespoke software from £3,000, designed to save time and money, with AI built in where it helps and integrations with the systems you already use.",
   },
+  shopify: {
+    title: "Shopify Web Design & Development Agency, UK | Webgro",
+    description:
+      "Shopify design and development for UK brands: custom themes, rebuilds, Shopify Plus and migrations. Gieves & Hawkes, Sublishop, ValuePet and more.",
+  },
+  wordpress: {
+    title: "WordPress Web Design & Development Agency, UK | Webgro",
+    description:
+      "WordPress design and development on custom block themes: fast pages, a site your team can edit, and care plans with hosting from £55 a month.",
+  },
   "shopify-apps": {
     title: "Custom Shopify App Development, Built for One Store | Webgro",
     description:
@@ -120,7 +136,7 @@ export const SERVICE_META: Record<string, Meta> = {
       "Custom WordPress plugin development: product catalogues, configurators and forms that connect to other systems, built for one site.",
   },
   seo: {
-    title: "SEO for Shopify & WordPress Websites | Webgro",
+    title: "SEO for Shopify & WordPress Sites, Bracknell | Webgro",
     description:
       "Technical SEO, content and monthly reporting for Shopify and WordPress sites, covering both Google rankings and AI search results.",
   },
@@ -154,6 +170,8 @@ export const SERVICE_META: Record<string, Meta> = {
 /** Starting prices for the Service structured data. Automation and AI is priced per project, so it has none. */
 export const SERVICE_PRICE: Record<string, StartingPrice> = {
   websites: { from: 4000 },
+  shopify: { from: 5000 },
+  wordpress: { from: 4000 },
   consultancy: { from: 400, unit: "DAY" },
   "bespoke-software": { from: 3000 },
   seo: { from: 750, unit: "MON" },

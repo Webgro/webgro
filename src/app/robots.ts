@@ -28,8 +28,8 @@ export default function robots(): MetadataRoute.Robots {
           "/forms/",
           // Any future API endpoints
           "/api/",
-          // Next.js internals
-          "/_next/",
+          // /_next/ stays crawlable: Google needs the scripts, styles and
+          // fonts there to render pages the way visitors see them.
         ],
       },
     ],

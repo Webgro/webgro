@@ -94,9 +94,9 @@ export const towns: Town[] = [
     slug: "bracknell",
     name: "Bracknell",
     meta: {
-      title: "Web Design in Bracknell | Webgro",
+      title: "Web Designers and SEO in Bracknell | Webgro",
       description:
-        "Shopify and WordPress websites from a four-person studio at 12 Longshot Lane, Bracknell. Meet the team at the office. Websites from £4,000.",
+        "Shopify and WordPress websites and local SEO from a four-person studio at 12 Longshot Lane, Bracknell. Meet the team at the office. Websites from £4,000.",
     },
     areaType: "City",
     drive: "Our office",
@@ -127,7 +127,7 @@ export const towns: Town[] = [
       ],
       services: [
         S.websites("Shopify and WordPress, designed and built in the office. WordPress builds usually cost £4k to £15k, and Shopify rebuilds £5k to £25k."),
-        S.seo("Technical fixes, content and monthly reporting, covering Google and AI search."),
+        S.seo("Local SEO for Bracknell businesses: your Google Business Profile, local pages and reviews, plus technical fixes and monthly reporting."),
         S.email("Automated flows and campaigns in Klaviyo for businesses that sell online."),
         S.ppc("Google and Meta campaigns, managed week to week against your margins."),
         S.consultancy("Senior eCommerce advice on strategy, platforms and growth, booked by the day."),
@@ -185,6 +185,10 @@ export const towns: Town[] = [
       {
         q: "Do you look after the website after launch?",
         a: "Yes. Care plans start from £55 a month and cover updates, backups and monitoring. We can also run your SEO, from £750 a month, or your email marketing, paid ads and social media once the site is live.",
+      },
+      {
+        q: "Do you do SEO for Bracknell businesses?",
+        a: "Yes. For a local business that means your Google Business Profile, pages for the towns you serve, reviews and the technical fixes behind them, with a monthly report. SEO starts from £750 a month, and we track your keywords in our own portal so you can see where you rank.",
       },
       {
         q: "Have you worked with other businesses in Bracknell?",

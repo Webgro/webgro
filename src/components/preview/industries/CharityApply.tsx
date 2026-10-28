@@ -18,6 +18,7 @@ import { SCENE_QUERY, STATIC_QUERY, useGsap } from "../useGsap";
 import type { ApplyCopy } from "./content";
 import "../contact/contact.css";
 import "../contact/enquiry.css";
+import { track } from "@/lib/analytics";
 
 /* ── How it works ───────────────────────────────────────────────────────── */
 
@@ -258,6 +259,7 @@ export function ApplyForm({ copy }: { copy: ApplyCopy }) {
       });
       const data = (await res.json().catch(() => ({ ok: false, error: GENERIC }))) as CharityApplicationResponse;
       if (data.ok) {
+        track("generate_lead", { form: "charity" });
         setLive("");
         setSent({ first: body.contactName.split(/\s+/)[0] ?? "", charity: body.charityName });
         return;
