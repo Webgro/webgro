@@ -214,8 +214,7 @@ export function JournalArticle({
               <p>
                 Written by{" "}
                 <Link href={pv("/about")} className="pv-textlink" data-cursor>{article.author}</Link>
-                {article.author === "Michael Broadbridge" ? ", co-founder and CEO of Webgro" : ""}. Articles in The Gro
-                are drafted with help from AI and edited by a person before they are published.
+                {article.author === "Michael Broadbridge" ? ", co-founder and CEO of Webgro" : ""}.
               </p>
               {service && (
                 <p>
