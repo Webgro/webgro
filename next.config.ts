@@ -127,6 +127,8 @@ const legacyRedirects = async () => {
 
   // --- News-style posts with a specific destination ------------------------
   const specificPosts: R[] = [
+    // Old posts whose topic has a new article.
+    r("/how-much-should-i-expect-to-pay-for-a-website-design", "/the-gro/how-much-does-a-website-cost-uk"),
     r("/broadbridge-design-is-now-webgro", "/about"),
     r("/webgro-nominated-for-best-gardening-website-design-award-by-designrush", "/about"),
     r(
@@ -142,7 +144,6 @@ const legacyRedirects = async () => {
     "/top-tips-for-starting-an-e-commerce-business",
     "/the-benefits-of-hiring-a-professional-web-design-agency",
     "/what-makes-a-great-landing-page",
-    "/how-much-should-i-expect-to-pay-for-a-website-design",
     "/how-does-infinite-scrolling-affect-seo",
     "/5-ways-a-blog-can-benefit-your-business",
     "/4-reasons-you-need-to-use-a-business-email-address",
