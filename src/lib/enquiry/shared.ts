@@ -60,9 +60,9 @@ export const LIMITS = {
   /** Most options a question may carry. The service question has 12 chips. */
   options: 14,
   /** Follow-up questions after the two fixed ones. */
-  followUps: 5,
+  followUps: 1,
   /** The two fixed steps plus the follow-ups. */
-  steps: 7,
+  steps: 3,
   name: 120,
   email: 200,
   phone: 40,

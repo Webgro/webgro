@@ -22,10 +22,11 @@ import "./enquiry.css";
 import { track } from "@/lib/analytics";
 
 /**
- * The guided enquiry: one question at a time. Two fixed questions, then up
- * to five follow-ups from /api/enquiry/next (chosen by Claude, or a fixed
- * set per service when no API key is set), then contact details and a
- * summary before /api/enquiry/submit emails it to the team.
+ * The guided enquiry: one question at a time. Two fixed questions, then at
+ * most one follow-up from /api/enquiry/next (chosen by Claude, or a fixed one
+ * per service when no API key is set), then contact details and sending on a
+ * single screen, before /api/enquiry/submit emails it to the team. Kept short
+ * on purpose: every extra screen loses enquiries.
  *
  * Stateless on the server: this component holds every answered step and
  * posts the whole list each time. Spam protection matches the letter form:
@@ -33,7 +34,7 @@ import { track } from "@/lib/analytics";
  */
 
 type Answered = { q: EnquiryQuestion; answer: string; picked: string[]; text: string };
-type Phase = "question" | "loading" | "contact" | "review";
+type Phase = "question" | "loading" | "contact";
 type Draft = { picked: string[]; text: string };
 type Contact = { name: string; email: string; phone: string; company: string };
 type ContactErrors = Partial<Record<"name" | "email", string>>;
@@ -245,7 +246,6 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
   function back() {
     setStarted(true);
     setError(null);
-    if (phase === "review") return setPhase("contact");
     const prev = done[done.length - 1];
     if (!prev) return;
     setDone(done.slice(0, -1));
@@ -270,7 +270,8 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
     if (key in contactErrors) setContactErrors((e) => ({ ...e, [key]: undefined }));
   };
 
-  async function toReview() {
+  /** Checks the required details, then sends. Contact details and sending share one screen. */
+  async function submitContact() {
     const found: ContactErrors = {};
     if (!contact.name.trim()) found.name = "Enter your name";
     if (!contact.email.trim()) found.email = "Enter your email address";
@@ -281,12 +282,7 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
       document.getElementById(`${uid}-${first}`)?.focus();
       return;
     }
-    if (moving.current) return;
-    moving.current = true;
-    await leave();
-    moving.current = false;
-    setStarted(true);
-    setPhase("review");
+    await send();
   }
 
   async function send() {
@@ -327,8 +323,8 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
   /* ── Progress ─────────────────────────────────────────────────────── */
 
   const number = done.length + 1;
-  const progress = phase === "review" ? 1 : phase === "contact" ? (TOTAL - 1) / TOTAL : done.length / TOTAL;
-  const stageLabel = phase === "review" ? "Check and send" : phase === "contact" ? "Your details" : `Question ${Math.min(number, TOTAL - 1)}`;
+  const progress = phase === "contact" ? (TOTAL - 1) / TOTAL : done.length / TOTAL;
+  const stageLabel = phase === "contact" ? "Your details" : `Question ${Math.min(number, TOTAL - 1)}`;
   const live =
     phase === "loading" ? "Loading the next question." : phase === "question" ? `Question ${number}.` : `${stageLabel}.`;
 
@@ -469,74 +465,19 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
       noValidate
       onSubmit={(e) => {
         e.preventDefault();
-        toReview();
+        submitContact();
       }}
     >
       <h2 className="pv-enq-q" id={`${uid}-contact`} tabIndex={-1} data-enq-heading data-enq-in>
         Where should we send our reply?
       </h2>
-      <p className="pv-enq-hint" data-enq-in>You can check everything on the next screen before it&rsquo;s sent.</p>
+      <p className="pv-enq-hint" data-enq-in>We reply within one working day.</p>
       <div className="pv-enq-fields">
         {contactField("name", "Your name", { autoComplete: "name", required: true, placeholder: "Alex Morgan" })}
         {contactField("email", "Email", { type: "email", autoComplete: "email", required: true, placeholder: "you@yourcompany.com" })}
         {contactField("phone", "Phone (optional)", { type: "tel", autoComplete: "tel", placeholder: "+44 ..." })}
         {contactField("company", "Company (optional)", { autoComplete: "organization" })}
       </div>
-      <div className="pv-enq-actions" data-enq-in>
-        <button type="submit" className="pv-btn pv-enq-next" data-cursor>
-          <span>Check your answers</span>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-        </button>
-        <button type="button" className="pv-enq-link pv-enq-back" onClick={back} data-cursor>
-          Back
-        </button>
-      </div>
-    </form>
-  );
-
-  const details = [
-    ["Name", contact.name],
-    ["Email", contact.email],
-    ["Phone", contact.phone],
-    ["Company", contact.company],
-  ].filter(([, v]) => v.trim());
-
-  const reviewView = (
-    <form
-      className="pv-enq-panel"
-      aria-labelledby={`${uid}-review`}
-      noValidate
-      onSubmit={(e) => {
-        e.preventDefault();
-        send();
-      }}
-    >
-      <h2 className="pv-enq-q" id={`${uid}-review`} tabIndex={-1} data-enq-heading data-enq-in>
-        Check your answers
-      </h2>
-
-      <dl className="pv-enq-summary" data-enq-in>
-        {done.map((s) => (
-          <div className="pv-enq-summary-row" key={s.q.id}>
-            <dt>{s.q.question}</dt>
-            <dd className={s.answer ? undefined : "is-skipped"}>{s.answer || "Skipped"}</dd>
-          </div>
-        ))}
-        <div className="pv-enq-summary-row">
-          <dt>
-            Your details{" "}
-            <button type="button" className="pv-enq-link pv-enq-change" onClick={() => setPhase("contact")} data-cursor>
-              Change
-            </button>
-          </dt>
-          <dd>
-            {details.map(([k, v]) => (
-              <span key={k} className="pv-enq-summary-detail">{v}</span>
-            ))}
-          </dd>
-        </div>
-      </dl>
-
       {/* Honeypot: offscreen and empty for people, filled in by bots. */}
       <div className="pv-contact-pot" aria-hidden="true">
         <label>
@@ -596,19 +537,18 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
             Back
           </button>
         </div>
-        <p className="pv-enq-note">We reply within one working day.</p>
       </div>
     </form>
   );
 
-  const view = phase === "question" ? questionView : phase === "loading" ? loadingView : phase === "contact" ? contactView : reviewView;
+  const view = phase === "question" ? questionView : phase === "loading" ? loadingView : contactView;
 
   return (
     <div className="pv-enq" ref={root}>
       <div className="pv-enq-progress">
         <div className="pv-enq-progress-head">
           <span className="pv-label">{stageLabel}</span>
-          {phase !== "review" && <span className="pv-enq-progress-meta">A few short questions, then your details</span>}
+          <span className="pv-enq-progress-meta">A few short questions, then your details</span>
         </div>
         <div
           className="pv-enq-bar"

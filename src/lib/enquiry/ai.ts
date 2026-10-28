@@ -53,6 +53,7 @@ Prices, for setting budget bands and expectations. Never quote a final price and
 - Website care plans from £55 a month. WordPress £55, £120 or £250 a month. Shopify £80, £300 or £600 a month.
 
 Rules:
+- You get at most ONE follow-up question for the whole enquiry, because every extra question loses customers. Make it the single most useful thing a project lead would want to know, usually the budget or the timeline. If the project description already gives a project lead enough for a useful first reply, set done to true and ask nothing.
 - Ask one question only. Keep it short enough to read at a glance, ideally under 15 words.
 - Do not ask for anything already answered, or anything you can reasonably infer from earlier answers.
 - If an answer was vague, you may ask for the missing detail once. If the customer skipped a question, do not ask it again.
