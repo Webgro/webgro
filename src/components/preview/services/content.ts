@@ -1459,7 +1459,7 @@ const wordpressSites: PvService = {
   name: "WordPress websites",
   lower: "WordPress websites",
   say: "New WordPress websites and rebuilds of older ones, for service businesses, charities and content-led brands.",
-  short: "WordPress design and development for UK businesses: custom block themes, fast pages and a site your own team can edit.",
+  short: "WordPress design and development for UK businesses: custom block themes or Elementor, fast pages and a site your own team can edit.",
   facts: [
     { label: "Usually costs", value: "£4k to £15k" },
     { label: "Usually takes", value: "4 to 6 weeks" },
