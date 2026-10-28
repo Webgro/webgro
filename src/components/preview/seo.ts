@@ -123,7 +123,7 @@ export const SERVICE_META: Record<string, Meta> = {
   wordpress: {
     title: "WordPress Web Design & Development Agency, UK | Webgro",
     description:
-      "WordPress design and development on custom block themes: fast pages, a site your team can edit, and care plans with hosting from £55 a month.",
+      "WordPress design and development, on custom block themes or Elementor: fast pages, a site your team can edit, and care plans with hosting from £55 a month.",
   },
   "shopify-apps": {
     title: "Custom Shopify App Development, Built for One Store | Webgro",

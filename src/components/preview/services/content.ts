@@ -1469,12 +1469,12 @@ const wordpressSites: PvService = {
   hero: {
     title: ["WordPress design", "and development", "for UK businesses"],
     brush: "UK businesses",
-    intro: "We design and build WordPress websites for service businesses, charities, manufacturers and anyone whose site is mostly content. Each one is built on a custom block theme, so pages load fast and your team can edit them without a developer.",
+    intro: "We design and build WordPress websites for service businesses, charities, manufacturers and anyone whose site is mostly content. Most are built on a custom block theme, so pages load fast and your team can edit them without a developer. Where a site needs Elementor, we build with that.",
   },
   forYou: {
     heading: "Sites that are hard to edit or slow to load",
     yes: [
-      "WordPress sites built on a page builder that has become slow and hard to change.",
+      "WordPress sites that have become slow and hard to change, whether built on a page builder or a bought theme.",
       "Businesses that need staff to add pages, case studies and news without breaking the layout.",
       "Charities and organisations that need forms which connect to their other systems.",
       "Manufacturers with product catalogues that need filters, spec sheets and downloads.",
@@ -1485,11 +1485,11 @@ const wordpressSites: PvService = {
   get: {
     heading: "A WordPress site your team can run",
     body: [
-      "We build WordPress sites on custom block themes rather than heavy page builders. The editor shows your own blocks in your own styles, so the site looks the same after a year of edits as on launch day.",
+      "For most new sites we build a custom block theme. The editor shows your own blocks in your own styles, so the site looks the same after a year of edits as on launch day. If your team already works in Elementor, or the site needs it, we build with Elementor instead.",
       "Where a site needs something no plugin does well, we build it as a custom WordPress plugin. At Architectural FX one custom plugin replaced three, and products now publish from a Google Sheet.",
     ],
     items: [
-      "Custom block themes", "Gutenberg blocks", "WooCommerce", "Custom WordPress plugins", "Forms and integrations",
+      "Custom block themes", "Gutenberg blocks", "Elementor", "WooCommerce", "Custom WordPress plugins", "Forms and integrations",
       "Speed work", "Accessibility", "Migrations from page builders", "Hosting", "SEO foundations",
     ],
   },
@@ -1524,8 +1524,8 @@ const wordpressSites: PvService = {
       a: "Usually 4 to 6 weeks. Sites with custom plugins or integrations take longer, and we fix the timeline after discovery.",
     },
     {
-      q: "Do you use page builders like Elementor or Divi?",
-      a: "We don't build new sites on them. We build custom block themes for the WordPress editor, which load faster and are harder to break than page builder layouts.",
+      q: "Do you build with Elementor?",
+      a: "Yes, where it's the right fit, for example if your team already knows it. For most new sites we recommend a custom block theme, which loads faster and is harder to break, and we'll explain the trade-off before you choose.",
     },
     {
       q: "Can you rebuild our existing WordPress site?",
