@@ -37,7 +37,7 @@ export const articles: Article[] = [
     title: "How much does a website cost in the UK?",
     excerpt:
       "A small business website from a studio usually costs £4,000 to £15,000, and a Shopify shop £5,000 to £25,000, plus a monthly cost to keep it running. Here's what drives the price, what you pay after launch, and how to get a quote you can trust.",
-    date: "Nov 2026",
+    date: "Oct 2026",
     readTime: "6 min read",
     accent: "teal",
     author: "Michael Broadbridge",
