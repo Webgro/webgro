@@ -32,6 +32,130 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "how-much-does-a-website-cost-uk",
+    category: "Websites",
+    title: "How much does a website cost in the UK?",
+    excerpt:
+      "A small business website from a studio usually costs £4,000 to £15,000, and a Shopify shop £5,000 to £25,000, plus a monthly cost to keep it running. Here's what drives the price, what you pay after launch, and how to get a quote you can trust.",
+    date: "Nov 2026",
+    readTime: "6 min read",
+    accent: "teal",
+    author: "Michael Broadbridge",
+    heroImage: "/articles/website-cost.jpg",
+    relatedService: "websites",
+    body: [
+      {
+        type: "p",
+        text: "Most people asking what a website costs get the same answer: it depends. That's true, but it isn't much help when you're trying to set a budget. So here are the numbers we actually quote, what moves a project up or down the range, and what you'll pay once the site is live.",
+      },
+      {
+        type: "callout",
+        accent: "teal",
+        text: "The short answer: a WordPress website from a UK studio usually costs £4,000 to £15,000. A Shopify shop costs £5,000 to £25,000 to build or rebuild. Shopify Plus and heavily custom builds cost more. After launch, budget for a monthly care plan, from £55 a month.",
+      },
+      { type: "h2", text: "The three ways to get a website" },
+      {
+        type: "p",
+        text: "Before the studio prices, it's worth being honest about the alternatives, because they're the right answer for some businesses.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Build it yourself on Wix, Squarespace or Shopify. You pay a monthly subscription and your own time. It's the cheapest way to start and fine for a sole trader with a few pages. It gets harder when you need it to rank in search, load fast or do something the template doesn't.",
+          "Hire a freelancer. Often cheaper than a studio, and a good freelancer is excellent value. The risk is that one person covers design, development, SEO and support, so you depend on them being available.",
+          "Hire a studio or agency. You pay more, and you get a team: design, development, SEO and someone to call when something breaks. This is where the prices below come from.",
+        ],
+      },
+      { type: "h2", text: "What a studio-built website costs" },
+      {
+        type: "p",
+        text: "These are the ranges we quote at Webgro. Other studios will differ, but most UK studios our size land in a similar place.",
+      },
+      {
+        type: "ul",
+        items: [
+          "WordPress website: £4,000 to £15,000, usually 4 to 6 weeks. Service businesses, charities, manufacturers and anyone whose site is mostly pages rather than products. More on our [WordPress websites](/services/websites/wordpress) page.",
+          "Shopify shop: £5,000 to £25,000 for a build or rebuild, usually 6 to 10 weeks. Online shops of most sizes. More on our [Shopify websites](/services/websites/shopify) page.",
+          "Shopify Plus, or heavily custom work: above £25,000, usually 10 to 12 weeks or more. Businesses selling wholesale and retail, in several countries, or needing features Shopify doesn't have.",
+        ],
+      },
+      { type: "h2", text: "What moves the price" },
+      {
+        type: "p",
+        text: "Two websites can look similar and cost very different amounts. These are the things that make the difference.",
+      },
+      { type: "h3", text: "The number of templates" },
+      {
+        type: "p",
+        text: "A template is a type of page: the home page, a service page, a product page, a case study. A site with five templates and fifty pages costs much less than one with fifteen templates, because each template is designed and built once and then reused.",
+      },
+      { type: "h3", text: "Custom features" },
+      {
+        type: "p",
+        text: "Booking systems, product configurators, trade pricing, quote forms that connect to your accounts software. Anything the platform doesn't do out of the box has to be built, and that is usually the biggest single cost. Sometimes it's a custom plugin or app, which we cover on our [Shopify apps](/services/bespoke-software/shopify-apps) and [WordPress plugins](/services/bespoke-software/wordpress-plugins) pages.",
+      },
+      { type: "h3", text: "Moving from another platform" },
+      {
+        type: "p",
+        text: "Moving from WooCommerce, Magento or an older WordPress site means moving products, customers and sometimes order history, and setting up a redirect for every old address so you keep your Google rankings. It's careful work and it adds to the price, but skipping it is how businesses lose half their search traffic overnight.",
+      },
+      { type: "h3", text: "Design from scratch, or to a brand you already have" },
+      {
+        type: "p",
+        text: "If you have a brand book or finished designs, the project starts further along. If you need a logo and identity first, that's a separate piece of work before the website.",
+      },
+      { type: "h3", text: "Content and photography" },
+      {
+        type: "p",
+        text: "Someone has to write the words and supply the pictures. If you do it, the price stays down, but the launch date depends on you. If the studio writes copy or arranges photography, budget for it.",
+      },
+      { type: "h2", text: "What you pay after launch" },
+      {
+        type: "p",
+        text: "The build is a one-off cost. A website also has running costs, and they are easy to forget when comparing quotes.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Hosting, updates and backups. For WordPress our [care plans](/care-plans) are £55, £120 or £250 a month with hosting included. For Shopify, hosting comes with your Shopify plan, and our care plans are £80, £300 or £600 a month with time for changes included.",
+          "Your platform subscription. Shopify charges a monthly plan plus payment fees, and both are set by Shopify. WordPress itself is free, but premium plugins often have yearly licences.",
+          "Apps. On Shopify, monthly app fees add up fast. When we rebuilt the Gieves & Hawkes shop, replacing eight apps with theme code saved £300 a month.",
+          "Your domain name, usually a few pounds a year.",
+          "Marketing, if you want people to find the site: SEO from £750 a month, or paid ads and email.",
+        ],
+      },
+      {
+        type: "callout",
+        accent: "teal",
+        text: "When you compare quotes, compare the cost over two or three years, not just the build. A cheaper build on a template full of paid apps can cost more by year two than a custom theme that needs none.",
+      },
+      { type: "h2", text: "Why some quotes are much cheaper" },
+      {
+        type: "p",
+        text: "If one quote is half the others, it usually means one of these: a bought theme with your logo on it, no redirects from your old site, no SEO set-up, no testing on phones, or no support after launch. None of those is wrong in itself, but you should know which one you're getting. Ask what's included, and ask what happens if something breaks a month after launch.",
+      },
+      { type: "h2", text: "How to get an accurate quote" },
+      {
+        type: "p",
+        text: "The more a studio knows, the tighter the quote. Before you ask for one, it helps to have:",
+      },
+      {
+        type: "ol",
+        items: [
+          "A list of the pages or sections you need, even a rough one.",
+          "Anything the site has to do beyond showing information: take bookings, sell products, connect to other software.",
+          "Your current website, if you have one, and what's wrong with it.",
+          "Two or three websites you like, and why.",
+          "A budget range. It isn't a negotiating weakness. It lets the studio tell you what's realistic for that money, instead of quoting for something you can't afford.",
+        ],
+      },
+      {
+        type: "p",
+        text: "At Webgro the first conversation is a free 30-minute call. After it we send a written proposal within three working days, with the scope, timeline and a fixed price. If you'd like a figure for your project, [get in touch](/contact) or see what's included on our [websites](/services/websites) page.",
+      },
+    ],
+  },
+  {
     slug: "how-to-check-website-php-vulnerabilities",
     category: "Security",
     title: "How to check your website for PHP vulnerabilities, including PHP2Shell.",
