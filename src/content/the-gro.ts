@@ -32,6 +32,105 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "shopify-editions-fall-2026",
+    category: "Shopify",
+    title: "Shopify's Fall '26 Edition: what UK shops should actually do with it.",
+    excerpt:
+      "Shopify released its Fall '26 Edition, called Exponential, on 28 October 2026. Most of it is about selling through AI assistants. Here's what matters for a UK shop, what to switch on now, and what you can safely ignore.",
+    date: "Oct 2026",
+    readTime: "6 min read",
+    accent: "violet",
+    author: "Michael Broadbridge",
+    heroImage: "/articles/shopify-editions-fall-2026.jpg",
+    relatedService: "websites",
+    body: [
+      {
+        type: "p",
+        text: "Twice a year Shopify bundles its new features into an Edition. The Fall '26 Edition, which Shopify calls Exponential, went live on 28 October 2026, about six weeks earlier than last year's winter release on 10 December, so it lands before Black Friday. As usual the list is long, and most shops only need a handful of it. This is our read of what matters for a UK shop, based on [Shopify's own announcement](https://www.shopify.com/news/fall-26-edition-merchant) and the [Fall '26 Editions page](https://www.shopify.com/editions/fall2026).",
+      },
+      {
+        type: "callout",
+        accent: "violet",
+        text: "The short version. Do now: check whether your shop qualifies for Shopify Catalog, review and publish your knowledge base, and use Shopify Protect if you take payments through Shopify Payments. Try carefully: the rebuilt Sidekick and Canvas. Ignore for now: Shop Promise, which is US only.",
+      },
+      { type: "h2", text: "The big theme: shoppers buying through AI assistants" },
+      {
+        type: "p",
+        text: "Most of this Edition is about people shopping through AI assistants rather than through your website. Shopify has made Shop Pay checkout available inside several AI agents, launched Shop.md so a shopper can point an assistant like ChatGPT or Claude at more than a billion products, and added Universal Checkout on Shop, so one basket can hold items from several Shopify shops.",
+      },
+      {
+        type: "p",
+        text: "You don't have to believe AI shopping is about to take over to act on this. The assistants answer questions using the product data and facts they're given. If yours are wrong or missing, your products are less likely to come up, and the answers about your shop may be wrong. Two new admin features deal with exactly that.",
+      },
+      { type: "h3", text: "Catalog eligibility" },
+      {
+        type: "p",
+        text: "A new view in the admin shows whether your shop qualifies for Shopify Catalog, the product data that shopping assistants draw on, with links to fix whatever is blocking it. Check it this week. The usual blockers are product data problems: missing details, thin descriptions, missing barcodes. Shopify also added GTIN suggestions to the product editor on 29 October, which helps with the last one.",
+      },
+      { type: "h3", text: "Knowledge base" },
+      {
+        type: "p",
+        text: "Under Sales channels, then Agentic, there's a new knowledge base: the facts AI agents are given about your shop, such as your returns window, where you ship and whether you offer gift wrapping. Shopify drafts it from your storefront, and nothing goes to agents until you publish it. Read every line before you do. If your returns policy says 30 days but your FAQ page still says 14, this is where it shows.",
+      },
+      {
+        type: "p",
+        text: "This is the same work as being found in Google's AI Overviews: clear, consistent facts about your business in the places machines read them. We covered the search side in [SEO after AI Overviews](/the-gro/seo-after-ai-overviews-2026).",
+      },
+      { type: "h2", text: "Sidekick and Canvas: useful, with care" },
+      {
+        type: "p",
+        text: "Sidekick, Shopify's built-in AI assistant, has been rebuilt. It can now run calculations, write code, search the web and remember your instructions, and it floats on every admin page in the new admin design. Shopify says you approve its changes before they take effect.",
+      },
+      {
+        type: "p",
+        text: "Canvas shows your whole shop on one screen and lets you change it with Sidekick, from small tweaks to a full redesign, built on your theme's design system. It's in early access, so not every shop has it yet.",
+      },
+      {
+        type: "p",
+        text: "Our advice: use both for small, checkable jobs, like rewording a banner or finding products with missing data. Before you let anything redesign pages, duplicate your live theme so you have a copy to go back to. If your theme was built for you, ask whoever built it first. A custom theme often has features that an AI editor won't know about and can break without realising.",
+      },
+      { type: "h2", text: "Fraud and chargebacks" },
+      {
+        type: "p",
+        text: "Shopify Protect now sits in the admin as a set of fraud and dispute tools: it blocks fraud at checkout, lets you write and test your own fraud rules with the Shopify Protect Rule Builder, and gathers delivery evidence for 'where's my parcel' chargebacks. Shopify says it's included at no extra cost if you use Shopify Payments, and that merchants have won up to 1.6 times more disputes, depending on what they sell. Going into Black Friday, it's worth half an hour of your time.",
+      },
+      { type: "h2", text: "Payments, shops and marketing" },
+      {
+        type: "ul",
+        items: [
+          "Seven new local payment methods in Shopify Payments: Alipay, WeChat Pay, MB WAY, OXXO, Satispay, Scalapay and GrabPay. They're aimed at shoppers in China, Portugal, Mexico, Italy and South East Asia, so they matter if you sell abroad, not much if you sell only in the UK.",
+          "Shopify POS can now save in-store shoppers to a customer profile when they choose a digital receipt and share their details. Shopify says known in-store customers are worth over 60% more over their lifetime than unknown ones. If you have a shop or market stall as well as a website, switch it on.",
+          "Campaign Autopilot, which runs ads for you, is now available to every merchant, with more channels. You set the budget and approve ads before they go live. Set a budget you'd be happy to lose while you test it.",
+          "Shopify Messaging can now send WhatsApp marketing automations. Treat it like email: only message people who have opted in, and don't overdo it.",
+        ],
+      },
+      { type: "h2", text: "What UK shops can ignore for now" },
+      {
+        type: "ul",
+        items: [
+          "Shop Promise, the free delivery and returns badges, is only for eligible US stores.",
+          "Amex payments through Shop Pay in AI agents are marked as coming soon.",
+          "The new admin look changes colours, type and navigation. It takes a day to get used to, and changes nothing about your shop.",
+        ],
+      },
+      { type: "h2", text: "The short list for this week" },
+      {
+        type: "ol",
+        items: [
+          "Open Catalog eligibility and fix what it flags.",
+          "Read your knowledge base line by line, correct it, then publish it.",
+          "If you use Shopify Payments, set up Shopify Protect before Black Friday.",
+          "Duplicate your live theme before you try Canvas or let Sidekick change pages.",
+          "If you sell in person, turn on POS customer recognition.",
+        ],
+      },
+      {
+        type: "p",
+        text: "If you'd rather someone else worked through it, we look after Shopify shops on our [care plans](/care-plans), and we build and rebuild [Shopify websites](/services/websites/shopify). [Get in touch](/contact) and we'll check what this Edition means for yours.",
+      },
+    ],
+  },
+  {
     slug: "how-much-does-a-website-cost-uk",
     category: "Websites",
     title: "How much does a website cost in the UK?",
