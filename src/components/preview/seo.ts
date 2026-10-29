@@ -271,6 +271,11 @@ export const CASE_META: Record<string, Meta> = {
 };
 
 export const ARTICLE_META: Record<string, Meta> = {
+  "shopify-editions-fall-2026": {
+    title: "Shopify Fall '26 Edition: What UK Shops Should Do | Webgro",
+    description:
+      "Shopify's Fall '26 Edition (Exponential) explained for UK shops: Catalog eligibility, the agent knowledge base, Sidekick, Canvas and Shopify Protect.",
+  },
   "how-much-does-a-website-cost-uk": {
     title: "How Much Does a Website Cost in the UK? | Webgro",
     description:
