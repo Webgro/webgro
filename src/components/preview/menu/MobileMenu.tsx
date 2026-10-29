@@ -7,7 +7,6 @@ import { BrushStroke } from "../Brush";
 import { pv } from "../links";
 import { pvBespokeMenu, pvServices, pvSubServices, pvWebsitesMenu } from "../services/content";
 import "./mobile.css";
-import { HEADER_PROMO, usePromoLive } from "../promo";
 
 type Item = { href: string; label: string; services?: boolean };
 
@@ -72,8 +71,6 @@ export function MobileMenu({
   onClose: () => void;
 }) {
   const pathname = usePathname() ?? "";
-  const promoLive = usePromoLive();
-  const list: Item[] = promoLive ? [...items, { href: HEADER_PROMO.href, label: HEADER_PROMO.shortLabel }] : items;
   const toggleRef = useRef<HTMLButtonElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
   const firstRef = useRef<HTMLAnchorElement>(null);
@@ -192,7 +189,7 @@ export function MobileMenu({
       >
         <nav className="pv-nav-sheet-nav" aria-label="Menu">
           <ul className="pv-nav-sheet-list">
-            {list.map((l, i) => {
+            {items.map((l, i) => {
               const current = isCurrent(pathname, l.href);
               if (l.services) {
                 return (
