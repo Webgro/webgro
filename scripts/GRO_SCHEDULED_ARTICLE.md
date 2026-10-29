@@ -53,6 +53,14 @@ the service page the brief links to.
   `relatedService` from the brief.
 - Insert it as the FIRST element of the `articles` array.
 
+## 2b. Search title and description
+
+Add an entry for the slug at the top of `ARTICLE_META` in
+`src/components/preview/seo.ts`: a `title` of 60 characters or fewer, in
+title case, that leads with the main keyword and ends `| Webgro` where it
+fits, and a `description` of 150 to 160 characters. Without it, Google gets
+the full headline and excerpt, which are too long.
+
 ## 3. Take over the old URL (if the brief names one)
 
 In `next.config.ts`, remove the old path from the `blogPosts` list and add,
@@ -92,7 +100,7 @@ Both must be 0.
 ## 6. Commit, push and deploy
 
 ```bash
-cd ~/Desktop/Claude/webgro-site && git add src/content/the-gro.ts next.config.ts public/articles/<slug>.jpg public/articles/feed/<slug>.jpg && git commit -m "Gro: <title>" && git push origin main
+cd ~/Desktop/Claude/webgro-site && git add src/content/the-gro.ts next.config.ts src/components/preview/seo.ts public/articles/<slug>.jpg public/articles/feed/<slug>.jpg && git commit -m "Gro: <title>" && git push origin main
 rm -rf /tmp/wg-deploy; git worktree prune; git worktree add -q --detach /tmp/wg-deploy HEAD && vercel deploy --prod --yes --project webgro --cwd /tmp/wg-deploy
 ```
 
