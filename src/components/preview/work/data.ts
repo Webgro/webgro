@@ -104,8 +104,8 @@ export const workExtras: Record<string, WorkExtra> = {
   },
   fleaway: {
     w: 1200, h: 800,
-    blurb: "A Shopify store for a flea and tick treatment sold in Ireland. A pack finder matches the treatment to the pet's weight, and the same theme runs the sister site.",
-    figure: { value: "2", label: "sites run from one Shopify theme" },
+    blurb: "Two Shopify stores from one theme, for a flea treatment and a worming range sold in Ireland. A pack finder matches the treatment to the pet's weight.",
+    figure: { value: "2", label: "stores run from one Shopify theme" },
   },
   "architectural-fx": {
     w: 1200, h: 800,

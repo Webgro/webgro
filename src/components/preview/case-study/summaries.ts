@@ -19,8 +19,8 @@ export const summaries: Record<string, Summary> = {
   },
   fleaway: {
     ask: "Fleaway Plus comes in five packs split by animal and weight, and a shopper who picks the wrong one has bought something they can't use.",
-    did: "We wrote a Shopify theme from scratch around a pack finder, added one, three and twelve month packs with subscriptions and a flea and worm discount, and wrote the how-to guide and advice articles.",
-    changed: "Shoppers choose dog or cat, set the weight and see the right pack. The same theme runs the sister site, Wormaway, set up so the two don't compete in search.",
+    did: "We wrote a Shopify theme from scratch around a pack finder, added pack sizes with subscriptions and a flea and worm discount, wrote the guides and advice articles, and ran Wormaway on the same theme with its own look.",
+    changed: "Shoppers choose dog or cat, set the weight and see the right pack. Both stores run from one theme, set up so the two don't compete in search.",
   },
   "architectural-fx": {
     ask: "Architectural FX had to email their product spreadsheet to us and wait for an import every time a product changed, and their products page took more than six seconds to load.",
@@ -108,7 +108,7 @@ export const summaries: Record<string, Summary> = {
 export const headlineFigures: Record<string, string[]> = {
   valuepet: ["+62%", "€69.03", "8 weeks"],
   berrymae: ["68", "344", "3"],
-  fleaway: ["8", "3", "2"],
+  fleaway: ["8", "2", "10%"],
   "architectural-fx": ["3", "128", "9"],
   "fun-cases": ["+300%", "30%", "−70%"],
   "gieves-and-hawkes": ["+21", "£300", "#1"],

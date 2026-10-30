@@ -204,9 +204,9 @@ export const CASE_META: Record<string, Meta> = {
       "A brand identity and a custom Shopify theme for BerryMae, a phone case brand. Shoppers choose their phone once, from 68 models, to see the cases that fit.",
   },
   fleaway: {
-    title: "Fleaway: Shopify Store with a Pack Finder | Webgro",
+    title: "Fleaway & Wormaway: Two Shopify Stores, One Theme | Webgro",
     description:
-      "A Shopify store for Fleaway Plus flea and tick treatment. A pack finder matches the treatment to the pet's weight, with subscriptions and a sister site.",
+      "Two Shopify stores from one theme, for Fleaway Plus flea treatment and Wormaway worming tablets in Ireland, with a pack finder that goes by the pet's weight.",
   },
   "architectural-fx": {
     title: "Architectural FX: WordPress Catalogue Plugin | Webgro",
