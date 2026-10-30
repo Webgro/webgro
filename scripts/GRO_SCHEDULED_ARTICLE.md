@@ -107,12 +107,13 @@ cd ~/Desktop/Claude/webgro-site && grep -c $'\xe2\x80\x94' src/content/the-gro.t
 
 Both must be 0.
 
-## 6. Commit, push and deploy
+## 6. Commit and push
 
 ```bash
 cd ~/Desktop/Claude/webgro-site && git add src/content/the-gro.ts next.config.ts src/components/preview/seo.ts public/articles/<slug>.jpg public/articles/feed/<slug>.jpg && git commit -m "Gro: <title>" && git push origin main
-rm -rf /tmp/wg-deploy; git worktree prune; git worktree add -q --detach /tmp/wg-deploy HEAD && vercel deploy --prod --yes --project webgro --cwd /tmp/wg-deploy
 ```
+
+Vercel deploys on push, so never also run a manual production deploy.
 
 End the commit message with:
 `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`
