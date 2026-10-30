@@ -32,6 +32,117 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "google-share-price-fall-seo-ai-search",
+    category: "SEO",
+    title: "Google's record share price fall: what it means for SEO and AI search.",
+    excerpt:
+      "Alphabet had its worst day since 2004 on 29 October, partly over slower search growth and AI spending. It doesn't mean SEO is dead. Here's what still works in Google, what changes with AI answers, and what to do about both.",
+    date: "Oct 2026",
+    readTime: "6 min read",
+    accent: "blue",
+    author: "Michael Broadbridge",
+    heroImage: "/articles/google-share-price-fall-seo-ai-search.jpg",
+    relatedService: "seo",
+    body: [
+      {
+        type: "p",
+        text: "On 29 October 2026 shares in Alphabet, Google's parent company, fell nearly 13%, [their worst day since listing in 2004](https://finance.yahoo.com/technology/article/google-stock-plunges-more-than-12-on-q3-earnings-miss-135322453.html). If your business relies on Google, the headlines can make it sound as if search is in trouble. The numbers don't say that, and it's no reason to stop doing SEO. They do show where search is heading, and that's worth acting on.",
+      },
+      {
+        type: "callout",
+        accent: "blue",
+        text: "The short answer: investors reacted to an earnings miss, heavy AI spending and slower search revenue growth. Google says search use is growing. Keep doing SEO, because people are still searching on Google. Add AIEO, because more people now get an answer without clicking, and you want your business named in it.",
+      },
+      { type: "h2", text: "What happened" },
+      {
+        type: "p",
+        text: "Alphabet reported its third quarter on 28 October. Revenue rose to $127.6 billion, but several numbers fell short of what investors wanted:",
+      },
+      {
+        type: "ul",
+        items: [
+          "Earnings per share were $2.12, against about $3 expected. [An $8.7 billion loss on equity securities](https://finance.yahoo.com/markets/stocks/articles/why-alphabet-googl-shares-sliding-174434959.html) was part of the gap.",
+          "[Google Search revenue](https://s206.q4cdn.com/479360582/files/doc_financials/2026/q3/2026q3-alphabet-earnings-release.pdf) grew 12% to $63.35 billion, which [missed forecasts](https://finance.yahoo.com/markets/stocks/articles/why-alphabet-googl-shares-sliding-174434959.html).",
+          "Free cash flow was [negative by about $9 billion](https://s206.q4cdn.com/479360582/files/doc_financials/2026/q3/2026q3-alphabet-earnings-release.pdf), with [$51.36 billion of capital spending](https://finance.yahoo.com/markets/stocks/articles/why-alphabet-googl-shares-sliding-174434959.html), much of it on AI.",
+          "Yahoo Finance reports that Chief Business Officer Philipp Schindler put part of the search slowdown down to [\"lower monetization rates in AI Mode queries\"](https://finance.yahoo.com/markets/stocks/articles/why-alphabet-googl-shares-sliding-174434959.html). In plain terms, AI Mode searches currently earn Google less.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Reports also point to [wider worry about whether heavy AI spending will pay off](https://finance.yahoo.com/technology/article/google-stock-plunges-more-than-12-on-q3-earnings-miss-135322453.html). This article isn't investment advice, and we have no view on the shares.",
+      },
+      { type: "h2", text: "What it doesn't mean" },
+      {
+        type: "p",
+        text: "It doesn't mean people have stopped using Google. Search revenue still grew, and CEO Sundar Pichai says [query growth is the highest it has been in five years](https://s206.q4cdn.com/479360582/files/doc_financials/2026/q3/2026q3-alphabet-earnings-release.pdf). That's Google's own figure and it has reasons to say so, but nothing in these results shows search shrinking. A share price measures what investors expected against what they got.",
+      },
+      {
+        type: "p",
+        text: "It also says nothing about your website. None of these reports look at what happened to traffic for any business, so check your own numbers in Search Console rather than reading it off a headline.",
+      },
+      { type: "h2", text: "What changes with AI answers" },
+      {
+        type: "ul",
+        items: [
+          "Fewer clicks on some searches. In a [Pew Research study](https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/) of US users in March 2025, people clicked a normal result on 8% of visits to a page with an AI summary, against 15% without one. About 1% clicked a link in the summary. It's one US study and the data is getting old, so treat it as a signal rather than a forecast.",
+          "Longer questions. Pichai says [AI Mode queries are on average three times longer than traditional searches](https://blog.google/company-news/inside-google/message-ceo/alphabet-earnings-q3-2026/), and one in five use voice, images or documents.",
+          "A single experience. Google is building [one seamless experience across AI Overviews, AI Mode and traditional Search](https://blog.google/company-news/inside-google/message-ceo/alphabet-earnings-q3-2026/), so the line between ranking and being quoted will blur.",
+          "Tasks, not just answers. Google says it is bringing [agents that handle reservations, forms, appointments and purchases](https://blog.google/company-news/inside-google/message-ceo/alphabet-earnings-q3-2026/) to Search. Rivals are working on the same idea.",
+          "Other starting points. Some people now start in ChatGPT or similar tools. We recently had our first known enquiry from a new customer who found us through ChatGPT. One enquiry proves little, but it's a route worth measuring.",
+        ],
+      },
+      { type: "h2", text: "What still works in Google" },
+      {
+        type: "p",
+        text: "The basics haven't gone anywhere, and AI answers lean on the same pages. We covered this in more depth in [SEO after AI Overviews](/the-gro/seo-after-ai-overviews-2026).",
+      },
+      {
+        type: "ul",
+        items: [
+          "A site Google can crawl, that loads quickly on a phone.",
+          "A clear page for each thing you sell, with a title that says what it is.",
+          "Pages that answer the question properly, with real examples, not filler.",
+          "For local businesses, a complete Google Business Profile, plus real reviews from real customers.",
+          "Links from sites that have a reason to mention you.",
+        ],
+      },
+      { type: "h2", text: "What AIEO adds" },
+      {
+        type: "p",
+        text: "AIEO means AI engine optimisation. You may also see it called AIO or GEO. It's the work of getting your business named in answers from ChatGPT, Gemini, Perplexity, Copilot and Google's AI Overviews. Nobody can guarantee that: answers vary by person and session. What you can do is make it easy for these tools to find you, understand you and repeat what you say.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Let them in. Check your robots.txt doesn't block AI crawlers without you knowing, and make sure Bing can index your site, as Copilot draws on it.",
+          "Answer first. Open your main pages with a short, direct answer: what you do, who it suits and where.",
+          "State facts they can repeat. Services, locations, how long you've traded and named client examples, written plainly and kept consistent.",
+          "Add structured data, so your business, services and FAQs are clear to machines.",
+          "Be mentioned elsewhere. These tools rely on what other sites say about you, so honest directory listings, reviews and press coverage matter. Fake ones are a risk you don't need.",
+        ],
+      },
+      { type: "h2", text: "What to do this month" },
+      {
+        type: "ol",
+        items: [
+          "Look at 12 months of clicks and impressions in Search Console. If impressions are holding while clicks fall, AI answers may be part of the reason.",
+          "Write down 10 questions a customer would ask, and put them to ChatGPT, Gemini, Perplexity and Copilot. Note who gets named. Repeat it monthly, using the same questions.",
+          "Rewrite the opening of your three most important pages so each one answers the question straight away.",
+          "Check your robots.txt, and add your site to Bing Webmaster Tools.",
+          "Ask every new enquiry how they found you, and include AI tools as an option. Most analytics won't show you this reliably.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Shopify shops have some extra steps: see what we said about [Shopify's Fall '26 Edition](/the-gro/shopify-editions-fall-2026). If you'd rather have this done for you, our [SEO service](/services/seo) covers both Google and AI search. [Get in touch](/contact) and we'll look at where you stand.",
+      },
+      {
+        type: "p",
+        text: "Figures were checked on 30 October 2026 against [Alphabet's earnings release](https://s206.q4cdn.com/479360582/files/doc_financials/2026/q3/2026q3-alphabet-earnings-release.pdf), [Google's published remarks](https://blog.google/company-news/inside-google/message-ceo/alphabet-earnings-q3-2026/) and the reports linked above.",
+      },
+    ],
+  },
+  {
     slug: "shopify-editions-fall-2026",
     category: "Shopify",
     title: "Shopify's Fall '26 Edition: what UK shops should actually do with it.",

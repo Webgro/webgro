@@ -271,6 +271,11 @@ export const CASE_META: Record<string, Meta> = {
 };
 
 export const ARTICLE_META: Record<string, Meta> = {
+  "google-share-price-fall-seo-ai-search": {
+    title: "Google's Share Fall: What It Means for SEO and AIEO | Webgro",
+    description:
+      "Alphabet had its worst day since 2004. Why it doesn't mean SEO is dead, what still works in Google, what changes with AI answers, and what to do about both.",
+  },
   "shopify-editions-fall-2026": {
     title: "Shopify Fall '26 Edition: What UK Shops Should Do | Webgro",
     description:
