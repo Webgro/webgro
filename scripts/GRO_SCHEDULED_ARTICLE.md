@@ -12,8 +12,18 @@ Repo: `~/Desktop/Claude/webgro-site` (Next.js, deployed to Vercel project
 ## Hard rules
 
 - No em dashes anywhere (U+2014): copy, alt text, commit messages. En dashes
-  only in number ranges (£4k–15k). The house voice is plain, blunt and direct.
-- Only facts that are already on the site. Prices, timelines and results come
+  only in number ranges (4–8 weeks). The house voice is plain, blunt and direct.
+- Do not quote Webgro's own prices anywhere in an article: no build, care plan,
+  SEO or other service prices, in the text, excerpt or search description
+  (Michael, 30 October 2026). Send readers to the service page or /contact
+  instead. Figures from a case study, and a third party's published prices with
+  their source, are fine. If a brief asks for Webgro's prices, leave them out
+  and say so in the email.
+- Exception: a post about what something costs, where the cost is vital
+  (Michael, 30 October 2026), may give figures as UK market ranges. Open each
+  page you take a figure from, link it beside the figure, and say the date you
+  checked. They are still not Webgro's own prices.
+- Only facts that are already on the site. Timelines and results come
   from `src/components/preview/services/content.ts`, the care plans content
   under `src/components/preview/care/`, `src/content/work.ts` (case studies)
   and `src/components/preview/seo.ts`. Never invent a client, figure or quote.
@@ -35,8 +45,8 @@ aren't yours, stop and email Michael (step 9) instead of publishing.
 ## 2. Write the article
 
 Read the brief, the two most recent articles in `src/content/the-gro.ts`
-(including "How much does a website cost in the UK?", the model to follow) and
-the service page the brief links to.
+(including "How much does a website cost in the UK?", the model to follow, including
+how it cites market ranges) and the service page the brief links to.
 
 - 1,000 to 1,400 words. Open with a paragraph that sets up the question, then
   a `callout` giving the short answer. `h2` sections, `h3` where useful, lists

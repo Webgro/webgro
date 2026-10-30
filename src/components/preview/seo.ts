@@ -279,7 +279,7 @@ export const ARTICLE_META: Record<string, Meta> = {
   "how-much-does-a-website-cost-uk": {
     title: "How Much Does a Website Cost in the UK? | Webgro",
     description:
-      "WordPress sites cost £4,000 to £15,000 and Shopify shops £5,000 to £25,000 from a UK studio, plus care from £55 a month. What drives the price, and how to get a quote.",
+      "UK guides put a small business website at about £2,000 to £8,000 and an online shop at £5,000 to £30,000 or more. What drives the price, and what you pay after launch.",
   },
   "how-to-check-website-php-vulnerabilities": {
     title: "How to Check Your Website for PHP Vulnerabilities (PHP2Shell)",

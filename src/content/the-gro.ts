@@ -135,7 +135,7 @@ export const articles: Article[] = [
     category: "Websites",
     title: "How much does a website cost in the UK?",
     excerpt:
-      "A small business website from a studio usually costs £4,000 to £15,000, and a Shopify shop £5,000 to £25,000, plus a monthly cost to keep it running. Here's what drives the price, what you pay after launch, and how to get a quote you can trust.",
+      "UK price guides put a small business website from an agency at about £2,000 to £8,000, and an online shop at about £5,000 to £30,000 or more, plus a monthly cost to keep it running. Here's what drives the price, what you pay after launch, and how to get a quote you can trust.",
     date: "Oct 2026",
     readTime: "6 min read",
     accent: "teal",
@@ -145,38 +145,42 @@ export const articles: Article[] = [
     body: [
       {
         type: "p",
-        text: "Most people asking what a website costs get the same answer: it depends. That's true, but it isn't much help when you're trying to set a budget. So here are the numbers we actually quote, what moves a project up or down the range, and what you'll pay once the site is live.",
+        text: "Most people asking what a website costs get the same answer: it depends. That's true, but it isn't much help when you're trying to set a budget. So here are the ranges published in UK price guides, what moves a project up or down them, and what you'll pay once the site is live.",
       },
       {
         type: "callout",
         accent: "teal",
-        text: "The short answer: a WordPress website from a UK studio usually costs £4,000 to £15,000. A Shopify shop costs £5,000 to £25,000 to build or rebuild. Shopify Plus and heavily custom builds cost more. After launch, budget for a monthly care plan, from £55 a month.",
+        text: "The short answer: UK price guides put a small business website from an agency at about £2,000 to £8,000, and an online shop at about £5,000 to £30,000 or more. Larger custom builds cost more. After launch, keeping a site maintained commonly costs £50 to £300 a month. The sources are linked below.",
       },
       { type: "h2", text: "The three ways to get a website" },
       {
         type: "p",
-        text: "Before the studio prices, it's worth being honest about the alternatives, because they're the right answer for some businesses.",
+        text: "Who builds the site makes the biggest difference to the price. The cheaper routes are the right answer for some businesses.",
       },
       {
         type: "ul",
         items: [
-          "Build it yourself on Wix, Squarespace or Shopify. You pay a monthly subscription and your own time. It's the cheapest way to start and fine for a sole trader with a few pages. It gets harder when you need it to rank in search, load fast or do something the template doesn't.",
-          "Hire a freelancer. Often cheaper than a studio, and a good freelancer is excellent value. The risk is that one person covers design, development, SEO and support, so you depend on them being available.",
-          "Hire a studio or agency. You pay more, and you get a team: design, development, SEO and someone to call when something breaks. This is where the prices below come from.",
+          "Build it yourself on Wix, Squarespace or Shopify. You pay a monthly subscription, from £1.99 to £259 a month according to [Startups.co.uk](https://startups.co.uk/websites/how-much-does-a-website-cost), and your own time. It's the cheapest way to start and fine for a sole trader with a few pages. It gets harder when you need it to rank in search, load fast or do something the template doesn't.",
+          "Hire a freelancer. [Bark](https://www.bark.com/en/gb/web-design/web-design-price-guide) lists £300 to £1,000 for a basic site and £1,000 to £3,000 for a small business site. Often cheaper than a studio, and a good freelancer is excellent value. The risk is that one person covers design, development, SEO and support, so you depend on them being available.",
+          "Hire a studio or agency. You pay more, and you get a team: design, development, SEO and someone to call when something breaks. This is what the next section covers.",
         ],
       },
-      { type: "h2", text: "What a studio-built website costs" },
+      { type: "h2", text: "What an agency-built website costs" },
       {
         type: "p",
-        text: "These are the ranges we quote at Webgro. Other studios will differ, but most UK studios our size land in a similar place.",
+        text: "These are published ranges, not quotes, and some of the guides come from firms that sell websites. The gaps between them are mostly down to scope and where the agency is based.",
       },
       {
         type: "ul",
         items: [
-          "WordPress website: £4,000 to £15,000, usually 4 to 6 weeks. Service businesses, charities, manufacturers and anyone whose site is mostly pages rather than products. More on our [WordPress websites](/services/websites/wordpress) page.",
-          "Shopify shop: £5,000 to £25,000 for a build or rebuild, usually 6 to 10 weeks. Online shops of most sizes. More on our [Shopify websites](/services/websites/shopify) page.",
-          "Shopify Plus, or heavily custom work: above £25,000, usually 10 to 12 weeks or more. Businesses selling wholesale and retail, in several countries, or needing features Shopify doesn't have.",
+          "Small business website: £2,000 to £7,000 from [Bark](https://www.bark.com/en/gb/web-design/web-design-price-guide), £1,500 to £5,000 from [Lilo](https://www.lilo.co.uk/blog/how-much-does-website-design-cost-in-the-uk-2026-uk-price-guide/). [ExpertSure](https://www.expertsure.com/uk/web-design/website-design-costs-guide/) puts regional agencies at £2,000 to £8,000, and London agencies from £8,000.",
+          "Online shop: £5,000 to £15,000 from [Bark](https://www.bark.com/en/gb/web-design/web-design-price-guide), £8,000 to £30,000 or more from [Lilo](https://www.lilo.co.uk/blog/how-much-does-website-design-cost-in-the-uk-2026-uk-price-guide/), and £5,000 to £35,000 or more from a specialist agency, according to [ExpertSure](https://www.expertsure.com/uk/web-design/website-design-costs-guide/).",
+          "Custom or larger builds: £5,000 to £15,000 for a custom business website from [Lilo](https://www.lilo.co.uk/blog/how-much-does-website-design-cost-in-the-uk-2026-uk-price-guide/), £10,000 to £30,000 or more for a custom enterprise site from [Bark](https://www.bark.com/en/gb/web-design/web-design-price-guide).",
         ],
+      },
+      {
+        type: "p",
+        text: "At Webgro, WordPress builds usually take 4 to 6 weeks and Shopify rebuilds 6 to 10. See our [WordPress websites](/services/websites/wordpress) and [Shopify websites](/services/websites/shopify) pages for what's included.",
       },
       { type: "h2", text: "What moves the price" },
       {
@@ -216,11 +220,11 @@ export const articles: Article[] = [
       {
         type: "ul",
         items: [
-          "Hosting, updates and backups. For WordPress our [care plans](/care-plans) are £55, £120 or £250 a month with hosting included. For Shopify, hosting comes with your Shopify plan, and our care plans are £80, £300 or £600 a month with time for changes included.",
-          "Your platform subscription. Shopify charges a monthly plan plus payment fees, and both are set by Shopify. WordPress itself is free, but premium plugins often have yearly licences.",
-          "Apps. On Shopify, monthly app fees add up fast. When we rebuilt the Gieves & Hawkes shop, replacing eight apps with theme code saved £300 a month.",
-          "Your domain name, usually a few pounds a year.",
-          "Marketing, if you want people to find the site: SEO from £750 a month, or paid ads and email.",
+          "Updates, backups and support. [Lilo](https://www.lilo.co.uk/blog/how-much-does-website-design-cost-in-the-uk-2026-uk-price-guide/) says maintenance plans commonly cost £50 to £300 a month, and [ExpertSure](https://www.expertsure.com/uk/web-design/website-design-costs-guide/) puts agency retainers at £100 to £500 a month. See our [care plans](/care-plans) for what ours include.",
+          "Hosting and your platform subscription. [Lilo](https://www.lilo.co.uk/blog/how-much-does-website-design-cost-in-the-uk-2026-uk-price-guide/) puts hosting at £20 to £100 a month. Shopify includes hosting in its monthly plan, plus payment fees, all set by Shopify. WordPress itself is free, but premium plugins often have yearly licences.",
+          "Apps and plugins. [Startups.co.uk](https://startups.co.uk/websites/how-much-does-a-website-cost) lists £0 to £100 or more a month. On Shopify they add up fast. When we rebuilt the Gieves & Hawkes shop, replacing eight apps with theme code saved £300 a month.",
+          "Your domain name, typically £10 to £20 a year according to [Lilo](https://www.lilo.co.uk/blog/how-much-does-website-design-cost-in-the-uk-2026-uk-price-guide/).",
+          "Marketing, if you want people to find the site. [Startups.co.uk](https://startups.co.uk/websites/how-much-does-a-website-cost) lists SEO at £150 to £1,200 or more a month, and paid ads and email are on top.",
         ],
       },
       {
@@ -251,6 +255,10 @@ export const articles: Article[] = [
       {
         type: "p",
         text: "At Webgro the first conversation is a free 30-minute call. After it we send a written proposal within three working days, with the scope, timeline and a fixed price. If you'd like a figure for your project, [get in touch](/contact) or see what's included on our [websites](/services/websites) page.",
+      },
+      {
+        type: "p",
+        text: "Market figures were checked on 30 October 2026 on the pages linked above. Prices change, so treat them as a guide.",
       },
     ],
   },
