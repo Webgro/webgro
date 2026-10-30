@@ -29,6 +29,9 @@ Repo: `~/Desktop/Claude/webgro-site` (Next.js, deployed to Vercel project
   and `src/components/preview/seo.ts`. Never invent a client, figure or quote.
 - Never call Fun Cases, Sublishop or ANYPRINT sister or group companies.
 - Never add a line saying the article was written with AI.
+- Never put Webgro's own enquiries, analytics figures or business anecdotes in
+  an article unless Michael supplied them for that use (Michael, 30 October
+  2026). Published case studies and results already on the site are fine.
 - Never print or log `GEMINI_API_KEY`.
 - Commit only the files you created or changed. Other sessions may have
   uncommitted work in this checkout: leave it alone.
