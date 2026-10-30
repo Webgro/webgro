@@ -1690,7 +1690,7 @@ export const caseStudies: CaseStudy[] = [
     year: "2026",
     accent: "teal",
     heroImage: "/work/fleaway.jpg",
-    heroImageAlt: "A golden retriever lying in a patch of sunlight on an oak floor in a bright living room, looking out at the garden",
+    heroImageAlt: "A woman sitting on a rug in a bright living room, laughing and cuddling her fluffy brown dog",
     excerpt:
       "Two Shopify stores from one theme, for the Fleaway Plus flea treatment and Wormaway worming tablets, sold in Ireland. A pack finder matches the treatment to the pet's weight.",
     services: ["Shopify theme design", "Shopify development", "Subscriptions", "Content"],
