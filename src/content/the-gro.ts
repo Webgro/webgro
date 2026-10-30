@@ -88,7 +88,6 @@ export const articles: Article[] = [
           "Longer questions. Pichai says [AI Mode queries are on average three times longer than traditional searches](https://blog.google/company-news/inside-google/message-ceo/alphabet-earnings-q3-2026/), and one in five use voice, images or documents.",
           "A single experience. Google is building [one seamless experience across AI Overviews, AI Mode and traditional Search](https://blog.google/company-news/inside-google/message-ceo/alphabet-earnings-q3-2026/), so the line between ranking and being quoted will blur.",
           "Tasks, not just answers. Google says it is bringing [agents that handle reservations, forms, appointments and purchases](https://blog.google/company-news/inside-google/message-ceo/alphabet-earnings-q3-2026/) to Search. Rivals are working on the same idea.",
-          "Other starting points. Some people now start in ChatGPT or similar tools. We recently had our first known enquiry from a new customer who found us through ChatGPT. One enquiry proves little, but it's a route worth measuring.",
         ],
       },
       { type: "h2", text: "What still works in Google" },
