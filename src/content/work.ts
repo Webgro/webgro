@@ -1690,7 +1690,7 @@ export const caseStudies: CaseStudy[] = [
     year: "2026",
     accent: "teal",
     heroImage: "/work/fleaway.jpg",
-    heroImageAlt: "Five Fleaway Plus spot-on packs in a row, each in its own colour: green for cats, then orange, blue, pink and red for dogs from small to extra large",
+    heroImageAlt: "A golden retriever lying on a sunlit kitchen floor with a pack of Fleaway Plus for large dogs in front of it",
     excerpt:
       "Two Shopify stores from one theme, for the Fleaway Plus flea treatment and Wormaway worming tablets, sold in Ireland. A pack finder matches the treatment to the pet's weight.",
     services: ["Shopify theme design", "Shopify development", "Subscriptions", "Content"],
