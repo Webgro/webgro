@@ -9,6 +9,7 @@ import {
   FIXED_QUESTIONS,
   LIMITS,
   PROJECT_QUESTION,
+  PROJECT_SKIPPED,
   SERVICE_QUESTION,
   type EnquiryQuestion,
   type EnquiryStepIn,
@@ -184,7 +185,7 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
     const top = el.getBoundingClientRect().top;
     if (top < 72 || top > window.innerHeight * 0.6) {
       // Instant, like the sent state in ContactTop, so it doesn't fight Lenis.
-      window.scrollTo({ top: Math.max(0, window.scrollY + top - 120), behavior: "instant" });
+      window.scrollTo({ top: Math.max(0, window.scrollY + top - 176), behavior: "instant" });
     }
     if (phase === "loading") return;
     const fine = window.matchMedia("(pointer: fine)").matches;
@@ -212,6 +213,19 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
   async function goForward(value: string, picked: string[], text: string) {
     setError(null);
     const steps: Answered[] = [...done, { q: current, answer: value, picked, text }];
+    const skipped = value === PROJECT_SKIPPED;
+    const stepName = current.id === SERVICE_QUESTION.id ? "service" : skipped ? "project_skipped" : isProject ? "project" : "follow_up";
+    track("form_step", { form: "enquiry", step: stepName });
+
+    // Someone who'd rather talk has told us enough. No follow-up, straight to their details.
+    if (skipped) {
+      await leave();
+      setStarted(true);
+      setDone(steps);
+      setPhase("contact");
+      track("form_step", { form: "enquiry", step: "contact_details" });
+      return;
+    }
 
     if (current.id === SERVICE_QUESTION.id) {
       await leave();
@@ -233,6 +247,7 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
       setDone(steps);
       if (next.done) {
         setPhase("contact");
+        track("form_step", { form: "enquiry", step: "contact_details" });
       } else {
         setCurrent(next.step);
         setDraft(EMPTY);
@@ -314,8 +329,12 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
         track("generate_lead", { form: "enquiry" });
         onSent(contact.name.trim().split(/\s+/)[0] ?? "");
       }
-      else setError(result.error ?? GENERIC);
+      else {
+        track("form_step", { form: "enquiry", step: "send_failed" });
+        setError(result.error ?? GENERIC);
+      }
     } catch (e) {
+      track("form_step", { form: "enquiry", step: "send_failed" });
       setError(e instanceof Error ? e.message : GENERIC);
     } finally {
       setSending(false);
@@ -347,7 +366,7 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
       onSubmit={(e) => {
         e.preventDefault();
         if (canContinue) advance(answer, draft.picked, draft.text);
-        else setError(isProject ? "Please tell us a little about the project." : current.id === SERVICE_QUESTION.id ? "Choose a service or describe what you need." : "Type an answer, or skip this question.");
+        else setError(isProject ? "Tell us a little about the project, or skip this question." : current.id === SERVICE_QUESTION.id ? "Choose a service or describe what you need." : "Type an answer, or skip this question.");
       }}
     >
       <h2 className="pv-enq-q" id={qId} tabIndex={-1} data-enq-heading data-enq-in>
@@ -413,8 +432,8 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
         </button>
         {canSkip && (
-          <button type="button" className="pv-enq-link" onClick={() => advance("", [], "")} data-cursor>
-            Skip this question
+          <button type="button" className="pv-enq-link" onClick={() => advance(isProject ? PROJECT_SKIPPED : "", [], "")} data-cursor>
+            {isProject ? "Skip and talk on a call" : "Skip this question"}
           </button>
         )}
         {done.length > 0 && (

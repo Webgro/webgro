@@ -99,9 +99,11 @@ export const PROJECT_QUESTION: EnquiryQuestion = {
   id: "project",
   question: "Tell us about the project.",
   inputType: "text",
-  hint: "A few lines is enough. What the business does, and what you'd like to change or build.",
-  required: true,
+  hint: "A few lines is enough. What the business does, and what you'd like to change or build. Or skip this and we'll offer you a time for a free 30-minute call.",
 };
+
+/** The project answer when someone skips it. The team reads this in the email and the brief. */
+export const PROJECT_SKIPPED = "Skipped. Would rather talk it through on a call.";
 
 export const FIXED_QUESTIONS = [SERVICE_QUESTION, PROJECT_QUESTION] as const;
 

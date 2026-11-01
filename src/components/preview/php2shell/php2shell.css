@@ -61,6 +61,7 @@
 .pv-p2s-result-found summary { cursor: pointer; font-weight: 600; color: var(--pv-ink); }
 .pv-p2s-result-found ul { margin: 10px 0 0; padding-left: 1.1em; display: grid; gap: 6px; }
 .pv-p2s-result-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 26px; margin-top: 22px; }
+.pv-p2s-result-offer { flex-basis: 100%; }
 .pv-p2s-result .pv-btn { background: var(--pv-ink); color: var(--pv-paper) !important; }
 .pv-p2s-result .pv-textlink { color: var(--pv-ink); }
 

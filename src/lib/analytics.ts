@@ -5,11 +5,12 @@
  *
  * generate_lead and sign_up are GA4's recommended event names; contact_click
  * is our own, for phone and email links. Mark them as key events in GA4 so
- * enquiries can be counted by channel.
+ * enquiries can be counted by channel. form_step shows how far people get
+ * through the enquiry form, so it stays an ordinary event.
  */
 type Gtag = (command: "event", name: string, params?: Record<string, string>) => void;
 
-export function track(name: "generate_lead" | "sign_up" | "contact_click", params?: Record<string, string>) {
+export function track(name: "generate_lead" | "sign_up" | "contact_click" | "form_step", params?: Record<string, string>) {
   const gtag = (window as unknown as { gtag?: Gtag }).gtag;
   if (typeof gtag === "function") gtag("event", name, params);
 }

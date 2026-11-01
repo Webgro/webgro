@@ -20,13 +20,15 @@
 .pv-contact-top .pv-btn:focus-visible, .pv-contact-top .pv-contact-chip:focus-visible { border-radius: 999px; }
 
 /* ── Headline ─────────────────────────────────────────────────────────── */
-.pv-contact-top { padding: clamp(116px, 17vh, 190px) var(--pv-pad) clamp(90px, 16vh, 200px); }
+.pv-contact-top { padding: clamp(92px, 12vh, 124px) var(--pv-pad) clamp(90px, 16vh, 200px); }
+/* The form is why people are here, so the heading stays small enough to leave it on the first screen. */
+.pv-contact-head .pv-h1 { font-size: clamp(2.3rem, 4.4vw, 4.2rem); }
 .pv-contact-kicker {
   font-family: var(--pv-display); font-weight: 500; font-size: clamp(1rem, 1.25vw, 1.2rem);
-  margin-bottom: 1.5em; max-width: 36ch;
+  margin-bottom: 0.9em; max-width: 36ch;
 }
 .pv-contact-intro {
-  margin-top: clamp(28px, 4.2vh, 48px); max-width: 58ch;
+  margin-top: clamp(16px, 2.4vh, 26px); max-width: 66ch;
   font-size: clamp(1.02rem, 1.22vw, 1.2rem); line-height: 1.5; color: var(--pv-muted);
 }
 .pv-contact-intro a, .pv-contact-note a, .pv-contact-agree label a {
@@ -37,7 +39,7 @@
 .pv-contact-intro a:hover, .pv-contact-note a:hover, .pv-contact-agree label a:hover { background-size: 0% 1px; background-position: 100% 100%; }
 
 /* ── Letter form ──────────────────────────────────────────────────────── */
-.pv-contact-body { display: grid; gap: clamp(56px, 9vh, 96px); margin-top: clamp(56px, 10vh, 120px); }
+.pv-contact-body { display: grid; gap: clamp(56px, 9vh, 96px); margin-top: clamp(26px, 4vh, 44px); }
 .pv-contact-form {
   --pv-contact-fs: clamp(1.45rem, 2.7vw, 2.75rem);
   position: relative; display: grid; gap: clamp(30px, 5vh, 54px); max-width: 62rem; min-width: 0;
@@ -383,3 +385,5 @@
   .pv-contact-form .pv-contact-blank-brush, .pv-contact-chip, .pv-contact-chip::before, .pv-contact-end-roll { transition-duration: 0.01s; transition-delay: 0s; }
   .pv-contact-blank.is-invalid, .pv-contact-agree.is-invalid .pv-contact-agree-box { animation: none; }
 }
+
+@media (max-width: 599px) { .pv-contact-kicker { display: none; } }

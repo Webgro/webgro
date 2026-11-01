@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { requestPhp2ShellFix } from "@/app/actions/php2shell";
 import { TurnstileWidget } from "@/components/TurnstileWidget";
 import { track } from "@/lib/analytics";
@@ -35,6 +35,15 @@ export function Php2ShellView() {
     setFix(ctx);
     // An instant jump, like the site's other #anchor links: Lenis cancels a native smooth scroll part way.
     document.getElementById("fix")?.scrollIntoView({ block: "start" });
+  }, []);
+
+
+  // The article links straight to the form. The page's scroll setup ignores a
+  // hash in the URL, so go there once the page has laid out.
+  useEffect(() => {
+    if (window.location.hash !== "#fix") return;
+    const frame = requestAnimationFrame(() => document.getElementById("fix")?.scrollIntoView({ block: "start" }));
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   return (
@@ -223,6 +232,11 @@ function ResultCard({ result, onAskToFix }: { result: ScanResult; onAskToFix: (c
           <summary data-cursor>What we found</summary>
           <ul>{result.signals.map((s) => <li key={s}>{s}</li>)}</ul>
         </details>
+      )}
+      {tone === "bad" && (
+        <p className="pv-p2s-result-body">
+          We can do this for you. Send us your web address and we&rsquo;ll reply within one working day.
+        </p>
       )}
       <div className="pv-p2s-result-actions">
         {needsHelp && (
@@ -436,6 +450,9 @@ function FindVersion({ onAskToFix }: { onAskToFix: (ctx: FixContext) => void }) 
             )}
             {(verdict === "vulnerable" || verdict === "end-of-life") && parsed && (
               <div className="pv-p2s-result-actions">
+                <p className="pv-p2s-result-body pv-p2s-result-offer">
+                  We can do this for you. Send us your web address and we&rsquo;ll reply within one working day.
+                </p>
                 <button
                   type="button"
                   className="pv-btn"

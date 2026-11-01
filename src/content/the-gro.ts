@@ -393,6 +393,10 @@ export const articles: Article[] = [
         type: "p",
         text: "The quickest way to start is our free [PHP2Shell checker](/php2shell-checker). Enter your web address and it tells you whether your server shows a PHP version, and whether that version has the fix. The rest of this article explains what the checker can and can't see, how to confirm the version yourself, and what to do next.",
       },
+      {
+        type: "p",
+        text: "If you'd rather someone did this for you, [ask us to fix it](/php2shell-checker#fix). We'll reply within one working day.",
+      },
       { type: "h2", text: "What PHP2Shell is" },
       {
         type: "p",
@@ -502,7 +506,7 @@ export const articles: Article[] = [
       { type: "h2", text: "The short version" },
       {
         type: "p",
-        text: "Run the [PHP2Shell checker](/php2shell-checker), confirm your PHP version from the inside, update to 8.5.12, 8.4.27, 8.3.36 or 8.2.35, restart PHP, and change your secrets. If you'd rather someone did it for you, or you're not sure what you're looking at, [get in touch](/contact) and we'll check it for you.",
+        text: "Run the [PHP2Shell checker](/php2shell-checker), confirm your PHP version from the inside, update to 8.5.12, 8.4.27, 8.3.36 or 8.2.35, restart PHP, and change your secrets. If you'd rather someone did it for you, or you're not sure what you're looking at, [ask us to fix it](/php2shell-checker#fix) and we'll check it for you.",
       },
     ],
   },

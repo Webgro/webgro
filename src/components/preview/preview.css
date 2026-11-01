@@ -386,7 +386,12 @@
 .pv-cookie button:hover { background: rgba(242, 239, 233, 0.12); }
 .pv-cookie button.is-primary { background: var(--pv-paper); color: var(--pv-ink); border-color: var(--pv-paper); }
 .pv-cookie button.is-primary:hover { background: #fff; }
-@media (min-width: 900px) { .pv-cookie { left: auto; right: 24px; bottom: 24px; max-width: 560px; } }
+@media (max-width: 899px) { .pv-cookie { padding: 10px 12px 10px 14px; font-size: 0.85rem; } .pv-cookie button { padding: 0.55em 1.1em; } }
+/* One slim row, so it doesn't sit on top of what people came for. */
+@media (min-width: 900px) {
+  .pv-cookie { left: auto; right: 24px; bottom: 16px; flex-wrap: nowrap; }
+  .pv-cookie p { max-width: none; white-space: nowrap; }
+}
 
 /* ── Footer ───────────────────────────────────────────────────────────── */
 .pv-foot { position: relative; overflow: hidden; background: var(--pv-ink); color: var(--pv-paper); border-top: 1px solid rgba(242, 239, 233, 0.1);

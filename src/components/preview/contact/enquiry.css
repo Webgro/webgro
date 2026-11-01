@@ -150,3 +150,9 @@
 @media (prefers-reduced-motion: reduce) {
   .pv-enq-bar span, .pv-enq .pv-enq-brush, .pv-enq-next svg { transition-duration: 0.01s; transition-delay: 0s; }
 }
+
+/* No Enter key to speak of on a phone. */
+@media (hover: none) { .pv-enq-keys { display: none; } }
+
+/* On a phone, keep the first options above the fold. */
+@media (max-width: 599px) { .pv-enq-progress-meta { display: none; } }

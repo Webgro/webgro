@@ -85,9 +85,8 @@ export function ContactTop() {
           </span>
         </h1>
         <p className="pv-contact-intro">
-          Answer a few short questions below and we&rsquo;ll reply within one working day. You can also email{" "}
-          <a href={EMAIL_HREF} data-cursor>{EMAIL}</a>, call <a href={PHONE_HREF} data-cursor>{PHONE_SHORT}</a>{" "}or
-          visit the studio in Bracknell.
+          We reply within one working day and offer you a time for a free 30-minute call. Prefer to talk now? Call{" "}
+          <a href={PHONE_HREF} data-cursor>{PHONE_SHORT}</a>{" "}or email <a href={EMAIL_HREF} data-cursor>{EMAIL}</a>.
         </p>
       </div>
 
