@@ -20,6 +20,7 @@ import { pv } from "../links";
 import { SCENE_QUERY, STATIC_QUERY, useGsap } from "../useGsap";
 import "./enquiry.css";
 import { track } from "@/lib/analytics";
+import { leadSource } from "@/lib/lead-source";
 
 /**
  * The guided enquiry: one question at a time. Two fixed questions, then at
@@ -307,6 +308,7 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
         newsletter,
         website: honeypot,
         turnstileToken: turnstileToken ?? undefined,
+        source: leadSource(),
       });
       if (result.ok) {
         track("generate_lead", { form: "enquiry" });

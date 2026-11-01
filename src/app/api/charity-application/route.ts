@@ -6,6 +6,7 @@ import {
   type CharityField,
 } from "@/lib/charity-application";
 import { clientIp, rateLimited } from "@/lib/enquiry/rate-limit";
+import { type CheckedLeadSource, LeadSourceBody, leadSourceRows } from "@/lib/lead-source-report";
 import { escapeHtml, sendCustomerEmail, sendTeamEmail, verifyTurnstile } from "@/lib/form-guard";
 import { NEWSLETTER_SOURCE, subscribeFormOptIn } from "@/lib/newsletter";
 
@@ -48,6 +49,7 @@ const Body = z.object({
   newsletter: z.boolean().default(false),
   hp: z.string().max(500).optional(),
   turnstileToken: z.string().max(4000).optional(),
+  source: LeadSourceBody,
 });
 
 type Application = {
@@ -62,6 +64,7 @@ type Application = {
   email: string;
   phone: string;
   newsletter: boolean;
+  source: CheckedLeadSource;
   submittedAt: string;
 };
 
@@ -74,6 +77,7 @@ function buildEmail(a: Application) {
     ["Email", a.email],
     ["Phone", a.phone || "None given"],
     ["Newsletter", a.newsletter ? "Opted in to the newsletter" : "Did not opt in to the newsletter"],
+    ...leadSourceRows(a.source),
     ["Submitted", a.submittedAt],
   ];
   const answers: [string, string][] = [
@@ -179,6 +183,7 @@ export async function POST(request: Request) {
     email: oneLine(body.email),
     phone: oneLine(body.phone),
     newsletter: body.newsletter,
+    source: body.source,
     submittedAt: new Date().toISOString(),
   };
 

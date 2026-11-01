@@ -1,3 +1,5 @@
+import type { LeadSource } from "./lead-source";
+
 /**
  * Shared by the charity application form (src/components/preview/industries/
  * CharityApply.tsx) and its route handler (src/app/api/charity-application).
@@ -39,6 +41,8 @@ export type CharityApplicationBody = {
   /** Honeypot. Always empty for people. */
   hp?: string;
   turnstileToken?: string;
+  /** Where the visit came from (lib/lead-source.ts). */
+  source?: LeadSource;
 };
 
 export type CharityApplicationResponse =

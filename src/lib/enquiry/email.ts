@@ -11,7 +11,13 @@ const row = (label: string, value: string) =>
   `<tr><td style="padding: 6px 12px 6px 0; color: #6B7A99; width: 110px; vertical-align: top;">${label}</td><td style="padding: 6px 0; vertical-align: top;">${value}</td></tr>`;
 
 /** The team email for a guided enquiry: the internal brief first, then contact details, then every answer. */
-export function buildEnquiryEmail(steps: TrustedStep[], contact: EnquiryContact, brief: Brief, newsletter = false) {
+export function buildEnquiryEmail(
+  steps: TrustedStep[],
+  contact: EnquiryContact,
+  brief: Brief,
+  newsletter = false,
+  sourceRows: [string, string][] = [],
+) {
   const newsletterLine = newsletter ? "Opted in to the newsletter" : "Did not opt in to the newsletter";
   const priority = brief.priority.charAt(0).toUpperCase() + brief.priority.slice(1);
   const subject = `New enquiry · ${contact.name}${contact.company ? ` (${contact.company})` : ""} · ${brief.service.slice(0, 60)} · ${priority}`;
@@ -35,6 +41,7 @@ export function buildEnquiryEmail(steps: TrustedStep[], contact: EnquiryContact,
     contact.phone ? `Phone:     ${contact.phone}` : null,
     contact.company ? `Company:   ${contact.company}` : null,
     `Newsletter: ${newsletterLine}`,
+    ...sourceRows.map(([k, v]) => `${k}: ${v}`),
     "",
     "ANSWERS",
     ...steps.flatMap((s, i) => [`${i + 1}. ${s.question}`, `   ${s.answer || "(skipped)"}`, ""]),
@@ -67,6 +74,7 @@ export function buildEnquiryEmail(steps: TrustedStep[], contact: EnquiryContact,
         ${contact.phone ? row("Phone", escapeHtml(contact.phone)) : ""}
         ${contact.company ? row("Company", escapeHtml(contact.company)) : ""}
         ${row("Newsletter", escapeHtml(newsletterLine))}
+        ${sourceRows.map(([k, v]) => row(k, escapeHtml(v))).join("")}
       </table>
 
       ${steps

@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useCallback, useId, useRef, useState } from "react";
 import { requestPhp2ShellFix } from "@/app/actions/php2shell";
 import { TurnstileWidget } from "@/components/TurnstileWidget";
+import { track } from "@/lib/analytics";
+import { leadSource } from "@/lib/lead-source";
 import type { ScanResult } from "@/lib/php2shell/scan";
 import { checkVersion, fixFor, parseVersion } from "@/lib/php2shell/versions";
 import { Closing } from "../Closing";
@@ -483,10 +485,13 @@ function FixForm({ context }: { context: FixContext }) {
       phpVersion: context.phpVersion,
       platform: context.platform,
       turnstileToken: token ?? undefined,
+      source: leadSource(),
     });
     setSubmitting(false);
-    if (res.ok) setDone(true);
-    else setError(res.error);
+    if (res.ok) {
+      track("generate_lead", { form: "php2shell" });
+      setDone(true);
+    } else setError(res.error);
   }
 
   return (

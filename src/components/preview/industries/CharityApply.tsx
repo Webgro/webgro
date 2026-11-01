@@ -19,6 +19,7 @@ import type { ApplyCopy } from "./content";
 import "../contact/contact.css";
 import "../contact/enquiry.css";
 import { track } from "@/lib/analytics";
+import { leadSource } from "@/lib/lead-source";
 
 /* ── How it works ───────────────────────────────────────────────────────── */
 
@@ -249,6 +250,7 @@ export function ApplyForm({ copy }: { copy: ApplyCopy }) {
       newsletter,
       hp: honeypot,
       ...(turnstileToken ? { turnstileToken } : {}),
+      source: leadSource(),
     };
 
     try {

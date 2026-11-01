@@ -6,6 +6,7 @@ import { CustomCursor } from "@/components/CustomCursor";
 import { CookieBanner } from "@/components/CookieBanner";
 import { JsonLd, organisationLd, websiteLd } from "@/components/JsonLd";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { LeadTracking } from "@/components/LeadTracking";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -83,6 +84,7 @@ export default function RootLayout({
         <JsonLd id="ld-org" data={organisationLd()} />
         <JsonLd id="ld-website" data={websiteLd()} />
         <GoogleAnalytics />
+        <LeadTracking />
         <CustomCursor />
         <LenisProvider>{children}</LenisProvider>
         <CookieBanner />

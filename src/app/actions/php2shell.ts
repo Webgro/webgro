@@ -7,6 +7,8 @@
  */
 
 import { escapeHtml, sendCustomerEmail, sendTeamEmail, verifyTurnstile } from "@/lib/form-guard";
+import type { LeadSource } from "@/lib/lead-source";
+import { LeadSourceBody, leadSourceRows } from "@/lib/lead-source-report";
 
 export type FixRequestResult = { ok: true } | { ok: false; error: string };
 
@@ -23,6 +25,8 @@ export type FixRequestPayload = {
   /** Honeypot: must be empty. */
   company?: string;
   turnstileToken?: string;
+  /** Where the visit came from. */
+  source?: LeadSource;
 };
 
 const VERDICT_LABEL: Record<string, string> = {
@@ -70,6 +74,7 @@ export async function requestPhp2ShellFix(p: FixRequestPayload): Promise<FixRequ
     ...(platform ? [["Platform", platform] as [string, string]] : []),
     ["Email", email],
     ...(phone ? [["Phone", phone] as [string, string]] : []),
+    ...leadSourceRows(LeadSourceBody.parse(p.source)),
   ];
 
   const text = [

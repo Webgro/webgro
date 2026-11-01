@@ -82,6 +82,12 @@ export default function PrivacyDoc() {
         no decision about you is made automatically.
       </LegalP>
       <LegalP>
+        When you send us a form, the email we receive also says which website
+        sent you to us and which page of our site you arrived on. We use this
+        to see which of our marketing works. It is held in your browser&rsquo;s
+        memory until you send the form, and no cookie is used for it.
+      </LegalP>
+      <LegalP>
         <strong>Lawful basis:</strong> legitimate interest (Article 6(1)(f)
         UK GDPR). You contacted us to ask about our services, and we use
         the data you supplied to respond.
@@ -137,8 +143,9 @@ export default function PrivacyDoc() {
         If you accept analytics cookies on the cookie banner, we load
         Google Analytics 4 with IP anonymisation. GA4 tells us which
         pages get visited, which don&rsquo;t, and roughly where visitors
-        come from. We do not combine this with any other Google product
-        or use it for advertising.
+        come from. It is linked to Google Search Console, which adds the
+        search terms people used to find the site, as totals and never by
+        person. We do not use it for advertising.
       </LegalP>
       <LegalP>
         <strong>Lawful basis:</strong> consent (Article 6(1)(a) UK GDPR).

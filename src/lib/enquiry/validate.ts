@@ -1,5 +1,6 @@
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import { z } from "zod";
+import { LeadSourceBody } from "@/lib/lead-source-report";
 import { fallbackById } from "./fallback";
 import { FIXED_QUESTIONS, LIMITS, type EnquiryQuestion } from "./shared";
 
@@ -39,6 +40,8 @@ export const SubmitBody = StepsBody.extend({
   newsletter: z.boolean().default(false),
   website: z.string().max(500).optional(),
   turnstileToken: z.string().max(4000).optional(),
+  /** Where the visit came from. Never fails the submission. */
+  source: LeadSourceBody,
 });
 
 /** A step the server has checked, with the question text the server itself issued. */
