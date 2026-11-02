@@ -156,3 +156,7 @@
 
 /* On a phone, keep the first options above the fold. */
 @media (max-width: 599px) { .pv-enq-progress-meta { display: none; } }
+
+/* "How did you find us?" on the contact step */
+.pv-enq-heard { display: grid; gap: 12px; margin-top: clamp(22px, 3.2vh, 32px); }
+.pv-enq-heard-label { margin: 0; font-size: 0.95rem; color: var(--pv-muted); }

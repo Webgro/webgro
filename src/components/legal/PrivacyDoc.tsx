@@ -85,7 +85,10 @@ export default function PrivacyDoc() {
         When you send us a form, the email we receive also says which website
         sent you to us and which page of our site you arrived on. We use this
         to see which of our marketing works. It is held in your browser&rsquo;s
-        memory until you send the form, and no cookie is used for it.
+        memory until you send the form, and no cookie is used for it. We also
+        count each enquiry in Google Analytics from our server, with your answer
+        to &ldquo;How did you find us?&rdquo; if you gave one. That count has no
+        personal details and uses no cookie.
       </LegalP>
       <LegalP>
         <strong>Lawful basis:</strong> legitimate interest (Article 6(1)(f)

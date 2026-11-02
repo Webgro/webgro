@@ -2,7 +2,7 @@ import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import { z } from "zod";
 import { LeadSourceBody } from "@/lib/lead-source-report";
 import { fallbackById } from "./fallback";
-import { FIXED_QUESTIONS, LIMITS, type EnquiryQuestion } from "./shared";
+import { FIXED_QUESTIONS, HEARD_OPTIONS, LIMITS, type EnquiryQuestion } from "./shared";
 
 /**
  * Server-side checks for the steps the browser posts back. Nothing the
@@ -42,6 +42,9 @@ export const SubmitBody = StepsBody.extend({
   turnstileToken: z.string().max(4000).optional(),
   /** Where the visit came from. Never fails the submission. */
   source: LeadSourceBody,
+  /** "How did you find us?" Optional, and a bad value never fails the submission. */
+  heardFrom: z.enum(HEARD_OPTIONS).optional().catch(undefined),
+  heardDetail: z.string().trim().max(LIMITS.heardDetail).optional().catch(undefined),
 });
 
 /** A step the server has checked, with the question text the server itself issued. */

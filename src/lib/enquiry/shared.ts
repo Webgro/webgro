@@ -67,6 +67,7 @@ export const LIMITS = {
   email: 200,
   phone: 40,
   company: 160,
+  heardDetail: 200,
 } as const;
 
 /** Services as chips on the first question, matching the price list in ./ai.ts. */
@@ -106,6 +107,18 @@ export const PROJECT_QUESTION: EnquiryQuestion = {
 export const PROJECT_SKIPPED = "Skipped. Would rather talk it through on a call.";
 
 export const FIXED_QUESTIONS = [SERVICE_QUESTION, PROJECT_QUESTION] as const;
+
+/** Choices for the optional "How did you find us?" on the contact step. */
+export const HEARD_OPTIONS = [
+  "Google",
+  "ChatGPT or another AI tool",
+  "A recommendation",
+  "Social media",
+  "Saw your work",
+  "Other",
+] as const;
+
+export const HEARD_AI = HEARD_OPTIONS[1];
 
 /** Answer text built from the chips picked and anything typed, the same way WebFixed does it. */
 export function composeAnswer(picked: string[], text: string): string {

@@ -7,6 +7,8 @@ import {
   composeAnswer,
   EMAIL_PATTERN,
   FIXED_QUESTIONS,
+  HEARD_AI,
+  HEARD_OPTIONS,
   LIMITS,
   PROJECT_QUESTION,
   PROJECT_SKIPPED,
@@ -44,6 +46,8 @@ type ContactErrors = Partial<Record<"name" | "email", string>>;
 type Gsap = typeof import("gsap").default;
 
 /** Fixed questions, the follow-ups and the contact step. The bar fills against this. */
+type HeardOption = (typeof HEARD_OPTIONS)[number];
+
 const TOTAL = FIXED_QUESTIONS.length + LIMITS.followUps + 1;
 const EMPTY: Draft = { picked: [], text: "" };
 const GENERIC = "Something went wrong. Please try again, or email hello@webgro.co.uk.";
@@ -125,6 +129,8 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
   const [agreeError, setAgreeError] = useState<string | null>(null);
   // Newsletter opt-in. Starts off: a pre-ticked box is not consent.
   const [newsletter, setNewsletter] = useState(false);
+  const [heardFrom, setHeardFrom] = useState<HeardOption | null>(null);
+  const [heardDetail, setHeardDetail] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
@@ -324,6 +330,8 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
         website: honeypot,
         turnstileToken: turnstileToken ?? undefined,
         source: leadSource(),
+        ...(heardFrom ? { heardFrom } : {}),
+        ...(heardFrom === HEARD_AI && heardDetail.trim() ? { heardDetail: heardDetail.trim() } : {}),
       });
       if (result.ok) {
         track("generate_lead", { form: "enquiry" });
@@ -498,6 +506,29 @@ export function EnquiryFlow({ onSent }: { onSent: (firstName: string) => void })
         {contactField("email", "Email", { type: "email", autoComplete: "email", required: true, placeholder: "you@yourcompany.com" })}
         {contactField("phone", "Phone (optional)", { type: "tel", autoComplete: "tel", placeholder: "+44 ..." })}
         {contactField("company", "Company (optional)", { autoComplete: "organization" })}
+      </div>
+      <div className="pv-enq-heard" role="group" aria-labelledby={`${uid}-heard`} data-enq-in>
+        <p className="pv-enq-heard-label" id={`${uid}-heard`}>How did you find us? (optional)</p>
+        <div className="pv-enq-chips">
+          {HEARD_OPTIONS.map((o) => (
+            <Chip key={o} label={o} selected={heardFrom === o} onToggle={() => setHeardFrom(heardFrom === o ? null : o)} />
+          ))}
+        </div>
+        {heardFrom === HEARD_AI && (
+          <div className="pv-enq-input">
+            <label htmlFor={`${uid}-heard-detail`}>What did you ask it? (optional)</label>
+            <span className="pv-enq-input-line">
+              <input
+                id={`${uid}-heard-detail`}
+                type="text"
+                value={heardDetail}
+                maxLength={LIMITS.heardDetail}
+                onChange={(e) => setHeardDetail(e.target.value)}
+              />
+              <BrushStroke className="pv-enq-brush" />
+            </span>
+          </div>
+        )}
       </div>
       {/* Honeypot: offscreen and empty for people, filled in by bots. */}
       <div className="pv-contact-pot" aria-hidden="true">
