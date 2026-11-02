@@ -202,9 +202,9 @@ export const towns: Town[] = [
     slug: "reading",
     name: "Reading",
     meta: {
-      title: "Web Design for Reading Businesses | Webgro",
+      title: "Web Design Reading, Berkshire | Shopify & WordPress | Webgro",
       description:
-        "Shopify and WordPress websites, SEO and consultancy for Reading businesses, from our Bracknell studio about half an hour away. Websites from £4,000.",
+        "Website design for Reading businesses from our Bracknell studio, half an hour away. Shopify and WordPress sites, SEO and consultancy. Websites from £4,000.",
     },
     areaType: "City",
     drive: "About 30 min",
@@ -212,7 +212,7 @@ export const towns: Town[] = [
       lines: ["Web design", "for businesses", "in Reading"],
       brush: "Reading",
       intro:
-        "We're a Shopify and WordPress studio in Bracknell, about half an hour from Reading by car. We build websites for Reading businesses and run their SEO and marketing, working with them on calls and in person.",
+        "We're a Shopify and WordPress web design studio in Bracknell, about half an hour from Reading by car. We build websites for Reading's B2B firms, professional services and online shops, and run their SEO and marketing, working on calls and in person. Recent clients include Origin Architectural and Paragon Freight.",
       facts: [
         { label: "From our office", value: "About 30 minutes by car" },
         { label: "Meetings", value: "Video calls, our office, or yours" },
@@ -287,6 +287,14 @@ export const towns: Town[] = [
       {
         q: "Can you work alongside our in-house team?",
         a: "Yes. Consultancy is £400 a day. At Gieves & Hawkes we work with the in-house team week to week on strategy, platform decisions and specialist projects.",
+      },
+      {
+        q: "Which parts of Reading do you work with?",
+        a: "All of them, including the town centre, Caversham, Earley, Woodley and Tilehurst. We work mostly on video calls and by email, so where you are doesn't change how a project runs. We can meet in person when it helps.",
+      },
+      {
+        q: "How long does a new website take?",
+        a: "Most projects take 4 to 12 weeks from kick-off to launch. WordPress builds usually take 4 to 6 weeks, Shopify rebuilds 6 to 10, and heavier custom work 10 to 12.",
       },
     ],
     hubLine: "About 30 minutes. B2B and professional services firms, and SEO.",

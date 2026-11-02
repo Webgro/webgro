@@ -10,7 +10,7 @@ export const NOW_YEAR = 2026;
 export const hero = {
   kicker: "About Webgro",
   lede:
-    "We build Shopify and WordPress websites, and we also handle SEO, marketing and AI tools.",
+    "Webgro is a small web design studio in Bracknell, Berkshire, in business since 2012. We build Shopify and WordPress websites and handle SEO, marketing and AI tools for UK online shops and service businesses. Clients include Gieves & Hawkes, Twisted Tailor, Origin Architectural and Paragon Freight.",
   facts: [
     { figure: "2012", label: "The year Michael and Lily started the business" },
     { figure: "14", label: "Years in business" },
@@ -26,6 +26,7 @@ export const story = {
   body: [
     "They started the business together in 2012 as 4ogo. It became Broadbridge Design in 2015 and has been Webgro since 2022.",
     "Alongside them there's a small senior team in the office, and a network of specialists we bring in for particular jobs.",
+    "We suit businesses that want to deal directly with the people building their site. Our office is at 12 Longshot Lane in Bracknell, and we work with clients across the UK.",
   ],
 };
 
