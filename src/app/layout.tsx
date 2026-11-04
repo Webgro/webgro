@@ -43,6 +43,7 @@ const jakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://webgro.co.uk"),
+  verification: { other: { "msvalidate.01": "BEB51AC41C60189389911052AAD6C6CB" } },
   title: "Shopify & WordPress Web Design Studio in Bracknell | Webgro",
   description:
     "Webgro designs, builds and looks after Shopify and WordPress websites, with SEO, marketing and AI tools, from a small team in Bracknell, Berkshire.",
