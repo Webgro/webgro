@@ -248,6 +248,10 @@ const nextConfig: NextConfig = {
   redirects: legacyRedirects,
   async rewrites() {
     return [
+      // Image Studio for Bushell: its own Vercel project (bushell-imagegen,
+      // basePath /bushell), served under this domain. Login lives there.
+      { source: "/bushell", destination: "https://bushell-imagegen.vercel.app/bushell" },
+      { source: "/bushell/:path*", destination: "https://bushell-imagegen.vercel.app/bushell/:path*" },
       // Clean URLs for client proposals stored as static HTML in
       // /public/proposals. Middleware password-gates the whole path.
       {
