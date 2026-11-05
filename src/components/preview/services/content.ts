@@ -625,10 +625,11 @@ const seo: PvService = {
     heading: "Technical work, content and monthly reports",
     body: [
       "We start with the technical groundwork, then produce content that answers real questions in your category. An engagement covers a technical audit and fixes, content architecture, keyword research, ongoing content production or editing, and monthly reporting.",
-      "Alongside traditional SEO we work on AIO (AI optimisation) and GEO (generative engine optimisation). This is the work of getting your brand into answers from Claude, ChatGPT and Perplexity, as well as into Google's results.",
+      "GEO (generative engine optimisation), also called AIEO, is the work of getting your business named and linked in answers from ChatGPT, Gemini, Perplexity, Copilot and Google's AI Overviews. It uses the same foundations as SEO: pages that answer questions directly, clear facts about who you are, structured data, and a site those tools can read.",
+      "For GEO we put a short, direct answer at the top of each key page, keep your business facts the same everywhere they appear, add schema, and check that the directories and listings AI tools draw on describe you correctly. Each month we ask the same set of buyer questions in five AI tools and report where you're named. It suits businesses whose customers compare suppliers before they get in touch, and sites that rank on Google but don't show up in AI answers.",
     ],
     items: [
-      "Technical SEO", "Content architecture", "Keyword research", "AIO and GEO", "Schema markup",
+      "Technical SEO", "Content architecture", "Keyword research", "GEO and AIEO", "Schema markup",
       "Internal linking", "Site audits", "Migration protection", "Content programmes",
     ],
   },
@@ -663,8 +664,12 @@ const seo: PvService = {
       a: "6 to 12 months for most categories, and 12 to 24 for competitive terms. We agree expectations at the start and track progress monthly, covering both Google rankings and how often AI answers cite you.",
     },
     {
-      q: "What are AIO and GEO?",
-      a: "AI optimisation and generative engine optimisation. It means adjusting your content, schema and site structure so that large language models (Claude, ChatGPT, Perplexity, Gemini) mention your brand when people ask about your industry. It's becoming as important as Google rankings, and in some categories it already matters more.",
+      q: "What is GEO, or AIEO?",
+      a: "GEO stands for generative engine optimisation and AIEO for AI engine optimisation. Both mean getting your business into the answers people get from ChatGPT, Gemini, Perplexity, Copilot and Google's AI Overviews. AIO, AI optimisation, is another name for the same work.",
+    },
+    {
+      q: "Can you guarantee we'll be named by ChatGPT?",
+      a: "No. AI answers change from one person and one day to the next, so nobody can promise a mention. We make your site easy for these tools to read and quote, then report each month what five AI tools say for the same questions, so you can see the trend.",
     },
     {
       q: "Is Google SEO still worth doing now that AI search is here?",

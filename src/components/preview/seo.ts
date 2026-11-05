@@ -138,7 +138,7 @@ export const SERVICE_META: Record<string, Meta> = {
   seo: {
     title: "SEO for Shopify & WordPress Sites, Bracknell | Webgro",
     description:
-      "Technical SEO, content and monthly reporting for Shopify and WordPress sites, covering both Google rankings and AI search results.",
+      "Technical SEO, content and GEO (generative engine optimisation) for Shopify and WordPress sites, so you show up in Google and in AI answers.",
   },
   marketing: {
     title: "Digital Marketing: PPC, Email & Social | Webgro",
