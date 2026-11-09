@@ -271,6 +271,11 @@ export const CASE_META: Record<string, Meta> = {
 };
 
 export const ARTICLE_META: Record<string, Meta> = {
+  "what-is-geo-aieo": {
+    title: "What Is GEO (AIEO), and Does Your Business Need It? | Webgro",
+    description:
+      "GEO, or AIEO, gets your business named in ChatGPT, Gemini, Perplexity and Google AI Overviews. What it involves, how it differs from SEO and when it's worth it.",
+  },
   "google-share-price-fall-seo-ai-search": {
     title: "Google's Share Fall: What It Means for SEO and AIEO | Webgro",
     description:

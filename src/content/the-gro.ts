@@ -32,6 +32,132 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "what-is-geo-aieo",
+    category: "SEO",
+    title: "What is GEO (AIEO), and does your business need it?",
+    excerpt:
+      "GEO, also called AIEO, is the work of getting your business named in answers from ChatGPT, Gemini, Perplexity, Copilot and Google's AI Overviews. What it involves, how it differs from SEO, how to measure it, and when it's worth doing.",
+    date: "Nov 2026",
+    readTime: "6 min read",
+    accent: "violet",
+    author: "Michael Broadbridge",
+    heroImage: "/articles/what-is-geo-aieo.jpg",
+    relatedService: "seo",
+    body: [
+      {
+        type: "p",
+        text: "More people now ask ChatGPT, Gemini or Perplexity a question that they would once have typed into Google. Google itself answers many searches with an AI Overview before the first link. If you've had an agency email recently, you've probably seen the term GEO used to describe the work of showing up in those answers. You may also have seen AIEO, AIO, AI SEO or LLM SEO. They all describe the same job. This article explains what it is, how it differs from ordinary SEO, and whether your business needs it.",
+      },
+      {
+        type: "callout",
+        accent: "violet",
+        text: "The short answer: GEO (generative engine optimisation), also called AIEO, means making it easy for AI tools to find your business, understand what you do and repeat it in their answers. It rests on the same foundations as SEO. Most businesses whose customers research before they buy should be doing it, but as part of their SEO, not as a separate project.",
+      },
+      { type: "h2", text: "What GEO means" },
+      {
+        type: "p",
+        text: "The term comes from a 2023 research paper, [GEO: Generative Engine Optimization](https://arxiv.org/abs/2311.09735), by a team that included researchers at Princeton. They tested how changes to a web page affect whether AI answer engines use it as a source. The name stuck, and agencies now use it for any work aimed at AI answers.",
+      },
+      {
+        type: "p",
+        text: "AIEO stands for AI engine optimisation and means the same thing. We use both names. In the UK more people search for GEO, but you'll see AIEO and AIO in plenty of proposals, so it helps to know they aren't different services.",
+      },
+      { type: "h2", text: "How AI tools decide what to say" },
+      {
+        type: "p",
+        text: "An AI tool answers in one of two ways. It can answer from what it learnt in training, which is a large snapshot of the web taken at some point in the past. Or it can search the web as it answers, read a handful of pages and summarise them, usually with links to its sources. ChatGPT, Perplexity, Gemini and Copilot all search the web for many questions, and Google's AI Overviews are built from pages in Google's own index.",
+      },
+      {
+        type: "p",
+        text: "That matters because the second route uses search indexes. Copilot draws on Bing, so a site that Bing hasn't indexed is easy for it to miss. A page that Google can't crawl won't appear in an AI Overview. A lot of GEO is making sure the pages these tools read are the right ones, and that they say clearly what you do.",
+      },
+      { type: "h2", text: "How GEO differs from SEO" },
+      {
+        type: "p",
+        text: "Most of the groundwork is shared. A site that loads quickly, can be crawled, has a clear page for each service and answers real questions will do better in Google and in AI answers. The differences are in what you aim for and how you measure it.",
+      },
+      {
+        type: "ul",
+        items: [
+          "The result is a mention, not a position. In Google you rank somewhere on a page of links. In an AI answer you are either named or you aren't, sometimes with a link and sometimes without.",
+          "The answer is a summary. AI tools pick out short, quotable statements, so a page that buries what you do under three paragraphs of introduction gives them less to work with.",
+          "Other sites count for more. AI tools lean on what directories, reviews, press and other businesses say about you, not only on your own pages.",
+          "Bing matters more than it used to, because of Copilot.",
+          "Results move around. Ask the same question twice and you may get two different answers. That makes single checks unreliable.",
+        ],
+      },
+      { type: "h2", text: "What GEO work involves" },
+      {
+        type: "ul",
+        items: [
+          "A direct answer at the top of each important page: what the business does, who it suits and where, in 40 to 60 words.",
+          "Facts that are the same everywhere. Your name, address, services and how long you've traded should match on your site, your Google Business Profile, Bing Places and the directories that list you.",
+          "Structured data, so your business, services, articles and FAQs are labelled in a way machines can read.",
+          "Pages that answer the questions your customers ask, with specifics such as timescales, examples and named clients, rather than general claims.",
+          "Honest mentions elsewhere: directory listings, reviews from real customers and coverage that has a reason to exist. Planted reviews and paid link schemes are a risk.",
+          "Access. Check that your robots.txt doesn't block AI crawlers by accident, that your site works without relying on JavaScript to show its main text, and that it's added to Bing Webmaster Tools.",
+        ],
+      },
+      {
+        type: "p",
+        text: "None of this is exotic. It's mostly good SEO written with a clearer purpose. That's why we offer it as part of our [SEO service](/services/seo) rather than as a separate product.",
+      },
+      { type: "h2", text: "How to measure it" },
+      {
+        type: "p",
+        text: "There's no ranking report for AI answers, so measurement needs some discipline.",
+      },
+      {
+        type: "ol",
+        items: [
+          "Write down 15 to 20 questions a customer might ask, such as \"who builds Shopify sites near Reading?\". Keep the wording fixed.",
+          "Each month, ask each question in the same tools, signed out where you can, and note whether you're named, whether you're linked and who else appears.",
+          "Look at the trend over several months, not one result.",
+          "Add your site to Bing Webmaster Tools. Its AI Performance report, currently in preview, shows when your pages are cited in Copilot answers.",
+          "Check your analytics for visits from chatgpt.com, perplexity.ai and similar sources. Treat the numbers as a minimum, because analytics only counts visitors who accept cookies.",
+          "Ask new enquiries how they found you, with AI tools as one of the options. It's the most direct evidence you'll get.",
+        ],
+      },
+      { type: "h2", text: "What GEO can't do" },
+      {
+        type: "p",
+        text: "Nobody can guarantee that ChatGPT or any other tool will name your business. The tools change how they work without notice, and answers vary by person, location and wording. Be wary of anyone who promises a fixed position in AI answers or sells a quick trick. What you can do is improve the odds and measure the trend.",
+      },
+      {
+        type: "p",
+        text: "GEO also won't make up for a weak offer or a site that doesn't explain what you do. If your Google rankings are poor because the basics are missing, fix those first. You'll help your AI visibility at the same time.",
+      },
+      { type: "h2", text: "Does your business need it?" },
+      {
+        type: "p",
+        text: "It's worth doing if your customers compare suppliers before they get in touch, if you sell something people research, such as a service, software or a considered purchase, or if you already rank in Google but don't appear when someone asks an AI tool the same question. That covers most B2B firms, professional services and online shops with products that need explaining.",
+      },
+      {
+        type: "p",
+        text: "It matters less if nearly all your work comes from repeat customers or word of mouth, or from people who walk past your door. Even then, the basics take little time and stop AI tools giving out wrong details about you.",
+      },
+      {
+        type: "p",
+        text: "If an agency quotes for GEO as a separate project on top of SEO, ask what they would do that isn't already part of good SEO. A sensible answer covers measurement and mentions on other sites. A vague one is a warning sign.",
+      },
+      { type: "h2", text: "Where to start" },
+      {
+        type: "ol",
+        items: [
+          "Ask ten customer questions in ChatGPT, Gemini, Perplexity and Copilot, and note who gets named.",
+          "Check that your Google Business Profile and Bing Places listing are complete and match your website.",
+          "Add your site to Bing Webmaster Tools and submit your sitemap.",
+          "Rewrite the opening of your three most important pages so each one answers the question straight away.",
+          "Check your robots.txt, and fix any business details that differ from one listing to another.",
+        ],
+      },
+      {
+        type: "p",
+        text: "For the wider picture, see [SEO after AI Overviews](/the-gro/seo-after-ai-overviews-2026) and what [Google's share price fall](/the-gro/google-share-price-fall-seo-ai-search) does and doesn't mean for search. If you'd like this done for you, our [SEO and GEO service](/services/seo) covers Google and AI search together. [Get in touch](/contact) and we'll look at where you stand.",
+      },
+    ],
+  },
+  {
     slug: "google-share-price-fall-seo-ai-search",
     category: "SEO",
     title: "Google's record share price fall: what it means for SEO and AI search.",
