@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { pv } from "../links";
 import { STATIC_QUERY, useGsap } from "../useGsap";
 import type { Faq } from "./content";
 
@@ -96,6 +98,11 @@ export function Faqs({ faqs, topic }: { faqs: Faq[]; topic: string }) {
               <div className="pv-svc-faq-a" id={`pv-svc-faq-${i}`} role="region" aria-hidden={!isOpen}>
                 <div>
                   <p>{f.a}</p>
+                  {f.link && (
+                    <p className="pv-svc-faq-link">
+                      <Link href={pv(f.link.href)} className="pv-textlink" data-cursor>{f.link.label}</Link>
+                    </p>
+                  )}
                 </div>
               </div>
             </div>

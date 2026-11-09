@@ -43,8 +43,8 @@ export function CareHero() {
         </h1>
         <div className="pv-svc-hero-row">
           <p className="pv-svc-hero-intro">
-            We look after Shopify and WordPress sites for a fixed monthly fee. Every plan covers updates, backups and
-            monitoring. WordPress plans include your hosting, and Shopify plans include time each month for changes.
+            We&rsquo;re a web studio in Bracknell, Berkshire, looking after Shopify and WordPress sites for UK businesses
+            for a fixed monthly fee. Every plan covers updates, backups and monitoring. WordPress plans include your hosting, and Shopify plans include time each month for changes.
             Plans start at £55 a month and run month to month.
           </p>
           <div className="pv-svc-hero-actions">

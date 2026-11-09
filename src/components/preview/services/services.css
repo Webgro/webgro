@@ -709,6 +709,8 @@
 .pv-svc-faq-item.is-open .pv-svc-faq-a { grid-template-rows: 1fr; visibility: visible; transition: grid-template-rows 0.6s var(--pv-ease), visibility 0s; }
 .pv-svc-faq-a > div { min-height: 0; overflow: hidden; }
 .pv-svc-faq-a p { padding-bottom: clamp(22px, 2.6vw, 36px); max-width: 64ch; font-size: clamp(1.02rem, 1.2vw, 1.18rem); line-height: 1.55; color: var(--pv-muted); }
+.pv-svc-faq-a p:has(+ .pv-svc-faq-link) { padding-bottom: 12px; }
+.pv-svc-faq-a .pv-svc-faq-link { color: var(--pv-fg); }
 @media (min-width: 900px) {
   .pv-svc-faq { grid-template-columns: 0.8fr 1.55fr; column-gap: 6vw; align-items: start; }
   .pv-svc-faq-head { position: sticky; top: 16vh; }

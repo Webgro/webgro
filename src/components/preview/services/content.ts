@@ -38,7 +38,8 @@ export type FigureDrawing =
   | { kind: "mails"; count: number };
 export type Figure = { value: string; label: string; draw?: FigureDrawing };
 export type Fact = { label: string; value: string };
-export type Faq = { q: string; a: string };
+/** `link` adds one internal link under the answer, outside the FAQ schema text. */
+export type Faq = { q: string; a: string; link?: { href: string; label: string } };
 
 export type PvService = {
   slug: string;
@@ -666,6 +667,7 @@ const seo: PvService = {
     {
       q: "What is GEO, or AIEO?",
       a: "GEO stands for generative engine optimisation and AIEO for AI engine optimisation. Both mean getting your business into the answers people get from ChatGPT, Gemini, Perplexity, Copilot and Google's AI Overviews. AIO, AI optimisation, is another name for the same work.",
+      link: { href: "/the-gro/what-is-geo-aieo", label: "Read our guide to GEO and whether your business needs it" },
     },
     {
       q: "Can you guarantee we'll be named by ChatGPT?",
