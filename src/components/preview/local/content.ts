@@ -304,7 +304,7 @@ export const towns: Town[] = [
     slug: "wokingham",
     name: "Wokingham",
     meta: {
-      title: "Web Design in Wokingham | Webgro",
+      title: "Web Design Wokingham | WordPress & Shopify Websites | Webgro",
       description:
         "WordPress and Shopify websites for Wokingham businesses, from a small studio in Bracknell about 15 minutes away. Websites from £4,000, care from £55 a month.",
     },
@@ -314,7 +314,7 @@ export const towns: Town[] = [
       lines: ["Web design", "in Wokingham"],
       brush: "Wokingham",
       intro:
-        "Webgro is a small web design studio in Bracknell, about 15 minutes' drive from Wokingham. We build WordPress and Shopify websites for local businesses, and look after them once they're live.",
+        "Webgro is a small web design studio in Bracknell, about 15 minutes' drive from Wokingham. We build WordPress and Shopify websites for Wokingham businesses and look after them once they're live. Local clients include Architectural FX on Molly Millars Lane and Little Muddy Boots, who run classes in the town.",
       facts: [
         { label: "From our office", value: "About 15 minutes by car" },
         { label: "Meetings", value: "In person or on a call" },
@@ -330,7 +330,7 @@ export const towns: Town[] = [
     },
     business: {
       label: "Businesses in Wokingham",
-      heading: "Websites for Wokingham businesses",
+      heading: "Website design for Wokingham businesses",
       body: [
         "Wokingham is a market town with a lot of new housing around it, and many of its businesses are independent shops, trades and local services. Their websites need to show people nearby what's on offer and make it easy to book or get in touch.",
         "We usually build these sites on WordPress, set up so you can edit every page yourself. Smaller sites sit towards the lower end of our £4k to £15k range for WordPress.",
@@ -375,6 +375,10 @@ export const towns: Town[] = [
     },
     review: "Bradley Ashton",
     faqs: [
+      {
+        q: "Which parts of Wokingham do you cover?",
+        a: "All of it, including the town centre, Winnersh, Woodley, Earley, Crowthorne, Finchampstead and Arborfield. We're about 15 minutes away in Bracknell, so meeting in person is easy.",
+      },
       {
         q: "How far is your office from Wokingham?",
         a: "Our office in Bracknell is about 15 minutes from Wokingham by car. We can meet at your premises or ours, or talk on a call if that's easier.",
@@ -493,7 +497,7 @@ export const towns: Town[] = [
     slug: "maidenhead",
     name: "Maidenhead",
     meta: {
-      title: "Web Design in Maidenhead | Webgro",
+      title: "Web Design Maidenhead | Shopify & WordPress Sites | Webgro",
       description:
         "Shopify and WordPress websites, Google Ads and email marketing for Maidenhead businesses, from our studio in Bracknell about 25 minutes away.",
     },
@@ -503,7 +507,7 @@ export const towns: Town[] = [
       lines: ["Web design", "in Maidenhead"],
       brush: "Maidenhead",
       intro:
-        "Webgro is a Shopify and WordPress studio in Bracknell, about 25 minutes' drive from Maidenhead. We build websites for Maidenhead businesses and run their Google Ads, email marketing and SEO.",
+        "Webgro is a Shopify and WordPress studio in Bracknell, about 25 minutes' drive from Maidenhead. We build websites for Maidenhead businesses and run their Google Ads, email marketing and SEO. Clients with customers in the town include Little Muddy Boots and F&P Agency.",
       facts: [
         { label: "From our office", value: "About 25 minutes by car" },
         { label: "Meetings", value: "Our office, yours, or a video call" },
@@ -519,7 +523,7 @@ export const towns: Town[] = [
     },
     business: {
       label: "Businesses in Maidenhead",
-      heading: "Websites for Maidenhead businesses",
+      heading: "Website design for Maidenhead businesses",
       body: [
         "Maidenhead has a mix of offices, professional services and independent shops, and the Elizabeth line links it directly to central London.",
         "Once a site is live, we can run the paid ads and email marketing that bring in new enquiries and orders. Paid ads are managed week to week against your margins, and email runs on Klaviyo.",
@@ -560,6 +564,10 @@ export const towns: Town[] = [
     review: "James Kibble",
     faqs: [
       {
+        q: "Which parts of Maidenhead do you cover?",
+        a: "All of it, including the town centre, Cookham, Bray, Holyport and Taplow. We're about 25 minutes away in Bracknell, and most of the work happens on calls and by email.",
+      },
+      {
         q: "How do meetings work if we're in Maidenhead?",
         a: "Our Bracknell office is about 25 minutes from Maidenhead by car. We can meet there, at your office or on a video call, and the day-to-day work is done by email and phone.",
       },
@@ -588,15 +596,15 @@ export function getTown(slug: string): Town | undefined {
 
 export const berkshire = {
   meta: {
-    title: "Web Design in Berkshire | Webgro",
+    title: "Web Design & Website Developers in Berkshire | Webgro",
     description:
-      "A Shopify and WordPress studio in Bracknell working with businesses in Reading, Wokingham, Windsor, Maidenhead and across Berkshire. Rated 5.0 on Google.",
+      "Website designers and developers in Bracknell, building Shopify and WordPress sites for businesses in Reading, Wokingham, Windsor and across Berkshire.",
   },
   hero: {
     lines: ["Web design", "in Berkshire"],
     brush: "Berkshire",
     intro:
-      "Webgro is a four-person Shopify and WordPress studio in Bracknell. We work with businesses across Berkshire and the rest of the UK, and in 2020 we were named Best Web Design Agency in Berkshire.",
+      "Webgro is a four-person studio of website designers and developers in Bracknell, building Shopify and WordPress sites. We work with businesses across Berkshire, from Reading and Wokingham to Windsor, Maidenhead and Ascot, and in 2020 we were named Best Web Design Agency in Berkshire.",
     facts: [
       { label: "Our office", value: "12 Longshot Lane, Bracknell" },
       RATING,
@@ -652,7 +660,7 @@ export const berkshire = {
   faqs: [
     {
       q: "Which parts of Berkshire do you work in?",
-      a: "All of it. Our office is in Bracknell, and we work with businesses in Reading, Wokingham, Windsor, Maidenhead and elsewhere in the county, as well as across the UK. Meetings can be at our office, at yours, or on a call.",
+      a: "All of it. Our office is in Bracknell, and we work with businesses in Reading, Wokingham, Windsor, Maidenhead, Ascot and elsewhere in the county, as well as across the UK. Meetings can be at our office, at yours, or on a call.",
     },
     {
       q: "Do you only work with Berkshire businesses?",
