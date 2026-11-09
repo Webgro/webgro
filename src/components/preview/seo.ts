@@ -48,9 +48,9 @@ export function pageMeta({
 
 export const PAGE_META = {
   home: {
-    title: "Shopify & WordPress Web Design Studio in Bracknell | Webgro",
+    title: "Web Design Bracknell | Shopify & WordPress Studio | Webgro",
     description:
-      "Webgro designs, builds and looks after Shopify and WordPress websites, with SEO, marketing and AI tools, from a small team in Bracknell, Berkshire.",
+      "Web design in Bracknell, Berkshire: a small studio that builds and looks after Shopify and WordPress websites, with SEO, GEO and marketing alongside.",
   },
   work: {
     title: "Our Work: Shopify & WordPress Case Studies | Webgro",
