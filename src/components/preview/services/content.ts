@@ -1375,7 +1375,7 @@ const shopifySites: PvService = {
   hero: {
     title: ["Shopify design", "and development", "for UK brands"],
     brush: "UK brands",
-    intro: "We design and build Shopify shops, from a first store to a full rebuild on Shopify Plus. Every theme is built for the shop it runs, so it's fast on a phone, easy for your team to run and doesn't lean on a pile of monthly apps.",
+    intro: "We're a Shopify design and development studio in Bracknell, Berkshire, building shops for UK brands, from a first store to a full rebuild on Shopify Plus. Clients include Gieves & Hawkes, Twisted Tailor and Origin Architectural. Every theme is built for the shop it runs, so it's fast on a phone and easy for your team to run.",
   },
   forYou: {
     heading: "Shops that have outgrown their theme",
@@ -1474,7 +1474,7 @@ const wordpressSites: PvService = {
   hero: {
     title: ["WordPress design", "and development", "for UK businesses"],
     brush: "UK businesses",
-    intro: "We design and build WordPress websites for service businesses, charities, manufacturers and anyone whose site is mostly content. Most are built on a custom block theme, so pages load fast and your team can edit them without a developer. Where a site needs Elementor, we build with that.",
+    intro: "We're a WordPress studio in Bracknell, Berkshire, building websites for UK service businesses, charities, manufacturers and anyone whose site is mostly content. Clients include Architectural FX and the JBVC Foundation. Most sites run on a custom block theme, so pages load fast and your team can edit them without a developer.",
   },
   forYou: {
     heading: "Sites that are hard to edit or slow to load",
