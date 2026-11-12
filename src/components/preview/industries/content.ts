@@ -404,7 +404,7 @@ export const industries: Industry[] = [
       {
         slug: "jbvc-foundation",
         summary:
-          "A new WordPress site for the Johnson Beharry VC Foundation, which works intensively with 10 and 11 year olds. It tells the story as you scroll, from the case for early prevention to its two programmes, Project Alpha and The Regiment, and a film-like page on its founder, Johnson Beharry VC.",
+          "A new WordPress website for the Johnson Beharry VC Foundation, which works with 10 and 11 year olds. It includes a page that tells Johnson Beharry's story, from Grenada to the Victoria Cross.",
         results: [],
       },
     ],

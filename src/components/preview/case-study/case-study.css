@@ -403,3 +403,6 @@
   .pv-cs-mock-panel .overflow-hidden:has(> table) { overflow-x: auto; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; }
   .pv-cs-mock-panel table { min-width: max-content; }
 }
+
+/* A button after a section, to the live page it describes. */
+.pv-cs-beat-link { margin-top: 8px; }

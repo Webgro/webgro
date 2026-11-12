@@ -109,7 +109,7 @@ export const workExtras: Record<string, WorkExtra> = {
   },
   "jbvc-foundation": {
     w: 1400, h: 900,
-    blurb: "A WordPress site for a charity that protects children from criminal exploitation, told through scroll animation, including a film-like story page for its founder.",
+    blurb: "A new WordPress website for a charity that protects children from criminal exploitation and violence.",
   },
   toughcode: {
     w: 1400, h: 788,

@@ -23,9 +23,9 @@ export const summaries: Record<string, Summary> = {
     changed: "The team publish product changes from the sheet themselves, and specifiers can filter the catalogue and download a spec sheet for the configuration they need.",
   },
   "jbvc-foundation": {
-    ask: "The Johnson Beharry VC Foundation relaunched in 2026 to protect 10 and 11 year olds from criminal exploitation, and needed a website that makes the case for starting that early.",
-    did: "We designed and built a WordPress site that tells the story as you scroll: statistics that count up, a five-year plan that fills in, and a film-like page following Johnson from Grenada to the Victoria Cross.",
-    changed: "The foundation has a site that takes visitors from the problem to its programmes, Johnson's story and a way to donate.",
+    ask: "The foundation relaunched in 2026 to work with 10 and 11 year olds, and needed a new website.",
+    did: "We designed and built it in WordPress, including a page that tells Johnson Beharry's story.",
+    changed: "The site sets out the foundation's work and programmes, and takes donations through Give as you Live.",
   },
   toughcode: {
     ask: "Tough Code needed a landing page to present their UK pouch manufacturing to other brands.",
