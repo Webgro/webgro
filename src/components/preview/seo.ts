@@ -261,7 +261,7 @@ export const CASE_META: Record<string, Meta> = {
   "jbvc-foundation": {
     title: "JBVC Foundation: Charity Website | Webgro Case Study",
     description:
-      "A single-page WordPress site for the Johnson Beharry VC Foundation, a charity that protects vulnerable children from criminal exploitation and violence.",
+      "A new WordPress site for the Johnson Beharry VC Foundation, a charity that protects children from criminal exploitation, told through scroll animation.",
   },
   toughcode: {
     title: "Tough Code: Landing Page with Scroll Animation | Webgro",

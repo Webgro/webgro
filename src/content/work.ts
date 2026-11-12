@@ -25,6 +25,8 @@ export type CaseBlock =
       url: string;
       aspect?: string;
       phone?: { src: string; alt: string };
+      /** An animated WebP of the page scrolling. src is its last frame, shown to anyone who prefers less motion. */
+      animated?: string;
     }
   | { type: "phone"; src: string; alt: string; width?: "sm" | "md" | "lg" }
   /** A name from the mockup registry, or a BespokeMockName for a redrawn app screen. */
@@ -2293,62 +2295,137 @@ export const caseStudies: CaseStudy[] = [
     slug: "jbvc-foundation",
     client: "JBVC Foundation",
     tag: "Charity · WordPress",
-    year: "2025",
+    year: "2026",
     accent: "violet",
     heroImage: "/work/jbvc-foundation.jpg",
-    heroImageAlt: "A young person sitting outside, from the JBVC Foundation website",
+    heroImageAlt: "Johnson Beharry VC in uniform, wearing his Victoria Cross",
     excerpt:
-      "A single-page WordPress site for the Johnson Beharry VC Foundation, a charity that protects vulnerable children from criminal exploitation and violence.",
+      "A new website for the Johnson Beharry VC Foundation, a charity that protects children from criminal exploitation, told through scroll animation from its first statistic to Johnson's own story.",
     services: ["WordPress", "Design"],
-    stack: ["WordPress"],
-    timeline: "Single-page build",
+    stack: ["WordPress", "Scroll animation"],
+    timeline: "Relaunched November 2026",
     url: "https://jbvcfoundation.org.uk",
     categories: ["wordpress"],
     body: [
       {
         type: "intro",
-        text: "The Johnson Beharry VC Foundation works with children aged 10 and above to protect them from criminal exploitation and violence. We designed and built its website as a single WordPress page.",
+        text: "The Johnson Beharry VC Foundation protects vulnerable children from criminal exploitation and violence, working intensively with 10 and 11 year olds. When it relaunched with that purpose in 2026, after 14 years of work in offender rehabilitation, we designed and built a new website that tells the story as you scroll.",
       },
       {
         type: "section",
-        eyebrow: "The site",
-        heading: "One page, in full-screen sections",
+        eyebrow: "The home page",
+        heading: "The case, made one scroll at a time",
         body: [
-          "The site is one page split into full-screen sections: what the foundation does, its founder Johnson Beharry VC, why early prevention matters, and its two programmes, Project Alpha and The Regiment.",
+          "The home page opens on one figure: 43 in every 100 teenagers in gangs joined by the age of 12. As you scroll, it gives way to the foundation's answer, to start at ten, not fifteen.",
         ],
       },
       {
         type: "browser",
-        src: "/work/jbvc-foundation/storefront.jpg",
-        alt: "JBVC Foundation homepage",
+        src: "/work/jbvc-foundation/scroll-hero.jpg",
+        animated: "/work/jbvc-foundation/scroll-hero.webp",
+        alt: "JBVC Foundation home page scrolling from the opening statistic to 'We start at ten, not fifteen'",
         url: "jbvcfoundation.org.uk",
         phone: {
           src: "/work/jbvc-foundation/mobile.jpg",
-          alt: "JBVC Foundation homepage on a phone",
+          alt: "JBVC Foundation home page on a phone",
         },
       },
       {
+        type: "section",
+        eyebrow: "The evidence",
+        heading: "Figures that count up, principles that stack",
+        body: [
+          "The statistics count up as they arrive on screen. Further down, the foundation's four principles stack on top of one another like cards as you read them.",
+        ],
+      },
+      {
         type: "browser",
-        src: "/work/jbvc-foundation/live-founder.jpg",
-        alt: "JBVC Foundation section about its founder, Johnson Beharry VC",
+        src: "/work/jbvc-foundation/scroll-stats.jpg",
+        animated: "/work/jbvc-foundation/scroll-stats.webp",
+        alt: "JBVC Foundation statistics counting up as the page scrolls",
         url: "jbvcfoundation.org.uk",
       },
       {
         type: "browser",
-        src: "/work/jbvc-foundation/live-stats.jpg",
-        alt: "JBVC Foundation section on why early prevention matters",
+        src: "/work/jbvc-foundation/scroll-unique.jpg",
+        animated: "/work/jbvc-foundation/scroll-unique.webp",
+        alt: "The foundation's four principles stacking like cards as the page scrolls",
         url: "jbvcfoundation.org.uk",
+      },
+      {
+        type: "section",
+        eyebrow: "The five-year plan",
+        heading: "A plan that fills in as you read",
+        body: [
+          "The plan runs from one school and 12 children in year one to 16 schools and 192 children in year five. Each year fills in its share of a grid of dots, so you can see the scale it builds to.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/jbvc-foundation/scroll-plan.jpg",
+        animated: "/work/jbvc-foundation/scroll-plan.webp",
+        alt: "The five-year plan filling a grid of dots, year by year, as the page scrolls",
+        url: "jbvcfoundation.org.uk",
+      },
+      {
+        type: "section",
+        eyebrow: "Johnson's story",
+        heading: "His story, told like a film",
+        body: [
+          "Who is Johnson Beharry? follows him from Grenada in 1979 to the Victoria Cross and the foundation, using footage from the foundation's own film. A timeline runs down the side as you go.",
+          "His journey from Grenada to London is drawn on a map, with the distance counting up to 7,000 km.",
+        ],
+      },
+      {
+        type: "browser",
+        src: "/work/jbvc-foundation/scroll-story.jpg",
+        animated: "/work/jbvc-foundation/scroll-story.webp",
+        alt: "The opening of the Who is Johnson Beharry? page as it scrolls",
+        url: "jbvcfoundation.org.uk/who-is-johnson-beharry",
+      },
+      {
+        type: "browser",
+        src: "/work/jbvc-foundation/scroll-journey.jpg",
+        animated: "/work/jbvc-foundation/scroll-journey.webp",
+        alt: "A map drawing Johnson's journey from Grenada to London as the page scrolls",
+        url: "jbvcfoundation.org.uk/who-is-johnson-beharry",
+      },
+      {
+        type: "browser",
+        src: "/work/jbvc-foundation/live-grenada.jpg",
+        alt: "Grenada, 1979, from the Who is Johnson Beharry? page",
+        url: "jbvcfoundation.org.uk/who-is-johnson-beharry",
+      },
+      {
+        type: "section",
+        eyebrow: "The rest of the site",
+        heading: "About, Our work and Contact",
+        body: [
+          "About us explains the foundation's new purpose. Our work sets out its two programmes, Project Alpha and The Regiment, and its new way of identifying children at risk. Contact has a form that asks what the enquiry is about, donations go through Give as you Live, and every page ends with a newsletter signup.",
+        ],
       },
       {
         type: "browser",
         src: "/work/jbvc-foundation/live-programmes.jpg",
-        alt: "JBVC Foundation programmes, Project Alpha and The Regiment",
-        url: "jbvcfoundation.org.uk",
+        alt: "Project Alpha on the Our work page",
+        url: "jbvcfoundation.org.uk/our-work",
+      },
+      {
+        type: "browser",
+        src: "/work/jbvc-foundation/live-about.jpg",
+        alt: "What makes the foundation unique, on the About us page",
+        url: "jbvcfoundation.org.uk/about-us",
       },
       {
         type: "deliverables",
         heading: "Deliverables",
-        items: ["Website design", "Single-page WordPress build"],
+        items: [
+          "Website design",
+          "Custom WordPress theme",
+          "Scroll animation",
+          "Johnson Beharry VC story page",
+          "Contact form and newsletter signup",
+        ],
       },
     ],
   },

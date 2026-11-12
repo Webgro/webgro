@@ -62,6 +62,20 @@ export function PhoneShot({ src, alt, size = "md" }: { src: string; alt: string;
   );
 }
 
+/** A scroll recording as an animated WebP, with the still for anyone who has asked for less motion. */
+function AnimatedShot({ still, animated, alt }: { still: string; animated: string; alt: string }) {
+  const { assets } = useContext(CaseContext);
+  const found = assets[still];
+  if (found === null) return <Placeholder label={alt} />;
+  const a = found ?? { src: still, w: 1120, h: 700 };
+  return (
+    <picture>
+      <source srcSet={animated} type="image/webp" media="(prefers-reduced-motion: no-preference)" />
+      <img src={a.src} alt={alt} width={a.w} height={a.h} loading="lazy" decoding="async" draggable={false} />
+    </picture>
+  );
+}
+
 function BrowserShot({ block }: { block: Extract<MediaBlock, { type: "browser" }> }) {
   // A missing phone screenshot is left out rather than shown as an empty handset.
   const phone = useHasImage(block.phone?.src ?? "") ? block.phone : undefined;
@@ -75,7 +89,11 @@ function BrowserShot({ block }: { block: Extract<MediaBlock, { type: "browser" }
           </div>
           <div className="pv-cs-browser-view" style={{ aspectRatio: aspectOf(block.aspect, "16 / 10") }}>
             <div className="pv-cs-browser-shot">
-              <Shot src={block.src} alt={block.alt} />
+              {block.animated ? (
+                <AnimatedShot still={block.src} animated={block.animated} alt={block.alt} />
+              ) : (
+                <Shot src={block.src} alt={block.alt} />
+              )}
             </div>
             <span className="pv-cs-scan" aria-hidden="true" />
           </div>
