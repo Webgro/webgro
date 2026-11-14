@@ -107,6 +107,10 @@ export const workExtras: Record<string, WorkExtra> = {
     blurb: "A custom WordPress plugin for a Wokingham lighting distributor. Products are published from their Google Sheet, and the new products page has live filters and a configurator that produces spec sheets.",
     figure: { value: "3", label: "plugins replaced by one custom plugin" },
   },
+  pawguard: {
+    w: 1200, h: 800,
+    blurb: "A new Shopify store for wireless dog fences in Ireland, with a homepage finder that recommends the right fence for your land.",
+  },
   "jbvc-foundation": {
     w: 1400, h: 900,
     blurb: "A single-page WordPress site for a charity that protects vulnerable children from criminal exploitation and violence.",
@@ -144,6 +148,7 @@ export const workFocus: Record<string, string> = {
   "its-pouch": "50% 60%",
   threadology: "45% 30%",
   "little-muddy-boots": "50% 45%",
+  pawguard: "62% 40%",
   "jbvc-foundation": "55% 30%",
   toughcode: "40% 40%",
 };

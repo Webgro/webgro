@@ -22,6 +22,11 @@ export const summaries: Record<string, Summary> = {
     did: "We replaced WooCommerce and two other plugins with one custom WordPress plugin, connected it to their Google Sheet, built new products and product pages with a configurator, and moved 128 DWG drawings off Amazon S3.",
     changed: "The team publish product changes from the sheet themselves, and specifiers can filter the catalogue and download a spec sheet for the configuration they need.",
   },
+  pawguard: {
+    ask: "PawGuard sells several kinds of wireless dog fence, and which one a customer needs depends on the size and shape of their land.",
+    did: "We designed and built a new Shopify store, dark throughout, with a fence finder in the homepage hero and menus that work from the keyboard.",
+    changed: "Customers can see which fence fits their land before they start browsing.",
+  },
   "jbvc-foundation": {
     ask: "The Johnson Beharry VC Foundation needed a website that explains its work with vulnerable children clearly.",
     did: "We designed and built a single-page WordPress site in full-screen sections, covering the foundation, its founder, the case for early prevention and its two programmes.",

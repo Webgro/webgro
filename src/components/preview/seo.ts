@@ -258,6 +258,11 @@ export const CASE_META: Record<string, Meta> = {
     description:
       "A WordPress redesign for freight business Paragon Freight, with a currency selector for overseas enquiries and ongoing social media management.",
   },
+  pawguard: {
+    title: "PawGuard: Shopify Store with a Fence Finder | Webgro",
+    description:
+      "A new Shopify store for PawGuard, which sells wireless dog fences in Ireland, with a homepage finder that recommends the right fence for your land.",
+  },
   "jbvc-foundation": {
     title: "JBVC Foundation: Charity Website | Webgro Case Study",
     description:

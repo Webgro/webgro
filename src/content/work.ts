@@ -25,6 +25,8 @@ export type CaseBlock =
       url: string;
       aspect?: string;
       phone?: { src: string; alt: string };
+      /** An animated WebP of the page scrolling. src is its last frame, shown to anyone who prefers less motion. */
+      animated?: string;
     }
   | { type: "phone"; src: string; alt: string; width?: "sm" | "md" | "lg" }
   /** A name from the mockup registry, or a BespokeMockName for a redrawn app screen. */
@@ -1683,6 +1685,69 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
 
+  {
+    slug: "pawguard",
+    client: "PawGuard",
+    tag: "Shopify · Pet products",
+    year: "2026",
+    accent: "blue",
+    heroImage: "/work/pawguard.jpg",
+    heroImageAlt: "A German shepherd running through a river wearing a PawGuard GPS collar",
+    excerpt:
+      "A new Shopify store for PawGuard, which sells wireless dog fences in Ireland, with a homepage finder that recommends the right fence for your land.",
+    services: ["Shopify theme design", "Shopify development"],
+    stack: ["Shopify", "Custom theme"],
+    timeline: "Launched November 2026",
+    url: "https://www.pawguard.ie",
+    categories: ["ecommerce"],
+    body: [
+      {
+        type: "intro",
+        text: "PawGuard sells wireless dog fences, training collars and bark control collars across Ireland. We designed and built its new Shopify store.",
+      },
+      {
+        type: "beforeAfter",
+        before: { src: "/work/pawguard/before-home.jpg", alt: "The PawGuard homepage before the rebuild" },
+        after: { src: "/work/pawguard/after-home.jpg", alt: "The new PawGuard homepage, with the fence finder in the hero" },
+      },
+      {
+        type: "section",
+        eyebrow: "The homepage",
+        heading: "Which fence do I need?",
+        body: "The right fence depends on how much land there is and what shape it is, so the homepage asks. Drag from a small garden to a farm, tick anything that applies, and it draws the boundary on a map and recommends the fence that fits.",
+      },
+      {
+        type: "browser",
+        src: "/work/pawguard/finder.jpg",
+        animated: "/work/pawguard/finder.webp",
+        alt: "The fence finder redrawing the boundary and changing its recommendation as the slider moves",
+        url: "pawguard.ie",
+        phone: { src: "/work/pawguard/mobile.jpg", alt: "The new PawGuard homepage on a phone" },
+      },
+      {
+        type: "section",
+        eyebrow: "Navigation",
+        heading: "Dark, with menus that work from the keyboard",
+        body: "The whole store is dark. Each menu opens a panel of products you can narrow down by type, and it opens when you tab to it, not just when you hover.",
+      },
+      {
+        type: "browser",
+        src: "/work/pawguard/mega-menu.jpg",
+        alt: "The Dog Fences menu open, with fences filtered by type",
+        url: "pawguard.ie",
+      },
+      {
+        type: "beforeAfter",
+        before: { src: "/work/pawguard/before-product.jpg", alt: "A PawGuard product page before the rebuild" },
+        after: { src: "/work/pawguard/after-product.jpg", alt: "The same product page on the new store" },
+      },
+      {
+        type: "deliverables",
+        heading: "Deliverables",
+        items: ["Shopify theme design and build", "Fence finder", "Mega menus", "Comparison page"],
+      },
+    ],
+  },
   {
     slug: "its-pouch",
     client: "it's Pouch",
