@@ -54,13 +54,7 @@
   animation: pvFadeUp 1s var(--pv-ease) 0.4s both;
 }
 
-.pv-cs-open-inner { display: grid; gap: clamp(36px, 6vh, 64px); padding: clamp(56px, 10vh, 110px) var(--pv-pad) clamp(48px, 9vh, 100px); }
-.pv-cs-ledger { margin: 0; display: grid; gap: clamp(24px, 4vh, 40px); }
-.pv-cs-ledger-row { display: grid; gap: 10px; align-content: start; padding-top: 16px; border-top: 1px solid var(--pv-rule); }
-.pv-cs-ledger dt { font-family: var(--pv-display); font-weight: 500; font-size: 0.95rem; color: var(--pv-muted); }
-.pv-cs-ledger dd { margin: 0; font-size: clamp(1.02rem, 1.2vw, 1.18rem); line-height: 1.5; max-width: 46ch; }
-.pv-cs-ledger-row:last-child dd { font-family: var(--pv-display); font-weight: 500; }
-
+.pv-cs-open-inner { padding: clamp(56px, 10vh, 110px) var(--pv-pad) clamp(40px, 7vh, 80px); }
 .pv-cs-heads { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(20px, 3vh, 32px); }
 .pv-cs-head {
   display: grid; gap: 8px; align-content: start; padding-top: 16px; border-top: 1px solid var(--pv-rule);
@@ -72,14 +66,18 @@
 .pv-cs-head p strong { font-family: var(--pv-display); font-weight: 500; font-size: 1rem; }
 .pv-cs-head p span { color: var(--pv-muted); }
 
-.pv-cs-meta { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 5vw; padding-top: 18px; border-top: 1px solid var(--pv-rule); }
-.pv-cs-meta dt { font-family: var(--pv-display); font-weight: 500; font-size: 0.9rem; color: var(--pv-muted); margin-bottom: 3px; }
-.pv-cs-meta dd { margin: 0; font-size: 0.98rem; line-height: 1.4; }
+/* Project details: one slim line on the cover. */
+.pv-cs-meta {
+  margin: clamp(4px, 1vh, 12px) 0 0; display: flex; flex-wrap: wrap; gap: 10px clamp(24px, 3.4vw, 56px);
+  padding-top: clamp(14px, 2vh, 20px); border-top: 1px solid rgba(255, 255, 255, 0.22);
+  animation: pvFadeUp 1s var(--pv-ease) 0.55s both;
+}
+.pv-cs-meta dt { font-family: var(--pv-display); font-weight: 500; font-size: 0.82rem; color: rgba(255, 255, 255, 0.62); margin-bottom: 2px; }
+.pv-cs-meta dd { margin: 0; font-size: 0.95rem; line-height: 1.4; color: #fff; }
+.pv-cs-meta a { color: #fff; }
 
 @media (min-width: 900px) {
-  .pv-cs-ledger { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4vw; }
   .pv-cs-heads { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4vw; }
-  .pv-cs-meta { grid-template-columns: 1.6fr 1.2fr 1fr auto; }
 }
 
 /* ── Sections and the beats inside them ───────────────────────────────── */
@@ -404,7 +402,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pv-cs-crumb, .pv-cs-jump, .pv-cs-cover-lede, .pv-cs-title .pv-line > span { animation: none; }
+  .pv-cs-crumb, .pv-cs-jump, .pv-cs-cover-lede, .pv-cs-meta, .pv-cs-title .pv-line > span { animation: none; }
   .pv-cs-spine { transition: none; }
 }
 

@@ -10,27 +10,18 @@ import { Count } from "./Beats";
 import { Placeholder } from "./Media";
 import { counter } from "./motion";
 import type { Figure, Segment } from "./structure";
-import { summaries } from "./summaries";
 import { NewTag } from "../NewTag";
 
 const domainOf = (url: string) => url.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
 /**
- * The cover is the hero photograph, full screen, with the client's name and
- * one line about the project on it. Underneath: the brief, what we did and
- * what changed, any figures that matter, and the project details.
+ * The cover is the hero photograph, full screen, with the client's name, one
+ * line about the project and the project details on it. Case studies with
+ * figures show them in a row underneath; the rest go straight into the story.
  */
-export function Opening({ cs, hero, headline, segments }: { cs: CaseStudy; hero: Asset | null; headline: Figure[]; segments: Segment[] }) {
+export function Opening({ cs, hero, headline }: { cs: CaseStudy; hero: Asset | null; headline: Figure[]; segments: Segment[] }) {
   const root = useRef<HTMLElement>(null);
-  const summary = summaries[cs.slug];
-  const rows = summary
-    ? [
-        { term: "The brief", text: summary.ask },
-        { term: "What we did", text: summary.did },
-        { term: "Results", text: summary.changed },
-      ]
-    : [{ term: "Summary", text: cs.excerpt }];
-  // A case study without figures falls back to its timeline, which already sits in the details.
+  // A case study without figures falls back to its timeline, which is already on the cover.
   const figures = headline.filter((f) => f.label !== "Timeline");
 
   useGsap(root, ({ gsap }) => {
@@ -88,20 +79,25 @@ export function Opening({ cs, hero, headline, segments }: { cs: CaseStudy; hero:
             <span className="pv-line"><span>{cs.client}</span></span>
           </h1>
           <p className="pv-cs-cover-lede">{cs.excerpt}</p>
+          <dl className="pv-cs-meta">
+            <div><dt>Services</dt><dd>{cs.services.join(", ")}</dd></div>
+            <div><dt>Timeline</dt><dd>{cs.timeline}</dd></div>
+            {cs.url && (
+              <div>
+                <dt>Live site</dt>
+                <dd>
+                  <a href={cs.url} target="_blank" rel="noopener noreferrer" className="pv-textlink" data-cursor>
+                    {domainOf(cs.url)}
+                  </a>
+                </dd>
+              </div>
+            )}
+          </dl>
         </div>
       </div>
 
-      <div className="pv-cs-open-inner" data-pv-theme="paper">
-        <dl className="pv-cs-ledger">
-          {rows.map((r) => (
-            <div className="pv-cs-ledger-row" key={r.term}>
-              <dt>{r.term}</dt>
-              <dd>{r.text}</dd>
-            </div>
-          ))}
-        </dl>
-
-        {figures.length > 0 && (
+      {figures.length > 0 && (
+        <div className="pv-cs-open-inner" data-pv-theme="paper">
           <ul className="pv-cs-heads" aria-label="Key figures">
             {figures.map((f, i) => (
               <li className="pv-cs-head" key={i}>
@@ -113,46 +109,8 @@ export function Opening({ cs, hero, headline, segments }: { cs: CaseStudy; hero:
               </li>
             ))}
           </ul>
-        )}
-
-        <dl className="pv-cs-meta">
-          <div><dt>Services</dt><dd>{cs.services.join(", ")}</dd></div>
-          <div><dt>Built with</dt><dd>{cs.stack.join(", ")}</dd></div>
-          <div><dt>Timeline</dt><dd>{cs.timeline}</dd></div>
-          {cs.url && (
-            <div>
-              <dt>Live site</dt>
-              <dd>
-                <a href={cs.url} target="_blank" rel="noopener noreferrer" className="pv-textlink" data-cursor>
-                  {domainOf(cs.url)}
-                </a>
-              </dd>
-            </div>
-          )}
-        </dl>
-
-        {segments.length > 2 && (
-          <nav className="pv-cs-jump" aria-label="Case study sections">
-            <span className="pv-cs-jump-label">Jump to</span>
-            {segments.map((seg) => (
-              <a
-                key={seg.id}
-                href={`#${seg.id}`}
-                data-cursor
-                onClick={(e) => {
-                  const target = document.getElementById(seg.id);
-                  if (!target) return;
-                  e.preventDefault();
-                  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-                  window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY + 2, behavior: reduce ? "auto" : "smooth" });
-                }}
-              >
-                {seg.label}
-              </a>
-            ))}
-          </nav>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 }
