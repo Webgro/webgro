@@ -113,7 +113,7 @@ export const workExtras: Record<string, WorkExtra> = {
   },
   "jbvc-foundation": {
     w: 1400, h: 900,
-    blurb: "A single-page WordPress site for a charity that protects vulnerable children from criminal exploitation and violence.",
+    blurb: "A new WordPress website for a charity that protects children from criminal exploitation and violence.",
   },
   toughcode: {
     w: 1400, h: 788,
@@ -149,7 +149,7 @@ export const workFocus: Record<string, string> = {
   threadology: "45% 30%",
   "little-muddy-boots": "50% 45%",
   pawguard: "62% 40%",
-  "jbvc-foundation": "55% 30%",
+  "jbvc-foundation": "58% 22%",
   toughcode: "40% 40%",
 };
 

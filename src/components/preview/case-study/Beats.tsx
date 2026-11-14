@@ -64,6 +64,13 @@ function TextBeat({ beat }: { beat: Extract<Beat, { kind: "text" }> }) {
         </div>
         <div className="pv-cs-beat-body">
           {paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+          {section.link && (
+            <p className="pv-cs-beat-link">
+              <a href={section.link.href} className="pv-btn" target="_blank" rel="noopener noreferrer" data-cursor>
+                <span>{section.link.label}</span>
+              </a>
+            </p>
+          )}
         </div>
       </div>
       {section.phone && hasPhone && (

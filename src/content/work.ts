@@ -9,6 +9,8 @@ export type CaseBlock =
       body: string | string[];
       eyebrow?: string;
       phone?: { src: string; alt: string; width?: "sm" | "md" | "lg" };
+      /** A button after the text, for example to the live page it describes. Opens in a new tab. */
+      link?: { label: string; href: string };
     }
   | { type: "stats"; items: Array<{ label: string; value: string }> }
   | { type: "heroStat"; value: string; label: string; eyebrow?: string; footnote?: string }
@@ -2358,62 +2360,71 @@ export const caseStudies: CaseStudy[] = [
     slug: "jbvc-foundation",
     client: "JBVC Foundation",
     tag: "Charity · WordPress",
-    year: "2025",
+    year: "2026",
     accent: "violet",
     heroImage: "/work/jbvc-foundation.jpg",
-    heroImageAlt: "A young person sitting outside, from the JBVC Foundation website",
+    heroImageAlt: "Johnson Beharry VC in uniform, wearing his Victoria Cross",
     excerpt:
-      "A single-page WordPress site for the Johnson Beharry VC Foundation, a charity that protects vulnerable children from criminal exploitation and violence.",
+      "A new website for the Johnson Beharry VC Foundation, a charity that protects children from criminal exploitation and violence.",
     services: ["WordPress", "Design"],
-    stack: ["WordPress"],
-    timeline: "Single-page build",
+    stack: ["WordPress", "Scroll animation"],
+    timeline: "Relaunched November 2026",
     url: "https://jbvcfoundation.org.uk",
     categories: ["wordpress"],
     body: [
       {
         type: "intro",
-        text: "The Johnson Beharry VC Foundation works with children aged 10 and above to protect them from criminal exploitation and violence. We designed and built its website as a single WordPress page.",
+        text: "The Johnson Beharry VC Foundation works with 10 and 11 year olds to protect them from criminal exploitation and violence. It relaunched with that focus in 2026, and we designed and built its new website.",
       },
       {
         type: "section",
-        eyebrow: "The site",
-        heading: "One page, in full-screen sections",
-        body: [
-          "The site is one page split into full-screen sections: what the foundation does, its founder Johnson Beharry VC, why early prevention matters, and its two programmes, Project Alpha and The Regiment.",
-        ],
+        eyebrow: "The home page",
+        heading: "The figures come first",
+        body: "The home page leads with the statistics behind the foundation's work, then its five-year plan: from one school and 12 children in year one to 16 schools and 192 children in year five.",
       },
       {
         type: "browser",
-        src: "/work/jbvc-foundation/storefront.jpg",
-        alt: "JBVC Foundation homepage",
+        src: "/work/jbvc-foundation/scroll-hero.jpg",
+        animated: "/work/jbvc-foundation/scroll-hero.webp",
+        alt: "The JBVC Foundation home page scrolling from its opening statistic",
         url: "jbvcfoundation.org.uk",
         phone: {
           src: "/work/jbvc-foundation/mobile.jpg",
-          alt: "JBVC Foundation homepage on a phone",
+          alt: "JBVC Foundation home page on a phone",
         },
       },
       {
         type: "browser",
-        src: "/work/jbvc-foundation/live-founder.jpg",
-        alt: "JBVC Foundation section about its founder, Johnson Beharry VC",
+        src: "/work/jbvc-foundation/scroll-plan.jpg",
+        animated: "/work/jbvc-foundation/scroll-plan.webp",
+        alt: "The five-year plan filling a grid of dots, year by year",
         url: "jbvcfoundation.org.uk",
       },
       {
-        type: "browser",
-        src: "/work/jbvc-foundation/live-stats.jpg",
-        alt: "JBVC Foundation section on why early prevention matters",
-        url: "jbvcfoundation.org.uk",
+        type: "section",
+        eyebrow: "Who is Johnson Beharry?",
+        heading: "Our most immersive page yet",
+        body: "Johnson's story, from Grenada in 1979 to the Victoria Cross, told with footage from the foundation's own film.",
+        link: { label: "Try it for yourself", href: "https://jbvcfoundation.org.uk/who-is-johnson-beharry/" },
       },
       {
         type: "browser",
-        src: "/work/jbvc-foundation/live-programmes.jpg",
-        alt: "JBVC Foundation programmes, Project Alpha and The Regiment",
-        url: "jbvcfoundation.org.uk",
+        src: "/work/jbvc-foundation/scroll-story.jpg",
+        animated: "/work/jbvc-foundation/scroll-story.webp",
+        alt: "The opening of the Who is Johnson Beharry? page",
+        url: "jbvcfoundation.org.uk/who-is-johnson-beharry",
+      },
+      {
+        type: "browser",
+        src: "/work/jbvc-foundation/scroll-journey.jpg",
+        animated: "/work/jbvc-foundation/scroll-journey.webp",
+        alt: "A map drawing Johnson's journey from Grenada to London",
+        url: "jbvcfoundation.org.uk/who-is-johnson-beharry",
       },
       {
         type: "deliverables",
         heading: "Deliverables",
-        items: ["Website design", "Single-page WordPress build"],
+        items: ["Website design", "Custom WordPress theme", "Scroll animation", "Contact form and newsletter signup"],
       },
     ],
   },
