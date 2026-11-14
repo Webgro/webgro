@@ -79,6 +79,14 @@ export const reel = [
     figureLabel: "Phone models in the shop-by-phone picker",
   },
   {
+    client: "PawGuard",
+    slug: "pawguard",
+    img: "/preview/reel-pawguard.jpg",
+    body: "A new Shopify store for wireless dog fences in Ireland. A finder on the homepage asks about your land and recommends the fence that fits.",
+    figure: "7",
+    figureLabel: "Fences the homepage finder chooses between",
+  },
+  {
     client: "Sublishop",
     slug: "sublishop",
     img: "/preview/reel-sublishop.jpg",
