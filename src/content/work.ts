@@ -2394,13 +2394,6 @@ export const caseStudies: CaseStudy[] = [
         },
       },
       {
-        type: "browser",
-        src: "/work/jbvc-foundation/scroll-plan.jpg",
-        animated: "/work/jbvc-foundation/scroll-plan.webp",
-        alt: "The five-year plan filling a grid of dots, year by year",
-        url: "jbvcfoundation.org.uk",
-      },
-      {
         type: "section",
         eyebrow: "Who is Johnson Beharry?",
         heading: "Our most immersive page yet",
@@ -2412,13 +2405,6 @@ export const caseStudies: CaseStudy[] = [
         src: "/work/jbvc-foundation/scroll-story.jpg",
         animated: "/work/jbvc-foundation/scroll-story.webp",
         alt: "The opening of the Who is Johnson Beharry? page",
-        url: "jbvcfoundation.org.uk/who-is-johnson-beharry",
-      },
-      {
-        type: "browser",
-        src: "/work/jbvc-foundation/scroll-journey.jpg",
-        animated: "/work/jbvc-foundation/scroll-journey.webp",
-        alt: "A map drawing Johnson's journey from Grenada to London",
         url: "jbvcfoundation.org.uk/who-is-johnson-beharry",
       },
       {
