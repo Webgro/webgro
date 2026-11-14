@@ -96,7 +96,7 @@ export function CaseStudyPreview({
   const onLeave = useCallback(() => gl.current?.stop(), []);
 
   return (
-    <PreviewShell initialTheme="paper">
+    <PreviewShell initialTheme="ink">
       <CaseContext.Provider value={context}>
         <article className="pv-cs" ref={root}>
           <canvas className="pv-cs-canvas" ref={canvas} aria-hidden="true" />

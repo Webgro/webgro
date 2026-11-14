@@ -16,9 +16,9 @@ import { NewTag } from "../NewTag";
 const domainOf = (url: string) => url.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
 /**
- * The whole story on one screen: who the client is, what they needed, what we
- * did, what changed, and the two or three figures that matter most. The hero
- * image waits at the bottom edge and grows to full width as the reader moves on.
+ * The cover is the hero photograph, full screen, with the client's name and
+ * one line about the project on it. Underneath: the brief, what we did and
+ * what changed, any figures that matter, and the project details.
  */
 export function Opening({ cs, hero, headline, segments }: { cs: CaseStudy; hero: Asset | null; headline: Figure[]; segments: Segment[] }) {
   const root = useRef<HTMLElement>(null);
@@ -30,6 +30,8 @@ export function Opening({ cs, hero, headline, segments }: { cs: CaseStudy; hero:
         { term: "Results", text: summary.changed },
       ]
     : [{ term: "Summary", text: cs.excerpt }];
+  // A case study without figures falls back to its timeline, which already sits in the details.
+  const figures = headline.filter((f) => f.label !== "Timeline");
 
   useGsap(root, ({ gsap }) => {
     const el = root.current!;
@@ -37,23 +39,23 @@ export function Opening({ cs, hero, headline, segments }: { cs: CaseStudy; hero:
     const mm = gsap.matchMedia();
 
     mm.add(SCENE_QUERY, () => {
-      // Headline figures count up once, shortly after the page settles.
       const restores: Array<() => void> = [];
       (q(".pv-cs-head-value[data-end]") as HTMLElement[]).forEach((node, i) => {
         const c = counter(node);
         c.render();
         restores.push(c.restore);
-        gsap.to(c.state, { v: c.end, duration: 1.7, delay: 0.55 + i * 0.14, ease: "power2.out", onUpdate: c.render });
+        gsap.to(c.state, {
+          v: c.end, duration: 1.7, delay: i * 0.14, ease: "power2.out", onUpdate: c.render,
+          scrollTrigger: { trigger: q(".pv-cs-heads")[0], start: "top 85%" },
+        });
       });
 
-      // The hero image starts as a card and grows to the full width of the page.
-      const media = q(".pv-cs-hero-media")[0];
-      if (media) {
-        gsap.fromTo(media, { scale: () => (window.innerWidth < 900 ? 0.88 : 0.76) }, {
-          scale: 1, ease: "none",
-          scrollTrigger: {
-            trigger: q(".pv-cs-hero")[0], start: "top bottom", end: "top 14%", scrub: 0.5, invalidateOnRefresh: true,
-          },
+      // The photograph drifts a little slower than the page as you scroll past it.
+      const img = q(".pv-cs-cover-media img")[0];
+      if (img) {
+        gsap.fromTo(img, { yPercent: 0, scale: 1.04 }, {
+          yPercent: 10, ease: "none",
+          scrollTrigger: { trigger: q(".pv-cs-cover")[0], start: "top top", end: "bottom top", scrub: true },
         });
       }
       return () => restores.forEach((r) => r());
@@ -62,18 +64,72 @@ export function Opening({ cs, hero, headline, segments }: { cs: CaseStudy; hero:
   });
 
   return (
-    <section className="pv-cs-open" data-pv-theme="paper" ref={root}>
-      <div className="pv-cs-open-inner">
-        <p className="pv-cs-crumb">
-          <Link href={pv("/work")} className="pv-textlink" data-cursor>All work</Link>
-          <span>{cs.tag}</span>
-          <span>{cs.year}</span>
-          <NewTag slug={cs.slug} />
-        </p>
+    <section className="pv-cs-open" ref={root}>
+      <div className="pv-cs-cover" data-pv-theme="ink">
+        <div className="pv-cs-cover-media">
+          {hero ? (
+            <ViewTransition name={`case-${cs.slug}`} share="morph" default="none">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={hero.src} alt={cs.heroImageAlt} width={hero.w} height={hero.h} fetchPriority="high" draggable={false} />
+            </ViewTransition>
+          ) : (
+            <Placeholder label={cs.heroImageAlt} />
+          )}
+        </div>
+        <div className="pv-cs-cover-shade" aria-hidden="true" />
+        <div className="pv-cs-cover-text">
+          <p className="pv-cs-crumb">
+            <Link href={pv("/work")} className="pv-textlink" data-cursor>All work</Link>
+            <span>{cs.tag}</span>
+            <span>{cs.year}</span>
+            <NewTag slug={cs.slug} />
+          </p>
+          <h1 className={`pv-h1 pv-cs-title${cs.client.length > 14 ? " is-long" : ""}`}>
+            <span className="pv-line"><span>{cs.client}</span></span>
+          </h1>
+          <p className="pv-cs-cover-lede">{cs.excerpt}</p>
+        </div>
+      </div>
 
-        <h1 className={`pv-h1 pv-cs-title${cs.client.length > 14 ? " is-long" : ""}`}>
-          <span className="pv-line"><span>{cs.client}</span></span>
-        </h1>
+      <div className="pv-cs-open-inner" data-pv-theme="paper">
+        <dl className="pv-cs-ledger">
+          {rows.map((r) => (
+            <div className="pv-cs-ledger-row" key={r.term}>
+              <dt>{r.term}</dt>
+              <dd>{r.text}</dd>
+            </div>
+          ))}
+        </dl>
+
+        {figures.length > 0 && (
+          <ul className="pv-cs-heads" aria-label="Key figures">
+            {figures.map((f, i) => (
+              <li className="pv-cs-head" key={i}>
+                <Count value={f.value} className={`pv-cs-head-value${f.value.length > 6 ? " is-long" : ""}`} />
+                <p>
+                  {f.eyebrow && <strong>{f.eyebrow}</strong>}
+                  <span>{f.label}</span>
+                </p>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <dl className="pv-cs-meta">
+          <div><dt>Services</dt><dd>{cs.services.join(", ")}</dd></div>
+          <div><dt>Built with</dt><dd>{cs.stack.join(", ")}</dd></div>
+          <div><dt>Timeline</dt><dd>{cs.timeline}</dd></div>
+          {cs.url && (
+            <div>
+              <dt>Live site</dt>
+              <dd>
+                <a href={cs.url} target="_blank" rel="noopener noreferrer" className="pv-textlink" data-cursor>
+                  {domainOf(cs.url)}
+                </a>
+              </dd>
+            </div>
+          )}
+        </dl>
 
         {segments.length > 2 && (
           <nav className="pv-cs-jump" aria-label="Case study sections">
@@ -96,60 +152,6 @@ export function Opening({ cs, hero, headline, segments }: { cs: CaseStudy; hero:
             ))}
           </nav>
         )}
-
-        <div className="pv-cs-open-grid">
-          <dl className="pv-cs-ledger">
-            {rows.map((r) => (
-              <div className="pv-cs-ledger-row" key={r.term}>
-                <dt>{r.term}</dt>
-                <dd>{r.text}</dd>
-              </div>
-            ))}
-          </dl>
-
-          {headline.length > 0 && (
-            <ul className="pv-cs-heads" aria-label="Key figures">
-              {headline.map((f, i) => (
-                <li className="pv-cs-head" key={i}>
-                  <Count value={f.value} className={`pv-cs-head-value${f.value.length > 6 ? " is-long" : ""}`} />
-                  <p>
-                    {f.eyebrow && <strong>{f.eyebrow}</strong>}
-                    <span>{f.label}</span>
-                  </p>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-        <dl className="pv-cs-meta">
-          <div><dt>Services</dt><dd>{cs.services.join(", ")}</dd></div>
-          <div><dt>Built with</dt><dd>{cs.stack.join(", ")}</dd></div>
-          {headline[0]?.label !== "Timeline" && <div><dt>Timeline</dt><dd>{cs.timeline}</dd></div>}
-          {cs.url && (
-            <div>
-              <dt>Live site</dt>
-              <dd>
-                <a href={cs.url} target="_blank" rel="noopener noreferrer" className="pv-textlink" data-cursor>
-                  {domainOf(cs.url)}
-                </a>
-              </dd>
-            </div>
-          )}
-        </dl>
-      </div>
-
-      <div className="pv-cs-hero">
-        <div className="pv-cs-hero-media" {...(hero ? { "data-pv-gl": "" } : {})}>
-          {hero ? (
-            <ViewTransition name={`case-${cs.slug}`} share="morph" default="none">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={hero.src} alt={cs.heroImageAlt} width={hero.w} height={hero.h} fetchPriority="high" draggable={false} />
-            </ViewTransition>
-          ) : (
-            <Placeholder label={cs.heroImageAlt} />
-          )}
-        </div>
       </div>
     </section>
   );
