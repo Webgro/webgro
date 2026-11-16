@@ -4,6 +4,8 @@ import { pvBespokeSubs, pvServices, pvSubServices, pvWebsiteSubs } from "@/compo
 import { towns } from "@/components/preview/local/content";
 import { industries } from "@/components/preview/industries/content";
 import { ARTICLE_META, CASE_META, PREVIEW_ROBOTS, SERVICE_META } from "@/components/preview/seo";
+import { team } from "@/components/preview/about/content";
+import { PHP2SHELL_META, PHP2SHELL_PATH } from "@/components/preview/php2shell/content";
 
 /**
  * Served at /llms.txt: a plain summary of the site for AI tools such as
@@ -77,6 +79,14 @@ ${caseStudies.map((c) => `- [${c.client}](${SITE}/work/${c.slug}): ${CASE_META[c
 ## Articles
 
 ${articles.map((a) => `- [${ARTICLE_META[a.slug]?.title.replace(/ \| Webgro$/, "") ?? a.title}](${SITE}/the-gro/${a.slug}): ${ARTICLE_META[a.slug]?.description ?? a.excerpt}`).join("\n")}
+
+## Free tools
+
+- [PHP2Shell checker](${SITE}${PHP2SHELL_PATH}): ${PHP2SHELL_META.description}
+
+## Team
+
+${team.map((p) => `- ${p.name}, ${p.role}. ${p.bio}`).join("\n")}
 
 ## About
 

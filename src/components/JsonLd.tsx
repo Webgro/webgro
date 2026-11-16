@@ -86,7 +86,17 @@ export function organisationLd() {
       postalCode: "RG12 1RL",
       addressCountry: "GB",
     },
-    areaServed: "GB",
+    // Bracknell, the towns named on the local pages, then the county and the UK.
+    areaServed: [
+      ...["Bracknell", "Reading", "Wokingham", "Windsor", "Maidenhead", "Ascot"].map((name) => ({ "@type": "City", name })),
+      { "@type": "AdministrativeArea", name: "Berkshire" },
+      { "@type": "Country", name: "United Kingdom" },
+    ],
+    hasMap: "https://maps.google.com/?cid=10237799358321821754",
+    founder: MICHAEL,
+    numberOfEmployees: { "@type": "QuantitativeValue", value: 4 },
+    knowsAbout: ["Shopify", "WordPress", "eCommerce", "SEO", "GEO and AIEO", "AI automation", "Bespoke software"],
+    // Opening hours are left out until they are confirmed against the Google Business Profile.
     sameAs: [
       "https://www.linkedin.com/company/webgroltd",
       "https://www.facebook.com/webgroltd",
