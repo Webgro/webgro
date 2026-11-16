@@ -96,7 +96,15 @@ export function organisationLd() {
     founder: MICHAEL,
     numberOfEmployees: { "@type": "QuantitativeValue", value: 4 },
     knowsAbout: ["Shopify", "WordPress", "eCommerce", "SEO", "GEO and AIEO", "AI automation", "Bespoke software"],
-    // Opening hours are left out until they are confirmed against the Google Business Profile.
+    // Monday to Friday, 9:00 to 16:30, closed at weekends (Michael, 16 Nov 2026).
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "16:30",
+      },
+    ],
     sameAs: [
       "https://www.linkedin.com/company/webgroltd",
       "https://www.facebook.com/webgroltd",
