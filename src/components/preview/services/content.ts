@@ -392,7 +392,7 @@ const automation: PvService = {
   hero: {
     title: ["AI tools and", "automations built into", "your systems"],
     brush: "your systems",
-    intro: "We build automations and AI that run in the background of the systems you already use: syncing data between your shop, stock and accounts, passing work to the right person or system, drafting replies and content for a person to approve, and running jobs on a schedule. Each one is set up so you can measure the time it saves from its first week.",
+    intro: "We're a studio in Bracknell, Berkshire, building AI tools and automations for UK businesses that run on Shopify, spreadsheets and separate apps. They sync your shop, stock and accounts, pass work to the right person and draft replies for a person to approve. AI customer service saves Fun Cases and Twisted Tailor 50 to 70% of their support hours.",
   },
   forYou: {
     heading: "Teams spending hours on repetitive work",
@@ -502,7 +502,7 @@ const bespoke: PvService = {
   hero: {
     title: ["Bespoke software", "built around", "your business"],
     brush: "your business",
-    intro: "We design and build software for one business at a time: portals, quoting tools, helpdesks, and stock and warehouse systems that your team logs into and uses every day. Each one is designed to save the business time and money. AI is built in where it helps, such as sorting support tickets, reading emailed enquiries into quotes and drafting replies for a person to approve.",
+    intro: "We're a studio in Bracknell, Berkshire, building bespoke software for UK businesses that have outgrown spreadsheets: portals, quoting tools, helpdesks and stock systems your team uses every day. The Fun Cases software saves 20 hours a day, and ANYPRINT's quote desk saves 8 hours a week. AI is built in where it helps, with a person approving what goes out.",
   },
   forYou: {
     heading: "Businesses that have outgrown spreadsheets and separate apps",
@@ -614,7 +614,7 @@ const seo: PvService = {
   hero: {
     title: ["SEO for", "Google and", "AI search"],
     brush: "AI search",
-    intro: "We fix the technical basics first: clean markup, fast pages, sensible URLs and schema. Then we write content that answers the questions people in your market search for. We also optimise it so that Claude, ChatGPT and Perplexity mention your brand, as well as Google.",
+    intro: "We're a web studio in Bracknell, Berkshire, doing SEO and GEO for online shops and service businesses: ranking on Google and being named in ChatGPT, Gemini and Perplexity answers. Fun Cases rank first on Google UK for 'phone cases' and Gieves & Hawkes for 'luxury suit'. We fix the technical basics, then write content that answers what your customers search for.",
   },
   forYou: {
     heading: "Businesses that want more search traffic",
