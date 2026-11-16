@@ -407,9 +407,9 @@ export const towns: Town[] = [
     slug: "windsor",
     name: "Windsor",
     meta: {
-      title: "Web Design in Windsor | Webgro",
+      title: "Web Design Windsor | Shopify & WordPress Websites | Webgro",
       description:
-        "Websites, online booking and social media for Windsor businesses, from our Bracknell studio about 25 minutes away. Websites from £4,000.",
+        "Shopify and WordPress websites, online booking and social media for Windsor businesses, from our Bracknell studio about 25 minutes away.",
     },
     areaType: "City",
     drive: "About 25 min",
@@ -417,7 +417,7 @@ export const towns: Town[] = [
       lines: ["Web design", "in Windsor"],
       brush: "Windsor",
       intro:
-        "We're a Shopify and WordPress studio in Bracknell, about 25 minutes from Windsor by car. We build websites for Windsor businesses and can run their social media, SEO and paid ads once the site is live.",
+        "Webgro is a Shopify and WordPress studio in Bracknell, about 25 minutes' drive from Windsor. We build websites for Windsor businesses, including online booking, and run their social media, SEO and paid ads. Clients working in the town include Space 4 U Self Storage, who have a storage site in Windsor, and F&P Agency.",
       facts: [
         { label: "From our office", value: "About 25 minutes by car" },
         { label: "Meetings", value: "Our office, yours, or a call" },
@@ -476,6 +476,10 @@ export const towns: Town[] = [
       {
         q: "Can our website take bookings?",
         a: "Yes. Where we can, we connect the booking system you already use. For Gieves & Hawkes we linked SimplyBookMe through its API, so made-to-measure appointments go straight into the team's calendar. For Little Muddy Boots we simplified the booking flow on their WordPress site.",
+      },
+      {
+        q: "Which parts of Windsor do you cover?",
+        a: "All of it, including the town centre, Eton, Datchet, Old Windsor, Clewer and Dedworth, and nearby Ascot. We're about 25 minutes away in Bracknell, and most of the work happens on calls and by email.",
       },
       {
         q: "Can you meet us in Windsor?",
