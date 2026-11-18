@@ -87,6 +87,14 @@ export const reel = [
     figureLabel: "Fences the homepage finder chooses between",
   },
   {
+    client: "Luna",
+    slug: "luna",
+    img: "/preview/reel-luna.jpg",
+    body: "A new Shopify theme for a women's clothing boutique in Newbury, with a menu rebuilt from their sales data and email marketing set up in Klaviyo.",
+    figure: "6",
+    figureLabel: "Klaviyo email flows set up",
+  },
+  {
     client: "Sublishop",
     slug: "sublishop",
     img: "/preview/reel-sublishop.jpg",
@@ -164,6 +172,7 @@ export const clients = [
   { name: "ANYPRINT", slug: "anyprint" },
   { name: "BerryMae", slug: "berrymae" },
   { name: "PawGuard", slug: "pawguard" },
+  { name: "Luna", slug: "luna" },
   { name: "Architectural FX", slug: "architectural-fx" },
   { name: "Origin Architectural", slug: "origin-architectural" },
   { name: "it's Pouch", slug: "its-pouch" },

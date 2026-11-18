@@ -1688,6 +1688,74 @@ export const caseStudies: CaseStudy[] = [
   },
 
   {
+    slug: "luna",
+    client: "Luna",
+    tag: "Shopify · Fashion",
+    year: "2026",
+    accent: "violet",
+    heroImage: "/work/luna.jpg",
+    heroImageAlt: "A woman in an olive short-sleeved jumper and jeans, from the Luna homepage",
+    excerpt:
+      "A new Shopify theme and Klaviyo email marketing for Luna, a women's clothing boutique in Newbury.",
+    services: ["Shopify theme design", "Shopify development", "Email marketing"],
+    stack: ["Shopify", "Custom theme", "Klaviyo"],
+    timeline: "Launched November 2026",
+    url: "https://lunauk.co.uk",
+    categories: ["ecommerce"],
+    body: [
+      {
+        type: "intro",
+        text: "Luna by Caroline Dallas is a women's clothing boutique on Northbrook Street in Newbury. We built them a new Shopify theme from scratch and set up their email marketing in Klaviyo.",
+      },
+      {
+        type: "beforeAfter",
+        before: { src: "/work/luna/before-home.jpg", alt: "The Luna homepage before the new theme" },
+        after: { src: "/work/luna/after-home.jpg", alt: "The new Luna homepage" },
+      },
+      {
+        type: "section",
+        eyebrow: "The menu",
+        heading: "A menu rebuilt around what sells",
+        body: "Luna sells over 800 products from brands like Alpini, Susy D and Orientique. The old menu listed the same categories in two places and had four links that went nowhere. We rebuilt it from their sales data: clothing by category, brand and fit, plus shopping by colour across everything in stock.",
+      },
+      {
+        type: "browser",
+        src: "/work/luna/menu.jpg",
+        alt: "The Clothing menu open on Tops, with styles, brands, fit and colours",
+        url: "lunauk.co.uk",
+      },
+      {
+        type: "browser",
+        src: "/work/luna/collection.jpg",
+        alt: "The Best sellers collection, with its row of colours",
+        url: "lunauk.co.uk/collections/best-sellers",
+        phone: { src: "/work/luna/mobile.jpg", alt: "The Best sellers collection on a phone" },
+      },
+      {
+        type: "section",
+        eyebrow: "The shop",
+        heading: "The site points back to the shop",
+        body: "Luna is a shop first, and plenty of online customers know it. So product pages offer click and collect from Newbury and a number to call if you'd rather order by phone, and every page reminds you that you can try things on, seven days a week.",
+      },
+      {
+        type: "section",
+        eyebrow: "Email",
+        heading: "Email marketing, moved to Klaviyo",
+        body: "We moved Luna's email from Omnisend to a new Klaviyo account: sending domain, six automated flows including a welcome series with a 10% code, and their first campaigns.",
+      },
+      {
+        type: "beforeAfter",
+        before: { src: "/work/luna/before-product.jpg", alt: "A Luna product page before the new theme" },
+        after: { src: "/work/luna/after-product.jpg", alt: "The same product page on the new theme" },
+      },
+      {
+        type: "deliverables",
+        heading: "Deliverables",
+        items: ["Shopify theme design and build", "New menu and shop by colour", "Klaviyo setup, flows and campaigns"],
+      },
+    ],
+  },
+  {
     slug: "pawguard",
     client: "PawGuard",
     tag: "Shopify · Pet products",

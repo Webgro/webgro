@@ -258,6 +258,11 @@ export const CASE_META: Record<string, Meta> = {
     description:
       "A WordPress redesign for freight business Paragon Freight, with a currency selector for overseas enquiries and ongoing social media management.",
   },
+  luna: {
+    title: "Luna: Shopify Theme for a Newbury Boutique | Webgro",
+    description:
+      "A new Shopify theme and Klaviyo email marketing for Luna, a women's clothing boutique in Newbury, with a menu rebuilt around what sells.",
+  },
   pawguard: {
     title: "PawGuard: Shopify Store with a Fence Finder | Webgro",
     description:
