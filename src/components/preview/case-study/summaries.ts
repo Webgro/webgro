@@ -22,6 +22,11 @@ export const summaries: Record<string, Summary> = {
     did: "We replaced WooCommerce and two other plugins with one custom WordPress plugin, connected it to their Google Sheet, built new products and product pages with a configurator, and moved 128 DWG drawings off Amazon S3.",
     changed: "The team publish product changes from the sheet themselves, and specifiers can filter the catalogue and download a spec sheet for the configuration they need.",
   },
+  luna: {
+    ask: "Luna's menu mixed categories, styles and edits in one long list of links, and four of them went nowhere.",
+    did: "We designed and built a new Shopify theme with a menu grouped the way people shop, colours on every collection, and click and collect from the Newbury shop on product pages.",
+    changed: "Shoppers can get from the homepage to navy tops in one click.",
+  },
   pawguard: {
     ask: "PawGuard sells several kinds of wireless dog fence, and which one a customer needs depends on the size and shape of their land.",
     did: "We designed and built a new Shopify store, dark throughout, with a fence finder in the homepage hero and menus that work from the keyboard.",

@@ -1688,6 +1688,68 @@ export const caseStudies: CaseStudy[] = [
   },
 
   {
+    slug: "luna",
+    client: "Luna",
+    tag: "Shopify · Fashion",
+    year: "2026",
+    accent: "violet",
+    heroImage: "/work/luna.jpg",
+    heroImageAlt: "A woman in an olive short-sleeved jumper and jeans, from the Luna homepage",
+    excerpt:
+      "A new Shopify theme for Luna, a women's clothing boutique in Newbury, with a menu built around how people shop.",
+    services: ["Shopify theme design", "Shopify development", "Email marketing"],
+    stack: ["Shopify", "Custom theme", "Klaviyo"],
+    timeline: "Launched November 2026",
+    url: "https://lunauk.co.uk",
+    categories: ["ecommerce"],
+    body: [
+      {
+        type: "intro",
+        text: "Luna is a women's clothing boutique on Northbrook Street in Newbury, with an online store on Shopify. We designed and built its new theme.",
+      },
+      {
+        type: "beforeAfter",
+        before: { src: "/work/luna/before-home.jpg", alt: "The Luna homepage before the new theme" },
+        after: { src: "/work/luna/after-home.jpg", alt: "The new Luna homepage" },
+      },
+      {
+        type: "section",
+        eyebrow: "Navigation",
+        heading: "Navy tops in one click",
+        body: "The old menu mixed categories, styles and edits in one long list. Now you open Clothing, point at Tops, and pick a style, a brand, a fit or a colour. Collection pages start with a row of colours too.",
+      },
+      {
+        type: "browser",
+        src: "/work/luna/menu.jpg",
+        alt: "The Clothing menu open on Tops, with styles, brands, fit and colours",
+        url: "lunauk.co.uk",
+      },
+      {
+        type: "browser",
+        src: "/work/luna/collection.jpg",
+        alt: "The Best sellers collection, with its row of colours",
+        url: "lunauk.co.uk/collections/best-sellers",
+        phone: { src: "/work/luna/mobile.jpg", alt: "The Best sellers collection on a phone" },
+      },
+      {
+        type: "section",
+        eyebrow: "The shop",
+        heading: "The Newbury shop is never far away",
+        body: "Product pages offer click and collect from the shop and a number to call to order, and every page reminds you that you can try things on in Newbury, seven days a week.",
+      },
+      {
+        type: "beforeAfter",
+        before: { src: "/work/luna/before-product.jpg", alt: "A Luna product page before the new theme" },
+        after: { src: "/work/luna/after-product.jpg", alt: "The same product page on the new theme" },
+      },
+      {
+        type: "deliverables",
+        heading: "Deliverables",
+        items: ["Shopify theme design and build", "Navigation and shop by colour", "Klaviyo email flows"],
+      },
+    ],
+  },
+  {
     slug: "pawguard",
     client: "PawGuard",
     tag: "Shopify · Pet products",

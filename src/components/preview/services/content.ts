@@ -94,6 +94,11 @@ export const caseNotes: Record<string, { client: string; img: string; w: number;
     img: "/preview/reel-pawguard.jpg", w: 1500, h: 1000,
     line: "A new Shopify store for wireless dog fences in Ireland, with a homepage finder that recommends the right fence for your land.",
   },
+  luna: {
+    client: "Luna",
+    img: "/preview/reel-luna.jpg", w: 1500, h: 1000,
+    line: "A new Shopify theme for a women's clothing boutique in Newbury, with a menu built around how people shop.",
+  },
   "fun-cases": {
     client: "Fun Cases",
     img: "/preview/reel-fun-cases.jpg", w: 1280, h: 853,
@@ -238,7 +243,7 @@ const websites: PvService = {
       { value: "99", label: "ANYPRINT's Lighthouse performance score, up from 54.", draw: { kind: "ring", value: 99, from: 54, note: "54 before" } },
       { value: "+240%", label: "Sublishop sales growth in the three months after relaunch.", draw: { kind: "bars", bars: [{ label: "Before", value: 1 }, { label: "After", value: 3.4, accent: true }] } },
     ],
-    cases: ["gieves-and-hawkes", "berrymae", "pawguard", "anyprint", "fun-cases", "origin-architectural", "threadology", "fandp-agency"],
+    cases: ["gieves-and-hawkes", "berrymae", "pawguard", "luna", "anyprint", "fun-cases", "origin-architectural", "threadology", "fandp-agency"],
   },
   faqs: [
     {
@@ -1429,7 +1434,7 @@ const shopifySites: PvService = {
       { value: "+240%", label: "Sublishop sales growth in the three months after relaunch.", draw: { kind: "bars", bars: [{ label: "Before", value: 1 }, { label: "After", value: 3.4, accent: true }] } },
       { value: "+62%", label: "ValuePet average order value the week after launch.", draw: { kind: "bars", bars: [{ label: "Before", value: 1 }, { label: "After", value: 1.62, accent: true }] } },
     ],
-    cases: ["gieves-and-hawkes", "berrymae", "pawguard", "sublishop", "valuepet", "fun-cases", "twisted-tailor", "origin-architectural", "its-pouch"],
+    cases: ["gieves-and-hawkes", "berrymae", "pawguard", "luna", "sublishop", "valuepet", "fun-cases", "twisted-tailor", "origin-architectural", "its-pouch"],
   },
   faqs: [
     {
