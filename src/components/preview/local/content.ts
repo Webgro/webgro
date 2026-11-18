@@ -634,6 +634,11 @@ export const berkshire = {
         line: "A custom WordPress plugin for a lighting distributor, publishing their catalogue from a Google Sheet, with a configurator that produces spec sheets.",
       },
       {
+        slug: "luna",
+        where: "Newbury",
+        line: "A Shopify theme for Luna, a women's clothing boutique in Newbury, with Klaviyo email marketing set up alongside it.",
+      },
+      {
         slug: "paragon-freight",
         where: "Bracknell and Hamilton",
         line: "A WordPress redesign for a freight business with an office in Bracknell, plus a currency selector and ongoing social media.",
@@ -664,7 +669,7 @@ export const berkshire = {
   faqs: [
     {
       q: "Which parts of Berkshire do you work in?",
-      a: "All of it. Our office is in Bracknell, and we work with businesses in Reading, Wokingham, Windsor, Maidenhead, Ascot and elsewhere in the county, as well as across the UK. Meetings can be at our office, at yours, or on a call.",
+      a: "All of it. Our office is in Bracknell, and we work with businesses in Reading, Newbury, Wokingham, Windsor, Maidenhead, Ascot and elsewhere in the county, as well as across the UK. Meetings can be at our office, at yours, or on a call.",
     },
     {
       q: "Do you only work with Berkshire businesses?",
