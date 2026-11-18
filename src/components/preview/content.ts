@@ -90,9 +90,9 @@ export const reel = [
     client: "Luna",
     slug: "luna",
     img: "/preview/reel-luna.jpg",
-    body: "A new Shopify theme for a women's clothing boutique in Newbury. The menu is grouped the way people shop, down to colour and fit.",
-    figure: "12",
-    figureLabel: "Colour families in the menu",
+    body: "A new Shopify theme for a women's clothing boutique in Newbury, with a menu rebuilt from their sales data and email marketing set up in Klaviyo.",
+    figure: "6",
+    figureLabel: "Klaviyo email flows set up",
   },
   {
     client: "Sublishop",

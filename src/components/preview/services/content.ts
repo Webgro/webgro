@@ -97,7 +97,7 @@ export const caseNotes: Record<string, { client: string; img: string; w: number;
   luna: {
     client: "Luna",
     img: "/preview/reel-luna.jpg", w: 1500, h: 1000,
-    line: "A new Shopify theme for a women's clothing boutique in Newbury, with a menu built around how people shop.",
+    line: "A new Shopify theme for a women's clothing boutique in Newbury, with a menu rebuilt from their sales data and Klaviyo email marketing.",
   },
   "fun-cases": {
     client: "Fun Cases",

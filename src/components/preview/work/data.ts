@@ -109,7 +109,7 @@ export const workExtras: Record<string, WorkExtra> = {
   },
   luna: {
     w: 1200, h: 800,
-    blurb: "A new Shopify theme for a women's clothing boutique in Newbury, with a menu built around how people shop.",
+    blurb: "A new Shopify theme and Klaviyo email marketing for a women's clothing boutique in Newbury.",
   },
   pawguard: {
     w: 1200, h: 800,

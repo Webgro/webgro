@@ -23,9 +23,9 @@ export const summaries: Record<string, Summary> = {
     changed: "The team publish product changes from the sheet themselves, and specifiers can filter the catalogue and download a spec sheet for the configuration they need.",
   },
   luna: {
-    ask: "Luna's menu mixed categories, styles and edits in one long list of links, and four of them went nowhere.",
-    did: "We designed and built a new Shopify theme with a menu grouped the way people shop, colours on every collection, and click and collect from the Newbury shop on product pages.",
-    changed: "Shoppers can get from the homepage to navy tops in one click.",
+    ask: "Luna's menu listed the same categories twice and had four dead links, and their email marketing needed moving to Klaviyo.",
+    did: "We built a new Shopify theme from scratch, rebuilt the menu from their sales data, and set up Klaviyo with six automated flows.",
+    changed: "Customers can browse by category, brand, fit or colour, and Luna's email runs from Klaviyo.",
   },
   pawguard: {
     ask: "PawGuard sells several kinds of wireless dog fence, and which one a customer needs depends on the size and shape of their land.",

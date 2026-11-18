@@ -1696,7 +1696,7 @@ export const caseStudies: CaseStudy[] = [
     heroImage: "/work/luna.jpg",
     heroImageAlt: "A woman in an olive short-sleeved jumper and jeans, from the Luna homepage",
     excerpt:
-      "A new Shopify theme for Luna, a women's clothing boutique in Newbury, with a menu built around how people shop.",
+      "A new Shopify theme and Klaviyo email marketing for Luna, a women's clothing boutique in Newbury.",
     services: ["Shopify theme design", "Shopify development", "Email marketing"],
     stack: ["Shopify", "Custom theme", "Klaviyo"],
     timeline: "Launched November 2026",
@@ -1705,7 +1705,7 @@ export const caseStudies: CaseStudy[] = [
     body: [
       {
         type: "intro",
-        text: "Luna is a women's clothing boutique on Northbrook Street in Newbury, with an online store on Shopify. We designed and built its new theme.",
+        text: "Luna by Caroline Dallas is a women's clothing boutique on Northbrook Street in Newbury. We built them a new Shopify theme from scratch and set up their email marketing in Klaviyo.",
       },
       {
         type: "beforeAfter",
@@ -1714,9 +1714,9 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         type: "section",
-        eyebrow: "Navigation",
-        heading: "Navy tops in one click",
-        body: "The old menu mixed categories, styles and edits in one long list. Now you open Clothing, point at Tops, and pick a style, a brand, a fit or a colour. Collection pages start with a row of colours too.",
+        eyebrow: "The menu",
+        heading: "A menu rebuilt around what sells",
+        body: "Luna sells over 800 products from brands like Alpini, Susy D and Orientique. The old menu listed the same categories in two places and had four links that went nowhere. We rebuilt it from their sales data: clothing by category, brand and fit, plus shopping by colour across everything in stock.",
       },
       {
         type: "browser",
@@ -1734,8 +1734,14 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "section",
         eyebrow: "The shop",
-        heading: "The Newbury shop is never far away",
-        body: "Product pages offer click and collect from the shop and a number to call to order, and every page reminds you that you can try things on in Newbury, seven days a week.",
+        heading: "The site points back to the shop",
+        body: "Luna is a shop first, and plenty of online customers know it. So product pages offer click and collect from Newbury and a number to call if you'd rather order by phone, and every page reminds you that you can try things on, seven days a week.",
+      },
+      {
+        type: "section",
+        eyebrow: "Email",
+        heading: "Email marketing, moved to Klaviyo",
+        body: "We moved Luna's email from Omnisend to a new Klaviyo account: sending domain, six automated flows including a welcome series with a 10% code, and their first campaigns.",
       },
       {
         type: "beforeAfter",
@@ -1745,7 +1751,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "deliverables",
         heading: "Deliverables",
-        items: ["Shopify theme design and build", "Navigation and shop by colour", "Klaviyo email flows"],
+        items: ["Shopify theme design and build", "New menu and shop by colour", "Klaviyo setup, flows and campaigns"],
       },
     ],
   },
